@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scintix | من نحن ورؤيتنا</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      /* ===== Light theme override (هذه الصفحة فقط) ===== */
+      :root {
+        --bg: #ffffff;
+        --surface: #f6f8fd;
+        --surface-strong: #eef1fb;
+        --text: #0c1430;
+        --text-muted: #5c6b8a;
+        --accent: #06b6d4;
+        --accent-strong: #7c3aed;
+        --border: rgba(10, 20, 60, 0.08);
+        --shadow: 0 20px 50px rgba(20, 40, 90, 0.06);
+      }
+      body {
+        background:
+          radial-gradient(circle at 12% 8%, rgba(6,182,212,0.06), transparent 22%),
+          radial-gradient(circle at 90% 4%, rgba(124,77,255,0.06), transparent 22%),
+          #ffffff;
+        color: var(--text);
+      }
+      .language-select {
+        background: #ffffff;
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+
+      .vision-shell {
+        width: min(880px, 100% - 32px);
+        margin: 0 auto;
+        padding: 40px 0 60px;
+      }
+      .policy-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent-strong);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+      }
+      .vision-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .vision-header .eyebrow {
+        display: inline-flex;
+        margin-bottom: 14px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        font-size: 0.78rem;
+      }
+      .vision-header h1 {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        margin: 0;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+      .vision-section {
+        margin-bottom: 28px;
+        padding: 32px 28px;
+        border-radius: 24px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .vision-section h2 {
+        font-size: 1.35rem;
+        margin: 0 0 16px;
+        color: var(--accent-strong);
+      }
+      .vision-section p {
+        color: var(--text-muted);
+        line-height: 2;
+        margin: 0 0 12px;
+        font-size: 1.02rem;
+      }
+      .vision-quote {
+        background: linear-gradient(160deg, rgba(6,182,212,0.07), rgba(124,77,255,0.08));
+        border-color: rgba(6,182,212,0.18);
+      }
+      .vision-quote p {
+        color: var(--text);
+        font-size: 1.12rem;
+        line-height: 2.1;
+        font-style: italic;
+        margin: 0;
+      }
+      .vision-quote .quote-mark {
+        font-size: 2.4rem;
+        color: var(--accent);
+        line-height: 1;
+        display: block;
+        margin-bottom: 8px;
+        font-style: normal;
+      }
+      [lang-block] { display: none; }
+      [lang-block].active { display: block; }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="assets/logo.png" alt="Scintix" />
+          <span class="brand-text">
+            <span class="brand-name">Scintix</span>
+          </span>
+        </a>
+        <nav class="main-nav">
+          <a href="index.html#services" data-i18n="nav.services">الخدمات</a>
+          <a href="index.html#plans" data-i18n="nav.plans">الباقات</a>
+          <a href="index.html#contact" data-i18n="nav.contact">اتصل بنا</a>
+        </nav>
+        <label class="language-switcher" aria-label="Language switcher">
+          <select class="language-select" data-lang-select>
+            <option value="ar">عربي</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+      </header>
+
+      <div class="vision-shell">
+
+        <a class="policy-back" href="index.html" lang-block data-lang="ar"> → العودة إلى الموقع</a>
+        <a class="policy-back" href="index.html" lang-block data-lang="en">← Back to website</a>
+
+        <!-- ============================= ARABIC ============================= -->
+        <div lang-block data-lang="ar" class="active" dir="rtl">
+
+          <div class="vision-header">
+            <span class="eyebrow">من نحن ورؤيتنا</span>
+            <h1>Scintix Digital Solutions</h1>
+          </div>
+
+          <section class="vision-section">
+            <h2>من نحن</h2>
+            <p>
+              Scintix هي وكالة رقمية سعودية متخصصة في التحول الرقمي والأتمتة الذكية وتطوير
+              المنصات المتكاملة. نربط بين الاستراتيجية والتقنية والتصميم لنقدّم لعملائنا حلولاً
+              عملية تواكب احتياجات السوق المحلي، وتُمكّنهم من الانتقال بثقة من أساليب العمل
+              التقليدية إلى منظومة رقمية ذكية ومتكاملة.
+            </p>
+          </section>
+
+          <section class="vision-section vision-quote">
+            <span class="quote-mark">"</span>
+            <p>
+              نطمح في Scintix أن نكون الشريك التقني الأول والموثوق للمنشآت الطموحة في المملكة
+              والمنطقة، من خلال قيادة التحول الرقمي وإعادة ابتكار أساليب العمل عبر حلول أتمتة
+              ذكية وتجارب مستخدم استثنائية، لنُمكن أعمال عملائنا من النمو المستدام والتحول من
+              العمل اليدوي التقليدي إلى المستقبل الرقمي الذكي بكل أمان وسلاسة.
+            </p>
+          </section>
+        </div>
+
+        <!-- ============================= ENGLISH ============================= -->
+        <div lang-block data-lang="en" dir="ltr">
+
+          <div class="vision-header">
+            <span class="eyebrow">About &amp; Vision</span>
+            <h1>Scintix Digital Solutions</h1>
+          </div>
+
+          <section class="vision-section">
+            <h2>About Us</h2>
+            <p>
+              Scintix is a Saudi digital agency specialized in digital transformation,
+              intelligent automation, and integrated platform development. We connect
+              strategy, technology, and design to deliver practical solutions tailored to
+              the local market — helping our clients move confidently from traditional ways
+              of working to a smart, integrated digital ecosystem.
+            </p>
+          </section>
+
+          <section class="vision-section vision-quote">
+            <span class="quote-mark">"</span>
+            <p>
+              At Scintix, we aspire to be the leading and most trusted technology partner for
+              ambitious enterprises across the Kingdom and the region — driving digital
+              transformation and reinventing the way businesses operate through intelligent
+              automation solutions and exceptional user experiences, empowering our clients
+              to achieve sustainable growth and move from traditional manual work to a smart
+              digital future, safely and seamlessly.
+            </p>
+          </section>
+        </div>
+
+      </div>
+
+      <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
+    </div>
+
+    <script>
+      function setPolicyLang(lang) {
+        document.querySelectorAll('[lang-block]').forEach(el => {
+          el.classList.toggle('active', el.dataset.lang === lang);
+        });
+      }
+      // يتم استدعاؤها تلقائياً من script.js عند تغيير اللغة (وعند تحميل الصفحة)
+      window.onPageLanguageChange = setPolicyLang;
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
