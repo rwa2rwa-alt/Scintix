@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scintix | فاتورة</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+:root{
+  --ink:#0c1430;--muted:#5c6b8a;--border:rgba(10,20,60,0.09);
+  --accent:#5cf0ff;--strong:#7c3aed;--radius:16px;
+  --shadow:0 4px 24px rgba(20,40,90,0.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 8% 0%,rgba(92,240,255,.07),transparent 28%),
+             radial-gradient(circle at 92% 4%,rgba(124,58,237,.06),transparent 28%),#f4f6ff;
+  color:var(--ink);font-family:'Segoe UI',Tahoma,sans-serif;
+}
+/* ── Header ── */
+.i-header{
+  background:rgba(2,5,20,0.97);padding:13px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(92,240,255,0.14);
+}
+.i-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.i-brand img{width:34px;height:34px;border-radius:9px;padding:5px;background:rgba(92,240,255,.12)}
+.i-brand span{color:#eef5ff;font-weight:700;font-size:1.05rem}
+.lang-btns{display:flex;gap:6px}
+.lang-btn{background:transparent;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.45);border-radius:999px;padding:4px 13px;font-size:.78rem;cursor:pointer;transition:all .2s}
+.lang-btn.on{background:rgba(92,240,255,.14);border-color:rgba(92,240,255,.4);color:#5cf0ff}
+/* ── Wrap ── */
+.i-wrap{width:min(820px,100%-32px);margin:32px auto 60px}
+/* ── Toolbar (controls, not printed) ── */
+.toolbar{
+  background:white;border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px 20px;margin-bottom:16px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;
+}
+.toolbar label{font-size:.72rem;color:var(--muted);display:block;margin-bottom:4px}
+.toolbar input,.toolbar select{
+  background:#fafbff;border:1px solid var(--border);border-radius:8px;
+  padding:7px 11px;font-size:.83rem;color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.toolbar input:focus,.toolbar select:focus{border-color:var(--strong)}
+.toolbar .btn-add{
+  padding:7px 16px;border-radius:8px;border:1px dashed rgba(124,58,237,.4);
+  background:transparent;color:var(--strong);font-size:.8rem;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.toolbar .btn-add:hover{background:#f0edff}
+/* ── Invoice doc ── */
+.i-doc{background:white;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+/* Top band */
+.i-top{
+  background:linear-gradient(135deg,#05071a 0%,#0d0f2b 100%);
+  padding:28px 32px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;
+}
+.i-logo-area{display:flex;align-items:center;gap:12px}
+.i-logo-area img{width:48px;height:48px;border-radius:13px;padding:8px;background:rgba(92,240,255,.12)}
+.i-company-name{color:white;font-size:1.25rem;font-weight:700}
+.i-company-sub{color:rgba(255,255,255,.45);font-size:.78rem;margin-top:2px}
+.i-doc-meta{text-align:left}
+[dir=rtl] .i-doc-meta{text-align:right}
+.i-doc-title{color:white;font-size:1.1rem;font-weight:700;margin-bottom:6px}
+.i-doc-num{color:#5cf0ff;font-family:monospace;font-size:.88rem}
+.i-doc-dates{color:rgba(255,255,255,.45);font-size:.76rem;margin-top:4px;line-height:1.7}
+/* Parties */
+.i-parties{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.i-party{padding:20px 28px}
+.i-party+.i-party{border-right:1px solid var(--border)}
+[dir=ltr] .i-party+.i-party{border-right:none;border-left:1px solid var(--border)}
+.party-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:7px}
+.party-nm{font-weight:700;font-size:.98rem;margin-bottom:3px}
+.party-info{font-size:.8rem;color:var(--muted);line-height:1.75}
+/* Items table */
+.i-items{padding:0 28px 0}
+.items-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-bottom:0}
+.items-table th{
+  background:#f8f6ff;color:var(--strong);font-weight:600;
+  padding:10px 12px;border-bottom:1px solid var(--border);
+  text-align:right;
+}
+[dir=ltr] .items-table th{text-align:left}
+.items-table td{padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:middle}
+.items-table tr:last-child td{border-bottom:none}
+.item-del{background:none;border:none;color:#ccc;cursor:pointer;font-size:1rem;padding:2px 6px;border-radius:4px;transition:color .2s}
+.item-del:hover{color:#e24b4a}
+/* Totals */
+.i-totals{padding:16px 28px;border-top:1px solid var(--border);background:#faf9ff}
+.totals-grid{display:grid;grid-template-columns:1fr auto;gap:4px 32px;font-size:.84rem;max-width:300px;margin-right:0;margin-left:auto}
+[dir=rtl] .totals-grid{margin-right:auto;margin-left:0}
+.totals-grid .t-label{color:var(--muted)}
+.totals-grid .t-val{text-align:left;font-weight:500}
+[dir=rtl] .totals-grid .t-val{text-align:right}
+.total-row .t-label,.total-row .t-val{
+  font-size:1rem;font-weight:700;color:var(--strong);
+  border-top:1.5px solid rgba(124,58,237,.2);padding-top:8px;margin-top:4px;
+}
+/* Notes */
+.i-notes{padding:18px 28px;border-top:1px solid var(--border)}
+.i-notes label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);display:block;margin-bottom:6px}
+.i-notes textarea{
+  width:100%;border:1px solid var(--border);border-radius:8px;
+  padding:9px 12px;font-size:.83rem;color:var(--ink);
+  font-family:inherit;resize:vertical;min-height:60px;outline:none;background:#fafbff;
+  transition:border-color .2s;
+}
+.i-notes textarea:focus{border-color:var(--strong)}
+/* Status badge */
+.i-status{padding:14px 28px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.status-lbl{font-size:.75rem;color:var(--muted)}
+.status-sel{border:1px solid var(--border);border-radius:999px;padding:5px 14px;font-size:.8rem;background:#fafbff;color:var(--ink);outline:none;cursor:pointer}
+.status-badge{display:inline-block;padding:4px 14px;border-radius:999px;font-size:.75rem;font-weight:700}
+.s-draft    {background:#f1f1f1;color:#888}
+.s-sent     {background:#e6f1fb;color:#185fa5}
+.s-paid     {background:#e6fdf5;color:#0f6e56}
+.s-overdue  {background:#fcebeb;color:#a32d2d}
+/* Actions */
+.i-actions{padding:18px 28px;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;border-top:1px solid var(--border)}
+.btn-pdf{padding:11px 24px;border-radius:999px;border:1px solid rgba(124,58,237,.35);background:transparent;color:var(--strong);font-size:.88rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s}
+.btn-pdf:hover{background:#f0edff}
+.btn-send{padding:11px 30px;border-radius:999px;border:none;background:linear-gradient(135deg,#5cf0ff,#7c3aed);color:#031228;font-size:.92rem;font-weight:700;font-family:inherit;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-send:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(92,240,255,.22)}
+/* Watermarks */
+.wm-paid{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);
+  font-size:5rem;font-weight:900;color:rgba(15,110,86,.08);
+  pointer-events:none;white-space:nowrap;display:none;
+}
+.wm-paid.on{display:block}
+.i-doc{position:relative}
+/* Lang blocks */
+[lang-block]{display:none}
+[lang-block].on{display:block}
+@media print{
+  .i-header,.toolbar,.i-notes label~textarea,.item-del,.i-actions,.status-sel,
+  .i-notes textarea{display:none!important}
+  body{background:white!important}
+  .i-doc{border:none!important;box-shadow:none!important}
+  .i-notes .printed-note{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Page header ── -->
+<div class="i-header">
+  <a class="i-brand" href="index.html">
+    <img src="assets/logo.png" alt="Scintix"/>
+    <span>Scintix</span>
+  </a>
+  <div class="lang-btns">
+    <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
+    <button class="lang-btn"   onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div class="i-wrap">
+
+  <!-- ════ TOOLBAR ════ -->
+  <div class="toolbar" id="toolbar">
+    <div>
+      <label id="lbl-client">اسم العميل</label>
+      <input id="inp-client" placeholder="شركة / شخص" oninput="updateClient()"/>
+    </div>
+    <div>
+      <label id="lbl-email">البريد</label>
+      <input id="inp-email" placeholder="email@example.com" type="email"/>
+    </div>
+    <div>
+      <label id="lbl-pkg">الباقة</label>
+      <select id="inp-pkg" onchange="selectPackage()">
+        <option value="spark">Spark — 899 SAR</option>
+        <option value="glow">Glow — 1,799 SAR</option>
+        <option value="pulse" selected>Pulse — 3,299 SAR</option>
+        <option value="nova">Nova — 5,999 SAR</option>
+        <option value="zenith">Zenith — 12,000 SAR</option>
+        <option value="custom">مخصص / Custom</option>
+      </select>
+    </div>
+    <div>
+      <label id="lbl-due">تاريخ الاستحقاق</label>
+      <input id="inp-due" type="date"/>
+    </div>
+    <div>
+      <label id="lbl-vat">ضريبة القيمة المضافة %</label>
+      <input id="inp-vat" type="number" value="15" min="0" max="100" style="width:70px" oninput="recalc()"/>
+    </div>
+    <button class="btn-add" onclick="addRow()">+ إضافة بند</button>
+  </div>
+
+  <!-- ════ INVOICE DOC ════ -->
+  <div class="i-doc" id="i-doc">
+    <div class="wm-paid" id="wm">PAID</div>
+
+    <!-- Top band -->
+    <div class="i-top">
+      <div class="i-logo-area">
+        <img src="assets/logo.png" alt="Scintix"/>
+        <div>
+          <div class="i-company-name">Scintix Digital Solutions</div>
+          <div class="i-company-sub">contact@scintix.sa · scintix.com.sa</div>
+        </div>
+      </div>
+      <div class="i-doc-meta">
+        <div class="i-doc-title" id="doc-title">فاتورة ضريبية</div>
+        <div class="i-doc-num"   id="inv-num">INV-2026-0001</div>
+        <div class="i-doc-dates">
+          <span id="lbl-issued">تاريخ الإصدار:</span> <span id="inv-issued"></span><br/>
+          <span id="lbl-due-lbl">تاريخ الاستحقاق:</span> <span id="inv-due"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parties -->
+    <div class="i-parties">
+      <div class="i-party">
+        <div class="party-lbl" id="lbl-from">من</div>
+        <div class="party-nm">Scintix Digital Solutions</div>
+        <div class="party-info">
+          المملكة العربية السعودية<br/>
+          contact@scintix.sa<br/>
+          <span id="cr-lbl">السجل التجاري:</span> 1234567890<br/>
+          <span id="vat-reg-lbl">الرقم الضريبي:</span> 3XXXXXXXXX
+        </div>
+      </div>
+      <div class="i-party">
+        <div class="party-lbl" id="lbl-to">إلى</div>
+        <div class="party-nm"  id="disp-client">—</div>
+        <div class="party-info" id="disp-email">—</div>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div class="i-items">
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th id="th-desc">الوصف</th>
+            <th id="th-qty"  style="width:70px">الكمية</th>
+            <th id="th-unit" style="width:110px">سعر الوحدة</th>
+            <th id="th-total" style="width:110px">الإجمالي</th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="items-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Totals -->
+    <div class="i-totals">
+      <div class="totals-grid">
+        <span class="t-label" id="lbl-sub">المجموع قبل الضريبة</span>
+        <span class="t-val"   id="disp-sub">0 SAR</span>
+        <span class="t-label" id="lbl-vat-line">ضريبة القيمة المضافة (15%)</span>
+        <span class="t-val"   id="disp-vat">0 SAR</span>
+        <span class="t-label total-row" id="lbl-total">الإجمالي المستحق</span>
+        <span class="t-val   total-row" id="disp-total">0 SAR</span>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="i-notes">
+      <label id="lbl-notes">ملاحظات</label>
+      <textarea id="inp-notes" placeholder="شكراً لثقتكم بـ Scintix Digital Solutions. يُرجى السداد خلال 14 يوماً من تاريخ الإصدار."></textarea>
+      <div class="printed-note" id="printed-note" style="font-size:.82rem;color:#555;line-height:1.7;display:none"></div>
+    </div>
+
+    <!-- Status -->
+    <div class="i-status">
+      <span class="status-lbl" id="lbl-status">الحالة:</span>
+      <select class="status-sel" onchange="updateStatus(this.value)">
+        <option value="draft"  id="opt-draft">مسودة</option>
+        <option value="sent"   id="opt-sent">مُرسلة</option>
+        <option value="paid"   id="opt-paid">مدفوعة</option>
+        <option value="overdue" id="opt-overdue">متأخرة</option>
+      </select>
+      <span class="status-badge s-draft" id="status-badge">مسودة</span>
+    </div>
+
+    <!-- Actions -->
+    <div class="i-actions">
+      <button class="btn-pdf"  onclick="printInv()">↓ PDF</button>
+      <button class="btn-send" onclick="sendInv()">إرسال الفاتورة ←</button>
+    </div>
+    <div style="padding:0 28px 24px;text-align:center;border-top:1px solid var(--border)">
+      <a id="pay-btn" href="payment.html" style="
+        display:inline-flex;align-items:center;gap:10px;
+        padding:14px 40px;border-radius:999px;
+        background:linear-gradient(135deg,#5cf0ff,#7c3aed);
+        color:#031228;font-weight:700;font-size:1rem;
+        text-decoration:none;transition:transform .25s,box-shadow .25s;
+        margin-bottom:8px;
+      ">
+        <span id="pay-btn-lbl">🔒 انتقل إلى صفحة السداد</span>
+      </a>
+      <p id="pay-sub" style="font-size:.78rem;color:#5c6b8a;margin:0">سيتم بدء العمل فور تأكيد الدفع</p>
+    </div>
+  </div>
+
+</div><!-- /i-wrap -->
+
+<script>
+/* ─── State ─── */
+let lang = localStorage.getItem('scintix-lang') || 'ar';
+let items = [];
+let itemId = 0;
+
+const PKGS = {
+  spark:  { ar:'باقة Spark — نماذج رقمية احترافية وصفحة هبوط ذكية', en:'Spark Package — Professional digital forms & smart landing page', price:899 },
+  glow:   { ar:'باقة Glow — مساعد واتساب ذكي وأتمتة المبيعات',       en:'Glow Package — Smart WhatsApp assistant & sales automation',   price:1799 },
+  pulse:  { ar:'باقة Pulse — تطبيق ويب متكامل ولوحة تحكم متقدمة',    en:'Pulse Package — Full web application & advanced dashboard',    price:3299 },
+  nova:   { ar:'باقة Nova — أتمتة AI متقدمة وتكامل ERP/CRM',          en:'Nova Package — Advanced AI automation & ERP/CRM integration', price:5999 },
+  zenith: { ar:'باقة Zenith — حلول مؤسسية كاملة ومراقبة 24/7',        en:'Zenith Package — Full enterprise solutions & 24/7 monitoring', price:12000 },
+  custom: { ar:'خدمة مخصصة', en:'Custom service', price:0 }
+};
+
+const STR = {
+  ar:{
+    docTitle:'فاتورة ضريبية', lblFrom:'من', lblTo:'إلى',
+    lblIssued:'تاريخ الإصدار:', lblDueLbl:'تاريخ الاستحقاق:',
+    lblClient:'اسم العميل', lblEmail:'البريد', lblPkg:'الباقة', lblDue:'تاريخ الاستحقاق',
+    lblVat:'ضريبة القيمة المضافة %', btnAdd:'+ إضافة بند',
+    thDesc:'الوصف', thQty:'الكمية', thUnit:'سعر الوحدة', thTotal:'الإجمالي',
+    lblSub:'المجموع قبل الضريبة', lblVatLine:'ضريبة القيمة المضافة', lblTotalLine:'الإجمالي المستحق',
+    lblNotes:'ملاحظات', lblStatus:'الحالة:',
+    optDraft:'مسودة', optSent:'مُرسلة', optPaid:'مدفوعة', optOverdue:'متأخرة',
+    crLbl:'السجل التجاري:', vatRegLbl:'الرقم الضريبي:',
+    btnPdf:'↓ PDF', btnSend:'إرسال الفاتورة ←',
+    defaultNote:'يُرجى السداد ليتم بدء العمل على مشروعكم وتسليمه خلال الوقت المحدد.',
+  },
+  en:{
+    docTitle:'Tax Invoice', lblFrom:'From', lblTo:'Bill To',
+    lblIssued:'Issue date:', lblDueLbl:'Due date:',
+    lblClient:'Client name', lblEmail:'Email', lblPkg:'Package', lblDue:'Due date',
+    lblVat:'VAT %', btnAdd:'+ Add line',
+    thDesc:'Description', thQty:'Qty', thUnit:'Unit price', thTotal:'Total',
+    lblSub:'Subtotal', lblVatLine:'VAT', lblTotalLine:'Total due',
+    lblNotes:'Notes', lblStatus:'Status:',
+    optDraft:'Draft', optSent:'Sent', optPaid:'Paid', optOverdue:'Overdue',
+    crLbl:'CR:', vatRegLbl:'VAT No.:',
+    btnPdf:'↓ PDF', btnSend:'Send Invoice →',
+    defaultNote:'Please complete your payment so we can begin work on your project and deliver it within the agreed timeframe.',
+  }
+};
+
+/* ─── Lang ─── */
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir  = l === 'en' ? 'ltr' : 'rtl';
+  document.querySelectorAll('.lang-btn').forEach((b,i) =>
+    b.classList.toggle('on',(i===0&&l==='ar')||(i===1&&l==='en')));
+  localStorage.setItem('scintix-lang', l);
+  applyStrings();
+  // تحديث نص زر السداد
+  const lbl = document.getElementById('pay-btn-lbl');
+  const sub = document.getElementById('pay-sub');
+  if (lbl) lbl.textContent = l==='ar' ? '🔒 انتقل إلى صفحة السداد' : '🔒 Proceed to Payment';
+  if (sub) sub.textContent = l==='ar' ? 'سيتم بدء العمل فور تأكيد الدفع' : 'Work begins immediately after payment confirmation';
+  buildPayUrl();
+  renderItems();
+}
+
+function applyStrings() {
+  const s = STR[lang];
+  const g = id => document.getElementById(id);
+  g('doc-title').textContent    = s.docTitle;
+  g('lbl-from').textContent     = s.lblFrom;
+  g('lbl-to').textContent       = s.lblTo;
+  g('lbl-issued').textContent   = s.lblIssued;
+  g('lbl-due-lbl').textContent  = s.lblDueLbl;
+  g('lbl-client').textContent   = s.lblClient;
+  g('lbl-email').textContent    = s.lblEmail;
+  g('lbl-pkg').textContent      = s.lblPkg;
+  g('lbl-due').textContent      = s.lblDue;
+  g('lbl-vat').textContent      = s.lblVat;
+  g('th-desc').textContent      = s.thDesc;
+  g('th-qty').textContent       = s.thQty;
+  g('th-unit').textContent      = s.thUnit;
+  g('th-total').textContent     = s.thTotal;
+  g('lbl-sub').textContent      = s.lblSub;
+  g('lbl-total').textContent    = s.lblTotalLine;
+  g('lbl-notes').textContent    = s.lblNotes;
+  g('lbl-status').textContent   = s.lblStatus;
+  g('cr-lbl').textContent       = s.crLbl;
+  g('vat-reg-lbl').textContent  = s.vatRegLbl;
+  g('opt-draft').textContent    = s.optDraft;
+  g('opt-sent').textContent     = s.optSent;
+  g('opt-paid').textContent     = s.optPaid;
+  g('opt-overdue').textContent  = s.optOverdue;
+  g('inp-notes').placeholder    = s.defaultNote;
+  // تحديث الملاحظة إذا كانت فارغة
+  const notesEl = document.getElementById('inp-notes');
+  if (notesEl && !notesEl.value) notesEl.placeholder = s.defaultNote;
+  document.querySelector('.btn-add').textContent  = s.btnAdd;
+  document.querySelector('.btn-pdf').textContent  = s.btnPdf;
+  document.querySelector('.btn-send').textContent = s.btnSend;
+  // vat label with %
+  const vat = document.getElementById('inp-vat')?.value || '15';
+  g('lbl-vat-line').textContent = `${s.lblVatLine} (${vat}%)`;
+}
+
+/* ─── Invoice number + dates ─── */
+function genInvNum() {
+  const n = String(Math.floor(Math.random()*9000)+1000);
+  return `INV-${new Date().getFullYear()}-${n}`;
+}
+const invNum = genInvNum();
+document.getElementById('inv-num').textContent = invNum;
+
+function formatDate(d) {
+  return d ? new Date(d).toLocaleDateString(lang==='ar'?'ar-SA':'en-GB') : '—';
+}
+const todayISO = new Date().toISOString().split('T')[0];
+document.getElementById('inv-issued').textContent = formatDate(todayISO);
+
+// Default due = 14 days
+const due14 = new Date(); due14.setDate(due14.getDate()+14);
+document.getElementById('inp-due').value = due14.toISOString().split('T')[0];
+document.getElementById('inp-due').addEventListener('input', function(){
+  document.getElementById('inv-due').textContent = formatDate(this.value);
+});
+document.getElementById('inv-due').textContent = formatDate(due14.toISOString().split('T')[0]);
+
+/* ─── Client update ─── */
+function updateClient() {
+  const v = document.getElementById('inp-client').value.trim();
+  document.getElementById('disp-client').textContent = v || '—';
+}
+document.getElementById('inp-email').addEventListener('input', function(){
+  document.getElementById('disp-email').textContent = this.value.trim() || '—';
+});
+
+/* ─── Package select ─── */
+function selectPackage() {
+  const pkg = document.getElementById('inp-pkg').value;
+  if (pkg === 'custom') { items = []; renderItems(); return; }
+  const p = PKGS[pkg];
+  items = [{ id: ++itemId, desc: p[lang]||p.ar, qty:1, unit:p.price }];
+  renderItems();
+}
+
+/* ─── Items ─── */
+function addRow() {
+  items.push({ id: ++itemId, desc:'', qty:1, unit:0 });
+  renderItems();
+}
+
+function delRow(id) {
+  items = items.filter(i => i.id !== id);
+  renderItems();
+}
+
+function renderItems() {
+  const tbody = document.getElementById('items-body');
+  tbody.innerHTML = '';
+  items.forEach(item => {
+    const total = item.qty * item.unit;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input value="${escH(item.desc)}" placeholder="${STR[lang].thDesc}" style="width:100%;border:1px solid #eee;border-radius:6px;padding:6px 9px;font-size:.82rem;background:#fafbff;outline:none"
+        oninput="updateItem(${item.id},'desc',this.value)"/></td>
+      <td><input type="number" value="${item.qty}" min="1" style="width:60px;border:1px solid #eee;border-radius:6px;padding:6px 8px;font-size:.82rem;background:#fafbff;text-align:center;outline:none"
+        oninput="updateItem(${item.id},'qty',this.value)"/></td>
+      <td><input type="number" value="${item.unit}" min="0" style="width:100px;border:1px solid #eee;border-radius:6px;padding:6px 8px;font-size:.82rem;background:#fafbff;text-align:center;outline:none"
+        oninput="updateItem(${item.id},'unit',this.value)"/></td>
+      <td style="font-weight:500">${fmtSAR(total)}</td>
+      <td><button class="item-del" onclick="delRow(${item.id})">✕</button></td>`;
+    tbody.appendChild(tr);
+  });
+  recalc();
+}
+
+function updateItem(id, field, val) {
+  const item = items.find(i => i.id === id);
+  if (!item) return;
+  if (field === 'desc') item.desc = val;
+  else item[field] = parseFloat(val)||0;
+  recalc();
+}
+
+function escH(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+function fmtSAR(n) { return n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2})+' SAR'; }
+
+function recalc() {
+  const sub  = items.reduce((a,i)=>a+i.qty*i.unit, 0);
+  const vat  = parseFloat(document.getElementById('inp-vat').value)||0;
+  const vatAmt = sub * vat / 100;
+  const total  = sub + vatAmt;
+  document.getElementById('disp-sub').textContent   = fmtSAR(sub);
+  document.getElementById('disp-vat').textContent   = fmtSAR(vatAmt);
+  document.getElementById('disp-total').textContent = fmtSAR(total);
+  document.getElementById('lbl-vat-line').textContent = `${STR[lang].lblVatLine} (${vat}%)`;
+}
+
+/* ─── Status ─── */
+const STATUS_MAP = {
+  draft:   { ar:'مسودة',   en:'Draft',   cls:'s-draft'   },
+  sent:    { ar:'مُرسلة',  en:'Sent',    cls:'s-sent'    },
+  paid:    { ar:'مدفوعة',  en:'Paid',    cls:'s-paid'    },
+  overdue: { ar:'متأخرة',  en:'Overdue', cls:'s-overdue' }
+};
+function updateStatus(v) {
+  const sm = STATUS_MAP[v];
+  const badge = document.getElementById('status-badge');
+  badge.className = 'status-badge ' + sm.cls;
+  badge.textContent = sm[lang];
+  document.getElementById('wm').classList.toggle('on', v==='paid');
+}
+
+/* ─── Print ─── */
+function printInv() {
+  const note = document.getElementById('inp-notes').value;
+  document.getElementById('printed-note').textContent = note;
+  document.getElementById('printed-note').style.display = 'block';
+  window.print();
+  setTimeout(()=>{ document.getElementById('printed-note').style.display='none'; },500);
+}
+
+/* ─── Send (placeholder) ─── */
+function sendInv() {
+  const email = document.getElementById('inp-email').value.trim();
+  if (!email) { alert(lang==='ar'?'يرجى إدخال البريد الإلكتروني':'Please enter client email'); return; }
+  alert(lang==='ar'
+    ? `✓ تم إرسال الفاتورة ${invNum} إلى ${email}\n(اربطي Make.com لإرسال حقيقي)`
+    : `✓ Invoice ${invNum} sent to ${email}\n(Connect Make.com for real sending)`);
+}
+
+/* ─── Auto-fill from URL params (sent by Airtable/Make.com) ─────────────
+   الرابط: invoice.html?name=شركة+الأمل&email=info@co.com&pkg=pulse&lang=ar&ref=REC123
+─────────────────────────────────────────────────────────────────────── */
+(function() {
+  const p = new URLSearchParams(window.location.search);
+
+  if (p.get('lang')) lang = p.get('lang');
+
+  // اسم العميل — للعرض فقط
+  const name = p.get('name') || p.get('client') || '';
+  if (name) {
+    const inp = document.getElementById('inp-client');
+    if (inp) {
+      inp.value = name;
+      inp.readOnly = true;
+      inp.style.cssText += ';background:#f0edff;color:#7c3aed;font-weight:600;';
+      updateClient();
+    }
+  }
+
+  // البريد — للعرض فقط
+  const email = p.get('email') || '';
+  if (email) {
+    const inp = document.getElementById('inp-email');
+    if (inp) {
+      inp.value = email;
+      inp.readOnly = true;
+      inp.style.cssText += ';background:#f0edff;color:#5c6b8a;';
+      document.getElementById('disp-email').textContent = email;
+    }
+  }
+
+  // الباقة
+  const pkg = p.get('pkg') || p.get('package') || '';
+  if (pkg) {
+    const sel = document.getElementById('inp-pkg');
+    if (sel) {
+      sel.value = pkg;
+      sel.style.cssText += ';background:#f0edff;color:#7c3aed;font-weight:600;';
+    }
+  }
+
+  // رقم مرجعي من Airtable (record ID)
+  const ref = p.get('ref') || p.get('record') || '';
+  if (ref) {
+    document.getElementById('inv-num').textContent = 'INV-' + ref;
+  }
+
+  // تاريخ استحقاق مخصص
+  const due = p.get('due') || '';
+  if (due) {
+    const inp = document.getElementById('inp-due');
+    if (inp) {
+      inp.value = due;
+      document.getElementById('inv-due').textContent = formatDate(due);
+    }
+  }
+})();
+
+/* ─── Build payment URL ──────────────────────────────────────────────── */
+function buildPayUrl() {
+  const name  = document.getElementById('inp-client')?.value.trim() || '';
+  const email = document.getElementById('inp-email')?.value.trim()  || '';
+  const pkg   = document.getElementById('inp-pkg')?.value            || 'pulse';
+  const ref   = document.getElementById('inv-num')?.textContent      || '';
+  const due   = document.getElementById('inp-due')?.value            || '';
+  const total = document.getElementById('disp-total')?.textContent   || '';
+
+  const params = new URLSearchParams({ name, email, pkg, ref, due, total, lang });
+  const btn = document.getElementById('pay-btn');
+  if (btn) btn.href = 'payment.html?' + params.toString();
+}
+
+// إعادة بناء الرابط عند تغيير أي حقل
+['inp-client','inp-email','inp-pkg','inp-due','inp-vat'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', buildPayUrl);
+  document.getElementById(id)?.addEventListener('change', buildPayUrl);
+});
+
+/* ─── Boot ─── */
+setLang(lang);
+selectPackage();
+</script>
+</body>
+</html>
