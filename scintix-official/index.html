@@ -1,1664 +1,439 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scintix | وكالة التسويق الرقمي والذكاء الاصطناعي</title>
-<meta name="description" content="وكالة رقمية سعودية متخصصة في بناء المواقع، الهوية البصرية، والأتمتة الذكية للأعمال">
-<style>
-  :root {
-    --primary: #7c6fff;
-    --dark: #0a0e27;
-    --darker: #060818;
-    --light: #f8f8ff;
-    --gray: #8892b0;
-    --card-bg: rgba(124,111,255,0.05);
-    --border: rgba(124,111,255,0.2);
-    --gradient: linear-gradient(135deg, #7c6fff 0%, #a855f7 50%, #06b6d4 100%);
-    --glow: 0 0 40px rgba(124,111,255,0.3);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Segoe UI',Tahoma,Arial,sans-serif;
-    background:var(--dark);
-    color:var(--light);
-    overflow-x:hidden;
-    direction:rtl;
-  }
-  ::selection{background:var(--primary);color:#fff;}
-  ::-webkit-scrollbar{width:6px;}
-  ::-webkit-scrollbar-track{background:var(--darker);}
-  ::-webkit-scrollbar-thumb{background:var(--primary);border-radius:3px;}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scintix | حلول ذكية للنمو الرقمي</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      /* ── Pulse badge ── */
+      .plan-featured-badge {
+        position: absolute;
+        top: -13px;
+        right: 50%;
+        transform: translateX(50%);
+        background: linear-gradient(135deg,#8d4cff,#5cf0ff);
+        color: #06071a;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 999px;
+        white-space: nowrap;
+        letter-spacing: .04em;
+      }
+      .plan-card { position: relative; }
 
-  /* TYPOGRAPHY */
-  h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:1.2;}
-  h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;}
-  h3{font-size:clamp(1.2rem,2.5vw,1.6rem);font-weight:600;}
-  p{line-height:1.8;color:var(--gray);}
-  .en{font-family:'Segoe UI',Arial,sans-serif;}
+      /* ── Plans grid 5 cols ── */
+      @media (min-width: 1080px) {
+        .plans-grid { grid-template-columns: repeat(5, minmax(0,1fr)); gap: 16px; }
+      }
+      @media (max-width: 1079px) and (min-width: 640px) {
+        .plans-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      }
 
-  /* LAYOUT */
-  .container{max-width:1200px;margin:0 auto;padding:0 24px;}
-  section{padding:100px 0;position:relative;}
+      /* ── AI Analyser section ── */
+      #ai-analyser {
+        margin: 44px 0 0;
+        padding: 36px 32px;
+        border-radius: 28px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      #ai-analyser h2 {
+        font-size: 1.6rem;
+        margin: 0 0 6px;
+      }
+      #ai-analyser .sub {
+        color: var(--text-muted);
+        margin: 0 0 24px;
+        font-size: .95rem;
+      }
+      .ai-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      @media (max-width: 640px) { .ai-form { grid-template-columns: 1fr; } }
+      .ai-form textarea { grid-column: 1 / -1; resize: vertical; min-height: 90px; }
+      .ai-form button   { grid-column: 1 / -1; }
+      .ai-form input,
+      .ai-form textarea {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 13px 16px;
+        color: var(--text);
+        font-size: .95rem;
+        font-family: inherit;
+        transition: border-color .2s;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .ai-form input::placeholder,
+      .ai-form textarea::placeholder { color: var(--text-muted); }
+      .ai-form input:focus,
+      .ai-form textarea:focus { border-color: var(--accent); }
+      .ai-form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 28px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        font-family: inherit;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #031228;
+        transition: transform .25s, box-shadow .25s, opacity .2s;
+      }
+      .ai-form button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(92,240,255,.25);
+      }
+      .ai-form button:disabled { opacity: .55; cursor: not-allowed; }
+      .ai-form button .spinner {
+        width: 18px; height: 18px;
+        border: 2px solid rgba(3,18,40,.3);
+        border-top-color: #031228;
+        border-radius: 50%;
+        animation: spin .7s linear infinite;
+        display: none;
+      }
+      .ai-form button.loading .spinner { display: block; }
+      .ai-form button.loading .btn-label { display: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* BUTTONS */
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:14px 32px;border-radius:50px;font-size:1rem;font-weight:600;
-    cursor:pointer;transition:all 0.3s ease;text-decoration:none;border:none;
-  }
-  .btn-primary{
-    background:var(--gradient);color:#fff;
-    box-shadow:0 4px 20px rgba(124,111,255,0.4);
-  }
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(124,111,255,0.6);}
-  .btn-outline{
-    background:transparent;color:var(--primary);
-    border:2px solid var(--primary);
-  }
-  .btn-outline:hover{background:var(--primary);color:#fff;transform:translateY(-3px);}
-  .btn-sm{padding:10px 24px;font-size:0.9rem;}
+      .ai-result {
+        margin-top: 22px;
+        padding: 22px 20px;
+        border-radius: 18px;
+        background: rgba(92,240,255,0.05);
+        border: 1px solid rgba(92,240,255,0.18);
+        display: none;
+        line-height: 1.9;
+        color: var(--text);
+        white-space: pre-wrap;
+      }
+      .ai-result.visible { display: block; }
+      .ai-result strong { color: var(--accent); }
 
-  /* SECTION HEADERS */
-  .section-tag{
-    display:inline-block;padding:6px 20px;border-radius:50px;
-    background:rgba(124,111,255,0.15);border:1px solid var(--border);
-    color:var(--primary);font-size:0.85rem;font-weight:600;
-    margin-bottom:16px;letter-spacing:1px;
-  }
-  .section-header{text-align:center;margin-bottom:60px;}
-  .section-header h2{margin-bottom:16px;}
-  .section-header p{max-width:600px;margin:0 auto;}
-  .gradient-text{
-    background:var(--gradient);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    background-clip:text;
-  }
+      .ai-error {
+        margin-top: 16px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        background: rgba(255,60,60,.07);
+        border: 1px solid rgba(255,60,60,.2);
+        color: #ff7070;
+        display: none;
+        font-size: .9rem;
+      }
+      .ai-error.visible { display: block; }
 
-  /* CARDS */
-  .card{
-    background:var(--card-bg);border:1px solid var(--border);
-    border-radius:20px;padding:32px;
-    transition:all 0.3s ease;backdrop-filter:blur(10px);
-  }
-  .card:hover{
-    transform:translateY(-8px);
-    border-color:var(--primary);
-    box-shadow:var(--glow);
-  }
+      /* ── FAQ (per package) ── */
+      .faq-panel { margin: 48px 0 24px; }
+      .faq-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .faq-item {
+        padding: 4px 26px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        transition: border-color .2s;
+      }
+      .faq-item[open] { border-color: rgba(92,240,255,.28); }
+      .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        list-style: none;
+      }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-icon {
+        flex-shrink: 0;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(92,240,255,0.1);
+        border: 1px solid rgba(92,240,255,0.2);
+        color: var(--accent);
+        font-size: 1.1rem;
+        transition: transform .25s ease;
+      }
+      .faq-item[open] .faq-icon { transform: rotate(45deg); background: var(--accent); color: #031228; }
+      .faq-item p {
+        margin: 0 0 20px;
+        color: var(--text-muted);
+        line-height: 1.9;
+        font-size: .92rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#">
+          <img class="brand-logo" src="assets/logo.png" alt="Scintix" />
+          <span class="brand-text">
+            <span class="brand-name">Scintix</span>
+            <span class="header-tagline" data-i18n="header.tagline" data-i18n-html="true">ودع العمل اليدوي وإبدأ استثمارك في المستقبل مع <span class="brand-accent">Scintix</span></span>
+          </span>
+        </a>
 
-  /* NAVBAR */
-  nav{
-    position:fixed;top:0;width:100%;z-index:1000;
-    padding:16px 0;
-    transition:all 0.3s ease;
-  }
-  nav.scrolled{
-    background:rgba(10,14,39,0.95);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);
-    padding:10px 0;
-  }
-  .nav-inner{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:24px;
-  }
-  .logo{
-    display:flex;align-items:center;gap:10px;
-    text-decoration:none;
-  }
-  .logo-icon{
-    width:40px;height:40px;
-    background:var(--gradient);
-    border-radius:10px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .logo-text{
-    font-size:1.4rem;font-weight:800;color:#fff;
-    font-family:'Segoe UI',Arial,sans-serif;
-    letter-spacing:1px;
-  }
-  .nav-links{
-    display:flex;align-items:center;gap:8px;list-style:none;
-  }
-  .nav-links a{
-    color:var(--gray);font-size:0.9rem;font-weight:500;
-    text-decoration:none;padding:8px 14px;border-radius:8px;
-    transition:all 0.3s;
-  }
-  .nav-links a:hover{color:#fff;background:rgba(124,111,255,0.1);}
-  .nav-actions{display:flex;align-items:center;gap:12px;}
-  .lang-toggle{
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    color:var(--primary);padding:8px 16px;border-radius:8px;
-    cursor:pointer;font-size:0.85rem;font-weight:600;
-    transition:all 0.3s;
-  }
-  .lang-toggle:hover{background:var(--primary);color:#fff;}
-  .hamburger{
-    display:none;flex-direction:column;gap:5px;cursor:pointer;
-    background:none;border:none;padding:8px;
-  }
-  .hamburger span{
-    display:block;width:24px;height:2px;background:#fff;
-    border-radius:2px;transition:all 0.3s;
-  }
-  .mobile-menu{
-    display:none;position:fixed;top:70px;right:0;left:0;
-    background:rgba(10,14,39,0.98);backdrop-filter:blur(20px);
-    border-bottom:1px solid var(--border);padding:24px;
-    flex-direction:column;gap:8px;z-index:999;
-  }
-  .mobile-menu.open{display:flex;}
-  .mobile-menu a{
-    color:var(--gray);padding:12px 16px;border-radius:10px;
-    text-decoration:none;font-weight:500;transition:all 0.3s;
-  }
-  .mobile-menu a:hover{color:#fff;background:rgba(124,111,255,0.1);}
-
-  /* HERO */
-  #home{
-    min-height:100vh;display:flex;align-items:center;
-    padding-top:100px;overflow:hidden;
-    background:radial-gradient(ellipse at top right, rgba(124,111,255,0.15) 0%, transparent 60%),
-               radial-gradient(ellipse at bottom left, rgba(6,182,212,0.08) 0%, transparent 60%);
-  }
-  .hero-inner{
-    display:grid;grid-template-columns:1fr 1fr;gap:60px;
-    align-items:center;
-  }
-  .hero-badge{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:8px 20px;border-radius:50px;
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    font-size:0.85rem;color:var(--primary);margin-bottom:24px;
-  }
-  .hero-badge .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--primary);animation:pulse 2s infinite;
-  }
-  .hero-title{margin-bottom:24px;}
-  .hero-desc{font-size:1.1rem;margin-bottom:40px;max-width:480px;}
-  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
-  .hero-stats{
-    display:flex;gap:32px;margin-top:48px;
-    padding-top:32px;border-top:1px solid var(--border);
-    flex-wrap:wrap;
-  }
-  .stat-item h3{font-size:2rem;font-weight:800;color:#fff;}
-  .stat-item p{font-size:0.85rem;color:var(--gray);}
-  .hero-visual{position:relative;}
-  .hero-card-main{
-    background:linear-gradient(135deg,rgba(124,111,255,0.1),rgba(6,182,212,0.05));
-    border:1px solid var(--border);border-radius:24px;
-    padding:32px;backdrop-filter:blur(10px);
-    position:relative;overflow:hidden;
-  }
-  .hero-card-main::before{
-    content:'';position:absolute;inset:0;
-    background:var(--gradient);opacity:0.03;
-    border-radius:24px;
-  }
-  .floating-badge{
-    position:absolute;
-    background:rgba(10,14,39,0.9);border:1px solid var(--border);
-    border-radius:12px;padding:12px 16px;
-    backdrop-filter:blur(10px);
-    display:flex;align-items:center;gap:8px;font-size:0.8rem;
-    animation:float 3s ease-in-out infinite;
-  }
-  .floating-badge.one{top:-20px;left:-20px;animation-delay:0s;}
-  .floating-badge.two{bottom:20px;right:-20px;animation-delay:1.5s;}
-  .badge-icon{
-    width:32px;height:32px;border-radius:8px;
-    display:flex;align-items:center;justify-content:center;
-    font-size:1rem;
-  }
-  .orb{
-    position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;
-  }
-  .orb-1{width:300px;height:300px;background:rgba(124,111,255,0.2);top:-100px;right:-100px;}
-  .orb-2{width:200px;height:200px;background:rgba(6,182,212,0.15);bottom:-50px;left:-50px;}
-
-  /* ABOUT */
-  #about{
-    background:radial-gradient(ellipse at center, rgba(124,111,255,0.05) 0%, transparent 70%);
-  }
-  .about-inner{
-    display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
-  }
-  .about-visual{
-    position:relative;
-    display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  }
-  .about-stat-card{
-    background:var(--card-bg);border:1px solid var(--border);
-    border-radius:20px;padding:28px 24px;text-align:center;
-    transition:all 0.3s;
-  }
-  .about-stat-card:hover{border-color:var(--primary);transform:translateY(-4px);}
-  .about-stat-card h3{
-    font-size:2.2rem;font-weight:800;
-    background:var(--gradient);-webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;background-clip:text;
-  }
-  .about-stat-card p{font-size:0.85rem;margin-top:4px;}
-  .about-stat-card.featured{
-    grid-column:span 2;
-    background:linear-gradient(135deg,rgba(124,111,255,0.15),rgba(6,182,212,0.05));
-  }
-  .about-content .features{display:flex;flex-direction:column;gap:16px;margin-top:32px;}
-  .feature-item{
-    display:flex;align-items:flex-start;gap:16px;
-    padding:20px;border-radius:16px;
-    background:var(--card-bg);border:1px solid var(--border);
-  }
-  .feature-icon{
-    width:44px;height:44px;border-radius:12px;
-    background:rgba(124,111,255,0.15);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .feature-text h4{font-size:1rem;font-weight:600;color:#fff;margin-bottom:4px;}
-  .feature-text p{font-size:0.85rem;}
-
-  /* SERVICES */
-  #services{background:var(--darker);}
-  .services-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-    gap:24px;
-  }
-  .service-card{position:relative;overflow:hidden;}
-  .service-card::before{
-    content:'';position:absolute;inset:0;
-    background:var(--gradient);opacity:0;
-    transition:opacity 0.3s;border-radius:20px;
-  }
-  .service-card:hover::before{opacity:0.05;}
-  .service-num{
-    font-size:0.75rem;font-weight:700;color:var(--primary);
-    letter-spacing:2px;margin-bottom:12px;
-    font-family:'Segoe UI',Arial,sans-serif;
-  }
-  .service-icon{
-    width:56px;height:56px;border-radius:16px;
-    background:rgba(124,111,255,0.15);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:20px;transition:all 0.3s;
-  }
-  .service-card:hover .service-icon{
-    background:var(--primary);
-    box-shadow:0 0 20px rgba(124,111,255,0.5);
-  }
-  .service-card h3{margin-bottom:12px;color:#fff;}
-  .service-card p{font-size:0.9rem;}
-  .service-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
-  .service-tag{
-    padding:4px 12px;border-radius:50px;
-    background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.2);
-    font-size:0.75rem;color:var(--primary);
-  }
-
-  /* PORTFOLIO */
-  #portfolio{}
-  .portfolio-filters{
-    display:flex;justify-content:center;gap:12px;
-    flex-wrap:wrap;margin-bottom:48px;
-  }
-  .filter-btn{
-    padding:10px 24px;border-radius:50px;font-size:0.9rem;font-weight:600;
-    cursor:pointer;transition:all 0.3s;border:1px solid var(--border);
-    background:transparent;color:var(--gray);
-  }
-  .filter-btn.active,.filter-btn:hover{
-    background:var(--primary);color:#fff;border-color:var(--primary);
-  }
-  .portfolio-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-    gap:24px;
-  }
-  .portfolio-item{
-    border-radius:20px;overflow:hidden;position:relative;cursor:pointer;
-    border:1px solid var(--border);
-    transition:all 0.3s;
-  }
-  .portfolio-item:hover{transform:translateY(-8px);box-shadow:var(--glow);}
-  .portfolio-thumb{
-    height:220px;position:relative;overflow:hidden;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .portfolio-thumb .thumb-bg{
-    position:absolute;inset:0;
-    transition:transform 0.5s ease;
-  }
-  .portfolio-item:hover .thumb-bg{transform:scale(1.1);}
-  .portfolio-overlay{
-    position:absolute;inset:0;
-    background:rgba(10,14,39,0.85);
-    display:flex;align-items:center;justify-content:center;
-    opacity:0;transition:opacity 0.3s;
-  }
-  .portfolio-item:hover .portfolio-overlay{opacity:1;}
-  .portfolio-info{padding:24px;background:var(--card-bg);}
-  .portfolio-cat{
-    font-size:0.75rem;color:var(--primary);font-weight:600;
-    letter-spacing:1px;margin-bottom:8px;
-  }
-  .portfolio-info h3{font-size:1.1rem;color:#fff;margin-bottom:8px;}
-  .portfolio-info p{font-size:0.85rem;}
-
-  /* TEAM */
-  #team{background:var(--darker);}
-  .team-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-    gap:24px;
-  }
-  .team-card{text-align:center;}
-  .team-avatar{
-    width:100px;height:100px;border-radius:50%;
-    margin:0 auto 20px;position:relative;
-    background:var(--gradient);
-    display:flex;align-items:center;justify-content:center;
-    font-size:2rem;font-weight:800;color:#fff;
-  }
-  .team-avatar::after{
-    content:'';position:absolute;inset:-3px;
-    border-radius:50%;background:var(--gradient);z-index:-1;
-    opacity:0;transition:opacity 0.3s;
-  }
-  .team-card:hover .team-avatar::after{opacity:1;}
-  .team-card h3{color:#fff;font-size:1.1rem;margin-bottom:6px;}
-  .team-card .role{color:var(--primary);font-size:0.85rem;font-weight:600;margin-bottom:12px;}
-  .team-card p{font-size:0.85rem;}
-  .team-social{display:flex;justify-content:center;gap:12px;margin-top:16px;}
-  .team-social a{
-    width:36px;height:36px;border-radius:8px;
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--gray);text-decoration:none;font-size:0.8rem;
-    transition:all 0.3s;
-  }
-  .team-social a:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
-
-  /* TESTIMONIALS */
-  #testimonials{
-    background:radial-gradient(ellipse at center, rgba(124,111,255,0.08) 0%, transparent 70%);
-  }
-  .testimonials-carousel{position:relative;overflow:hidden;}
-  .testimonials-track{
-    display:flex;transition:transform 0.5s ease;
-    gap:24px;
-  }
-  .testimonial-card{
-    min-width:calc(33.333% - 16px);
-    flex-shrink:0;
-  }
-  .testimonial-card .stars{
-    display:flex;gap:4px;margin-bottom:16px;
-  }
-  .star{color:#fbbf24;font-size:1rem;}
-  .testimonial-text{
-    font-size:1rem;color:var(--light);line-height:1.7;
-    margin-bottom:24px;font-style:italic;
-  }
-  .testimonial-author{display:flex;align-items:center;gap:12px;}
-  .author-avatar{
-    width:48px;height:48px;border-radius:50%;
-    background:var(--gradient);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;color:#fff;font-size:1rem;
-    flex-shrink:0;
-  }
-  .author-info h4{color:#fff;font-size:0.95rem;}
-  .author-info p{font-size:0.8rem;}
-  .carousel-controls{
-    display:flex;justify-content:center;gap:12px;margin-top:40px;
-  }
-  .carousel-btn{
-    width:48px;height:48px;border-radius:50%;
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    color:var(--primary);cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    transition:all 0.3s;font-size:1.2rem;
-  }
-  .carousel-btn:hover{background:var(--primary);color:#fff;}
-  .carousel-dots{display:flex;gap:8px;align-items:center;margin-top:24px;justify-content:center;}
-  .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:var(--border);cursor:pointer;transition:all 0.3s;
-  }
-  .dot.active{background:var(--primary);width:24px;border-radius:4px;}
-
-  /* BLOG */
-  #blog{}
-  .blog-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-    gap:24px;
-  }
-  .blog-card{overflow:hidden;}
-  .blog-thumb{
-    height:180px;border-radius:16px 16px 0 0;overflow:hidden;
-    position:relative;margin:-32px -32px 24px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .blog-cat{
-    position:absolute;top:16px;right:16px;
-    padding:4px 14px;border-radius:50px;
-    background:rgba(10,14,39,0.8);color:var(--primary);
-    font-size:0.75rem;font-weight:600;
-    backdrop-filter:blur(10px);
-  }
-  .blog-meta{
-    display:flex;align-items:center;gap:16px;
-    font-size:0.8rem;color:var(--gray);margin-bottom:12px;
-  }
-  .blog-card h3{color:#fff;margin-bottom:12px;font-size:1.05rem;}
-  .blog-card p{font-size:0.85rem;margin-bottom:16px;}
-  .read-more{
-    color:var(--primary);font-size:0.85rem;font-weight:600;
-    text-decoration:none;display:flex;align-items:center;gap:6px;
-    transition:gap 0.3s;
-  }
-  .read-more:hover{gap:10px;}
-
-  /* PRICING */
-  #pricing{background:var(--darker);}
-  .pricing-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-    gap:20px;
-  }
-  .pricing-card{text-align:center;position:relative;overflow:hidden;}
-  .pricing-card.featured{
-    background:linear-gradient(135deg,rgba(124,111,255,0.2),rgba(168,85,247,0.1));
-    border-color:var(--primary);
-    transform:scale(1.05);
-  }
-  .pricing-card.featured::before{
-    content:'الأكثر شيوعاً';
-    position:absolute;top:16px;left:50%;transform:translateX(-50%);
-    background:var(--gradient);color:#fff;
-    padding:4px 16px;border-radius:50px;font-size:0.7rem;font-weight:700;
-    white-space:nowrap;
-  }
-  .pkg-name{
-    font-size:1.1rem;font-weight:700;color:#fff;
-    margin-bottom:8px;margin-top:28px;
-  }
-  .pkg-name-en{
-    font-size:0.75rem;color:var(--primary);letter-spacing:2px;
-    font-family:'Segoe UI',Arial,sans-serif;font-weight:700;
-  }
-  .pkg-price{
-    margin:24px 0;
-  }
-  .pkg-price .amount{
-    font-size:2.2rem;font-weight:800;
-    background:var(--gradient);-webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;background-clip:text;
-  }
-  .pkg-price .currency{font-size:0.9rem;color:var(--gray);}
-  .pkg-price .period{font-size:0.8rem;color:var(--gray);}
-  .pkg-features{
-    list-style:none;text-align:right;margin-bottom:28px;
-  }
-  .pkg-features li{
-    padding:8px 0;font-size:0.85rem;color:var(--gray);
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    display:flex;align-items:center;gap:8px;
-  }
-  .pkg-features li::before{
-    content:'✓';color:var(--primary);font-weight:700;flex-shrink:0;
-  }
-  .pkg-target{
-    font-size:0.75rem;color:var(--primary);
-    background:rgba(124,111,255,0.1);padding:4px 12px;border-radius:50px;
-    display:inline-block;margin-bottom:16px;
-  }
-
-  /* FAQ */
-  #faq{
-    background:radial-gradient(ellipse at top, rgba(124,111,255,0.08) 0%, transparent 60%);
-  }
-  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
-  .faq-item{
-    border:1px solid var(--border);border-radius:16px;overflow:hidden;
-    transition:border-color 0.3s;
-  }
-  .faq-item.open{border-color:var(--primary);}
-  .faq-question{
-    padding:24px;display:flex;justify-content:space-between;
-    align-items:center;cursor:pointer;
-    background:var(--card-bg);
-  }
-  .faq-question h3{font-size:1rem;color:#fff;font-weight:600;}
-  .faq-toggle{
-    width:32px;height:32px;border-radius:50%;
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--primary);transition:all 0.3s;flex-shrink:0;
-    font-size:1.2rem;
-  }
-  .faq-item.open .faq-toggle{background:var(--primary);color:#fff;transform:rotate(45deg);}
-  .faq-answer{
-    max-height:0;overflow:hidden;transition:max-height 0.4s ease;
-    background:rgba(124,111,255,0.03);
-  }
-  .faq-answer p{padding:0 24px 24px;font-size:0.9rem;}
-
-  /* CONTACT */
-  #contact{background:var(--darker);}
-  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
-  .contact-info h2{margin-bottom:24px;}
-  .contact-info p{margin-bottom:40px;}
-  .contact-items{display:flex;flex-direction:column;gap:16px;margin-bottom:32px;}
-  .contact-item{
-    display:flex;align-items:center;gap:16px;
-    padding:16px;border-radius:12px;
-    background:var(--card-bg);border:1px solid var(--border);
-  }
-  .contact-item-icon{
-    width:44px;height:44px;border-radius:12px;
-    background:rgba(124,111,255,0.15);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .contact-item-text p:first-child{color:#fff;font-weight:600;font-size:0.9rem;}
-  .contact-item-text p:last-child{font-size:0.85rem;}
-  .map-placeholder{
-    border-radius:16px;overflow:hidden;border:1px solid var(--border);
-    height:200px;background:rgba(124,111,255,0.05);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--gray);font-size:0.9rem;position:relative;
-  }
-  .contact-form{display:flex;flex-direction:column;gap:16px;}
-  .form-group{display:flex;flex-direction:column;gap:8px;}
-  .form-group label{font-size:0.9rem;color:var(--light);font-weight:500;}
-  .form-group input,.form-group textarea,.form-group select{
-    padding:14px 18px;border-radius:12px;
-    background:rgba(255,255,255,0.04);border:1px solid var(--border);
-    color:#fff;font-size:0.9rem;font-family:inherit;
-    transition:border-color 0.3s;outline:none;width:100%;
-  }
-  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{
-    border-color:var(--primary);box-shadow:0 0 0 3px rgba(124,111,255,0.1);
-  }
-  .form-group select option{background:var(--dark);color:#fff;}
-  .form-group textarea{resize:vertical;min-height:120px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-
-  /* NEWSLETTER */
-  #newsletter{
-    background:linear-gradient(135deg,rgba(124,111,255,0.15) 0%,rgba(6,182,212,0.05) 100%);
-    padding:80px 0;
-  }
-  .newsletter-inner{
-    text-align:center;max-width:600px;margin:0 auto;
-  }
-  .newsletter-inner h2{margin-bottom:16px;}
-  .newsletter-inner p{margin-bottom:32px;}
-  .newsletter-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-  .newsletter-input{
-    flex:1;min-width:240px;padding:14px 20px;
-    border-radius:50px;background:rgba(255,255,255,0.05);
-    border:1px solid var(--border);color:#fff;font-size:0.9rem;
-    outline:none;transition:border-color 0.3s;
-  }
-  .newsletter-input:focus{border-color:var(--primary);}
-  .newsletter-input::placeholder{color:var(--gray);}
-
-  /* FOOTER */
-  footer{
-    background:var(--darker);border-top:1px solid var(--border);
-    padding:60px 0 32px;
-  }
-  .footer-grid{
-    display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:40px;margin-bottom:48px;
-  }
-  .footer-brand p{font-size:0.9rem;margin:16px 0 24px;}
-  .footer-socials{display:flex;gap:12px;}
-  .social-link{
-    width:40px;height:40px;border-radius:10px;
-    background:rgba(124,111,255,0.1);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--gray);text-decoration:none;font-size:0.9rem;
-    transition:all 0.3s;
-  }
-  .social-link:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
-  .footer-col h4{color:#fff;font-weight:600;margin-bottom:20px;font-size:0.95rem;}
-  .footer-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
-  .footer-links a{
-    color:var(--gray);text-decoration:none;font-size:0.85rem;
-    transition:color 0.3s;
-  }
-  .footer-links a:hover{color:var(--primary);}
-  .footer-bottom{
-    border-top:1px solid var(--border);padding-top:24px;
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:12px;
-  }
-  .footer-bottom p{font-size:0.8rem;}
-
-  /* ANIMATIONS */
-  @keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-12px);}
-  }
-  @keyframes pulse{
-    0%,100%{opacity:1;}
-    50%{opacity:0.4;}
-  }
-  @keyframes fadeInUp{
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  @keyframes rotate{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
-  }
-  @keyframes shimmer{
-    0%{background-position:200% center;}
-    100%{background-position:-200% center;}
-  }
-  .animate-in{animation:fadeInUp 0.6s ease forwards;opacity:0;}
-  .delay-1{animation-delay:0.1s;}
-  .delay-2{animation-delay:0.2s;}
-  .delay-3{animation-delay:0.3s;}
-  .delay-4{animation-delay:0.4s;}
-
-  /* PARTICLES */
-  #particles-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
-
-  /* CURSOR */
-  .cursor{
-    width:12px;height:12px;border-radius:50%;
-    background:var(--primary);position:fixed;
-    top:0;left:0;pointer-events:none;z-index:9999;
-    transition:transform 0.1s;mix-blend-mode:difference;
-  }
-  .cursor-ring{
-    width:36px;height:36px;border-radius:50%;
-    border:1px solid var(--primary);position:fixed;
-    top:0;left:0;pointer-events:none;z-index:9998;
-    transition:all 0.15s ease;opacity:0.6;
-  }
-
-  /* SCROLL PROGRESS */
-  .scroll-progress{
-    position:fixed;top:0;left:0;height:3px;z-index:1001;
-    background:var(--gradient);width:0%;transition:width 0.1s;
-  }
-
-  /* BACK TO TOP */
-  .back-top{
-    position:fixed;bottom:32px;left:32px;z-index:100;
-    width:48px;height:48px;border-radius:50%;
-    background:var(--primary);color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;border:none;font-size:1.2rem;
-    box-shadow:0 4px 20px rgba(124,111,255,0.4);
-    opacity:0;transform:translateY(20px);
-    transition:all 0.3s;
-  }
-  .back-top.show{opacity:1;transform:translateY(0);}
-  .back-top:hover{transform:translateY(-4px);}
-
-  /* RESPONSIVE */
-  @media(max-width:1024px){
-    .hero-inner,.about-inner,.contact-inner{grid-template-columns:1fr;}
-    .hero-visual{display:none;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    .testimonial-card{min-width:calc(50% - 12px);}
-    .pricing-card.featured{transform:scale(1);}
-  }
-  @media(max-width:768px){
-    .nav-links,.nav-actions .btn{display:none;}
-    .hamburger{display:flex;}
-    section{padding:70px 0;}
-    .about-visual{grid-template-columns:1fr 1fr;}
-    .form-row{grid-template-columns:1fr;}
-    .testimonial-card{min-width:100%;}
-    .portfolio-grid,.blog-grid,.services-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr;}
-    .hero-stats{gap:20px;}
-    .pricing-grid{grid-template-columns:1fr 1fr;}
-    .cursor,.cursor-ring{display:none;}
-  }
-  @media(max-width:480px){
-    .pricing-grid{grid-template-columns:1fr;}
-    .hero-actions{flex-direction:column;align-items:flex-start;}
-    .team-grid{grid-template-columns:1fr 1fr;}
-  }
-</style>
-</head>
-<body>
-
-<!-- Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Scroll Progress -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#home" class="logo">
-        <div class="logo-icon">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <path d="M11 2L14 8H20L15 12L17 18L11 14L5 18L7 12L2 8H8L11 2Z" fill="white"/>
-          </svg>
-        </div>
-        <span class="logo-text en">Scintix</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="#about">من نحن</a></li>
-        <li><a href="#services">خدماتنا</a></li>
-        <li><a href="#portfolio">أعمالنا</a></li>
-        <li><a href="#team">الفريق</a></li>
-        <li><a href="#pricing">الباقات</a></li>
-        <li><a href="#blog">المدونة</a></li>
-        <li><a href="#contact">تواصل</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="lang-toggle" id="langToggle">EN</button>
-        <a href="#contact" class="btn btn-primary btn-sm">ابدأ مشروعك</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu">
+        <button class="nav-toggle" aria-label="فتح القائمة" data-i18n-aria-label="nav.toggle">
           <span></span><span></span><span></span>
         </button>
-      </div>
-    </div>
-  </div>
-</nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#home">الرئيسية</a>
-  <a href="#about">من نحن</a>
-  <a href="#services">خدماتنا</a>
-  <a href="#portfolio">أعمالنا</a>
-  <a href="#team">الفريق</a>
-  <a href="#pricing">الباقات</a>
-  <a href="#blog">المدونة</a>
-  <a href="#faq">الأسئلة</a>
-  <a href="#contact">تواصل معنا</a>
-</div>
+        <nav class="main-nav">
+          <a href="#services"    data-i18n="nav.services">الخدمات</a>
+          <a href="#plans"       data-i18n="nav.plans">الباقات</a>
+          <a href="#faq"         data-i18n="nav.faq">الأسئلة الشائعة</a>
+          <a href="#ai-analyser" data-i18n="nav.ai">الذكاء الاصطناعي</a>
+          <a href="#clients"     data-i18n="nav.clients">شركاؤنا</a>
+          <a href="#contact"     data-i18n="nav.contact">اتصل بنا</a>
+        </nav>
 
-<!-- HERO -->
-<section id="home" style="position:relative;">
-  <canvas id="particles-canvas"></canvas>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-badge animate-in">
-          <span class="dot"></span>
-          <span>وكالة رقمية سعودية رائدة</span>
-        </div>
-        <h1 class="hero-title animate-in delay-1">
-          نُشعل <span class="gradient-text">إبداعك</span><br>بذكاء اصطناعي حقيقي
-        </h1>
-        <p class="hero-desc animate-in delay-2">
-          من الفكرة إلى الإطلاق — نبني مواقعك، نصمم هويتك، ونؤتمت أعمالك بأحدث تقنيات الذكاء الاصطناعي لتتفوق في سوق متسارع التحول.
-        </p>
-        <div class="hero-actions animate-in delay-3">
-          <a href="#contact" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            ابدأ الآن
-          </a>
-          <a href="#portfolio" class="btn btn-outline">استكشف أعمالنا</a>
-        </div>
-        <div class="hero-stats animate-in delay-4">
-          <div class="stat-item">
-            <h3><span class="counter" data-target="150">0</span>+</h3>
-            <p>مشروع منجز</p>
-          </div>
-          <div class="stat-item">
-            <h3><span class="counter" data-target="98">0</span>%</h3>
-            <p>رضا العملاء</p>
-          </div>
-          <div class="stat-item">
-            <h3><span class="counter" data-target="5">0</span>+</h3>
-            <p>سنوات خبرة</p>
-          </div>
-          <div class="stat-item">
-            <h3><span class="counter" data-target="40">0</span>+</h3>
-            <p>عميل نشط</p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-card-main" style="position:relative;">
-          <div class="floating-badge one">
-            <div class="badge-icon" style="background:rgba(124,111,255,0.2);">🤖</div>
-            <div>
-              <div style="color:#fff;font-weight:600;font-size:0.85rem;">AI Automation</div>
-              <div style="color:var(--gray);font-size:0.75rem;">+340% كفاءة</div>
-            </div>
-          </div>
-          <div style="text-align:center;padding:20px 0;">
-            <svg width="120" height="120" viewBox="0 0 120 120">
-              <defs>
-                <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style="stop-color:#7c6fff"/>
-                  <stop offset="50%" style="stop-color:#a855f7"/>
-                  <stop offset="100%" style="stop-color:#06b6d4"/>
-                </linearGradient>
-              </defs>
-              <circle cx="60" cy="60" r="55" stroke="url(#heroGrad)" stroke-width="2" fill="none" opacity="0.3"/>
-              <circle cx="60" cy="60" r="40" stroke="url(#heroGrad)" stroke-width="1.5" fill="none" opacity="0.2" stroke-dasharray="5 3"/>
-              <circle cx="60" cy="60" r="25" fill="url(#heroGrad)" opacity="0.15"/>
-              <path d="M60 35L67 52H85L71 62L76 79L60 69L44 79L49 62L35 52H53L60 35Z" fill="url(#heroGrad)"/>
-            </svg>
-            <h3 style="color:#fff;margin-top:16px;">Scintix Platform</h3>
-            <p style="font-size:0.85rem;margin-top:8px;">حلول رقمية متكاملة بالذكاء الاصطناعي</p>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">
-            <div style="background:rgba(124,111,255,0.1);border-radius:12px;padding:16px;text-align:center;">
-              <div style="font-size:1.5rem;font-weight:800;color:#fff;">24/7</div>
-              <div style="font-size:0.75rem;color:var(--gray);">دعم فوري</div>
-            </div>
-            <div style="background:rgba(6,182,212,0.1);border-radius:12px;padding:16px;text-align:center;">
-              <div style="font-size:1.5rem;font-weight:800;color:#fff;">AI</div>
-              <div style="font-size:0.75rem;color:var(--gray);">مدعوم بالذكاء</div>
-            </div>
-          </div>
-          <div class="floating-badge two">
-            <div class="badge-icon" style="background:rgba(6,182,212,0.2);">📈</div>
-            <div>
-              <div style="color:#fff;font-weight:600;font-size:0.85rem;">نمو الإيرادات</div>
-              <div style="color:var(--gray);font-size:0.75rem;">+85% متوسطاً</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-inner">
-      <div class="about-visual">
-        <div class="about-stat-card featured">
-          <h3>150+</h3>
-          <p>مشروع رقمي أطلقناه بنجاح منذ تأسيسنا</p>
-        </div>
-        <div class="about-stat-card">
-          <h3>5+</h3>
-          <p>سنوات في التسويق الرقمي</p>
-        </div>
-        <div class="about-stat-card">
-          <h3>40+</h3>
-          <p>عميل نشط حول المملكة</p>
-        </div>
-        <div class="about-stat-card">
-          <h3>12</h3>
-          <p>خبير رقمي متخصص</p>
-        </div>
-      </div>
-      <div class="about-content">
-        <div class="section-tag">من نحن</div>
-        <h2>وكالة سعودية <span class="gradient-text">تُشعل</span> مستقبل أعمالك</h2>
-        <p style="margin-top:16px;">Scintix وكالة رقمية سعودية متخصصة في تحويل رؤى الأعمال إلى تجارب رقمية استثنائية. نجمع بين إبداع التصميم، قوة الكود، وذكاء الأتمتة لنقدم حلولاً تُحدث فارقاً حقيقياً.</p>
-        <div class="features">
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
-            <div class="feature-text">
-              <h4>نهج متكامل من A إلى Z</h4>
-              <p>من الاستراتيجية والتصميم إلى التطوير والإطلاق والدعم المستمر</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            </div>
-            <div class="feature-text">
-              <h4>مدعوم بالذكاء الاصطناعي</h4>
-              <p>نوظف أحدث أدوات AI لتسريع التنفيذ وتحسين النتائج قياساً بالمنافسين</p>
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <div class="feature-text">
-              <h4>فريق سعودي متخصص</h4>
-              <p>خبراء سعوديون يفهمون السوق المحلي وطموحات رؤية 2030</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">خدماتنا</div>
-      <h2>حلول رقمية <span class="gradient-text">شاملة</span></h2>
-      <p>من بناء المواقع إلى الأتمتة الذكية — نغطي كل ما تحتاجه لنجاحك الرقمي</p>
-    </div>
-    <div class="services-grid">
-      <div class="card service-card">
-        <div class="service-num en">01</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <h3>تصميم وتطوير المواقع</h3>
-        <p>مواقع احترافية سريعة ومتجاوبة، مبنية بأحدث التقنيات ومصممة لتحويل الزوار إلى عملاء.</p>
-        <div class="service-tags">
-          <span class="service-tag">RTL/EN</span>
-          <span class="service-tag">متجاوب</span>
-          <span class="service-tag">سريع</span>
-        </div>
-      </div>
-      <div class="card service-card">
-        <div class="service-num en">02</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3>الأتمتة الذكية بالذكاء الاصطناعي</h3>
-        <p>نربط أدواتك (CRM، بريد، دفع) ببعض عبر أتمتة كاملة توفر وقتك وتقلل الأخطاء البشرية.</p>
-        <div class="service-tags">
-          <span class="service-tag">AI</span>
-          <span class="service-tag">Automation</span>
-        </div>
-      </div>
-      <div class="card service-card">
-        <div class="service-num en">03</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z"/></svg>
-        </div>
-        <h3>الهوية البصرية والبراندنق</h3>
-        <p>شعار، ألوان، ونظام هوية متكامل يعكس شخصية نشاطك ويميزك عن المنافسين.</p>
-        <div class="service-tags">
-          <span class="service-tag">شعارات</span>
-          <span class="service-tag">هوية</span>
-        </div>
-      </div>
-      <div class="card service-card">
-        <div class="service-num en">04</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        </div>
-        <h3>التسويق الرقمي والمحتوى</h3>
-        <p>محتوى إعلاني وسوشيال ميديا مدعوم بالذكاء الاصطناعي، بعربي وإنجليزي، جاهز للنشر.</p>
-        <div class="service-tags">
-          <span class="service-tag">إعلانات</span>
-          <span class="service-tag">سوشيال ميديا</span>
-        </div>
-      </div>
-      <div class="card service-card">
-        <div class="service-num en">05</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </div>
-        <h3>تطبيقات وأدوات مخصصة</h3>
-        <p>أدوات داخلية وأنظمة إدارة مصممة خصيصاً لطريقة عمل نشاطك، لا حلول جاهزة عامة.</p>
-        <div class="service-tags">
-          <span class="service-tag">مخصص</span>
-        </div>
-      </div>
-      <div class="card service-card">
-        <div class="service-num en">06</div>
-        <div class="service-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7c6fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>الدعم والصيانة المستمرة</h3>
-        <p>نتابع أداء موقعك ونحدّثه باستمرار، مع دعم فني سريع وقت ما تحتاجينه.</p>
-        <div class="service-tags">
-          <span class="service-tag">24/7</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">أعمالنا</div>
-      <h2>مشاريع <span class="gradient-text">نفخر</span> بها</h2>
-      <p>نماذج من المواقع والأنظمة التي بنيناها لعملائنا</p>
-    </div>
-    <div class="portfolio-filters">
-      <button class="filter-btn active" data-filter="all">الكل</button>
-      <button class="filter-btn" data-filter="web">مواقع</button>
-      <button class="filter-btn" data-filter="brand">هوية بصرية</button>
-      <button class="filter-btn" data-filter="automation">أتمتة</button>
-    </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-item" data-cat="web">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#7c6fff,#06b6d4);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">تطوير مواقع</div>
-          <h3>منصة تجارة إلكترونية</h3>
-          <p>متجر متكامل بواجهة عربية وتجربة دفع سلسة</p>
-        </div>
-      </div>
-      <div class="portfolio-item" data-cat="automation">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#a855f7,#7c6fff);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">أتمتة ذكية</div>
-          <h3>نظام إدارة عملاء آلي</h3>
-          <p>أتمتة كاملة من استقبال العميل للتسليم النهائي</p>
-        </div>
-      </div>
-      <div class="portfolio-item" data-cat="brand">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#06b6d4,#a855f7);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">هوية بصرية</div>
-          <h3>هوية مقهى مختص</h3>
-          <p>شعار ونظام ألوان دافئ يعكس شخصية العلامة</p>
-        </div>
-      </div>
-      <div class="portfolio-item" data-cat="web">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#7c6fff,#a855f7);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">تطوير مواقع</div>
-          <h3>موقع شركة عقارية</h3>
-          <p>عرض مشاريع تفاعلي بخرائط وفلترة متقدمة</p>
-        </div>
-      </div>
-      <div class="portfolio-item" data-cat="brand">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#06b6d4,#7c6fff);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">هوية بصرية</div>
-          <h3>هوية عيادة تجميل</h3>
-          <p>هوية راقية بلمسة طبية موثوقة</p>
-        </div>
-      </div>
-      <div class="portfolio-item" data-cat="automation">
-        <div class="portfolio-thumb">
-          <div class="thumb-bg" style="background:linear-gradient(135deg,#a855f7,#06b6d4);width:100%;height:100%;"></div>
-          <div class="portfolio-overlay"><span style="color:#fff;font-weight:600;">عرض المشروع</span></div>
-        </div>
-        <div class="portfolio-info">
-          <div class="portfolio-cat">أتمتة ذكية</div>
-          <h3>خط إنتاج مواقع تلقائي</h3>
-          <p>من طلب العميل إلى موقع منشور خلال دقائق</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team" style="background:var(--darker);">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">فريقنا</div>
-      <h2>خبرة بشرية <span class="gradient-text">بقوة</span> الذكاء الاصطناعي</h2>
-      <p>فريق سعودي متخصص، مدعوم بمحرك أتمتة يضمن سرعة ودقة ما يقدر عليها فريق تقليدي</p>
-    </div>
-    <div class="team-grid">
-      <div class="team-card card">
-        <div class="team-avatar">أ</div>
-        <h3>أروى</h3>
-        <div class="role">المؤسسة والمديرة التقنية</div>
-        <p>تقود الرؤية التقنية والإشراف على كل مشروع من الفكرة للإطلاق</p>
-      </div>
-      <div class="team-card card">
-        <div class="team-avatar">🤖</div>
-        <h3>محرك Scintix AI</h3>
-        <div class="role">الأتمتة والتنفيذ</div>
-        <p>يبني المواقع وينفذ المهام التقنية بسرعة وجودة ثابتة على مدار الساعة</p>
-      </div>
-      <div class="team-card card">
-        <div class="team-avatar">🎨</div>
-        <h3>فريق التصميم</h3>
-        <div class="role">الهوية البصرية</div>
-        <p>يحول رؤية كل عميل لهوية بصرية متكاملة تعكس شخصية نشاطه</p>
-      </div>
-      <div class="team-card card">
-        <div class="team-avatar">📞</div>
-        <h3>فريق الدعم</h3>
-        <div class="role">متابعة العملاء</div>
-        <p>يتابع كل مشروع بعد التسليم ويضمن رضا العميل على المدى الطويل</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">آراء العملاء</div>
-      <h2>قصص نجاح <span class="gradient-text">عملائنا</span></h2>
-      <p>نبني علاقات طويلة الأمد مبنية على نتائج حقيقية</p>
-    </div>
-    <div class="testimonials-carousel">
-      <div class="testimonials-track" id="testimonialsTrack">
-        <div class="testimonial-card card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"موقعنا صار جاهز بوقت قياسي وبجودة فاقت توقعاتنا. التواصل كان سلس والنتيجة احترافية."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">ن</div>
-            <div class="author-info"><h4>عميل قطاع المقاهي</h4><p>الرياض</p></div>
-          </div>
-        </div>
-        <div class="testimonial-card card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"الأتمتة اللي بنوها لنا وفرت علينا ساعات يومية كانت تروح بالأعمال اليدوية."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">م</div>
-            <div class="author-info"><h4>عميل قطاع العقار</h4><p>جدة</p></div>
-          </div>
-        </div>
-        <div class="testimonial-card card">
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">"فريق محترف ومتفهم لاحتياجاتنا، وأسعارهم منصفة مقارنة بالجودة المقدمة."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">س</div>
-            <div class="author-info"><h4>عميل قطاع التجزئة</h4><p>الدمام</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="prevTestimonial">›</button>
-        <button class="carousel-btn" id="nextTestimonial">‹</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog" style="background:var(--darker);">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">المدونة</div>
-      <h2>أفكار <span class="gradient-text">ورؤى</span> رقمية</h2>
-      <p>مقالات نشاركك فيها خبرتنا بالتحول الرقمي والأتمتة</p>
-    </div>
-    <div class="blog-grid">
-      <div class="blog-card card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#7c6fff,#06b6d4);">
-          <span class="blog-cat">تسويق رقمي</span>
-        </div>
-        <div class="blog-meta"><span>5 دقائق قراءة</span></div>
-        <h3>لماذا موقعك أهم استثمار تسويقي هذا العام؟</h3>
-        <p>نظرة على كيف تحول المواقع الاحترافية زوار عابرين إلى عملاء دائمين.</p>
-        <a href="#" class="read-more">اقرأ المزيد ←</a>
-      </div>
-      <div class="blog-card card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#a855f7,#7c6fff);">
-          <span class="blog-cat">أتمتة</span>
-        </div>
-        <div class="blog-meta"><span>4 دقائق قراءة</span></div>
-        <h3>5 مهام في عملك تقدر تؤتمتها اليوم</h3>
-        <p>خطوات عملية لتوفير وقتك وتقليل الأخطاء عبر الأتمتة الذكية.</p>
-        <a href="#" class="read-more">اقرأ المزيد ←</a>
-      </div>
-      <div class="blog-card card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#06b6d4,#a855f7);">
-          <span class="blog-cat">هوية بصرية</span>
-        </div>
-        <div class="blog-meta"><span>3 دقائق قراءة</span></div>
-        <h3>كيف تختارين الألوان الصح لهويتك التجارية؟</h3>
-        <p>دليل مبسط لفهم سيكولوجية الألوان وتأثيرها على قرار العميل.</p>
-        <a href="#" class="read-more">اقرأ المزيد ←</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">باقاتنا</div>
-      <h2>اختاري الباقة <span class="gradient-text">المناسبة</span> لك</h2>
-      <p>خمس باقات مصممة لكل مرحلة من مراحل نشاطك</p>
-    </div>
-    <div class="pricing-grid">
-
-      <div class="card pricing-card">
-        <div class="pkg-name-en">SPARK</div>
-        <div class="pkg-name">سبارك</div>
-        <div class="pkg-target">أنشطة ناشئة</div>
-        <div class="pkg-price"><span class="amount en">899</span> <span class="currency">ريال</span></div>
-        <ul class="pkg-features">
-          <li>صفحة واحدة احترافية</li>
-          <li>تصميم متجاوب</li>
-          <li>نموذج تواصل</li>
-          <li>تسليم خلال أيام</li>
-        </ul>
-        <a href="https://scintix-intake-form.netlify.app?package=Spark" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">ابدأ الآن</a>
-        <div class="faq-item" style="margin-top:16px;text-align:right;">
-          <div class="faq-question" style="padding:14px;font-size:0.85rem;" onclick="toggleFaq(this)">
-            <h3 style="font-size:0.85rem;">أسئلة عن هذي الباقة</h3>
-            <span class="faq-toggle" style="width:24px;height:24px;font-size:1rem;">+</span>
-          </div>
-          <div class="faq-answer">
-            <p style="font-size:0.8rem;"><b>كم مدة التسليم؟</b> عادة 3-5 أيام عمل.<br><b>تقدر تضيفين صفحات لاحقاً؟</b> نعم، بترقية للباقة الأعلى.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card pricing-card featured">
-        <div class="pkg-name-en">GLOW</div>
-        <div class="pkg-name">جلو</div>
-        <div class="pkg-target">أنشطة متنامية</div>
-        <div class="pkg-price"><span class="amount en">1,799</span> <span class="currency">ريال</span></div>
-        <ul class="pkg-features">
-          <li>موقع متعدد الأقسام</li>
-          <li>هوية بصرية أساسية</li>
-          <li>تحسين محركات البحث</li>
-          <li>ربط سوشيال ميديا</li>
-        </ul>
-        <a href="https://scintix-intake-form.netlify.app?package=Glow" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">ابدأ الآن</a>
-        <div class="faq-item" style="margin-top:16px;text-align:right;">
-          <div class="faq-question" style="padding:14px;font-size:0.85rem;" onclick="toggleFaq(this)">
-            <h3 style="font-size:0.85rem;">أسئلة عن هذي الباقة</h3>
-            <span class="faq-toggle" style="width:24px;height:24px;font-size:1rem;">+</span>
-          </div>
-          <div class="faq-answer">
-            <p style="font-size:0.8rem;"><b>هل تشمل الهوية شعار كامل؟</b> تشمل أساسيات الهوية؛ الشعار الكامل بباقة Pulse فأعلى.<br><b>وش يميزها؟</b> الأكثر طلباً لتوازنها بين السعر والمزايا.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card pricing-card">
-        <div class="pkg-name-en">PULSE</div>
-        <div class="pkg-name">بالس</div>
-        <div class="pkg-target">أعمال متوسطة</div>
-        <div class="pkg-price"><span class="amount en">3,299</span> <span class="currency">ريال</span></div>
-        <ul class="pkg-features">
-          <li>موقع متكامل + مدونة</li>
-          <li>هوية بصرية كاملة</li>
-          <li>تحليلات وتقارير</li>
-          <li>دعم فني 3 أشهر</li>
-        </ul>
-        <a href="https://scintix-intake-form.netlify.app?package=Pulse" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">ابدأ الآن</a>
-        <div class="faq-item" style="margin-top:16px;text-align:right;">
-          <div class="faq-question" style="padding:14px;font-size:0.85rem;" onclick="toggleFaq(this)">
-            <h3 style="font-size:0.85rem;">أسئلة عن هذي الباقة</h3>
-            <span class="faq-toggle" style="width:24px;height:24px;font-size:1rem;">+</span>
-          </div>
-          <div class="faq-answer">
-            <p style="font-size:0.8rem;"><b>هل فيها مدونة فعلية؟</b> نعم، جاهزة لنشر مقالاتك مباشرة.<br><b>الدعم بعد الـ3 أشهر؟</b> يتجدد باشتراك شهري اختياري.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card pricing-card">
-        <div class="pkg-name-en">NOVA</div>
-        <div class="pkg-name">نوفا</div>
-        <div class="pkg-target">أعمال متقدمة</div>
-        <div class="pkg-price"><span class="amount en">5,999</span> <span class="currency">ريال</span></div>
-        <ul class="pkg-features">
-          <li>موقع متقدم بميزات تفاعلية</li>
-          <li>معرض أعمال وفلترة</li>
-          <li>أتمتة أساسية مدمجة</li>
-          <li>دعم فني 6 أشهر</li>
-        </ul>
-        <a href="https://scintix-intake-form.netlify.app?package=Nova" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">ابدأ الآن</a>
-        <div class="faq-item" style="margin-top:16px;text-align:right;">
-          <div class="faq-question" style="padding:14px;font-size:0.85rem;" onclick="toggleFaq(this)">
-            <h3 style="font-size:0.85rem;">أسئلة عن هذي الباقة</h3>
-            <span class="faq-toggle" style="width:24px;height:24px;font-size:1rem;">+</span>
-          </div>
-          <div class="faq-answer">
-            <p style="font-size:0.8rem;"><b>وش نوع الأتمتة المدمجة؟</b> ربط نموذج التواصل بنظام إدارة عملاء تلقائي.<br><b>تقدر تُخصص أكثر؟</b> نعم، عبر باقة Zenith.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card pricing-card">
-        <div class="pkg-name-en">ZENITH</div>
-        <div class="pkg-name">زينيث</div>
-        <div class="pkg-target">مشاريع مخصصة بالكامل</div>
-        <div class="pkg-price"><span class="amount en">+12,000</span> <span class="currency">ريال</span></div>
-        <ul class="pkg-features">
-          <li>حل مخصص بالكامل</li>
-          <li>أتمتة أعمال متقدمة</li>
-          <li>هوية بصرية فاخرة</li>
-          <li>دعم فني سنوي كامل</li>
-        </ul>
-        <a href="https://scintix-intake-form.netlify.app?package=Zenith" class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">تواصلي معنا</a>
-        <div class="faq-item" style="margin-top:16px;text-align:right;">
-          <div class="faq-question" style="padding:14px;font-size:0.85rem;" onclick="toggleFaq(this)">
-            <h3 style="font-size:0.85rem;">أسئلة عن هذي الباقة</h3>
-            <span class="faq-toggle" style="width:24px;height:24px;font-size:1rem;">+</span>
-          </div>
-          <div class="faq-answer">
-            <p style="font-size:0.8rem;"><b>ليش السعر "+"؟</b> لأن النطاق يعتمد على تعقيد متطلباتك، نحدده بعد جلسة استشارية مجانية.<br><b>كم مدة التنفيذ؟</b> حسب النطاق، عادة 3-6 أسابيع.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-tag">الأسئلة الشائعة</div>
-      <h2>عندك <span class="gradient-text">سؤال؟</span></h2>
-      <p>إجابات على أكثر الأسئلة اللي توصلنا من عملائنا</p>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3>كيف تتم عملية العمل معكم من البداية للنهاية؟</h3>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer"><p>تختارين الباقة المناسبة، نتواصل معك لفهم احتياجك، نجهز خطة ونرسل عقد للتوقيع، وبعد الدفع نبدأ التنفيذ مباشرة حتى التسليم.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3>وش طرق الدفع المتاحة؟</h3>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer"><p>نقبل مدى، فيزا/ماستركارد، وApple Pay عبر بوابة دفع آمنة. الدفع كامل عند توقيع العقد.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3>هل عندي كود خصم كيف أستخدمه؟</h3>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer"><p>نعم! فيه خانة مخصصة لكود الخصم بصفحة الدفع، تدخلينه هناك ويتطبق الخصم تلقائياً قبل إتمام الدفع.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3>هل أقدر أطلب تعديلات بعد التسليم؟</h3>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer"><p>كل باقة فيها فترة دعم فني مجانية (تختلف حسب الباقة) تشمل تعديلات بسيطة. تعديلات أكبر تُسعّر بشكل منفصل.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFaq(this)">
-          <h3>هل الموقع يكون ملكي بالكامل؟</h3>
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer"><p>نعم، بعد إتمام الدفع كامل الملفات والنطاق يصيرون ملكك الكاملة، وتقدرين تنقلينهم لأي جهة استضافة تحبينها.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section id="newsletter">
-  <div class="container">
-    <div class="newsletter-inner">
-      <h2>خليك <span class="gradient-text">أول من يعرف</span></h2>
-      <p>اشتركي بالنشرة البريدية عشان توصلك آخر النصائح الرقمية وعروضنا الحصرية</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('تم الاشتراك بنجاح، شكراً لك!');">
-        <input type="email" class="newsletter-input" placeholder="بريدك الإلكتروني" required>
-        <button type="submit" class="btn btn-primary">اشتركي</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-inner">
-      <div class="contact-info">
-        <div class="section-tag">تواصل معنا</div>
-        <h2>يلا <span class="gradient-text">نبدأ</span> مشروعك</h2>
-        <p>عبي النموذج وفريقنا بيتواصل معك خلال 24 ساعة</p>
-        <div class="contact-items">
-          <div class="contact-item">
-            <div class="contact-item-icon">📧</div>
-            <div class="contact-item-text"><p>hello@scintix.sa</p><p>راسلينا بأي وقت</p></div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📱</div>
-            <div class="contact-item-text"><p>+966 5X XXX XXXX</p><p>واتساب متاح</p></div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            <div class="contact-item-text"><p>الرياض، السعودية</p><p>نخدم كل المملكة عن بُعد</p></div>
-          </div>
-        </div>
-        <div class="map-placeholder">خريطة الموقع</div>
-      </div>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('تم استلام رسالتك، بنتواصل معك قريباً!');">
-        <div class="form-row">
-          <div class="form-group">
-            <label>الاسم</label>
-            <input type="text" placeholder="اسمك الكامل" required>
-          </div>
-          <div class="form-group">
-            <label>الجوال</label>
-            <input type="tel" placeholder="05XXXXXXXX" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>البريد الإلكتروني</label>
-          <input type="email" placeholder="name@example.com" required>
-        </div>
-        <div class="form-group">
-          <label>الباقة المهتمة فيها</label>
-          <select>
-            <option>Spark - 899 ريال</option>
-            <option>Glow - 1,799 ريال</option>
-            <option>Pulse - 3,299 ريال</option>
-            <option>Nova - 5,999 ريال</option>
-            <option>Zenith - مخصص</option>
-            <option>غير متأكدة، أبي استشارة</option>
+        <label class="language-switcher" aria-label="Language switcher">
+          <select class="language-select" data-lang-select>
+            <option value="ar">عربي</option>
+            <option value="en">English</option>
           </select>
-        </div>
-        <div class="form-group">
-          <label>كود الخصم (اختياري)</label>
-          <input type="text" placeholder="مثال: SCX10" style="text-transform:uppercase;">
-        </div>
-        <div class="form-group">
-          <label>رسالتك</label>
-          <textarea placeholder="حدثينا عن مشروعك..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">أرسلي الطلب</button>
-      </form>
-    </div>
-  </div>
-</section>
+        </label>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#home" class="logo">
-          <div class="logo-icon">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M11 2L14 8H20L15 12L17 18L11 14L5 18L7 12L2 8H8L11 2Z" fill="white"/>
-            </svg>
+        <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer"
+           data-form-link data-i18n="cta.consult">اطلب استشارة</a>
+      </header>
+
+      <main>
+        <!-- ════════════ HERO ════════════ -->
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <span class="eyebrow" data-i18n="hero.eyebrow">حلول تقنية متكاملة</span>
+            <h1 data-i18n-html="hero.title">حلول ذكية. آمنة. <span>نمو مستدام.</span></h1>
+            <p data-i18n="hero.description">نحو تجربة رقمية متكاملة، نربط بين الاستراتيجية والتقنية والتصميم لمنتجات تلائم السوق والمستخدم وتسرع نمو أعمالك.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#plans" data-i18n="hero.primary">استكشف الباقات</a>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="hero.secondary">تواصل معنا</a>
+            </div>
+            <div class="hero-stats">
+              <div><strong>120+</strong><span data-i18n="stats.projects">مشروع منشأ</span></div>
+              <div><strong>30</strong>  <span data-i18n="stats.partners">شريك نمو</span></div>
+              <div><strong>99%</strong> <span data-i18n="stats.satisfaction">معدل رضا العملاء</span></div>
+            </div>
           </div>
-          <span class="logo-text en">Scintix</span>
-        </a>
-        <p>وكالة رقمية سعودية تُشعل نمو أعمالك بمزيج من الإبداع والذكاء الاصطناعي.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-link">X</a>
-          <a href="#" class="social-link">In</a>
-          <a href="#" class="social-link">Ig</a>
+          <div class="hero-visual">
+            <div class="glow-orbit"></div>
+            <div class="hero-logo-wrap">
+              <img class="hero-logo" src="assets/logo.png" alt="شعار Scintix" />
+            </div>
+            <div class="hero-badge">Scintix</div>
+          </div>
+        </section>
+
+        <!-- ════════════ SERVICES ════════════ -->
+        <section id="services" class="features-panel">
+          <article class="feature-card">
+            <h3 data-i18n="features.apps.title">تطبيقات متكاملة</h3>
+            <p data-i18n="features.apps.body">نطور منصات رقمية تربط عملياتك وتوفر تجربة موحدة للعملاء وتدعم أهداف النمو التشغيلية.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.security.title">أمان متقدم</h3>
+            <p data-i18n="features.security.body">حماية كاملة من الطبقة إلى الواجهة، مع بنية آمنة وخصوصية بيانات قوية للحفاظ على ثقة عملائك.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.ux.title">تجربة مستخدم متميزة</h3>
+            <p data-i18n="features.ux.body">تصميم واجهات احترافية وواضحة تزيد من التفاعل وتُسهل عمليات المستخدم وتُعزز هوية علامتك.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.support.title">دعم مستمر</h3>
+            <p data-i18n="features.support.body">متابعة أداء يومية، تحديثات دورية، وخدمات دعم تقنية تساعدك على الاستجابة السريعة والتطوير الدائم.</p>
+          </article>
+        </section>
+
+        <!-- ════════════ PLANS (5 packages) ════════════ -->
+        <section id="plans" class="plans-panel">
+          <div class="panel-heading">
+            <span data-i18n="plans.heading">باقة مرنة تناسب احتياجاتك</span>
+            <p data-i18n="plans.description">اختر الباقة المناسبة لنمو شركتك — من المشاريع الناشئة حتى المؤسسات الكبرى.</p>
+          </div>
+
+          <div class="plans-grid">
+
+            <!-- Spark -->
+            <article class="plan-card plan-spark">
+              <div class="plan-name">Spark</div>
+              <div class="plan-price"><span data-price="899">899</span><small data-currency-label>SAR / شهرياً</small></div>
+              <ul>
+                <li data-i18n="plans.spark.one">نماذج رقمية احترافية</li>
+                <li data-i18n="plans.spark.two">صفحة هبوط ذكية</li>
+                <li data-i18n="plans.spark.three">ربط CRM أساسي</li>
+                <li data-i18n="plans.spark.four">دعم تقني أساسي</li>
+                <li data-i18n="plans.spark.five">تحليلات بسيطة</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+            </article>
+
+            <!-- Glow -->
+            <article class="plan-card plan-glow">
+              <div class="plan-name">Glow</div>
+              <div class="plan-price"><span data-price="1799">1,799</span><small data-currency-label>SAR / شهرياً</small></div>
+              <ul>
+                <li data-i18n="plans.glow.one">كل خدمات Spark</li>
+                <li data-i18n="plans.glow.two">مساعد واتساب ذكي</li>
+                <li data-i18n="plans.glow.three">أتمتة المبيعات</li>
+                <li data-i18n="plans.glow.four">ربط CRM متقدم</li>
+                <li data-i18n="plans.glow.five">إشعارات تلقائية</li>
+              </ul>
+              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+            </article>
+
+            <!-- Pulse — FEATURED -->
+            <article class="plan-card plan-pulse">
+              <div class="plan-featured-badge" data-i18n="plans.pulse.badge">الأكثر طلباً</div>
+              <div class="plan-name">Pulse</div>
+              <div class="plan-price"><span data-price="3299">3,299</span><small data-currency-label>SAR / شهرياً</small></div>
+              <ul>
+                <li data-i18n="plans.pulse.one">كل خدمات Glow</li>
+                <li data-i18n="plans.pulse.two">تطبيق ويب متكامل</li>
+                <li data-i18n="plans.pulse.three">لوحة تحكم متقدمة</li>
+                <li data-i18n="plans.pulse.four">تكامل بوابة دفع</li>
+                <li data-i18n="plans.pulse.five">تقارير أداء متقدمة</li>
+              </ul>
+              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+            </article>
+
+            <!-- Nova -->
+            <article class="plan-card plan-pulse" style="background:linear-gradient(180deg,rgba(82,114,255,.14),rgba(9,16,40,.92))">
+              <div class="plan-name">Nova</div>
+              <div class="plan-price"><span data-price="5999">5,999</span><small data-currency-label>SAR / شهرياً</small></div>
+              <ul>
+                <li data-i18n="plans.nova.one">كل خدمات Pulse</li>
+                <li data-i18n="plans.nova.two">أتمتة متقدمة AI</li>
+                <li data-i18n="plans.nova.three">متعدد المستخدمين</li>
+                <li data-i18n="plans.nova.four">تكامل ERP / CRM</li>
+                <li data-i18n="plans.nova.five">دعم فني مخصص</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+            </article>
+
+            <!-- Zenith -->
+            <article class="plan-card plan-zenith">
+              <div class="plan-name">Zenith</div>
+              <div class="plan-price"><span data-price="12000">12,000</span><small data-currency-label>SAR / شهرياً</small></div>
+              <ul>
+                <li data-i18n="plans.zenith.one">حلول مؤسسية كاملة</li>
+                <li data-i18n="plans.zenith.two">تكامل كامل مع الأنظمة</li>
+                <li data-i18n="plans.zenith.three">مراقبة 24/7</li>
+                <li data-i18n="plans.zenith.four">SLA مضمون</li>
+                <li data-i18n="plans.zenith.five">دعم غير محدود</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ════════════ FAQ (per package) ════════════ -->
+        <section id="faq" class="faq-panel">
+          <div class="panel-heading">
+            <span data-i18n="faq.heading">أسئلة شائعة عن باقاتنا</span>
+            <p data-i18n="faq.description">إجابات سريعة تساعدك تختارين الباقة الصح</p>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary><span data-i18n="faq.spark.q">هل باقة Spark مناسبة لمشروع ناشئ صغير؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.spark.a">نعم، Spark مصممة خصيصاً للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة وبأقل تكلفة.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.glow.q">وش يميز Glow عن Spark؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.glow.a">Glow تضيف مساعد واتساب ذكي وأتمتة مبيعات وربط CRM متقدم — مناسبة لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.pulse.q">ليش Pulse هي الأكثر طلباً؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.pulse.a">لأنها توازن مثالي بين السعر والمزايا: تطبيق ويب متكامل، لوحة تحكم متقدمة، وتكامل بوابة دفع — تغطي أغلب احتياجات الأعمال المتوسطة.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.nova.q">هل Nova تدعم أكثر من مستخدم؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.nova.a">نعم، Nova مبنية لدعم فرق متعددة المستخدمين مع أتمتة AI متقدمة وتكامل مباشر مع أنظمة ERP/CRM الحالية عندك.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.zenith.q">وش يشمله الدعم غير المحدود في Zenith؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.zenith.a">Zenith مخصصة للمؤسسات: مراقبة على مدار الساعة، اتفاقية مستوى خدمة (SLA) مضمونة، وفريق دعم مخصص يستجيب فوراً لأي طارئ.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.switch.q">أقدر أغيّر باقتي لاحقاً؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.switch.a">بالتأكيد، تقدرين تترقّين لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ════════════ AI PROJECT ANALYSER ════════════ -->
+        <section id="ai-analyser">
+          <h2 data-i18n="ai.title">🤖 تحليل مشروعك بالذكاء الاصطناعي</h2>
+          <p class="sub" data-i18n="ai.sub">أخبرنا عن مشروعك وسنرشّدك إلى أنسب باقة وخطة عمل فورية</p>
+
+          <div style="text-align:center;padding:12px 0 4px">
+            <a href="analyse.html"
+               style="display:inline-flex;align-items:center;gap:10px;
+                      padding:15px 36px;border-radius:999px;border:none;cursor:pointer;
+                      font-weight:700;font-size:1rem;font-family:inherit;
+                      background:linear-gradient(135deg,var(--accent),var(--accent-strong));
+                      color:#031228;text-decoration:none;
+                      box-shadow:0 12px 32px rgba(92,240,255,.2);"
+               data-i18n="ai.btn">✦ تحليل المشروع</a>
+          </div>
+        </section>
+
+        <!-- ════════════ CLIENTS ════════════ -->
+        <section id="clients" class="clients-panel">
+          <span class="section-label" data-i18n="clients.label">شركاؤنا</span>
+          <div class="clients-grid">
+            <span>AKAD</span>
+            <span>Zid</span>
+            <span>tamara</span>
+            <span>Sary</span>
+            <span>Nahdi</span>
+          </div>
+        </section>
+      </main>
+
+      <!-- ════════════ FOOTER ════════════ -->
+      <footer id="contact" class="site-footer">
+        <div>
+          <h2 data-i18n="footer.title">هل أنتِ مستعدة للانطلاق مع Scintix؟</h2>
+          <p data-i18n="footer.description">ابدئي استراتيجية رقمية جديدة مع فريق متخصص في التحول الرقمي والتجربة المتميزة.</p>
         </div>
-      </div>
-      <div class="footer-col">
-        <h4>روابط سريعة</h4>
-        <ul class="footer-links">
-          <li><a href="#about">من نحن</a></li>
-          <li><a href="#services">خدماتنا</a></li>
-          <li><a href="#portfolio">أعمالنا</a></li>
-          <li><a href="#pricing">الباقات</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>الباقات</h4>
-        <ul class="footer-links">
-          <li><a href="#pricing">Spark</a></li>
-          <li><a href="#pricing">Glow</a></li>
-          <li><a href="#pricing">Pulse</a></li>
-          <li><a href="#pricing">Nova</a></li>
-          <li><a href="#pricing">Zenith</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>تواصل</h4>
-        <ul class="footer-links">
-          <li><a href="mailto:hello@scintix.sa">hello@scintix.sa</a></li>
-          <li><a href="#faq">الأسئلة الشائعة</a></li>
-          <li><a href="#contact">راسلينا</a></li>
-        </ul>
-      </div>
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
+           data-form-link data-i18n="footer.cta">ابدأ الآن</a>
+      </footer>
+
+      <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Scintix. جميع الحقوق محفوظة.</p>
-      <p>صُنع بـ 💜 في الرياض</p>
-    </div>
-  </div>
-</footer>
 
-<!-- Back to top -->
-<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+    <script src="js/script.js"></script>
 
-<script>
-  // Navbar scroll effect
-  const navbar = document.getElementById('navbar');
-  const scrollProgress = document.getElementById('scrollProgress');
-  const backTop = document.getElementById('backTop');
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    navbar.classList.toggle('scrolled', scrolled > 20);
-    backTop.classList.toggle('show', scrolled > 400);
-    const height = document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress.style.width = (scrolled / height * 100) + '%';
-  });
-  backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    <!-- 🤖 Chatbase AI Widget -->
+    <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
 
-  // Mobile menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  hamburger?.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-  // Language toggle (placeholder)
-  document.getElementById('langToggle')?.addEventListener('click', function(){
-    alert('النسخة الإنجليزية قريباً!');
-  });
-
-  // Counters
-  const counters = document.querySelectorAll('.counter');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const el = entry.target;
-        const target = parseInt(el.dataset.target);
-        let current = 0;
-        const step = Math.max(1, Math.ceil(target / 60));
-        const tick = () => {
-          current += step;
-          if(current >= target){ el.textContent = target; }
-          else { el.textContent = current; requestAnimationFrame(tick); }
-        };
-        tick();
-        counterObserver.unobserve(el);
-      }
-    });
-  }, {threshold:0.5});
-  counters.forEach(c => counterObserver.observe(c));
-
-  // FAQ toggle
-  function toggleFaq(el){
-    const item = el.closest('.faq-item');
-    const answer = item.querySelector('.faq-answer');
-    const isOpen = item.classList.contains('open');
-    item.classList.toggle('open');
-    answer.style.maxHeight = isOpen ? '0px' : answer.scrollHeight + 'px';
-  }
-
-  // Portfolio filter
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.portfolio-item').forEach(item => {
-        item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
-      });
-    });
-  });
-
-  // Testimonials carousel
-  let testimonialIndex = 0;
-  const track = document.getElementById('testimonialsTrack');
-  const cards = track ? track.children.length : 0;
-  function updateCarousel(){
-    if(!track) return;
-    const cardWidth = track.children[0].offsetWidth + 24;
-    track.style.transform = `translateX(${testimonialIndex * cardWidth}px)`;
-  }
-  document.getElementById('nextTestimonial')?.addEventListener('click', () => {
-    testimonialIndex = Math.min(0, testimonialIndex + 1);
-    updateCarousel();
-  });
-  document.getElementById('prevTestimonial')?.addEventListener('click', () => {
-    testimonialIndex = Math.max(-(cards-1), testimonialIndex - 1);
-    updateCarousel();
-  });
-
-  // Simple animated background particles
-  const canvas = document.getElementById('particles-canvas');
-  if(canvas){
-    const ctx = canvas.getContext('2d');
-    function resize(){ canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-    resize();
-    window.addEventListener('resize', resize);
-    const particles = Array.from({length:40}, () => ({
-      x: Math.random()*canvas.width, y: Math.random()*canvas.height,
-      r: Math.random()*2+0.5, dx:(Math.random()-0.5)*0.3, dy:(Math.random()-0.5)*0.3
-    }));
-    function animate(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle = 'rgba(124,111,255,0.4)';
-      particles.forEach(p => {
-        p.x += p.dx; p.y += p.dy;
-        if(p.x<0||p.x>canvas.width) p.dx*=-1;
-        if(p.y<0||p.y>canvas.height) p.dy*=-1;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-    animate();
-  }
-
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
-  window.addEventListener('mousemove', (e) => {
-    if(cursor){ cursor.style.transform = `translate(${e.clientX-6}px, ${e.clientY-6}px)`; }
-    if(cursorRing){ cursorRing.style.transform = `translate(${e.clientX-18}px, ${e.clientY-18}px)`; }
-  });
-</script>
-</body>
+  </body>
 </html>
