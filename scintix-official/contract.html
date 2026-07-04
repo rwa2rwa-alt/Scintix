@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scintix | عقد الخدمة</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+:root{
+  --ink:#020514;--surface:rgba(255,255,255,0.97);
+  --muted:#5c6b8a;--border:rgba(10,20,60,0.1);
+  --accent:#5cf0ff;--strong:#7c3aed;
+  --radius:16px;--shadow:0 4px 24px rgba(20,40,90,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 10% 0%,rgba(92,240,255,.08),transparent 30%),
+             radial-gradient(circle at 90% 5%,rgba(124,58,237,.07),transparent 30%),#f5f7ff;
+  color:var(--ink);font-family:'Segoe UI',Tahoma,sans-serif;
+}
+/* ── Header ── */
+.c-header{
+  background:rgba(2,5,20,0.97);
+  padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(92,240,255,0.15);
+}
+.c-header .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.c-header img{width:36px;height:36px;border-radius:10px;padding:6px;background:rgba(92,240,255,.12)}
+.c-header .bname{color:#eef5ff;font-weight:700;font-size:1.1rem}
+.lang-btns{display:flex;gap:6px}
+.lang-btn{
+  background:transparent;border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.5);border-radius:999px;
+  padding:5px 14px;font-size:.8rem;cursor:pointer;transition:all .2s;
+}
+.lang-btn.on{background:rgba(92,240,255,.15);border-color:rgba(92,240,255,.4);color:#5cf0ff}
+/* ── Layout ── */
+.c-wrap{width:min(860px,100%-32px);margin:32px auto 60px}
+/* ── Contract doc ── */
+.c-doc{
+  background:white;border-radius:var(--radius);
+  border:1px solid var(--border);box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.c-doc-header{
+  background:linear-gradient(135deg,#05071a,#0d0f2b);
+  padding:28px 36px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;
+}
+.c-doc-header h1{color:white;font-size:1.4rem;font-weight:700}
+.c-doc-header .meta{text-align:left}
+[dir=rtl] .c-doc-header .meta{text-align:right}
+.meta .inv-num{color:#5cf0ff;font-family:monospace;font-size:.9rem}
+.meta .inv-date{color:rgba(255,255,255,0.5);font-size:.8rem;margin-top:2px}
+/* ── Parties ── */
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border)}
+.party{padding:22px 28px}
+.party+.party{border-right:1px solid var(--border)}
+[dir=ltr] .party+.party{border-right:none;border-left:1px solid var(--border)}
+.party-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:8px}
+.party-name{font-weight:700;font-size:1rem;margin-bottom:4px}
+.party-detail{font-size:.83rem;color:var(--muted);line-height:1.7}
+/* ── Section ── */
+.c-section{padding:22px 28px;border-bottom:1px solid var(--border)}
+.c-section:last-of-type{border-bottom:none}
+.c-section h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--strong);margin-bottom:14px}
+.c-section p,.c-section li{font-size:.88rem;color:#334;line-height:1.9}
+.c-section ul{padding-inline-start:18px;display:grid;gap:6px}
+/* ── Package table ── */
+.pkg-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.pkg-table th{background:#f8f6ff;color:var(--strong);font-weight:600;padding:9px 14px;text-align:right;border-bottom:1px solid var(--border)}
+[dir=ltr] .pkg-table th{text-align:left}
+.pkg-table td{padding:9px 14px;border-bottom:1px solid rgba(0,0,0,.04);vertical-align:top}
+.pkg-table tr:last-child td{border-bottom:none}
+.pkg-badge{
+  display:inline-block;background:#f0edff;color:var(--strong);
+  font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px;
+}
+/* ── Signature block ── */
+.sig-block{padding:22px 28px;border-top:1px solid var(--border)}
+.sig-block h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--strong);margin-bottom:16px}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:580px){.sig-grid{grid-template-columns:1fr}.parties{grid-template-columns:1fr}}
+.sig-box label{font-size:.78rem;color:var(--muted);display:block;margin-bottom:6px}
+.sig-type-tabs{display:flex;gap:6px;margin-bottom:10px}
+.sig-tab{
+  background:#f5f7ff;border:1px solid var(--border);
+  color:var(--muted);border-radius:999px;
+  padding:4px 14px;font-size:.75rem;cursor:pointer;transition:all .2s;
+}
+.sig-tab.on{background:#f0edff;border-color:var(--strong);color:var(--strong)}
+.canvas-wrap{
+  border:1.5px dashed rgba(124,58,237,.3);border-radius:10px;
+  background:#faf9ff;overflow:hidden;position:relative;
+  height:120px;touch-action:none;cursor:crosshair;
+}
+canvas{display:block;width:100%;height:100%}
+.sig-text-input{
+  width:100%;padding:10px 14px;border:1.5px solid var(--border);
+  border-radius:10px;font-size:1.3rem;font-family:Georgia,serif;
+  color:#1a0a40;background:#faf9ff;outline:none;
+  transition:border-color .2s;display:none;
+}
+.sig-text-input:focus{border-color:var(--strong)}
+.sig-date{
+  width:100%;padding:8px 12px;border:1px solid var(--border);
+  border-radius:8px;font-size:.85rem;margin-top:8px;outline:none;
+  background:#faf9ff;transition:border-color .2s;
+}
+.sig-date:focus{border-color:var(--strong)}
+.clear-btn{
+  font-size:.72rem;color:var(--muted);background:none;border:none;
+  cursor:pointer;padding:2px 0;margin-top:4px;text-decoration:underline;
+}
+/* ── Agreement ── */
+.agree-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:18px 28px;background:#fafbff;
+  border-top:1px solid var(--border);
+}
+.agree-row input[type=checkbox]{
+  width:18px;height:18px;accent-color:var(--strong);
+  flex-shrink:0;margin-top:2px;cursor:pointer;
+}
+.agree-row label{font-size:.83rem;color:#334;line-height:1.7;cursor:pointer}
+.agree-row a{color:var(--strong);text-decoration:none}
+/* ── Submit ── */
+.submit-row{padding:20px 28px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn-submit{
+  padding:13px 40px;border-radius:999px;border:none;cursor:pointer;
+  font-weight:700;font-size:1rem;font-family:inherit;
+  background:linear-gradient(135deg,#5cf0ff,#7c3aed);
+  color:#031228;transition:transform .25s,box-shadow .25s,opacity .2s;
+}
+.btn-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(92,240,255,.25)}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.btn-pdf{
+  padding:13px 28px;border-radius:999px;
+  border:1px solid rgba(124,58,237,.4);background:transparent;
+  color:var(--strong);font-weight:600;font-size:.9rem;
+  font-family:inherit;cursor:pointer;transition:all .2s;
+}
+.btn-pdf:hover{background:#f0edff}
+/* ── Success ── */
+.success-banner{
+  display:none;margin:0 28px 20px;padding:14px 18px;
+  background:#e6fdf5;border:1px solid rgba(29,158,117,.3);
+  border-radius:10px;color:#0f6e56;font-size:.88rem;
+}
+.success-banner.on{display:block}
+/* ── Hidden content ── */
+[lang-block]{display:none}
+[lang-block].on{display:block}
+</style>
+</head>
+<body>
+
+<div class="c-header">
+  <a class="brand" href="index.html">
+    <img src="assets/logo.png" alt="Scintix"/>
+    <span class="bname">Scintix</span>
+  </a>
+  <div class="lang-btns">
+    <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
+    <button class="lang-btn"   onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div class="c-wrap">
+
+  <!-- ── Arabic contract ── -->
+  <div class="c-doc" lang-block data-lang="ar">
+
+    <div class="c-doc-header">
+      <h1>عقد تقديم الخدمات الرقمية</h1>
+      <div class="meta">
+        <div class="inv-num" id="contract-num-ar">SCX-2026-001</div>
+        <div class="inv-date" id="contract-date-ar"></div>
+      </div>
+    </div>
+
+    <div class="parties">
+      <div class="party">
+        <div class="party-label">الطرف الأول — مزود الخدمة</div>
+        <div class="party-name">Scintix Digital Solutions</div>
+        <div class="party-detail">
+          المملكة العربية السعودية<br/>
+          البريد: contact@scintix.sa<br/>
+          السجل التجاري: 1234567890
+        </div>
+      </div>
+      <div class="party">
+        <div class="party-label">الطرف الثاني — العميل</div>
+        <div class="party-name" id="client-name-ar">— يُعبأ من العميل —</div>
+        <div class="party-detail">
+          <input id="cname-ar"  placeholder="اسم الشركة / الشخص"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
+            oninput="document.getElementById('client-name-ar').textContent=this.value||'— يُعبأ من العميل —'"/>
+          <input id="cemail-ar" placeholder="البريد الإلكتروني" type="email"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;background:#fafbff;outline:none"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-section">
+      <h2>موضوع العقد</h2>
+      <p>يتعهد الطرف الأول بتقديم خدمات رقمية متكاملة للطرف الثاني وفق الباقة المحددة أدناه، وذلك وفق الشروط والأحكام المنصوص عليها في هذا العقد.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>الباقة والخدمات المتفق عليها</h2>
+      <table class="pkg-table">
+        <thead><tr><th>الخدمة</th><th>التفاصيل</th><th>السعر</th></tr></thead>
+        <tbody id="pkg-rows-ar">
+          <tr>
+            <td><span class="pkg-badge">Pulse</span></td>
+            <td>تطبيق ويب متكامل، لوحة تحكم، تكامل بوابة دفع، تقارير متقدمة</td>
+            <td style="white-space:nowrap;font-weight:600">3,299 SAR / شهرياً</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="c-section">
+      <h2>التزامات الطرفين</h2>
+      <ul>
+        <li>يلتزم الطرف الأول ببدء التنفيذ خلال (3) أيام عمل من تاريخ توقيع هذا العقد واستلام الدفعة الأولى.</li>
+        <li>يلتزم الطرف الأول بتقديم تقارير دورية عن مراحل التنفيذ وفق الجدول الزمني المتفق عليه.</li>
+        <li>يلتزم الطرف الثاني بتوفير جميع البيانات والمواد المطلوبة خلال (5) أيام عمل من الطلب.</li>
+        <li>يلتزم الطرف الثاني بسداد الدفعات في مواعيدها المحددة.</li>
+      </ul>
+    </div>
+
+    <div class="c-section">
+      <h2>الملكية الفكرية وسرية البيانات</h2>
+      <p>تُعدّ جميع مخرجات العمل ملكاً للطرف الثاني بعد اكتمال السداد الكامل. يتعهد الطرف الأول بالحفاظ على سرية بيانات العميل وعدم مشاركتها مع أي طرف ثالث.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>سياسة الإلغاء والاسترداد</h2>
+      <p>جميع الخدمات تُصمَّم بناءً على طلب العميل وبعد موافقته؛ لذا <strong>لا يمكن استرداد المبالغ المدفوعة</strong> بعد بدء التنفيذ. في حال الإلغاء قبل البدء يُسترد 50% من الدفعة الأولى.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>مدة العقد والتجديد</h2>
+      <p>يبدأ هذا العقد من تاريخ التوقيع ويستمر لمدة (12) شهراً قابلة للتجديد تلقائياً ما لم يُبلَّغ بإنهائه قبل (30) يوماً من تاريخ الانتهاء.</p>
+    </div>
+
+    <!-- Signature -->
+    <div class="sig-block">
+      <h2>التوقيعات</h2>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <label>توقيع الطرف الأول (Scintix)</label>
+          <div class="sig-type-tabs">
+            <button class="sig-tab on" onclick="switchSig('draw','ar','first')">رسم</button>
+            <button class="sig-tab"    onclick="switchSig('type','ar','first')">كتابة</button>
+          </div>
+          <div class="canvas-wrap" id="cw-ar-first">
+            <canvas id="cv-ar-first" width="400" height="120"></canvas>
+          </div>
+          <input class="sig-text-input" id="st-ar-first" placeholder="اكتب اسمك هنا"/>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <input type="date" class="sig-date" id="sd-ar-first"/>
+            <button class="clear-btn" onclick="clearSig('ar','first')">مسح</button>
+          </div>
+        </div>
+        <div class="sig-box">
+          <label>توقيع الطرف الثاني (العميل)</label>
+          <div class="sig-type-tabs">
+            <button class="sig-tab on" onclick="switchSig('draw','ar','second')">رسم</button>
+            <button class="sig-tab"    onclick="switchSig('type','ar','second')">كتابة</button>
+          </div>
+          <div class="canvas-wrap" id="cw-ar-second">
+            <canvas id="cv-ar-second" width="400" height="120"></canvas>
+          </div>
+          <input class="sig-text-input" id="st-ar-second" placeholder="اكتب اسمك هنا"/>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <input type="date" class="sig-date" id="sd-ar-second"/>
+            <button class="clear-btn" onclick="clearSig('ar','second')">مسح</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agree-row">
+      <input type="checkbox" id="agree-ar" onchange="checkReady('ar')"/>
+      <label for="agree-ar">
+        أوافق على <a href="policies.html" target="_blank">الشروط والأحكام وسياسة الخصوصية</a> الخاصة بـ Scintix Digital Solutions،
+        وأُقرّ بأن هذا التوقيع الإلكتروني يُعادل التوقيع الورقي وفق أحكام نظام التعاملات الإلكترونية السعودي.
+      </label>
+    </div>
+
+    <div class="success-banner" id="success-ar">✓ تم إرسال العقد الموقّع بنجاح! سيصلك نسخة على بريدك الإلكتروني.</div>
+
+    <div class="submit-row">
+      <button class="btn-pdf"    onclick="exportPDF('ar')">↓ تحميل PDF</button>
+      <button class="btn-submit" id="sub-ar" disabled onclick="submitContract('ar')">إرسال العقد الموقّع</button>
+    </div>
+    <div id="pay-row-ar" style="display:none;padding:0 28px 24px;text-align:center">
+      <a id="pay-link-ar" href="payment.html" class="btn-pay">
+        🔒 انتقل إلى صفحة السداد ←
+      </a>
+      <p style="font-size:.78rem;color:#5c6b8a;margin-top:8px">سيتم بدء العمل فور تأكيد الدفع</p>
+    </div>
+  </div>
+
+  <!-- ── English contract ── -->
+  <div class="c-doc" lang-block data-lang="en">
+
+    <div class="c-doc-header">
+      <h1>Digital Services Agreement</h1>
+      <div class="meta">
+        <div class="inv-num" id="contract-num-en">SCX-2026-001</div>
+        <div class="inv-date" id="contract-date-en"></div>
+      </div>
+    </div>
+
+    <div class="parties">
+      <div class="party">
+        <div class="party-label">Party A — Service Provider</div>
+        <div class="party-name">Scintix Digital Solutions</div>
+        <div class="party-detail">
+          Kingdom of Saudi Arabia<br/>
+          Email: contact@scintix.sa<br/>
+          CR: 1234567890
+        </div>
+      </div>
+      <div class="party">
+        <div class="party-label">Party B — Client</div>
+        <div class="party-name" id="client-name-en">— To be filled by client —</div>
+        <div class="party-detail">
+          <input id="cname-en"  placeholder="Company / Full name"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
+            oninput="document.getElementById('client-name-en').textContent=this.value||'— To be filled by client —'"/>
+          <input id="cemail-en" placeholder="Email address" type="email"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;background:#fafbff;outline:none"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-section">
+      <h2>Scope of Work</h2>
+      <p>Party A agrees to deliver integrated digital services to Party B as specified in the package below, subject to the terms and conditions set forth in this agreement.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>Agreed Package &amp; Services</h2>
+      <table class="pkg-table">
+        <thead><tr><th style="text-align:left">Service</th><th style="text-align:left">Details</th><th style="text-align:left">Price</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="pkg-badge">Pulse</span></td>
+            <td>Full web application, advanced dashboard, payment gateway integration, performance reports</td>
+            <td style="white-space:nowrap;font-weight:600">3,299 SAR / month</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="c-section">
+      <h2>Obligations</h2>
+      <ul>
+        <li>Party A shall commence execution within 3 business days of contract signing and receipt of the first payment.</li>
+        <li>Party A shall provide periodic progress reports per the agreed timeline.</li>
+        <li>Party B shall supply all required data and materials within 5 business days of request.</li>
+        <li>Party B shall make payments on their scheduled due dates.</li>
+      </ul>
+    </div>
+
+    <div class="c-section">
+      <h2>Intellectual Property &amp; Confidentiality</h2>
+      <p>All deliverables become the property of Party B upon full payment. Party A undertakes to maintain strict confidentiality of all client data and not share it with any third party.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>Cancellation &amp; Refund Policy</h2>
+      <p>All services are custom-designed based on client requirements and approval; therefore <strong>payments are non-refundable</strong> once work has commenced. Cancellation prior to commencement entitles Party B to a 50% refund of the initial deposit.</p>
+    </div>
+
+    <div class="c-section">
+      <h2>Term &amp; Renewal</h2>
+      <p>This agreement commences on the signing date and continues for 12 months, auto-renewing unless either party provides 30 days' written notice prior to the expiry date.</p>
+    </div>
+
+    <!-- Signature -->
+    <div class="sig-block">
+      <h2>Signatures</h2>
+      <div class="sig-grid">
+        <div class="sig-box">
+          <label>Party A Signature (Scintix)</label>
+          <div class="sig-type-tabs">
+            <button class="sig-tab on" onclick="switchSig('draw','en','first')">Draw</button>
+            <button class="sig-tab"    onclick="switchSig('type','en','first')">Type</button>
+          </div>
+          <div class="canvas-wrap" id="cw-en-first">
+            <canvas id="cv-en-first" width="400" height="120"></canvas>
+          </div>
+          <input class="sig-text-input" id="st-en-first" placeholder="Type your name"/>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <input type="date" class="sig-date" id="sd-en-first"/>
+            <button class="clear-btn" onclick="clearSig('en','first')">Clear</button>
+          </div>
+        </div>
+        <div class="sig-box">
+          <label>Party B Signature (Client)</label>
+          <div class="sig-type-tabs">
+            <button class="sig-tab on" onclick="switchSig('draw','en','second')">Draw</button>
+            <button class="sig-tab"    onclick="switchSig('type','en','second')">Type</button>
+          </div>
+          <div class="canvas-wrap" id="cw-en-second">
+            <canvas id="cv-en-second" width="400" height="120"></canvas>
+          </div>
+          <input class="sig-text-input" id="st-en-second" placeholder="Type your name"/>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <input type="date" class="sig-date" id="sd-en-second"/>
+            <button class="clear-btn" onclick="clearSig('en','second')">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agree-row">
+      <input type="checkbox" id="agree-en" onchange="checkReady('en')"/>
+      <label for="agree-en">
+        I agree to the <a href="policies.html" target="_blank">Terms &amp; Conditions and Privacy Policy</a> of Scintix Digital Solutions.
+        I acknowledge that this electronic signature is legally equivalent to a handwritten signature.
+      </label>
+    </div>
+
+    <div class="success-banner" id="success-en">✓ Signed contract submitted successfully! A copy will be sent to your email.</div>
+
+    <div class="submit-row">
+      <button class="btn-pdf"    onclick="exportPDF('en')">↓ Download PDF</button>
+      <button class="btn-submit" id="sub-en" disabled onclick="submitContract('en')">Submit Signed Contract</button>
+    </div>
+    <div id="pay-row-en" style="display:none;padding:0 28px 24px;text-align:center">
+      <a id="pay-link-en" href="payment.html" class="btn-pay">
+        🔒 Proceed to Payment →
+      </a>
+      <p style="font-size:.78rem;color:#5c6b8a;margin-top:8px">Work begins immediately after payment confirmation</p>
+    </div>
+  </div>
+
+</div><!-- /c-wrap -->
+
+<script>
+/* ─── Lang ─── */
+let curLang = localStorage.getItem('scintix-lang') || 'ar';
+function setLang(lang) {
+  curLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir  = lang === 'en' ? 'ltr' : 'rtl';
+  document.querySelectorAll('[lang-block]').forEach(el =>
+    el.classList.toggle('on', el.dataset.lang === lang)
+  );
+  document.querySelectorAll('.lang-btn').forEach((btn, i) =>
+    btn.classList.toggle('on', (i === 0 && lang === 'ar') || (i === 1 && lang === 'en'))
+  );
+  localStorage.setItem('scintix-lang', lang);
+}
+
+/* ─── Contract number + date ─── */
+function genContractNum() {
+  const n = Math.floor(Math.random() * 9000) + 1000;
+  return `SCX-${new Date().getFullYear()}-${n}`;
+}
+const cn = genContractNum();
+const today = new Date().toLocaleDateString('en-GB');
+['ar','en'].forEach(l => {
+  const el = document.getElementById(`contract-num-${l}`);
+  const de = document.getElementById(`contract-date-${l}`);
+  if(el) el.textContent = cn;
+  if(de) de.textContent = today;
+});
+
+/* ─── Signature drawing ─── */
+const drawing = {};
+function initCanvas(id) {
+  const canvas = document.getElementById(`cv-${id}`);
+  if (!canvas || drawing[id]) return;
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#1a0a40';
+  ctx.lineWidth = 2.5;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  let isDown = false, px = 0, py = 0;
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const scX = canvas.width  / r.width;
+    const scY = canvas.height / r.height;
+    const src = e.touches ? e.touches[0] : e;
+    return [(src.clientX - r.left) * scX, (src.clientY - r.top) * scY];
+  }
+  function start(e) { e.preventDefault(); isDown=true; [px,py]=getPos(e); }
+  function move(e)  { if(!isDown) return; e.preventDefault();
+    const [x,y]=getPos(e);
+    ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(x,y); ctx.stroke();
+    [px,py]=[x,y];
+  }
+  function end(e) { isDown=false; checkReady(id.split('-')[0]); }
+  canvas.addEventListener('mousedown',start);
+  canvas.addEventListener('mousemove',move);
+  canvas.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});
+  canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',end);
+  drawing[id] = ctx;
+}
+
+['ar-first','ar-second','en-first','en-second'].forEach(initCanvas);
+
+function switchSig(mode, lang, party) {
+  const id  = `${lang}-${party}`;
+  const cw  = document.getElementById(`cw-${id}`);
+  const st  = document.getElementById(`st-${id}`);
+  const tabs = cw.closest('.sig-box').querySelectorAll('.sig-tab');
+  tabs.forEach((t,i) => t.classList.toggle('on', (i===0&&mode==='draw')||(i===1&&mode==='type')));
+  if (mode === 'draw') { cw.style.display='block'; st.style.display='none'; }
+  else                 { cw.style.display='none';  st.style.display='block'; st.focus(); }
+}
+
+function clearSig(lang, party) {
+  const id = `${lang}-${party}`;
+  const cv = document.getElementById(`cv-${id}`);
+  const ctx = drawing[id];
+  if (ctx && cv) ctx.clearRect(0,0,cv.width,cv.height);
+  const st = document.getElementById(`st-${id}`);
+  if (st) st.value = '';
+  checkReady(lang);
+}
+
+function hasSig(lang, party) {
+  const id = `${lang}-${party}`;
+  const cv = document.getElementById(`cv-${id}`);
+  const st = document.getElementById(`st-${id}`);
+  if (cv && cv.style.display !== 'none') {
+    const ctx = drawing[id];
+    if (!ctx) return false;
+    const d = ctx.getImageData(0,0,cv.width,cv.height).data;
+    return d.some(v => v !== 0);
+  }
+  return st && st.value.trim().length > 1;
+}
+
+function checkReady(lang) {
+  const agree = document.getElementById(`agree-${lang}`);
+  const btn   = document.getElementById(`sub-${lang}`);
+  if (!agree || !btn) return;
+  btn.disabled = !(agree.checked && hasSig(lang,'second'));
+}
+
+/* ─── Submit ─── */
+async function submitContract(lang) {
+  const name  = document.getElementById(`cname-${lang}`)?.value.trim();
+  const email = document.getElementById(`cemail-${lang}`)?.value.trim();
+  if (!name || !email) {
+    alert(lang==='ar' ? 'يرجى تعبئة اسم الشركة والبريد الإلكتروني' : 'Please fill in company name and email');
+    return;
+  }
+  const btn = document.getElementById(`sub-${lang}`);
+  btn.textContent = lang==='ar' ? 'جارٍ الإرسال...' : 'Submitting...';
+  btn.disabled = true;
+  await new Promise(r => setTimeout(r, 900));
+  document.getElementById(`success-${lang}`).classList.add('on');
+  btn.textContent = lang==='ar' ? '✓ تم التوقيع' : '✓ Signed';
+
+  // ── بناء رابط السداد مع بيانات العميل ──
+  const p = new URLSearchParams(window.location.search);
+  const payParams = new URLSearchParams({
+    name:  name,
+    email: email,
+    pkg:   p.get('pkg')  || 'pulse',
+    ref:   p.get('ref')  || document.getElementById(`contract-num-${lang}`)?.textContent || '',
+    lang:  lang
+  });
+  const payLink = document.getElementById(`pay-link-${lang}`);
+  if (payLink) payLink.href = 'payment.html?' + payParams.toString();
+
+  // ── إظهار زر السداد ──
+  const payRow = document.getElementById(`pay-row-${lang}`);
+  if (payRow) {
+    payRow.style.display = 'block';
+    setTimeout(() => payRow.scrollIntoView({behavior:'smooth',block:'center'}), 300);
+  }
+}
+
+/* ─── Export PDF ─── */
+function exportPDF(lang) {
+  const doc = document.querySelector(`[data-lang="${lang}"].c-doc`);
+  if (!doc) return;
+  const prev = {
+    title: document.title,
+    body:  document.body.innerHTML,
+    dir:   document.documentElement.dir
+  };
+  document.title = `Scintix-Contract-${cn}`;
+  const clone = doc.cloneNode(true);
+  clone.querySelectorAll('.submit-row,.agree-row,.success-banner,.sig-type-tabs,.clear-btn').forEach(el=>el.remove());
+  document.body.innerHTML = `
+    <style>
+      body{font-family:Arial,sans-serif;color:#111;background:white;margin:0;padding:24px}
+      .c-doc-header{background:#05071a;color:white;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-radius:8px 8px 0 0}
+      .c-doc-header h1{color:white;font-size:1.3rem}
+      .inv-num{color:#5cf0ff;font-family:monospace}
+      .inv-date{color:rgba(255,255,255,.5);font-size:.8rem}
+      .parties{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #eee}
+      .party{padding:16px 20px}.party+.party{border-right:1px solid #eee}
+      .party-label{font-size:.7rem;text-transform:uppercase;color:#999;margin-bottom:4px}
+      .party-name{font-weight:700;margin-bottom:4px}
+      .party-detail{font-size:.82rem;color:#555;line-height:1.7}
+      .c-section{padding:14px 20px;border-bottom:1px solid #eee}
+      .c-section h2{font-size:.72rem;text-transform:uppercase;color:#7c3aed;letter-spacing:.12em;margin-bottom:10px}
+      .c-section p,.c-section li{font-size:.85rem;color:#334;line-height:1.8}
+      .c-section ul{padding-right:18px}
+      .pkg-table{width:100%;border-collapse:collapse;font-size:.83rem}
+      .pkg-table th{background:#f5f3ff;padding:8px 12px;text-align:right;border-bottom:1px solid #eee;font-weight:600}
+      .pkg-table td{padding:8px 12px;border-bottom:1px solid #f5f5f5}
+      .pkg-badge{background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px}
+      .sig-block{padding:14px 20px}
+      .sig-block h2{font-size:.72rem;text-transform:uppercase;color:#7c3aed;letter-spacing:.12em;margin-bottom:12px}
+      .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+      .sig-box label{font-size:.75rem;color:#999;display:block;margin-bottom:4px}
+      .canvas-wrap{border:1px dashed #ccc;border-radius:8px;height:100px;background:#fafaff}
+      .sig-text-input{font-size:1.2rem;font-family:Georgia,serif;border:1px solid #ccc;border-radius:6px;padding:8px;width:100%}
+      .sig-date{width:100%;border:1px solid #eee;border-radius:6px;padding:6px;font-size:.82rem;margin-top:6px}
+    </style>
+  ` + clone.outerHTML;
+  setTimeout(() => {
+    window.print();
+    document.title      = prev.title;
+    document.body.innerHTML = prev.body;
+    document.documentElement.dir = prev.dir;
+    setLang(curLang);
+    ['ar-first','ar-second','en-first','en-second'].forEach(initCanvas);
+  }, 400);
+}
+
+/* ─── Auto-fill from URL params (sent by Airtable/Make.com) ─────────────
+   الرابط: contract.html?name=شركة+الأمل&email=info@co.com&pkg=pulse&lang=ar
+─────────────────────────────────────────────────────────────────────── */
+(function() {
+  const p = new URLSearchParams(window.location.search);
+
+  // اللغة
+  if (p.get('lang')) curLang = p.get('lang');
+
+  // اسم العميل
+  const name = p.get('name') || p.get('client') || '';
+  if (name) {
+    ['ar','en'].forEach(l => {
+      const inp = document.getElementById(`cname-${l}`);
+      if (inp) {
+        inp.value = name;
+        inp.dispatchEvent(new Event('input'));
+        // اجعل الحقل للعرض فقط — العميل لا يغيّره
+        inp.readOnly = true;
+        inp.style.background = '#f0edff';
+        inp.style.color = '#7c3aed';
+        inp.style.fontWeight = '600';
+      }
+    });
+  }
+
+  // البريد الإلكتروني
+  const email = p.get('email') || '';
+  if (email) {
+    ['ar','en'].forEach(l => {
+      const inp = document.getElementById(`cemail-${l}`);
+      if (inp) {
+        inp.value = email;
+        inp.readOnly = true;
+        inp.style.background = '#f0edff';
+        inp.style.color = '#5c6b8a';
+      }
+    });
+  }
+
+  // الباقة (تُظهر في جدول العقد)
+  const pkg = p.get('pkg') || p.get('package') || '';
+  const PKG_MAP = {
+    spark:  { ar: 'Spark — 899 SAR/شهرياً',   en: 'Spark — 899 SAR/month' },
+    glow:   { ar: 'Glow — 1,799 SAR/شهرياً',  en: 'Glow — 1,799 SAR/month' },
+    pulse:  { ar: 'Pulse — 3,299 SAR/شهرياً', en: 'Pulse — 3,299 SAR/month' },
+    nova:   { ar: 'Nova — 5,999 SAR/شهرياً',  en: 'Nova — 5,999 SAR/month' },
+    zenith: { ar: 'Zenith — 12,000 SAR/شهرياً', en: 'Zenith — 12,000 SAR/month' }
+  };
+  if (pkg && PKG_MAP[pkg]) {
+    const PKG_DESC = {
+      spark:  { ar:'نماذج رقمية احترافية، صفحة هبوط ذكية، ربط CRM أساسي',
+                en:'Professional digital forms, smart landing page, basic CRM integration' },
+      glow:   { ar:'مساعد واتساب ذكي، أتمتة المبيعات، ربط CRM متقدم',
+                en:'Smart WhatsApp assistant, sales automation, advanced CRM integration' },
+      pulse:  { ar:'تطبيق ويب متكامل، لوحة تحكم متقدمة، تكامل بوابة دفع',
+                en:'Full web application, advanced dashboard, payment gateway integration' },
+      nova:   { ar:'أتمتة AI متقدمة، متعدد المستخدمين، تكامل ERP/CRM',
+                en:'Advanced AI automation, multi-user access, ERP/CRM integration' },
+      zenith: { ar:'حلول مؤسسية كاملة، تكامل أنظمة، مراقبة 24/7، SLA مضمون',
+                en:'Full enterprise solutions, system integration, 24/7 monitoring, SLA' }
+    };
+    const PKG_PRICE = { spark:899, glow:1799, pulse:3299, nova:5999, zenith:12000 };
+    // Update AR table
+    const arTbody = document.getElementById('pkg-rows-ar');
+    if (arTbody) arTbody.innerHTML = `
+      <tr>
+        <td><span style="display:inline-block;background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px">${pkg.charAt(0).toUpperCase()+pkg.slice(1)}</span></td>
+        <td>${PKG_DESC[pkg].ar}</td>
+        <td style="white-space:nowrap;font-weight:600">${PKG_MAP[pkg].ar.split('—')[1].trim()}</td>
+      </tr>`;
+    // Update EN table
+    const enTbody = document.querySelector('[data-lang="en"] .pkg-table tbody');
+    if (enTbody) enTbody.innerHTML = `
+      <tr>
+        <td><span style="display:inline-block;background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px">${pkg.charAt(0).toUpperCase()+pkg.slice(1)}</span></td>
+        <td>${PKG_DESC[pkg].en}</td>
+        <td style="white-space:nowrap;font-weight:600">${PKG_MAP[pkg].en.split('—')[1].trim()}</td>
+      </tr>`;
+  }
+
+  // رقم الطلب من Airtable
+  const ref = p.get('ref') || p.get('record') || '';
+  if (ref) {
+    ['ar','en'].forEach(l => {
+      const el = document.getElementById(`contract-num-${l}`);
+      if (el) el.textContent = 'SCX-' + ref;
+    });
+  }
+})();
+
+/* ─── Boot ─── */
+setLang(curLang);
+</script>
+</body>
+</html>
