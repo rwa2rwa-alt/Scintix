@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scintix | إتمام السداد</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+:root{
+  --ink:#0c1430;--muted:#5c6b8a;--border:rgba(10,20,60,0.09);
+  --accent:#5cf0ff;--strong:#7c3aed;
+  --green:#0f6e56;--green-bg:#e6fdf5;--green-border:rgba(15,110,86,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at 10% 0%,rgba(92,240,255,.08),transparent 28%),
+             radial-gradient(circle at 90% 5%,rgba(124,58,237,.07),transparent 28%),#f4f6ff;
+  color:var(--ink);font-family:'Segoe UI',Tahoma,sans-serif;
+  display:flex;flex-direction:column;
+}
+/* Header */
+.p-header{
+  background:rgba(2,5,20,.97);padding:13px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(92,240,255,.14);flex-shrink:0;
+}
+.p-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.p-brand img{width:34px;height:34px;border-radius:9px;padding:5px;background:rgba(92,240,255,.12)}
+.p-brand span{color:#eef5ff;font-weight:700;font-size:1.05rem}
+.lang-btns{display:flex;gap:6px}
+.lang-btn{background:transparent;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.45);border-radius:999px;padding:4px 13px;font-size:.78rem;cursor:pointer;transition:all .2s}
+.lang-btn.on{background:rgba(92,240,255,.14);border-color:rgba(92,240,255,.4);color:#5cf0ff}
+/* Layout */
+.p-wrap{
+  flex:1;display:flex;align-items:flex-start;justify-content:center;
+  padding:32px 16px 60px;gap:20px;flex-wrap:wrap;
+}
+/* Order summary card */
+.order-card{
+  width:min(340px,100%);
+  background:white;border:1px solid var(--border);border-radius:18px;
+  box-shadow:0 4px 24px rgba(20,40,90,.07);overflow:hidden;
+  flex-shrink:0;
+}
+.order-top{
+  background:linear-gradient(135deg,#05071a,#0d0f2b);
+  padding:20px 22px;
+}
+.order-top h3{color:white;font-size:1rem;font-weight:700;margin-bottom:14px}
+.pkg-chip{
+  display:inline-block;background:rgba(92,240,255,.15);
+  color:#5cf0ff;font-weight:700;font-size:.78rem;
+  padding:4px 14px;border-radius:999px;margin-bottom:12px;
+}
+.order-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.order-row .lbl{color:rgba(255,255,255,.5);font-size:.8rem}
+.order-row .val{color:white;font-size:.88rem;font-weight:500}
+.order-total{
+  border-top:1px solid rgba(255,255,255,.1);margin-top:12px;padding-top:12px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.order-total .lbl{color:rgba(255,255,255,.6);font-size:.85rem}
+.order-total .val{color:#5cf0ff;font-size:1.25rem;font-weight:800;font-family:monospace}
+.order-body{padding:16px 22px}
+.order-detail{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;font-size:.8rem;color:var(--muted)}
+.order-detail::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.secure-badge{
+  display:flex;align-items:center;gap:6px;
+  background:#f0fdf4;border:1px solid rgba(15,110,86,.2);
+  border-radius:8px;padding:8px 12px;font-size:.75rem;color:var(--green);margin-top:4px;
+}
+/* Payment form card */
+.pay-card{
+  width:min(480px,100%);
+  background:white;border:1px solid var(--border);border-radius:18px;
+  box-shadow:0 4px 24px rgba(20,40,90,.07);overflow:hidden;
+}
+.pay-card-header{padding:20px 24px;border-bottom:1px solid var(--border)}
+.pay-card-header h2{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.pay-card-header p{font-size:.8rem;color:var(--muted)}
+.pay-methods{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.pay-method{
+  flex:1;min-width:80px;padding:10px 12px;border-radius:10px;
+  border:1.5px solid var(--border);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  transition:all .2s;background:#fafbff;
+}
+.pay-method.on{border-color:var(--strong);background:#f5f3ff}
+.pay-method .method-icon{font-size:1.4rem}
+.pay-method .method-lbl{font-size:.7rem;color:var(--muted);font-weight:600}
+.pay-method.on .method-lbl{color:var(--strong)}
+.pay-form{padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+.field-label{font-size:.75rem;color:var(--muted);display:block;margin-bottom:5px;font-weight:500}
+.pay-input{
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);
+  border-radius:10px;font-size:.92rem;color:var(--ink);
+  background:#fafbff;outline:none;transition:border-color .2s;font-family:inherit;
+}
+.pay-input:focus{border-color:var(--strong)}
+.pay-input.readonly{background:#f8f6ff;color:var(--strong);font-weight:600;cursor:default}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* Gateway placeholder */
+.gateway-wrap{
+  border:1.5px dashed rgba(124,58,237,.3);border-radius:12px;
+  padding:20px;text-align:center;background:#faf9ff;
+}
+.gateway-btns{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.gw-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:13px 20px;border-radius:10px;border:1.5px solid var(--border);
+  cursor:pointer;font-size:.9rem;font-weight:600;font-family:inherit;
+  background:white;color:var(--ink);transition:all .2s;
+}
+.gw-btn:hover{border-color:var(--strong);background:#f5f3ff;color:var(--strong)}
+.gw-btn.primary{
+  background:linear-gradient(135deg,#5cf0ff,#7c3aed);
+  border-color:transparent;color:#031228;
+}
+.gw-btn.primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(92,240,255,.25)}
+.gw-note{font-size:.72rem;color:var(--muted);margin-top:10px;line-height:1.6}
+.gw-note a{color:var(--strong);text-decoration:none}
+/* Divider */
+.or-divider{display:flex;align-items:center;gap:10px;font-size:.75rem;color:var(--muted)}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+/* Success */
+.success-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(5,7,26,.92);z-index:100;
+  align-items:center;justify-content:center;
+}
+.success-overlay.on{display:flex}
+.success-box{
+  background:white;border-radius:20px;padding:40px 36px;
+  text-align:center;max-width:400px;width:90%;
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.success-icon{font-size:3.5rem;margin-bottom:16px}
+.success-box h2{font-size:1.4rem;font-weight:700;margin-bottom:8px;color:var(--green)}
+.success-box p{font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:20px}
+.success-box .ref-num{
+  background:#f0edff;color:var(--strong);
+  font-family:monospace;font-size:.9rem;font-weight:700;
+  padding:6px 18px;border-radius:999px;display:inline-block;margin-bottom:20px;
+}
+.btn-home{
+  display:inline-block;padding:11px 28px;border-radius:999px;
+  background:linear-gradient(135deg,#5cf0ff,#7c3aed);
+  color:#031228;font-weight:700;text-decoration:none;font-size:.92rem;
+}
+</style>
+</head>
+<body>
+
+<div class="p-header">
+  <a class="p-brand" href="index.html">
+    <img src="assets/logo.png" alt="Scintix"/>
+    <span>Scintix</span>
+  </a>
+  <div class="lang-btns">
+    <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
+    <button class="lang-btn"   onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<div class="p-wrap">
+
+  <!-- ════ ORDER SUMMARY ════ -->
+  <div class="order-card">
+    <div class="order-top">
+      <h3 id="sum-title">ملخص الطلب</h3>
+      <div class="pkg-chip" id="sum-pkg">Pulse</div>
+      <div class="order-row"><span class="lbl" id="sum-ref-lbl">رقم المرجع</span><span class="val" id="sum-ref">—</span></div>
+      <div class="order-row"><span class="lbl" id="sum-client-lbl">العميل</span><span class="val" id="sum-client">—</span></div>
+      <div class="order-total">
+        <span class="lbl" id="sum-total-lbl">المبلغ المستحق</span>
+        <span class="val" id="sum-total">—</span>
+      </div>
+    </div>
+    <div class="order-body">
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <input class="pay-input" id="inp-discount" placeholder="كود الخصم" style="text-transform:uppercase;flex:1"/>
+        <button class="gw-btn" id="btn-apply-discount" style="white-space:nowrap;padding:0 16px" onclick="applyDiscount()">تطبيق</button>
+      </div>
+      <div id="discount-msg" style="font-size:.78rem;margin-bottom:14px;display:none"></div>
+      <div class="order-detail" id="detail-1">الباقة تشمل جميع الخدمات المتفق عليها</div>
+      <div class="order-detail" id="detail-2">بدء التنفيذ فور تأكيد الدفع</div>
+      <div class="order-detail" id="detail-3">التسليم خلال الوقت المحدد في العقد</div>
+      <div class="order-detail" id="detail-4">دعم تقني طوال مدة المشروع</div>
+      <div class="secure-badge">
+        <span>🔒</span>
+        <span id="secure-lbl">جميع المدفوعات مشفرة وآمنة</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PAYMENT FORM ════ -->
+  <div class="pay-card">
+    <div class="pay-card-header">
+      <h2 id="pay-title">إتمام السداد</h2>
+      <p id="pay-sub">اختر طريقة الدفع المناسبة لك</p>
+    </div>
+
+    <!-- Payment method tabs -->
+    <div class="pay-methods">
+      <div class="pay-method on" onclick="setMethod('card')">
+        <span class="method-icon">💳</span>
+        <span class="method-lbl" id="mth-card">بطاقة بنكية</span>
+      </div>
+      <div class="pay-method" onclick="setMethod('mada')">
+        <span class="method-icon">🏦</span>
+        <span class="method-lbl">مدى</span>
+      </div>
+      <div class="pay-method" onclick="setMethod('applepay')">
+        <span class="method-icon">🍎</span>
+        <span class="method-lbl">Apple Pay</span>
+      </div>
+      <div class="pay-method" onclick="setMethod('bank')">
+        <span class="method-icon">🏛️</span>
+        <span class="method-lbl" id="mth-bank">تحويل بنكي</span>
+      </div>
+    </div>
+
+    <!-- Card form -->
+    <div class="pay-form" id="form-card">
+      <div>
+        <label class="field-label" id="lbl-name">الاسم على البطاقة</label>
+        <input class="pay-input readonly" id="inp-cardname" readonly/>
+      </div>
+      <div>
+        <label class="field-label" id="lbl-cardnum">رقم البطاقة</label>
+        <input class="pay-input" id="inp-cardnum" placeholder="•••• •••• •••• ••••" maxlength="19"
+          oninput="fmtCard(this)"/>
+      </div>
+      <div class="row2">
+        <div>
+          <label class="field-label" id="lbl-expiry">تاريخ الانتهاء</label>
+          <input class="pay-input" id="inp-expiry" placeholder="MM/YY" maxlength="5"
+            oninput="fmtExpiry(this)"/>
+        </div>
+        <div>
+          <label class="field-label">CVV</label>
+          <input class="pay-input" id="inp-cvv" placeholder="•••" maxlength="4" type="password"/>
+        </div>
+      </div>
+
+      <div class="or-divider" id="or-lbl">أو ادفع عبر</div>
+
+      <!-- Gateway buttons (Moyasar / Tap) -->
+      <div class="gateway-wrap">
+        <div id="gw-title" style="font-size:.82rem;color:var(--muted);margin-bottom:4px">بوابات الدفع المعتمدة</div>
+        <div class="gateway-btns">
+          <button class="gw-btn primary" onclick="payViaGateway('moyasar')">
+            <span>💳</span> <span id="btn-moyasar">الدفع عبر Moyasar</span>
+          </button>
+          <button class="gw-btn" onclick="payViaGateway('tap')">
+            <span>⚡</span> <span id="btn-tap">الدفع عبر Tap</span>
+          </button>
+        </div>
+        <div class="gw-note" id="gw-note">
+          لتفعيل بوابة الدفع، أضيفي مفتاح Moyasar أو Tap في إعدادات الخادم.
+          <a href="https://moyasar.com" target="_blank">moyasar.com ←</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bank transfer form -->
+    <div class="pay-form" id="form-bank" style="display:none">
+      <div style="background:#f8f6ff;border:1px solid rgba(124,58,237,.15);border-radius:12px;padding:16px">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:12px;font-weight:600" id="bank-title">بيانات التحويل البنكي</div>
+        <div style="display:grid;gap:8px;font-size:.83rem">
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--muted)" id="bank-name-lbl">اسم البنك</span>
+            <span style="font-weight:600">بنك الراجحي</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--muted)" id="bank-acc-lbl">رقم الحساب</span>
+            <span style="font-weight:600;font-family:monospace" id="bank-acc">SA•• •••• •••• •••• ••••</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--muted)" id="bank-ben-lbl">المستفيد</span>
+            <span style="font-weight:600">Scintix Digital Solutions</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="color:var(--muted)" id="bank-ref-lbl">المرجع (إلزامي)</span>
+            <span style="font-weight:600;color:var(--strong);font-family:monospace" id="bank-ref-val">—</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="field-label" id="lbl-transfer-proof">إرفاق إيصال التحويل</label>
+        <input type="file" accept="image/*,.pdf" class="pay-input" id="inp-proof"
+          style="padding:8px;cursor:pointer"/>
+      </div>
+      <button class="gw-btn primary" style="border-radius:10px" onclick="confirmTransfer()">
+        <span>✓</span> <span id="btn-confirm-transfer">تأكيد التحويل</span>
+      </button>
+    </div>
+
+  </div>
+
+</div><!-- /p-wrap -->
+
+<!-- ════ SUCCESS OVERLAY ════ -->
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <h2 id="succ-title">تم استلام طلب السداد!</h2>
+    <p id="succ-body">شكراً لثقتكم بـ Scintix — سيتم التحقق من الدفع وإرسال تأكيد على بريدكم، ثم نبدأ العمل فوراً على مشروعكم.</p>
+    <div class="ref-num" id="succ-ref">—</div>
+    <a href="index.html" class="btn-home" id="succ-home">العودة للرئيسية</a>
+  </div>
+</div>
+
+<script>
+/* ─── Read URL params ─── */
+const P = new URLSearchParams(window.location.search);
+let lang = P.get('lang') || localStorage.getItem('scintix-lang') || 'ar';
+
+const CLIENT = P.get('name')  || '';
+const EMAIL  = P.get('email') || '';
+const PKG    = (P.get('pkg')  || 'pulse').toUpperCase();
+const REF    = P.get('ref')   || '—';
+const TOTAL  = P.get('total') || '—';
+
+/* ─── Strings ─── */
+const S = {
+  ar:{
+    sumTitle:'ملخص الطلب', refLbl:'رقم المرجع', clientLbl:'العميل',
+    totalLbl:'المبلغ المستحق',
+    d1:'الباقة تشمل جميع الخدمات المتفق عليها',
+    d2:'بدء التنفيذ فور تأكيد الدفع',
+    d3:'التسليم خلال الوقت المحدد في العقد',
+    d4:'دعم تقني طوال مدة المشروع',
+    secureLbl:'جميع المدفوعات مشفرة وآمنة',
+    discountPh:'كود الخصم', discountBtn:'تطبيق',
+    discountOk:'تم تطبيق الخصم بنجاح ✓', discountBad:'كود الخصم غير صحيح أو منتهي',
+    payTitle:'إتمام السداد', paySub:'اختر طريقة الدفع المناسبة لك',
+    mthCard:'بطاقة بنكية', mthBank:'تحويل بنكي',
+    lblName:'الاسم على البطاقة', lblCardnum:'رقم البطاقة', lblExpiry:'تاريخ الانتهاء',
+    orLbl:'أو ادفع عبر', gwTitle:'بوابات الدفع المعتمدة',
+    btnMoyasar:'الدفع عبر Moyasar', btnTap:'الدفع عبر Tap',
+    gwNote:'لتفعيل بوابة الدفع، أضيفي مفتاح API في إعدادات الخادم.',
+    bankTitle:'بيانات التحويل البنكي', bankNameLbl:'اسم البنك',
+    bankAccLbl:'رقم الحساب IBAN', bankBenLbl:'المستفيد', bankRefLbl:'المرجع (إلزامي)',
+    lblProof:'إرفاق إيصال التحويل', btnConfirm:'تأكيد التحويل',
+    succTitle:'تم استلام طلب السداد!',
+    succBody:'شكراً لثقتكم — سيتم التحقق من الدفع وإرسال تأكيد على بريدكم، ثم نبدأ العمل فوراً على مشروعكم.',
+    succHome:'العودة للرئيسية',
+  },
+  en:{
+    sumTitle:'Order Summary', refLbl:'Reference', clientLbl:'Client',
+    totalLbl:'Amount Due',
+    d1:'Package includes all agreed services',
+    d2:'Work starts immediately after payment',
+    d3:'Delivered within the timeline agreed in the contract',
+    d4:'Technical support throughout the project',
+    secureLbl:'All payments are encrypted and secure',
+    discountPh:'Discount code', discountBtn:'Apply',
+    discountOk:'Discount applied successfully ✓', discountBad:'Invalid or expired discount code',
+    payTitle:'Complete Payment', paySub:'Choose your preferred payment method',
+    mthCard:'Bank Card', mthBank:'Bank Transfer',
+    lblName:'Name on card', lblCardnum:'Card number', lblExpiry:'Expiry date',
+    orLbl:'Or pay via', gwTitle:'Approved payment gateways',
+    btnMoyasar:'Pay via Moyasar', btnTap:'Pay via Tap',
+    gwNote:'To activate a gateway, add the API key in server settings.',
+    bankTitle:'Bank Transfer Details', bankNameLbl:'Bank name',
+    bankAccLbl:'IBAN', bankBenLbl:'Beneficiary', bankRefLbl:'Reference (required)',
+    lblProof:'Attach transfer receipt', btnConfirm:'Confirm Transfer',
+    succTitle:'Payment Request Received!',
+    succBody:'Thank you for choosing Scintix — payment will be verified and a confirmation sent to your email. Work begins immediately.',
+    succHome:'Back to Home',
+  }
+};
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir  = l === 'en' ? 'ltr' : 'rtl';
+  document.querySelectorAll('.lang-btn').forEach((b,i) =>
+    b.classList.toggle('on',(i===0&&l==='ar')||(i===1&&l==='en')));
+  localStorage.setItem('scintix-lang', l);
+  applyStrings();
+}
+
+function g(id){ return document.getElementById(id); }
+
+function applyStrings() {
+  const s = S[lang];
+  g('sum-title').textContent    = s.sumTitle;
+  g('sum-ref-lbl').textContent  = s.refLbl;
+  g('sum-client-lbl').textContent = s.clientLbl;
+  g('sum-total-lbl').textContent = s.totalLbl;
+  g('detail-1').textContent = s.d1;
+  g('detail-2').textContent = s.d2;
+  g('detail-3').textContent = s.d3;
+  g('detail-4').textContent = s.d4;
+  g('secure-lbl').textContent   = s.secureLbl;
+  g('inp-discount').placeholder = s.discountPh;
+  g('btn-apply-discount').textContent = s.discountBtn;
+  g('pay-title').textContent    = s.payTitle;
+  g('pay-sub').textContent      = s.paySub;
+  g('mth-card').textContent     = s.mthCard;
+  g('mth-bank').textContent     = s.mthBank;
+  g('lbl-name').textContent     = s.lblName;
+  g('lbl-cardnum').textContent  = s.lblCardnum;
+  g('lbl-expiry').textContent   = s.lblExpiry;
+  g('or-lbl').textContent       = s.orLbl;
+  g('gw-title').textContent     = s.gwTitle;
+  g('btn-moyasar').textContent  = s.btnMoyasar;
+  g('btn-tap').textContent      = s.btnTap;
+  g('gw-note').textContent      = s.gwNote;
+  g('bank-title').textContent   = s.bankTitle;
+  g('bank-name-lbl').textContent = s.bankNameLbl;
+  g('bank-acc-lbl').textContent  = s.bankAccLbl;
+  g('bank-ben-lbl').textContent  = s.bankBenLbl;
+  g('bank-ref-lbl').textContent  = s.bankRefLbl;
+  g('lbl-transfer-proof').textContent = s.lblProof;
+  g('btn-confirm-transfer').textContent = s.btnConfirm;
+  g('succ-title').textContent   = s.succTitle;
+  g('succ-body').textContent    = s.succBody;
+  g('succ-home').textContent    = s.succHome;
+}
+
+/* ─── Fill order summary ─── */
+function fillSummary() {
+  g('sum-pkg').textContent    = PKG;
+  g('sum-ref').textContent    = REF;
+  g('sum-client').textContent = CLIENT || '—';
+  g('sum-total').textContent  = TOTAL  || '—';
+  g('bank-ref-val').textContent = REF;
+  g('succ-ref').textContent   = REF;
+  if (CLIENT) {
+    const cn = g('inp-cardname');
+    if (cn) cn.value = CLIENT;
+  }
+  // Page title
+  document.title = `Scintix | ${lang==='ar'?'السداد':'Payment'} — ${REF}`;
+}
+
+/* ─── Payment methods ─── */
+let currentMethod = 'card';
+function setMethod(m) {
+  currentMethod = m;
+  document.querySelectorAll('.pay-method').forEach((el,i) => {
+    el.classList.toggle('on', ['card','mada','applepay','bank'][i] === m);
+  });
+  g('form-card').style.display = m !== 'bank' ? 'flex' : 'none';
+  g('form-bank').style.display = m === 'bank' ? 'flex' : 'none';
+}
+
+/* ─── Card formatting ─── */
+function fmtCard(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+function fmtExpiry(el) {
+  let v = el.value.replace(/\D/g,'').slice(0,4);
+  if (v.length >= 3) v = v.slice(0,2)+'/'+v.slice(2);
+  el.value = v;
+}
+
+/* ─── Discount codes ───
+   ⚠️ هذا تحقق أساسي من طرف العميل (client-side) للعرض فقط.
+   قبل الإطلاق الفعلي، يجب التحقق من الكود ونسبته من مصدر موثوق
+   (مثل Airtable عبر Make.com) قبل تأكيد أي عملية دفع حقيقية،
+   حتى لا يقدر أحد يعدّل الكود من أدوات المطور بالمتصفح. ─── */
+const DISCOUNT_CODES = {
+  'SCX10':     0.10,
+  'SCX20':     0.20,
+  'WELCOME15': 0.15
+};
+let originalTotalRaw = null;
+
+function applyDiscount() {
+  const code = g('inp-discount').value.trim().toUpperCase();
+  const msgEl = g('discount-msg');
+  const pct = DISCOUNT_CODES[code];
+
+  if (originalTotalRaw === null) {
+    originalTotalRaw = parseFloat((TOTAL || '0').replace(/[^\d.]/g, '')) || 0;
+  }
+
+  if (!pct) {
+    msgEl.textContent = S[lang].discountBad;
+    msgEl.style.color = '#c0392b';
+    msgEl.style.display = 'block';
+    return;
+  }
+
+  const discounted = originalTotalRaw * (1 - pct);
+  const currencyLbl = lang === 'ar' ? 'ر.س' : 'SAR';
+  g('sum-total').textContent = `${discounted.toLocaleString(lang==='ar'?'ar-SA':'en-US')} ${currencyLbl}`;
+  msgEl.textContent = S[lang].discountOk;
+  msgEl.style.color = '#0f6e56';
+  msgEl.style.display = 'block';
+}
+
+/* ─── Gateway ─── */
+function payViaGateway(gw) {
+  // ── هنا تضيفي مفتاح Moyasar أو Tap بعد تفعيل الحساب ──
+  // مثال Moyasar:
+  // Moyasar.init({ publishable_api_key:'pk_test_...', amount: AMOUNT_HALALAS, ... })
+  alert(lang==='ar'
+    ? `🔗 جاري التحويل إلى ${gw==='moyasar'?'Moyasar':'Tap'}\n(أضيفي مفتاح API لتفعيل الدفع الحقيقي)`
+    : `🔗 Redirecting to ${gw==='moyasar'?'Moyasar':'Tap'}\n(Add your API key to enable real payments)`);
+}
+
+/* ─── Bank transfer confirm ─── */
+function confirmTransfer() {
+  showSuccess();
+}
+
+/* ─── Show success ─── */
+function showSuccess() {
+  g('success-overlay').classList.add('on');
+}
+
+/* ─── Boot ─── */
+setLang(lang);
+fillSummary();
+</script>
+</body>
+</html>
