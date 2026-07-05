@@ -259,7 +259,7 @@ body{
           </button>
         </div>
         <div class="gw-note" id="gw-note">
-          لتفعيل بوابة الدفع، أضيفي مفتاح Moyasar أو Tap في إعدادات الخادم.
+          لتفعيل بوابة الدفع، يلزم إضافة مفتاح Moyasar أو Tap في إعدادات الخادم.
           <a href="https://moyasar.com" target="_blank">moyasar.com ←</a>
         </div>
       </div>
@@ -341,7 +341,7 @@ const S = {
     lblName:'الاسم على البطاقة', lblCardnum:'رقم البطاقة', lblExpiry:'تاريخ الانتهاء',
     orLbl:'أو ادفع عبر', gwTitle:'بوابات الدفع المعتمدة',
     btnMoyasar:'الدفع عبر Moyasar', btnTap:'الدفع عبر Tap',
-    gwNote:'لتفعيل بوابة الدفع، أضيفي مفتاح API في إعدادات الخادم.',
+    gwNote:'لتفعيل بوابة الدفع، يلزم إضافة مفتاح API في إعدادات الخادم.',
     bankTitle:'بيانات التحويل البنكي', bankNameLbl:'اسم البنك',
     bankAccLbl:'رقم الحساب IBAN', bankBenLbl:'المستفيد', bankRefLbl:'المرجع (إلزامي)',
     lblProof:'إرفاق إيصال التحويل', btnConfirm:'تأكيد التحويل',
@@ -503,7 +503,7 @@ function payViaGateway(gw) {
   // مثال Moyasar:
   // Moyasar.init({ publishable_api_key:'pk_test_...', amount: AMOUNT_HALALAS, ... })
   alert(lang==='ar'
-    ? `🔗 جاري التحويل إلى ${gw==='moyasar'?'Moyasar':'Tap'}\n(أضيفي مفتاح API لتفعيل الدفع الحقيقي)`
+    ? `🔗 جاري التحويل إلى ${gw==='moyasar'?'Moyasar':'Tap'}\n(يلزم إضافة مفتاح API لتفعيل الدفع الحقيقي)`
     : `🔗 Redirecting to ${gw==='moyasar'?'Moyasar':'Tap'}\n(Add your API key to enable real payments)`);
 }
 
