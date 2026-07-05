@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scintix — ابدأ مشروعك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-card:#12172a;
+    --indigo:#6c5ce7;
+    --purple:#a855f7;
+    --pink:#ec4899;
+    --cyan:#22d3ee;
+    --text:#e8eaf6;
+    --text-dim:#8b90ab;
+    --border:#232946;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Cairo',sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(108,92,231,0.15), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(236,72,153,0.12), transparent 40%);
+  }
+  .wrap{max-width:560px;width:100%;}
+
+  .hero{text-align:center;margin-bottom:36px;}
+  .hero-logo{
+    width:64px;height:64px;margin:0 auto 20px;
+    border-radius:16px;object-fit:contain;
+    padding:8px;background:rgba(108,92,231,0.12);
+    box-shadow:0 0 40px rgba(108,92,231,0.25);
+  }
+
+  h1{font-size:26px;font-weight:800;margin-bottom:8px;}
+  .sub{color:var(--text-dim);font-size:14.5px;line-height:1.7;max-width:420px;margin:0 auto;}
+  .pkg-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(108,92,231,0.14);color:var(--indigo);
+    font-weight:700;font-size:12.5px;padding:6px 16px;
+    border-radius:999px;margin-bottom:14px;
+  }
+
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:32px 28px;
+  }
+
+  .field{margin-bottom:22px;}
+  label{display:block;font-weight:700;font-size:14.5px;margin-bottom:4px;}
+  .hint{color:var(--text-dim);font-size:12.5px;margin-bottom:10px;line-height:1.6;}
+  input[type=text], input[type=email], input[type=tel], select, textarea{
+    width:100%;
+    background:#0d1224;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 14px;
+    color:var(--text);
+    font-family:'Cairo',sans-serif;
+    font-size:14.5px;
+    transition:border-color .15s;
+  }
+  textarea{resize:vertical;min-height:70px;}
+  input:focus, select:focus, textarea:focus{
+    outline:none;border-color:var(--indigo);
+    box-shadow:0 0 0 3px rgba(108,92,231,0.15);
+  }
+  input::placeholder, textarea::placeholder{color:#4a5178;}
+
+  .phone-row{display:flex;gap:8px;}
+  .phone-row select{flex:0 0 118px;font-size:13px;padding-inline:8px;}
+  .phone-row input{flex:1;}
+
+  .palettes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .palette{
+    cursor:pointer;border:2px solid var(--border);border-radius:12px;
+    padding:10px 6px;text-align:center;transition:.15s;
+  }
+  .palette:hover{border-color:#3a4270;}
+  .palette.active{border-color:var(--indigo);background:rgba(108,92,231,0.08);}
+  .swatch-pair{display:flex;justify-content:center;gap:4px;margin-bottom:6px;}
+  .dot{width:18px;height:18px;border-radius:50%;}
+  .palette span{font-size:11px;color:var(--text-dim);}
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+  button{
+    width:100%;
+    background:linear-gradient(90deg,var(--indigo),var(--pink));
+    border:none;border-radius:12px;
+    color:#fff;font-family:'Cairo',sans-serif;
+    font-weight:700;font-size:15.5px;
+    padding:15px;cursor:pointer;margin-top:8px;
+    transition:opacity .15s, transform .15s;
+  }
+  button:hover{opacity:0.92;transform:translateY(-1px);}
+  button:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+
+  .footnote{text-align:center;color:var(--text-dim);font-size:12px;margin-top:18px;line-height:1.7;}
+
+  #status{
+    display:none;text-align:center;padding:14px;border-radius:10px;
+    font-size:14px;margin-top:16px;
+  }
+  #status.ok{display:block;background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.25);}
+  #status.err{display:block;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <img class="hero-logo" src="assets/logo.png" alt="Scintix">
+    <div class="pkg-chip" id="pkgChip" style="display:none">📦 <span id="pkgChipText"></span></div>
+    <h1>اطلب عرض سعرك الآن</h1>
+    <p class="sub">عبّي البيانات وفريقنا التقني بيتواصل معك خلال 24 ساعة بعرض مخصص لنشاطك.</p>
+  </div>
+
+  <form class="card" id="intakeForm">
+
+    <div class="field">
+      <label>الاسم *</label>
+      <input type="text" name="contact_name" placeholder="اسمك الكامل" required>
+    </div>
+
+    <div class="field">
+      <label>اسم النشاط التجاري *</label>
+      <input type="text" name="company_name" placeholder="مثال: بيكري ريتاج" required>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>المجال *</label>
+        <select name="industry" required>
+          <option value="" disabled selected>اختر المجال</option>
+          <option>مطاعم وكافيهات</option>
+          <option>تجارة تجزئة</option>
+          <option>عقارات</option>
+          <option>صحة وجمال</option>
+          <option>تعليم وتدريب</option>
+          <option>خدمات مهنية</option>
+          <option>تقنية وبرمجيات</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>رقم الجوال *</label>
+        <div class="phone-row">
+          <select name="phone_country" id="phoneCountry" required></select>
+          <input type="tel" name="phone_number" placeholder="5XXXXXXXX" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>البريد الإلكتروني *</label>
+      <input type="email" name="email" placeholder="name@example.com" required>
+    </div>
+
+    <div class="field">
+      <label>وصف نشاطك بجملة وحدة *</label>
+      <p class="hint">وش يميزك؟ اكتب كأنك تعرّف نشاطك لصديق — هذا اللي بيبني عليه الموقع.</p>
+      <textarea name="description" placeholder="مثال: نقدم قهوة مختصة وحلويات منزلية بأجواء دافية بقلب الرياض" required></textarea>
+    </div>
+
+    <div class="field">
+      <label>اختر مزاج الألوان اللي يناسب هويتك *</label>
+      <p class="hint">بنستخدم هالألوان بتصميم موقعك — تقدر تغيّرها بعدين لو حبيت.</p>
+      <div class="palettes" id="palettes">
+        <div class="palette" data-primary="#6c5ce7" data-secondary="#a855f7">
+          <div class="swatch-pair"><span class="dot" style="background:#6c5ce7"></span><span class="dot" style="background:#a855f7"></span></div>
+          <span>نيلي جريء</span>
+        </div>
+        <div class="palette" data-primary="#0ea5a4" data-secondary="#14b8a6">
+          <div class="swatch-pair"><span class="dot" style="background:#0ea5a4"></span><span class="dot" style="background:#14b8a6"></span></div>
+          <span>أخضر هادئ</span>
+        </div>
+        <div class="palette" data-primary="#ea580c" data-secondary="#f59e0b">
+          <div class="swatch-pair"><span class="dot" style="background:#ea580c"></span><span class="dot" style="background:#f59e0b"></span></div>
+          <span>دافئ حيوي</span>
+        </div>
+        <div class="palette" data-primary="#0f172a" data-secondary="#334155">
+          <div class="swatch-pair"><span class="dot" style="background:#0f172a"></span><span class="dot" style="background:#334155"></span></div>
+          <span>كلاسيكي راقي</span>
+        </div>
+      </div>
+      <input type="hidden" name="primary_color" required>
+      <input type="hidden" name="secondary_color">
+    </div>
+
+    <button type="submit" id="submitBtn">أرسل واستلم موقعك قريباً</button>
+    <div id="status"></div>
+    <p class="footnote">بمجرد الإرسال، فريقنا التقني (المدعوم بالذكاء الاصطناعي) بيبدأ فوراً بتجهيز موقعك.</p>
+  </form>
+
+</div>
+
+<script>
+  const WEBHOOK_URL = "https://hook.eu1.make.com/q9in1wja70ipcqt15dbgkg3gll171dwg";
+
+  // ── Country codes (flag + dial code) — السعودية افتراضياً ──
+  const COUNTRIES = [
+    {code:'966', flag:'🇸🇦', name:'السعودية'},
+    {code:'971', flag:'🇦🇪', name:'الإمارات'},
+    {code:'965', flag:'🇰🇼', name:'الكويت'},
+    {code:'973', flag:'🇧🇭', name:'البحرين'},
+    {code:'974', flag:'🇶🇦', name:'قطر'},
+    {code:'968', flag:'🇴🇲', name:'عُمان'},
+    {code:'20',  flag:'🇪🇬', name:'مصر'},
+    {code:'962',flag:'🇯🇴', name:'الأردن'},
+    {code:'961',flag:'🇱🇧', name:'لبنان'},
+    {code:'1',  flag:'🇺🇸', name:'أمريكا'},
+    {code:'44', flag:'🇬🇧', name:'بريطانيا'}
+  ];
+  const countrySelect = document.getElementById('phoneCountry');
+  COUNTRIES.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.code;
+    opt.textContent = `${c.flag} +${c.code}`;
+    countrySelect.appendChild(opt);
+  });
+
+  // ── Show which package the visitor came from (?package=Glow) ──
+  const params = new URLSearchParams(window.location.search);
+  const pkgParam = params.get('package');
+  if (pkgParam) {
+    document.getElementById('pkgChip').style.display = 'inline-flex';
+    document.getElementById('pkgChipText').textContent = `طلبك على باقة ${pkgParam}`;
+  }
+
+  const palettes = document.querySelectorAll('.palette');
+  palettes.forEach(p => {
+    p.addEventListener('click', () => {
+      palettes.forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      document.querySelector('[name=primary_color]').value = p.dataset.primary;
+      document.querySelector('[name=secondary_color]').value = p.dataset.secondary;
+    });
+  });
+
+  const form = document.getElementById('intakeForm');
+  const statusEl = document.getElementById('status');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if(!document.querySelector('[name=primary_color]').value){
+      statusEl.className = 'err';
+      statusEl.textContent = 'الرجاء اختيار مزاج الألوان قبل الإرسال';
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.phone = `+${data.phone_country}${data.phone_number}`;
+    delete data.phone_country;
+    delete data.phone_number;
+    data.package = pkgParam || '';
+    btn.disabled = true;
+    btn.textContent = 'جارٍ الإرسال...';
+    try{
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      });
+      statusEl.className = 'ok';
+      statusEl.textContent = 'تم استلام طلبك ✅ راح نتواصل معك قريباً';
+      form.reset();
+      palettes.forEach(x => x.classList.remove('active'));
+      btn.textContent = 'تم الإرسال ✓';
+    }catch(err){
+      statusEl.className = 'err';
+      statusEl.textContent = 'صار خطأ، حاول مرة ثانية أو تواصل معنا مباشرة';
+      btn.disabled = false;
+      btn.textContent = 'أرسل واستلم موقعك قريباً';
+    }
+  });
+</script>
+</body>
+</html>
