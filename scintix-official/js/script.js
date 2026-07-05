@@ -293,7 +293,7 @@ function buildSubFooter(lang) {
     { key: 'subfooter.about',   href: 'vision.html'   },
     { key: 'subfooter.policy',  href: 'policies.html'  },
     { key: 'subfooter.contact', href: '#contact'        },
-    { key: 'subfooter.support', href: '#contact'        }
+    { key: 'subfooter.support', href: 'support.html'    }
   ];
 
   const sf = document.createElement('div');
