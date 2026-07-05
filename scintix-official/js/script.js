@@ -10,8 +10,8 @@ const html       = document.documentElement;
 
 // ─── روابط Airtable ───────────────────────────────────────────
 const FORM_LINKS = {
-  ar: 'https://airtable.com/appkYurrIYGIup8QH/shrUOqxX19nXgoHqR',
-  en: 'https://airtable.com/appkYurrIYGIup8QH/shrAt8THaVjwmP3LR'
+  ar: 'quote.html',
+  en: 'quote.html'
 };
 
 // ─── روابط وسائل التواصل ─────────────────────────────────────
