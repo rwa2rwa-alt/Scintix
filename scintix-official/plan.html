@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scintix | تفاصيل الباقة</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .detail-shell{width:min(880px,100% - 32px);margin:0 auto;padding:40px 0 60px}
+  .detail-back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:24px}
+  .detail-hero{
+    padding:36px 32px;border-radius:28px;background:rgba(255,255,255,.03);
+    border:1px solid var(--border);margin-bottom:28px;
+  }
+  .detail-badge{display:inline-block;color:var(--accent);text-transform:uppercase;letter-spacing:.2em;font-size:.8rem;margin-bottom:14px}
+  .detail-hero h1{font-size:clamp(2rem,4vw,2.8rem);margin:0 0 12px;letter-spacing:-.02em}
+  .detail-price{display:flex;align-items:flex-end;gap:8px;margin:18px 0}
+  .detail-price span{font-size:2.6rem;font-weight:800}
+  .detail-price small{color:var(--text-muted)}
+  .video-frame{
+    aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;
+    background:radial-gradient(circle at center,rgba(92,240,255,.08),rgba(2,5,20,.6));
+    border:1px solid var(--border);margin:28px 0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .video-frame video{width:100%;height:100%;object-fit:cover;display:none}
+  .video-placeholder{text-align:center;color:var(--text-muted);padding:20px}
+  .video-placeholder .play-icon{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 14px;
+    background:rgba(92,240,255,.12);border:1px solid rgba(92,240,255,.3);
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent)
+  }
+  .detail-section{padding:28px 26px;border-radius:22px;background:var(--surface,rgba(255,255,255,.03));border:1px solid var(--border);margin-bottom:20px}
+  .detail-section h2{font-size:1.2rem;margin:0 0 16px}
+  .detail-features{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .detail-features li{display:flex;align-items:center;gap:10px;color:var(--text-muted);line-height:1.7}
+  .detail-features li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+  .detail-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+  [lang-pkg]{display:none}
+  [lang-pkg].active{display:block}
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Scintix"/>
+      <span class="brand-text"><span class="brand-name">Scintix</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#services" data-i18n="nav.services">الخدمات</a>
+      <a href="index.html#plans" data-i18n="nav.plans">الباقات</a>
+      <a href="index.html#faq" data-i18n="nav.faq">الأسئلة الشائعة</a>
+    </nav>
+    <label class="language-switcher">
+      <select class="language-select" data-lang-select onchange="setDetailLang(this.value)">
+        <option value="ar">عربي</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+  </header>
+
+  <div class="detail-shell">
+    <a class="detail-back" href="index.html#plans" id="backLink">→ رجوع لكل الباقات</a>
+
+    <div class="detail-hero">
+      <div class="detail-badge" id="pkgBadge">SPARK</div>
+      <h1 id="pkgName">—</h1>
+      <p id="pkgTagline" style="color:var(--text-muted);line-height:1.8"></p>
+      <div class="detail-price">
+        <span id="pkgPrice">—</span>
+        <small id="pkgPriceUnit">SAR / شهرياً</small>
+      </div>
+    </div>
+
+    <!-- 🎬 Intro video — يُستبدل placeholder بفيديو حقيقي لاحقاً -->
+    <div class="video-frame">
+      <video id="pkgVideo" controls poster=""></video>
+      <div class="video-placeholder" id="videoPlaceholder">
+        <div class="play-icon">▶</div>
+        <p id="videoComingSoon">الفيديو التعريفي لهذه الباقة قريباً</p>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h2 id="featuresTitle">وش تحصل عليه؟</h2>
+      <ul class="detail-features" id="featuresList"></ul>
+    </div>
+
+    <div class="detail-cta">
+      <a class="btn btn-primary" id="ctaStart" href="#" target="_blank" rel="noopener noreferrer">ابدأ الآن</a>
+      <a class="btn btn-outline" href="index.html#faq" id="ctaFaq">الأسئلة الشائعة</a>
+    </div>
+  </div>
+
+  <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
+</div>
+
+<script>
+const PKGS = {
+  spark: {
+    ar:{name:'Spark',tagline:'الخيار الأمثل للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة.',
+        features:['نماذج رقمية احترافية','صفحة هبوط ذكية','ربط CRM أساسي','دعم تقني أساسي','تحليلات بسيطة']},
+    en:{name:'Spark',tagline:'The ideal choice for startups and individuals who need a professional digital presence, fast.',
+        features:['Professional digital forms','Smart landing page','Basic CRM integration','Basic technical support','Simple analytics']},
+    price:899, video:null
+  },
+  glow: {
+    ar:{name:'Glow',tagline:'لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية تدعم مبيعاتك اليومية.',
+        features:['كل خدمات Spark','مساعد واتساب ذكي','أتمتة المبيعات','ربط CRM متقدم','إشعارات تلقائية']},
+    en:{name:'Glow',tagline:'For when your business starts growing and needs real automation to support daily sales.',
+        features:['Everything in Spark','Smart WhatsApp assistant','Sales automation','Advanced CRM integration','Automated notifications']},
+    price:1799, video:null
+  },
+  pulse: {
+    ar:{name:'Pulse',tagline:'التوازن المثالي بين السعر والمزايا — الأكثر طلباً بين عملائنا.',
+        features:['كل خدمات Glow','تطبيق ويب متكامل','لوحة تحكم متقدمة','تكامل بوابة دفع','تقارير أداء متقدمة']},
+    en:{name:'Pulse',tagline:'The perfect balance of price and features — our most popular plan.',
+        features:['Everything in Glow','Full web application','Advanced dashboard','Payment gateway integration','Advanced performance reports']},
+    price:3299, video:null
+  },
+  nova: {
+    ar:{name:'Nova',tagline:'لفرق العمل المتوسطة اللي تحتاج أتمتة متقدمة بالذكاء الاصطناعي ودعم لعدة مستخدمين.',
+        features:['كل خدمات Pulse','أتمتة متقدمة AI','متعدد المستخدمين','تكامل ERP / CRM','دعم فني مخصص']},
+    en:{name:'Nova',tagline:'For mid-sized teams needing advanced AI automation and multi-user support.',
+        features:['Everything in Pulse','Advanced AI automation','Multi-user access','ERP / CRM integration','Dedicated technical support']},
+    price:5999, video:null
+  },
+  zenith: {
+    ar:{name:'Zenith',tagline:'حلول مؤسسية مخصصة بالكامل لمنشآتك، بأعلى مستويات الدعم والمراقبة.',
+        features:['حلول مؤسسية كاملة','تكامل كامل مع الأنظمة','مراقبة 24/7','SLA مضمون','دعم غير محدود']},
+    en:{name:'Zenith',tagline:'Fully custom enterprise solutions for your organization, with top-tier support and monitoring.',
+        features:['Full enterprise solutions','Complete system integration','24/7 monitoring','Guaranteed SLA','Unlimited support']},
+    price:12000, video:null
+  }
+};
+
+const FORM_LINKS = {
+  ar: 'https://airtable.com/appkYurrIYGIup8QH/shrUOqxX19nXgoHqR',
+  en: 'https://airtable.com/appkYurrIYGIup8QH/shrAt8THaVjwmP3LR'
+};
+
+const STR = {
+  ar:{ back:'→ رجوع لكل الباقات', featuresTitle:'وش تحصل عليه؟', cta:'ابدأ الآن', faq:'الأسئلة الشائعة',
+       priceUnit:'SAR / شهرياً', videoSoon:'الفيديو التعريفي لهذه الباقة قريباً' },
+  en:{ back:'← Back to all plans', featuresTitle:"What's included?", cta:'Get Started', faq:'FAQ',
+       priceUnit:'SAR / month', videoSoon:'Intro video for this plan coming soon' }
+};
+
+const P = new URLSearchParams(window.location.search);
+const pkgKey = (P.get('pkg') || 'spark').toLowerCase();
+const pkg = PKGS[pkgKey] || PKGS.spark;
+let currentLang = localStorage.getItem('scintix-lang') || 'ar';
+
+function renderPkg(lang){
+  const data = pkg[lang] || pkg.ar;
+  const s = STR[lang] || STR.ar;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+
+  document.getElementById('pkgBadge').textContent = data.name.toUpperCase();
+  document.getElementById('pkgName').textContent = data.name;
+  document.getElementById('pkgTagline').textContent = data.tagline;
+  document.getElementById('pkgPrice').textContent = pkg.price.toLocaleString(lang==='ar'?'ar-SA':'en-US');
+  document.getElementById('pkgPriceUnit').textContent = s.priceUnit;
+  document.getElementById('featuresTitle').textContent = s.featuresTitle;
+  document.getElementById('backLink').textContent = s.back;
+  document.getElementById('ctaStart').textContent = s.cta;
+  document.getElementById('ctaFaq').textContent = s.faq;
+  document.getElementById('videoComingSoon').textContent = s.videoSoon;
+
+  const list = document.getElementById('featuresList');
+  list.innerHTML = '';
+  data.features.forEach(f => {
+    const li = document.createElement('li');
+    li.textContent = f;
+    list.appendChild(li);
+  });
+
+  const ctaUrl = new URL(FORM_LINKS[lang] || FORM_LINKS.ar);
+  document.getElementById('ctaStart').href = ctaUrl.toString();
+
+  // Video: if a real video URL is set for this package, show it; otherwise keep placeholder
+  const videoEl = document.getElementById('pkgVideo');
+  const placeholderEl = document.getElementById('videoPlaceholder');
+  if (pkg.video) {
+    videoEl.src = pkg.video;
+    videoEl.style.display = 'block';
+    placeholderEl.style.display = 'none';
+  } else {
+    videoEl.style.display = 'none';
+    placeholderEl.style.display = 'block';
+  }
+
+  document.title = `Scintix | ${data.name}`;
+}
+
+function setDetailLang(lang){
+  currentLang = lang;
+  localStorage.setItem('scintix-lang', lang);
+  renderPkg(lang);
+}
+
+renderPkg(currentLang);
+document.querySelector('[data-lang-select]').value = currentLang;
+</script>
+<script src="js/script.js"></script>
+</body>
+</html>
