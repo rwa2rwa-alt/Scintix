@@ -272,7 +272,7 @@
           <div class="plans-grid">
 
             <!-- Spark -->
-            <article class="plan-card plan-spark">
+            <article class="plan-card plan-spark" onclick="location.href='plan.html?pkg=spark'" style="cursor:pointer">
               <div class="plan-name">Spark</div>
               <div class="plan-price"><span data-price="899">899</span><small data-currency-label>SAR / شهرياً</small></div>
               <ul>
@@ -283,11 +283,11 @@
                 <li data-i18n="plans.spark.five">تحليلات بسيطة</li>
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+                 data-form-link data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
             </article>
 
             <!-- Glow -->
-            <article class="plan-card plan-glow">
+            <article class="plan-card plan-glow" onclick="location.href='plan.html?pkg=glow'" style="cursor:pointer">
               <div class="plan-name">Glow</div>
               <div class="plan-price"><span data-price="1799">1,799</span><small data-currency-label>SAR / شهرياً</small></div>
               <ul>
@@ -297,12 +297,12 @@
                 <li data-i18n="plans.glow.four">ربط CRM متقدم</li>
                 <li data-i18n="plans.glow.five">إشعارات تلقائية</li>
               </ul>
-              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
             </article>
 
             <!-- Pulse — FEATURED -->
-            <article class="plan-card plan-pulse">
+            <article class="plan-card plan-pulse" onclick="location.href='plan.html?pkg=pulse'" style="cursor:pointer">
               <div class="plan-featured-badge" data-i18n="plans.pulse.badge">الأكثر طلباً</div>
               <div class="plan-name">Pulse</div>
               <div class="plan-price"><span data-price="3299">3,299</span><small data-currency-label>SAR / شهرياً</small></div>
@@ -314,11 +314,11 @@
                 <li data-i18n="plans.pulse.five">تقارير أداء متقدمة</li>
               </ul>
               <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+                 data-form-link data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
             </article>
 
             <!-- Nova -->
-            <article class="plan-card plan-pulse" style="background:linear-gradient(180deg,rgba(82,114,255,.14),rgba(9,16,40,.92))">
+            <article class="plan-card plan-nova" onclick="location.href='plan.html?pkg=nova'" style="cursor:pointer">
               <div class="plan-name">Nova</div>
               <div class="plan-price"><span data-price="5999">5,999</span><small data-currency-label>SAR / شهرياً</small></div>
               <ul>
@@ -329,11 +329,11 @@
                 <li data-i18n="plans.nova.five">دعم فني مخصص</li>
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+                 data-form-link data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
             </article>
 
             <!-- Zenith -->
-            <article class="plan-card plan-zenith">
+            <article class="plan-card plan-zenith" onclick="location.href='plan.html?pkg=zenith'" style="cursor:pointer">
               <div class="plan-name">Zenith</div>
               <div class="plan-price"><span data-price="12000">12,000</span><small data-currency-label>SAR / شهرياً</small></div>
               <ul>
@@ -344,7 +344,7 @@
                 <li data-i18n="plans.zenith.five">دعم غير محدود</li>
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="plans.choose">ابدأ الآن</a>
+                 data-form-link data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
             </article>
 
           </div>
@@ -354,7 +354,7 @@
         <section id="faq" class="faq-panel">
           <div class="panel-heading">
             <span data-i18n="faq.heading">أسئلة شائعة عن باقاتنا</span>
-            <p data-i18n="faq.description">إجابات سريعة تساعدك تختارين الباقة الصح</p>
+            <p data-i18n="faq.description">إجابات سريعة تساعدك تختار الباقة الصح</p>
           </div>
           <div class="faq-list">
             <details class="faq-item">
@@ -379,7 +379,7 @@
             </details>
             <details class="faq-item">
               <summary><span data-i18n="faq.switch.q">أقدر أغيّر باقتي لاحقاً؟</span><span class="faq-icon">+</span></summary>
-              <p data-i18n="faq.switch.a">بالتأكيد، تقدرين تترقّين لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.</p>
+              <p data-i18n="faq.switch.a">بالتأكيد، تقدر تترقّى لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.</p>
             </details>
           </div>
         </section>
@@ -418,7 +418,7 @@
       <footer id="contact" class="site-footer">
         <div>
           <h2 data-i18n="footer.title">هل أنتِ مستعدة للانطلاق مع Scintix؟</h2>
-          <p data-i18n="footer.description">ابدئي استراتيجية رقمية جديدة مع فريق متخصص في التحول الرقمي والتجربة المتميزة.</p>
+          <p data-i18n="footer.description">ابدأ استراتيجية رقمية جديدة مع فريق متخصص في التحول الرقمي والتجربة المتميزة.</p>
         </div>
         <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
            data-form-link data-i18n="footer.cta">ابدأ الآن</a>
