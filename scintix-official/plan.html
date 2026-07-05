@@ -207,10 +207,6 @@ const PKGS = {
   }
 };
 
-const FORM_LINKS = {
-  ar: 'https://airtable.com/appkYurrIYGIup8QH/shrUOqxX19nXgoHqR',
-  en: 'https://airtable.com/appkYurrIYGIup8QH/shrAt8THaVjwmP3LR'
-};
 
 const STR = {
   ar:{ back:'→ رجوع لكل الباقات', featuresTitle:'وش تحصل عليه؟', cta:'ابدأ الآن', faq:'الأسئلة الشائعة',
@@ -267,8 +263,7 @@ function renderPkg(lang){
     faqList.appendChild(details);
   });
 
-  const ctaUrl = new URL(FORM_LINKS[lang] || FORM_LINKS.ar);
-  document.getElementById('ctaStart').href = ctaUrl.toString();
+  document.getElementById('ctaStart').href = `quote.html?package=${encodeURIComponent(data.name)}`;
 
   // Video: if a real video URL is set for this package, show it; otherwise keep placeholder
   const videoEl = document.getElementById('pkgVideo');
