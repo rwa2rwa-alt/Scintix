@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Scintix | الدعم الفني</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .support-shell{width:min(680px,100% - 32px);margin:0 auto;padding:40px 0 60px}
+  .support-back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:24px}
+  .support-card{padding:36px 32px;border-radius:28px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+  .support-card h1{font-size:clamp(1.7rem,4vw,2.2rem);margin:0 0 8px}
+  .support-card > p{color:var(--text-muted);margin:0 0 28px;line-height:1.8}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;color:var(--text-muted)}
+  .field input, .field select, .field textarea{
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+    border-radius:10px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:.92rem;
+  }
+  .field textarea{resize:vertical;min-height:110px}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none;border-color:var(--accent)}
+  .priority-row{display:flex;gap:10px}
+  .priority-chip{
+    flex:1;text-align:center;padding:11px;border-radius:10px;border:1.5px solid var(--border);
+    cursor:pointer;font-size:.85rem;font-weight:700;color:var(--text-muted);transition:.15s;
+  }
+  .priority-chip.active{border-color:var(--accent);background:rgba(92,240,255,.08);color:var(--accent)}
+  .priority-chip.urgent.active{border-color:#e11d48;background:rgba(225,29,72,.08);color:#e11d48}
+  #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
+  #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+  #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Scintix"/>
+      <span class="brand-text"><span class="brand-name">Scintix</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#services">الخدمات</a>
+      <a href="index.html#plans">الباقات</a>
+      <a href="index.html#faq">الأسئلة الشائعة</a>
+    </nav>
+  </header>
+
+  <div class="support-shell">
+    <a class="support-back" href="index.html">→ رجوع للرئيسية</a>
+
+    <div class="support-card">
+      <h1>🎫 عندك مشكلة؟ خبّرنا</h1>
+      <p>عبّي البيانات وفريقنا بيتواصل معك أسرع ما يمكن. للأسئلة السريعة، جرّب أول المساعد الذكي 🤖 أسفل الصفحة.</p>
+
+      <form id="ticketForm">
+        <div class="field">
+          <label>الاسم *</label>
+          <input type="text" name="client_name" required>
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني *</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="field">
+          <label>باقتك (إن وجدت)</label>
+          <select name="package">
+            <option value="">غير مشترك / لست متأكد</option>
+            <option>Spark</option>
+            <option>Glow</option>
+            <option>Pulse</option>
+            <option>Nova</option>
+            <option>Zenith</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>وش المشكلة؟ *</label>
+          <textarea name="issue" placeholder="اشرح المشكلة بالتفصيل قدر الإمكان..." required></textarea>
+        </div>
+        <div class="field">
+          <label>مدى إلحاح المشكلة</label>
+          <div class="priority-row">
+            <div class="priority-chip active" data-val="Normal">عادية</div>
+            <div class="priority-chip urgent" data-val="Urgent">عاجلة 🚨</div>
+          </div>
+          <input type="hidden" name="priority" value="Normal">
+        </div>
+        <button class="btn btn-primary" type="submit" id="submitBtn" style="width:100%;justify-content:center;border:none;cursor:pointer">إرسال التذكرة</button>
+        <div id="status"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
+</div>
+
+<script>
+  const WEBHOOK_URL = "https://hook.eu1.make.com/t329y7jjtzruw0oald5n9bbp9sk1l5t2";
+
+  document.querySelectorAll('.priority-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.priority-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelector('[name=priority]').value = chip.dataset.val;
+    });
+  });
+
+  const form = document.getElementById('ticketForm');
+  const statusEl = document.getElementById('status');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    btn.disabled = true;
+    btn.textContent = 'جارٍ الإرسال...';
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      statusEl.className = 'ok';
+      statusEl.textContent = 'تم استلام تذكرتك ✅ بنتواصل معك قريباً';
+      form.reset();
+      document.querySelectorAll('.priority-chip').forEach(c => c.classList.remove('active'));
+      document.querySelector('.priority-chip[data-val="Normal"]').classList.add('active');
+      btn.textContent = 'تم الإرسال ✓';
+    } catch (err) {
+      statusEl.className = 'err';
+      statusEl.textContent = 'صار خطأ، حاول مرة ثانية أو راسلنا على hello@scintix.sa';
+      btn.disabled = false;
+      btn.textContent = 'إرسال التذكرة';
+    }
+  });
+</script>
+<script src="js/script.js"></script>
+
+<!-- 🤖 Chatbase AI Widget -->
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+</body>
+</html>
