@@ -38,6 +38,14 @@
   .detail-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
   [lang-pkg]{display:none}
   [lang-pkg].active{display:block}
+  .faq-list{display:grid;gap:14px;margin-top:20px}
+  .faq-item{padding:4px 24px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);transition:border-color .2s}
+  .faq-item[open]{border-color:rgba(92,240,255,.28)}
+  .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 0;cursor:pointer;font-weight:700;font-size:.96rem;list-style:none}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-icon{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(92,240,255,.1);border:1px solid rgba(92,240,255,.2);color:var(--accent);font-size:1rem;transition:transform .25s ease}
+  .faq-item[open] .faq-icon{transform:rotate(45deg);background:var(--accent);color:#031228}
+  .faq-item p{margin:0 0 18px;color:var(--text-muted);line-height:1.85;font-size:.88rem}
 </style>
 </head>
 <body>
@@ -91,6 +99,11 @@
       <a class="btn btn-primary" id="ctaStart" href="#" target="_blank" rel="noopener noreferrer">ابدأ الآن</a>
       <a class="btn btn-outline" href="index.html#faq" id="ctaFaq">الأسئلة الشائعة</a>
     </div>
+
+    <div class="detail-section" style="margin-top:32px">
+      <h2 id="pkgFaqTitle">أسئلة شائعة عن هذه الباقة</h2>
+      <div class="faq-list" id="pkgFaqList"></div>
+    </div>
   </div>
 
   <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
@@ -100,38 +113,98 @@
 const PKGS = {
   spark: {
     ar:{name:'Spark',tagline:'الخيار الأمثل للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة.',
-        features:['نماذج رقمية احترافية','صفحة هبوط ذكية','ربط CRM أساسي','دعم تقني أساسي','تحليلات بسيطة']},
+        features:['نماذج رقمية احترافية','صفحة هبوط ذكية','ربط CRM أساسي','دعم تقني أساسي','تحليلات بسيطة'],
+        faq:[
+          {q:'هل Spark مناسبة لمشروع ناشئ صغير؟', a:'نعم، مصممة خصيصاً للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة وبأقل تكلفة.'},
+          {q:'وش يعني "ربط CRM أساسي"؟', a:'يعني أي رسالة أو استفسار يوصل من موقعك ينحفظ تلقائياً بقائمة عملاء منظمة عندك، بدل ما تضيع برسائل متفرقة.'},
+          {q:'وش تشمله "تحليلات بسيطة"؟', a:'تقرير واضح يوضح لك عدد زوار موقعك، ومن وين جو، بدون تعقيد أو مصطلحات تقنية.'},
+          {q:'هل أقدر أطوّر لباقة أكبر لاحقاً؟', a:'بالتأكيد، أي وقت تحسين نشاطك جاهز يكبر، تقدر تترقّى لـGlow أو أي باقة أعلى بدون ما تفقد أي بيانات.'}
+        ]},
     en:{name:'Spark',tagline:'The ideal choice for startups and individuals who need a professional digital presence, fast.',
-        features:['Professional digital forms','Smart landing page','Basic CRM integration','Basic technical support','Simple analytics']},
-    price:899, video:null
+        features:['Professional digital forms','Smart landing page','Basic CRM integration','Basic technical support','Simple analytics'],
+        faq:[
+          {q:'Is Spark suitable for a small startup?', a:'Yes, it is designed specifically for startups and individuals who need a professional digital presence quickly and affordably.'},
+          {q:'What does "basic CRM integration" mean?', a:'Any message or inquiry from your site is automatically saved into an organized customer list, instead of getting lost across scattered messages.'},
+          {q:'What does "simple analytics" include?', a:'A clear report showing how many visitors your site gets and where they come from, with no technical jargon.'},
+          {q:'Can I upgrade to a bigger plan later?', a:'Absolutely, whenever your business is ready to grow, you can upgrade to Glow or any higher plan without losing any data.'}
+        ]}
+    ,price:899, video:null
   },
   glow: {
     ar:{name:'Glow',tagline:'لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية تدعم مبيعاتك اليومية.',
-        features:['كل خدمات Spark','مساعد واتساب ذكي','أتمتة المبيعات','ربط CRM متقدم','إشعارات تلقائية']},
+        features:['كل خدمات Spark','مساعد واتساب ذكي','أتمتة المبيعات','ربط CRM متقدم','إشعارات تلقائية'],
+        faq:[
+          {q:'وش يميز Glow عن Spark؟', a:'تضيف مساعد واتساب ذكي وأتمتة مبيعات وربط CRM متقدم — مناسبة لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية.'},
+          {q:'كيف يشتغل "مساعد واتساب الذكي"؟', a:'بوت يرد على استفسارات عملائك بواتساب تلقائياً في أي وقت، ويحوّل المحادثة لك مباشرة لو احتاج العميل تدخل بشري.'},
+          {q:'وش تعني "أتمتة المبيعات"؟', a:'نظام يتابع كل عميل من أول تواصل معه لين ما يشتري، ويرسل له تذكيرات تلقائية بدون ما تحتاج تتابعه يدوياً.'},
+          {q:'وش الفرق بين "ربط CRM أساسي" و"متقدم"؟', a:'المتقدم يعطيك سجل كامل لكل تعاملاتك مع كل عميل (رسائل، طلبات، ملاحظات) بمكان واحد، مو بس بيانات تواصل بسيطة.'}
+        ]},
     en:{name:'Glow',tagline:'For when your business starts growing and needs real automation to support daily sales.',
-        features:['Everything in Spark','Smart WhatsApp assistant','Sales automation','Advanced CRM integration','Automated notifications']},
-    price:1799, video:null
+        features:['Everything in Spark','Smart WhatsApp assistant','Sales automation','Advanced CRM integration','Automated notifications'],
+        faq:[
+          {q:'What makes Glow different from Spark?', a:'Glow adds a smart WhatsApp assistant, sales automation, and advanced CRM integration — ideal once your business starts growing and needs real automation.'},
+          {q:'How does the "smart WhatsApp assistant" work?', a:'A bot automatically replies to customer inquiries on WhatsApp anytime, and hands the conversation to you directly if the customer needs human help.'},
+          {q:'What does "sales automation" mean?', a:'A system that follows up with each customer from first contact to purchase, sending automatic reminders without you having to track it manually.'},
+          {q:'What is the difference between basic and advanced CRM?', a:'Advanced CRM gives you a complete record of every interaction with each customer (messages, orders, notes) in one place, not just basic contact info.'}
+        ]}
+    ,price:1799, video:null
   },
   pulse: {
     ar:{name:'Pulse',tagline:'التوازن المثالي بين السعر والمزايا — الأكثر طلباً بين عملائنا.',
-        features:['كل خدمات Glow','تطبيق ويب متكامل','لوحة تحكم متقدمة','تكامل بوابة دفع','تقارير أداء متقدمة']},
+        features:['كل خدمات Glow','تطبيق ويب متكامل','لوحة تحكم متقدمة','تكامل بوابة دفع','تقارير أداء متقدمة'],
+        faq:[
+          {q:'ليش Pulse هي الأكثر طلباً؟', a:'لأنها توازن مثالي بين السعر والمزايا: تطبيق ويب متكامل ولوحة تحكم متقدمة وتكامل بوابة دفع — تغطي أغلب احتياجات الأعمال المتوسطة.'},
+          {q:'وش يعني "تطبيق ويب متكامل"؟', a:'نظام فيه تسجيل دخول خاص لعملائك، يقدرون من خلاله يتابعون طلباتهم أو حساباتهم بأنفسهم دون ما يحتاجون يتصلون بك.'},
+          {q:'وش توريني "لوحة التحكم المتقدمة"؟', a:'شاشة واحدة توضح لك كل أرقام نشاطك المهمة (مبيعات، عملاء جدد، طلبات معلقة) بدل ما تفتح عدة برامج منفصلة.'},
+          {q:'كيف تشتغل "بوابة الدفع"؟', a:'عميلك يدفع مباشرة من موقعك بأي طريقة (مدى، فيزا، Apple Pay) بدون ما يطلع من صفحتك لموقع خارجي.'}
+        ]},
     en:{name:'Pulse',tagline:'The perfect balance of price and features — our most popular plan.',
-        features:['Everything in Glow','Full web application','Advanced dashboard','Payment gateway integration','Advanced performance reports']},
-    price:3299, video:null
+        features:['Everything in Glow','Full web application','Advanced dashboard','Payment gateway integration','Advanced performance reports'],
+        faq:[
+          {q:'Why is Pulse the most popular plan?', a:'It strikes the perfect balance between price and features: a full web application, advanced dashboard, and payment gateway integration — covering most mid-sized business needs.'},
+          {q:'What does "full web application" mean?', a:'A system with a private login for your customers, letting them track their orders or accounts themselves without needing to contact you.'},
+          {q:'What does the "advanced dashboard" show me?', a:'One screen showing all your key business numbers (sales, new customers, pending orders) instead of opening several separate apps.'},
+          {q:'How does the "payment gateway" work?', a:'Your customer pays directly on your site with any method (Mada, Visa, Apple Pay) without leaving your page for an external site.'}
+        ]}
+    ,price:3299, video:null
   },
   nova: {
     ar:{name:'Nova',tagline:'لفرق العمل المتوسطة اللي تحتاج أتمتة متقدمة بالذكاء الاصطناعي ودعم لعدة مستخدمين.',
-        features:['كل خدمات Pulse','أتمتة متقدمة AI','متعدد المستخدمين','تكامل ERP / CRM','دعم فني مخصص']},
+        features:['كل خدمات Pulse','أتمتة متقدمة AI','متعدد المستخدمين','تكامل ERP / CRM','دعم فني مخصص'],
+        faq:[
+          {q:'هل Nova تدعم أكثر من مستخدم؟', a:'نعم، مبنية لدعم فرق متعددة المستخدمين مع أتمتة AI متقدمة وتكامل مباشر مع أنظمة ERP/CRM الحالية عندك.'},
+          {q:'وش تعني "أتمتة AI متقدمة" بشكل مبسط؟', a:'الذكاء الاصطناعي يراقب بيانات عملائك ويلفت انتباهك تلقائياً (مثلاً: عميل ما تفاعل من فترة، أو أفضل وقت تتواصل فيه معه).'},
+          {q:'وش يعني "تكامل ERP / CRM"؟', a:'نربط نظامك الجديد بالأنظمة اللي تشتغل فيها حالياً (محاسبة، مخزون، عملاء) عشان ما تحتاج تدخل نفس البيانات مرتين.'},
+          {q:'وش يميز "الدعم الفني المخصص"؟', a:'شخص تقني واحد يعرف تفاصيل نظامك بالكامل يكون خط تواصلك المباشر، بدل ما تشرح مشكلتك من الصفر كل مرة.'}
+        ]},
     en:{name:'Nova',tagline:'For mid-sized teams needing advanced AI automation and multi-user support.',
-        features:['Everything in Pulse','Advanced AI automation','Multi-user access','ERP / CRM integration','Dedicated technical support']},
-    price:5999, video:null
+        features:['Everything in Pulse','Advanced AI automation','Multi-user access','ERP / CRM integration','Dedicated technical support'],
+        faq:[
+          {q:'Does Nova support multiple users?', a:'Yes, Nova is built for multi-user teams with advanced AI automation and direct integration with your existing ERP/CRM systems.'},
+          {q:'What does "advanced AI automation" mean in simple terms?', a:'The AI monitors your customer data and automatically flags things for you (e.g. a customer who has gone quiet, or the best time to reach out to them).'},
+          {q:'What does "ERP / CRM integration" mean?', a:'We connect your new system with whatever you already use (accounting, inventory, customers) so you never have to enter the same data twice.'},
+          {q:'What makes the "dedicated technical support" different?', a:'One technical person who knows your system inside-out becomes your direct point of contact, instead of re-explaining your issue every time.'}
+        ]}
+    ,price:5999, video:null
   },
   zenith: {
     ar:{name:'Zenith',tagline:'حلول مؤسسية مخصصة بالكامل لمنشآتك، بأعلى مستويات الدعم والمراقبة.',
-        features:['حلول مؤسسية كاملة','تكامل كامل مع الأنظمة','مراقبة 24/7','SLA مضمون','دعم غير محدود']},
+        features:['حلول مؤسسية كاملة','تكامل كامل مع الأنظمة','مراقبة 24/7','SLA مضمون','دعم غير محدود'],
+        faq:[
+          {q:'وش يشمله الدعم غير المحدود في Zenith؟', a:'مراقبة على مدار الساعة، واتفاقية مستوى خدمة (SLA) مضمونة، وفريق دعم مخصص يستجيب فوراً لأي طارئ.'},
+          {q:'وش يعني "تكامل كامل مع الأنظمة"؟', a:'أي نظام تستخدمه حالياً مهما كان نوعه، نربطه بمنظومتك الجديدة بدون ما تغيّرين طريقة عملك الحالية.'},
+          {q:'وش يعني "SLA مضمون" بشكل مبسط؟', a:'اتفاقية مكتوبة نلتزم فيها بوقت استجابة محدد لأي مشكلة تقنية (مثلاً أقل من ساعة)، مو مجرد وعد شفهي.'},
+          {q:'ليش السعر يبدأ بـ"+" بدون رقم نهائي؟', a:'لأن Zenith مصممة بالكامل حسب احتياجك الخاص، فالسعر النهائي يتحدد بعد جلسة استشارية مجانية نفهم فيها نطاق مشروعك بالضبط.'}
+        ]},
     en:{name:'Zenith',tagline:'Fully custom enterprise solutions for your organization, with top-tier support and monitoring.',
-        features:['Full enterprise solutions','Complete system integration','24/7 monitoring','Guaranteed SLA','Unlimited support']},
-    price:12000, video:null
+        features:['Full enterprise solutions','Complete system integration','24/7 monitoring','Guaranteed SLA','Unlimited support'],
+        faq:[
+          {q:'What does unlimited support in Zenith include?', a:'24/7 monitoring, a guaranteed Service Level Agreement (SLA), and a dedicated support team that responds instantly to any issue.'},
+          {q:'What does "complete system integration" mean?', a:'Whatever system you currently use, of any kind, we connect it to your new setup without you needing to change how you already work.'},
+          {q:'What does a "guaranteed SLA" mean in simple terms?', a:'A written agreement committing to a specific response time for any technical issue (e.g. under one hour), not just a verbal promise.'},
+          {q:'Why does the price start with "+" with no fixed number?', a:'Because Zenith is fully custom-built around your specific needs, so the final price is set after a free consultation to understand your exact project scope.'}
+        ]}
+    ,price:12000, video:null
   }
 };
 
@@ -175,6 +248,25 @@ function renderPkg(lang){
     const li = document.createElement('li');
     li.textContent = f;
     list.appendChild(li);
+  });
+
+  document.getElementById('pkgFaqTitle').textContent = lang === 'ar' ? 'أسئلة شائعة عن هذه الباقة' : 'FAQ about this plan';
+  const faqList = document.getElementById('pkgFaqList');
+  faqList.innerHTML = '';
+  (data.faq || []).forEach(item => {
+    const details = document.createElement('details');
+    details.className = 'faq-item';
+    const summary = document.createElement('summary');
+    const qSpan = document.createElement('span');
+    qSpan.textContent = item.q;
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'faq-icon';
+    iconSpan.textContent = '+';
+    summary.append(qSpan, iconSpan);
+    const p = document.createElement('p');
+    p.textContent = item.a;
+    details.append(summary, p);
+    faqList.appendChild(details);
   });
 
   const ctaUrl = new URL(FORM_LINKS[lang] || FORM_LINKS.ar);
