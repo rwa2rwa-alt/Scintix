@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Scintix | فاتورة</title>
+<title>Caminotich | فاتورة</title>
 <link rel="stylesheet" href="css/styles.css"/>
 <style>
 :root{
@@ -149,8 +149,8 @@ body{
 <!-- ── Page header ── -->
 <div class="i-header">
   <a class="i-brand" href="index.html">
-    <img src="assets/logo.png" alt="Scintix"/>
-    <span>Scintix</span>
+    <img src="assets/logo.png" alt="Caminotich"/>
+    <span>Caminotich</span>
   </a>
   <div class="lang-btns">
     <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
@@ -199,10 +199,10 @@ body{
     <!-- Top band -->
     <div class="i-top">
       <div class="i-logo-area">
-        <img src="assets/logo.png" alt="Scintix"/>
+        <img src="assets/logo.png" alt="Caminotich"/>
         <div>
-          <div class="i-company-name">Scintix Digital Solutions</div>
-          <div class="i-company-sub">contact@scintix.sa · scintix.com.sa</div>
+          <div class="i-company-name">Caminotich Digital Solutions</div>
+          <div class="i-company-sub">contact@caminotich.sa · caminotich.sa</div>
         </div>
       </div>
       <div class="i-doc-meta">
@@ -219,10 +219,10 @@ body{
     <div class="i-parties">
       <div class="i-party">
         <div class="party-lbl" id="lbl-from">من</div>
-        <div class="party-nm">Scintix Digital Solutions</div>
+        <div class="party-nm">Caminotich Digital Solutions</div>
         <div class="party-info">
           المملكة العربية السعودية<br/>
-          contact@scintix.sa<br/>
+          contact@caminotich.sa<br/>
           <span id="cr-lbl">السجل التجاري:</span> 1234567890<br/>
           <span id="vat-reg-lbl">الرقم الضريبي:</span> 3XXXXXXXXX
         </div>
@@ -265,7 +265,7 @@ body{
     <!-- Notes -->
     <div class="i-notes">
       <label id="lbl-notes">ملاحظات</label>
-      <textarea id="inp-notes" placeholder="شكراً لثقتكم بـ Scintix Digital Solutions. يُرجى السداد خلال 14 يوماً من تاريخ الإصدار."></textarea>
+      <textarea id="inp-notes" placeholder="شكراً لثقتكم بـ Caminotich Digital Solutions. يُرجى السداد خلال 14 يوماً من تاريخ الإصدار."></textarea>
       <div class="printed-note" id="printed-note" style="font-size:.82rem;color:#555;line-height:1.7;display:none"></div>
     </div>
 
@@ -305,7 +305,7 @@ body{
 
 <script>
 /* ─── State ─── */
-let lang = localStorage.getItem('scintix-lang') || 'ar';
+let lang = localStorage.getItem('caminotich-lang') || 'ar';
 let items = [];
 let itemId = 0;
 
@@ -354,7 +354,7 @@ function setLang(l) {
   document.documentElement.dir  = l === 'en' ? 'ltr' : 'rtl';
   document.querySelectorAll('.lang-btn').forEach((b,i) =>
     b.classList.toggle('on',(i===0&&l==='ar')||(i===1&&l==='en')));
-  localStorage.setItem('scintix-lang', l);
+  localStorage.setItem('caminotich-lang', l);
   applyStrings();
   // تحديث نص زر السداد
   const lbl = document.getElementById('pay-btn-lbl');
