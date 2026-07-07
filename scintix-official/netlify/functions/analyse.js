@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════════
-   Netlify Serverless Function — Scintix AI Project Analyser
+   Netlify Serverless Function — Caminotich AI Project Analyser
    المسار: netlify/functions/analyse.js
 
    المتطلب: أضيفي ANTHROPIC_API_KEY في Netlify:
@@ -43,7 +43,7 @@ exports.handler = async function(event) {
 
   // ── Build prompt ──────────────────────────────────────────────────────────
   const prompt = lang === 'en'
-    ? `You are a digital consultant at Scintix Digital Solutions (Saudi Arabia).
+    ? `You are a digital consultant at Caminotich Digital Solutions (Saudi Arabia).
 Analyse the project below and recommend the best package. Reply in English.
 
 Company: ${company || 'N/A'}
@@ -57,7 +57,7 @@ Reply in this structure:
 3. **Next Steps** (3 practical steps)
 4. **Note** (one encouraging closing sentence)`
 
-    : `أنت مستشار رقمي في وكالة Scintix Digital Solutions السعودية.
+    : `أنت مستشار رقمي في وكالة Caminotich Digital Solutions السعودية.
 حلّل المشروع التالي وأعطِ توصية احترافية باللغة العربية.
 
 اسم الشركة: ${company || 'غير محدد'}
