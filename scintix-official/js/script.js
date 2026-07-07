@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Scintix Digital Solutions — script.js
+   Caminotich Digital Solutions — script.js
    نسخة نظيفة كاملة — تدعم العربي/الإنجليزي بشكل كامل
 ═══════════════════════════════════════════════════════════════ */
 
@@ -17,17 +17,17 @@ const FORM_LINKS = {
 // ─── روابط وسائل التواصل ─────────────────────────────────────
 const SOCIAL_LINKS = {
   whatsapp:  'https://wa.me/9665XXXXXXXX',
-  x:         'https://x.com/scintix',
-  instagram: 'https://instagram.com/scintix',
-  linkedin:  'https://linkedin.com/company/scintix',
-  tiktok:    'https://tiktok.com/@scintix'
+  x:         'https://x.com/caminotich',
+  instagram: 'https://instagram.com/caminotich',
+  linkedin:  'https://linkedin.com/company/caminotich',
+  tiktok:    'https://tiktok.com/@caminotich'
 };
 
 // ─── Translations ─────────────────────────────────────────────
 const T = {
   ar: {
-    'page.title':       'Scintix | حلول ذكية للنمو الرقمي',
-    'header.tagline':   'ودع العمل اليدوي وإبدأ استثمارك في المستقبل مع <span class="brand-accent">Scintix</span>',
+    'page.title':       'Caminotich | حلول ذكية للنمو الرقمي',
+    'header.tagline':   'ودع العمل اليدوي وإبدأ استثمارك في المستقبل مع <span class="brand-accent">Caminotich</span>',
     'nav.toggle':       'فتح القائمة',
     'nav.services':     'الخدمات',
     'nav.plans':        'الباقات',
@@ -84,7 +84,7 @@ const T = {
     'ai.sub':     'أخبرنا عن مشروعك وسنرشّدك إلى أنسب باقة وخطة عمل فورية',
     'ai.btn':     '✦ تحليل المشروع',
     'clients.label':      'شركاؤنا',
-    'footer.title':       'هل أنت مستعد للانطلاق مع Scintix؟',
+    'footer.title':       'هل أنت مستعد للانطلاق مع Caminotich؟',
     'footer.description': 'ابدأ استراتيجية رقمية جديدة مع فريق متخصص في التحول الرقمي والتجربة المتميزة.',
     'footer.cta':         'ابدأ الآن',
     'subfooter.about':    'من نحن ورؤيتنا',
@@ -111,8 +111,8 @@ const T = {
     'faq.switch.a': 'بالتأكيد، تقدر تترقّى لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.'
   },
   en: {
-    'page.title':       'Scintix | Smart Digital Growth Solutions',
-    'header.tagline':   'Leave manual work behind and start investing in your future with <span class="brand-accent">Scintix</span>',
+    'page.title':       'Caminotich | Smart Digital Growth Solutions',
+    'header.tagline':   'Leave manual work behind and start investing in your future with <span class="brand-accent">Caminotich</span>',
     'nav.toggle':       'Open menu',
     'nav.services':     'Services',
     'nav.plans':        'Plans',
@@ -169,7 +169,7 @@ const T = {
     'ai.sub':     'Tell us about your project and we\'ll instantly recommend the best package and action plan',
     'ai.btn':     '✦ Analyse Project',
     'clients.label':      'Our Clients',
-    'footer.title':       'Ready to Launch with Scintix?',
+    'footer.title':       'Ready to Launch with Caminotich?',
     'footer.description': 'Start a new digital strategy with a team specialized in digital transformation and premium experience.',
     'footer.cta':         'Get Started',
     'subfooter.about':    'About & Vision',
@@ -205,8 +205,8 @@ const CURRENCY_LABELS = {
 
 // ─── State ────────────────────────────────────────────────────
 const state = {
-  lang:     localStorage.getItem('scintix-lang')     || 'ar',
-  currency: localStorage.getItem('scintix-currency') || 'sar'
+  lang:     localStorage.getItem('caminotich-lang')     || 'ar',
+  currency: localStorage.getItem('caminotich-currency') || 'sar'
 };
 
 function formatPrice(value, currency) {
@@ -281,7 +281,7 @@ const SOCIAL_ICONS = {
 
 // ─── Build subfooter ──────────────────────────────────────────
 function buildSubFooter(lang) {
-  const old = document.getElementById('scintix-subfooter');
+  const old = document.getElementById('caminotich-subfooter');
   if (old) old.remove();
 
   const dict = T[lang] || T['ar'];
@@ -297,7 +297,7 @@ function buildSubFooter(lang) {
   ];
 
   const sf = document.createElement('div');
-  sf.id = 'scintix-subfooter';
+  sf.id = 'caminotich-subfooter';
   sf.setAttribute('dir', isAr ? 'rtl' : 'ltr');
   sf.style.cssText = [
     'margin-top:0','padding:28px 34px 24px',
@@ -373,7 +373,7 @@ function buildSubFooter(lang) {
   // copyright
   const copy = document.createElement('p');
   copy.style.cssText = 'text-align:center;color:rgba(255,255,255,0.2);font-size:0.72rem;margin:18px 0 0;letter-spacing:0.04em';
-  copy.textContent = `© ${year} Scintix Digital Solutions. ${isAr ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}`;
+  copy.textContent = `© ${year} Caminotich Digital Solutions. ${isAr ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}`;
 
   sf.append(navRow, divider, botRow, copy);
 
@@ -399,8 +399,8 @@ function applyLanguage(lang) {
   buildSubFooter(lang);
 
   // 4) حفظ التفضيل
-  localStorage.setItem('scintix-lang',     lang);
-  localStorage.setItem('scintix-currency', state.currency);
+  localStorage.setItem('caminotich-lang',     lang);
+  localStorage.setItem('caminotich-currency', state.currency);
 
   // 5) إشعار صفحات السياسات والرؤية
   if (typeof window.onPageLanguageChange === 'function') {
