@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Scintix | إتمام السداد</title>
+<title>Caminotich | إتمام السداد</title>
 <link rel="stylesheet" href="css/styles.css"/>
 <style>
 :root{
@@ -155,8 +155,8 @@ body{
 
 <div class="p-header">
   <a class="p-brand" href="index.html">
-    <img src="assets/logo.png" alt="Scintix"/>
-    <span>Scintix</span>
+    <img src="assets/logo.png" alt="Caminotich"/>
+    <span>Caminotich</span>
   </a>
   <div class="lang-btns">
     <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
@@ -280,7 +280,7 @@ body{
           </div>
           <div style="display:flex;justify-content:space-between">
             <span style="color:var(--muted)" id="bank-ben-lbl">المستفيد</span>
-            <span style="font-weight:600">Scintix Digital Solutions</span>
+            <span style="font-weight:600">Caminotich Digital Solutions</span>
           </div>
           <div style="display:flex;justify-content:space-between">
             <span style="color:var(--muted)" id="bank-ref-lbl">المرجع (إلزامي)</span>
@@ -307,7 +307,7 @@ body{
   <div class="success-box">
     <div class="success-icon">🎉</div>
     <h2 id="succ-title">تم استلام طلب السداد!</h2>
-    <p id="succ-body">شكراً لثقتكم بـ Scintix — سيتم التحقق من الدفع وإرسال تأكيد على بريدكم، ثم نبدأ العمل فوراً على مشروعكم.</p>
+    <p id="succ-body">شكراً لثقتكم بـ Caminotich — سيتم التحقق من الدفع وإرسال تأكيد على بريدكم، ثم نبدأ العمل فوراً على مشروعكم.</p>
     <div class="ref-num" id="succ-ref">—</div>
     <a href="index.html" class="btn-home" id="succ-home">العودة للرئيسية</a>
   </div>
@@ -316,7 +316,7 @@ body{
 <script>
 /* ─── Read URL params ─── */
 const P = new URLSearchParams(window.location.search);
-let lang = P.get('lang') || localStorage.getItem('scintix-lang') || 'ar';
+let lang = P.get('lang') || localStorage.getItem('caminotich-lang') || 'ar';
 
 const CLIENT = P.get('name')  || '';
 const EMAIL  = P.get('email') || '';
@@ -369,7 +369,7 @@ const S = {
     bankAccLbl:'IBAN', bankBenLbl:'Beneficiary', bankRefLbl:'Reference (required)',
     lblProof:'Attach transfer receipt', btnConfirm:'Confirm Transfer',
     succTitle:'Payment Request Received!',
-    succBody:'Thank you for choosing Scintix — payment will be verified and a confirmation sent to your email. Work begins immediately.',
+    succBody:'Thank you for choosing Caminotich — payment will be verified and a confirmation sent to your email. Work begins immediately.',
     succHome:'Back to Home',
   }
 };
@@ -380,7 +380,7 @@ function setLang(l) {
   document.documentElement.dir  = l === 'en' ? 'ltr' : 'rtl';
   document.querySelectorAll('.lang-btn').forEach((b,i) =>
     b.classList.toggle('on',(i===0&&l==='ar')||(i===1&&l==='en')));
-  localStorage.setItem('scintix-lang', l);
+  localStorage.setItem('caminotich-lang', l);
   applyStrings();
 }
 
@@ -436,7 +436,7 @@ function fillSummary() {
     if (cn) cn.value = CLIENT;
   }
   // Page title
-  document.title = `Scintix | ${lang==='ar'?'السداد':'Payment'} — ${REF}`;
+  document.title = `Caminotich | ${lang==='ar'?'السداد':'Payment'} — ${REF}`;
 }
 
 /* ─── Payment methods ─── */
