@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Scintix | عقد الخدمة</title>
+<title>Caminotich | عقد الخدمة</title>
 <link rel="stylesheet" href="css/styles.css"/>
 <style>
 :root{
@@ -160,8 +160,8 @@ canvas{display:block;width:100%;height:100%}
 
 <div class="c-header">
   <a class="brand" href="index.html">
-    <img src="assets/logo.png" alt="Scintix"/>
-    <span class="bname">Scintix</span>
+    <img src="assets/logo.png" alt="Caminotich"/>
+    <span class="bname">Caminotich</span>
   </a>
   <div class="lang-btns">
     <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
@@ -185,10 +185,10 @@ canvas{display:block;width:100%;height:100%}
     <div class="parties">
       <div class="party">
         <div class="party-label">الطرف الأول — مزود الخدمة</div>
-        <div class="party-name">Scintix Digital Solutions</div>
+        <div class="party-name">Caminotich Digital Solutions</div>
         <div class="party-detail">
           المملكة العربية السعودية<br/>
-          البريد: contact@scintix.sa<br/>
+          البريد: contact@caminotich.sa<br/>
           السجل التجاري: 1234567890
         </div>
       </div>
@@ -254,7 +254,7 @@ canvas{display:block;width:100%;height:100%}
       <h2>التوقيعات</h2>
       <div class="sig-grid">
         <div class="sig-box">
-          <label>توقيع الطرف الأول (Scintix)</label>
+          <label>توقيع الطرف الأول (Caminotich)</label>
           <div class="sig-type-tabs">
             <button class="sig-tab on" onclick="switchSig('draw','ar','first')">رسم</button>
             <button class="sig-tab"    onclick="switchSig('type','ar','first')">كتابة</button>
@@ -289,7 +289,7 @@ canvas{display:block;width:100%;height:100%}
     <div class="agree-row">
       <input type="checkbox" id="agree-ar" onchange="checkReady('ar')"/>
       <label for="agree-ar">
-        أوافق على <a href="policies.html" target="_blank">الشروط والأحكام وسياسة الخصوصية</a> الخاصة بـ Scintix Digital Solutions،
+        أوافق على <a href="policies.html" target="_blank">الشروط والأحكام وسياسة الخصوصية</a> الخاصة بـ Caminotich Digital Solutions،
         وأُقرّ بأن هذا التوقيع الإلكتروني يُعادل التوقيع الورقي وفق أحكام نظام التعاملات الإلكترونية السعودي.
       </label>
     </div>
@@ -322,10 +322,10 @@ canvas{display:block;width:100%;height:100%}
     <div class="parties">
       <div class="party">
         <div class="party-label">Party A — Service Provider</div>
-        <div class="party-name">Scintix Digital Solutions</div>
+        <div class="party-name">Caminotich Digital Solutions</div>
         <div class="party-detail">
           Kingdom of Saudi Arabia<br/>
-          Email: contact@scintix.sa<br/>
+          Email: contact@caminotich.sa<br/>
           CR: 1234567890
         </div>
       </div>
@@ -391,7 +391,7 @@ canvas{display:block;width:100%;height:100%}
       <h2>Signatures</h2>
       <div class="sig-grid">
         <div class="sig-box">
-          <label>Party A Signature (Scintix)</label>
+          <label>Party A Signature (Caminotich)</label>
           <div class="sig-type-tabs">
             <button class="sig-tab on" onclick="switchSig('draw','en','first')">Draw</button>
             <button class="sig-tab"    onclick="switchSig('type','en','first')">Type</button>
@@ -426,7 +426,7 @@ canvas{display:block;width:100%;height:100%}
     <div class="agree-row">
       <input type="checkbox" id="agree-en" onchange="checkReady('en')"/>
       <label for="agree-en">
-        I agree to the <a href="policies.html" target="_blank">Terms &amp; Conditions and Privacy Policy</a> of Scintix Digital Solutions.
+        I agree to the <a href="policies.html" target="_blank">Terms &amp; Conditions and Privacy Policy</a> of Caminotich Digital Solutions.
         I acknowledge that this electronic signature is legally equivalent to a handwritten signature.
       </label>
     </div>
@@ -449,7 +449,7 @@ canvas{display:block;width:100%;height:100%}
 
 <script>
 /* ─── Lang ─── */
-let curLang = localStorage.getItem('scintix-lang') || 'ar';
+let curLang = localStorage.getItem('caminotich-lang') || 'ar';
 function setLang(lang) {
   curLang = lang;
   document.documentElement.lang = lang;
@@ -460,7 +460,7 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach((btn, i) =>
     btn.classList.toggle('on', (i === 0 && lang === 'ar') || (i === 1 && lang === 'en'))
   );
-  localStorage.setItem('scintix-lang', lang);
+  localStorage.setItem('caminotich-lang', lang);
 }
 
 /* ─── Contract number + date ─── */
@@ -598,7 +598,7 @@ function exportPDF(lang) {
     body:  document.body.innerHTML,
     dir:   document.documentElement.dir
   };
-  document.title = `Scintix-Contract-${cn}`;
+  document.title = `Caminotich-Contract-${cn}`;
   const clone = doc.cloneNode(true);
   clone.querySelectorAll('.submit-row,.agree-row,.success-banner,.sig-type-tabs,.clear-btn').forEach(el=>el.remove());
   document.body.innerHTML = `
