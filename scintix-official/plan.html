@@ -127,7 +127,7 @@ const PKGS = {
           {q:'What does "simple analytics" include?', a:'A clear report showing how many visitors your site gets and where they come from, with no technical jargon.'},
           {q:'Can I upgrade to a bigger plan later?', a:'Absolutely, whenever your business is ready to grow, you can upgrade to Glow or any higher plan without losing any data.'}
         ]}
-    ,price:899, video:null
+    ,price:899, video:{ar:null,en:null}
   },
   glow: {
     ar:{name:'Glow',tagline:'لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية تدعم مبيعاتك اليومية.',
@@ -146,7 +146,7 @@ const PKGS = {
           {q:'What does "sales automation" mean?', a:'A system that follows up with each customer from first contact to purchase, sending automatic reminders without you having to track it manually.'},
           {q:'What is the difference between basic and advanced CRM?', a:'Advanced CRM gives you a complete record of every interaction with each customer (messages, orders, notes) in one place, not just basic contact info.'}
         ]}
-    ,price:1799, video:null
+    ,price:1799, video:{ar:null,en:null}
   },
   pulse: {
     ar:{name:'Pulse',tagline:'التوازن المثالي بين السعر والمزايا — الأكثر طلباً بين عملائنا.',
@@ -165,7 +165,7 @@ const PKGS = {
           {q:'What does the "advanced dashboard" show me?', a:'One screen showing all your key business numbers (sales, new customers, pending orders) instead of opening several separate apps.'},
           {q:'How does the "payment gateway" work?', a:'Your customer pays directly on your site with any method (Mada, Visa, Apple Pay) without leaving your page for an external site.'}
         ]}
-    ,price:3299, video:null
+    ,price:3299, video:{ar:null,en:null}
   },
   nova: {
     ar:{name:'Nova',tagline:'لفرق العمل المتوسطة اللي تحتاج أتمتة متقدمة بالذكاء الاصطناعي ودعم لعدة مستخدمين.',
@@ -184,7 +184,7 @@ const PKGS = {
           {q:'What does "ERP / CRM integration" mean?', a:'We connect your new system with whatever you already use (accounting, inventory, customers) so you never have to enter the same data twice.'},
           {q:'What makes the "dedicated technical support" different?', a:'One technical person who knows your system inside-out becomes your direct point of contact, instead of re-explaining your issue every time.'}
         ]}
-    ,price:5999, video:null
+    ,price:5999, video:{ar:null,en:null}
   },
   zenith: {
     ar:{name:'Zenith',tagline:'حلول مؤسسية مخصصة بالكامل لمنشآتك، بأعلى مستويات الدعم والمراقبة.',
@@ -203,7 +203,7 @@ const PKGS = {
           {q:'What does a "guaranteed SLA" mean in simple terms?', a:'A written agreement committing to a specific response time for any technical issue (e.g. under one hour), not just a verbal promise.'},
           {q:'Why does the price start with "+" with no fixed number?', a:'Because Zenith is fully custom-built around your specific needs, so the final price is set after a free consultation to understand your exact project scope.'}
         ]}
-    ,price:12000, video:null
+    ,price:12000, video:{ar:null,en:null}
   }
 };
 
@@ -268,8 +268,8 @@ function renderPkg(lang){
   // Video: if a real video URL is set for this package, show it; otherwise keep placeholder
   const videoEl = document.getElementById('pkgVideo');
   const placeholderEl = document.getElementById('videoPlaceholder');
-  if (pkg.video) {
-    videoEl.src = pkg.video;
+  if (pkg.video && pkg.video[lang]) {
+    videoEl.src = pkg.video[lang];
     videoEl.style.display = 'block';
     placeholderEl.style.display = 'none';
   } else {
