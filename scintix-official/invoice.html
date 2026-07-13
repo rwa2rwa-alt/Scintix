@@ -187,7 +187,7 @@ body{
     </div>
     <div>
       <label id="lbl-vat">ضريبة القيمة المضافة %</label>
-      <input id="inp-vat" type="number" value="15" min="0" max="100" style="width:70px" oninput="recalc()"/>
+      <input id="inp-vat" type="number" value="0" min="0" max="100" style="width:70px" oninput="recalc()"/>
     </div>
     <button class="btn-add" onclick="addRow()">+ إضافة بند</button>
   </div>
@@ -202,11 +202,11 @@ body{
         <img src="assets/logo.png" alt="Caminotich"/>
         <div>
           <div class="i-company-name">Caminotich Digital Solutions</div>
-          <div class="i-company-sub">contact@caminotich.sa · caminotich.sa</div>
+          <div class="i-company-sub">info@caminotich.sa · caminotich.sa</div>
         </div>
       </div>
       <div class="i-doc-meta">
-        <div class="i-doc-title" id="doc-title">فاتورة ضريبية</div>
+        <div class="i-doc-title" id="doc-title">فاتورة</div>
         <div class="i-doc-num"   id="inv-num">INV-2026-0001</div>
         <div class="i-doc-dates">
           <span id="lbl-issued">تاريخ الإصدار:</span> <span id="inv-issued"></span><br/>
@@ -222,9 +222,8 @@ body{
         <div class="party-nm">Caminotich Digital Solutions</div>
         <div class="party-info">
           المملكة العربية السعودية<br/>
-          contact@caminotich.sa<br/>
-          <span id="cr-lbl">السجل التجاري:</span> 1234567890<br/>
-          <span id="vat-reg-lbl">الرقم الضريبي:</span> 3XXXXXXXXX
+          info@caminotich.sa<br/>
+          <span id="cr-lbl">السجل التجاري الموحد:</span> 7054770941
         </div>
       </div>
       <div class="i-party">
@@ -320,7 +319,7 @@ const PKGS = {
 
 const STR = {
   ar:{
-    docTitle:'فاتورة ضريبية', lblFrom:'من', lblTo:'إلى',
+    docTitle:'فاتورة', lblFrom:'من', lblTo:'إلى',
     lblIssued:'تاريخ الإصدار:', lblDueLbl:'تاريخ الاستحقاق:',
     lblClient:'اسم العميل', lblEmail:'البريد', lblPkg:'الباقة', lblDue:'تاريخ الاستحقاق',
     lblVat:'ضريبة القيمة المضافة %', btnAdd:'+ إضافة بند',
@@ -328,12 +327,12 @@ const STR = {
     lblSub:'المجموع قبل الضريبة', lblVatLine:'ضريبة القيمة المضافة', lblTotalLine:'الإجمالي المستحق',
     lblNotes:'ملاحظات', lblStatus:'الحالة:',
     optDraft:'مسودة', optSent:'مُرسلة', optPaid:'مدفوعة', optOverdue:'متأخرة',
-    crLbl:'السجل التجاري:', vatRegLbl:'الرقم الضريبي:',
+    crLbl:'السجل التجاري الموحد:',
     btnPdf:'↓ PDF', btnSend:'إرسال الفاتورة ←',
     defaultNote:'يُرجى السداد ليتم بدء العمل على مشروعكم وتسليمه خلال الوقت المحدد.',
   },
   en:{
-    docTitle:'Tax Invoice', lblFrom:'From', lblTo:'Bill To',
+    docTitle:'Invoice', lblFrom:'From', lblTo:'Bill To',
     lblIssued:'Issue date:', lblDueLbl:'Due date:',
     lblClient:'Client name', lblEmail:'Email', lblPkg:'Package', lblDue:'Due date',
     lblVat:'VAT %', btnAdd:'+ Add line',
@@ -341,7 +340,7 @@ const STR = {
     lblSub:'Subtotal', lblVatLine:'VAT', lblTotalLine:'Total due',
     lblNotes:'Notes', lblStatus:'Status:',
     optDraft:'Draft', optSent:'Sent', optPaid:'Paid', optOverdue:'Overdue',
-    crLbl:'CR:', vatRegLbl:'VAT No.:',
+    crLbl:'Unified CR:',
     btnPdf:'↓ PDF', btnSend:'Send Invoice →',
     defaultNote:'Please complete your payment so we can begin work on your project and deliver it within the agreed timeframe.',
   }
@@ -387,7 +386,6 @@ function applyStrings() {
   g('lbl-notes').textContent    = s.lblNotes;
   g('lbl-status').textContent   = s.lblStatus;
   g('cr-lbl').textContent       = s.crLbl;
-  g('vat-reg-lbl').textContent  = s.vatRegLbl;
   g('opt-draft').textContent    = s.optDraft;
   g('opt-sent').textContent     = s.optSent;
   g('opt-paid').textContent     = s.optPaid;
@@ -493,6 +491,9 @@ function recalc() {
   const total  = sub + vatAmt;
   document.getElementById('disp-sub').textContent   = fmtSAR(sub);
   document.getElementById('disp-vat').textContent   = fmtSAR(vatAmt);
+  const vatHidden = vat === 0 ? 'none' : '';
+  document.getElementById('lbl-vat-line').style.display = vatHidden;
+  document.getElementById('disp-vat').style.display     = vatHidden;
   document.getElementById('disp-total').textContent = fmtSAR(total);
   document.getElementById('lbl-vat-line').textContent = `${STR[lang].lblVatLine} (${vat}%)`;
 }
