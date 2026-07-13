@@ -91,7 +91,7 @@ const T = {
     'subfooter.policy':   'السياسات',
     'subfooter.contact':  'جهات التواصل',
     'subfooter.support':  'الدعم',
-    'subfooter.cr':       'السجل التجاري',
+    'subfooter.cr':       'السجل التجاري الموحد',
     'subfooter.vision':   'نفخر بدعم رؤية المملكة 2030',
     'subfooter.follow':   'تابعونا',
     'nav.faq':          'الأسئلة الشائعة',
@@ -176,7 +176,7 @@ const T = {
     'subfooter.policy':   'Policies',
     'subfooter.contact':  'Contact Info',
     'subfooter.support':  'Support',
-    'subfooter.cr':       'Commercial Registration',
+    'subfooter.cr':       'Unified CR No.',
     'subfooter.vision':   'Proud supporter of Saudi Vision 2030',
     'subfooter.follow':   'Follow us',
     'nav.faq':          'FAQ',
@@ -286,7 +286,7 @@ function buildSubFooter(lang) {
 
   const dict = T[lang] || T['ar'];
   const isAr = lang === 'ar';
-  const CR   = '1234567890'; // ← غيّريه برقم سجلك الفعلي
+  const CR   = '7054770941';
   const year = new Date().getFullYear();
 
   const navItems = [
@@ -338,6 +338,20 @@ function buildSubFooter(lang) {
   crVal.style.cssText = 'color:rgba(92,240,255,0.7);font-size:0.82rem;font-weight:600;letter-spacing:0.06em;font-family:monospace';
   crDiv.append(crLbl, crVal);
 
+  // contact email
+  const mailDiv = document.createElement('div');
+  mailDiv.style.cssText = 'display:flex;align-items:center;gap:8px';
+  const mailLbl = document.createElement('span');
+  mailLbl.textContent = (dict['subfooter.contact'] || 'Contact') + ':';
+  mailLbl.style.cssText = 'color:rgba(255,255,255,0.25);font-size:0.75rem';
+  const mailA = document.createElement('a');
+  mailA.href = 'mailto:info@caminotich.sa';
+  mailA.textContent = 'info@caminotich.sa';
+  mailA.style.cssText = 'color:rgba(92,240,255,0.7);font-size:0.82rem;font-weight:600;text-decoration:none;font-family:monospace';
+  mailA.onmouseover = () => { mailA.style.color = '#5cf0ff'; };
+  mailA.onmouseout  = () => { mailA.style.color = 'rgba(92,240,255,0.7)'; };
+  mailDiv.append(mailLbl, mailA);
+
   // social icons
   const socRow = document.createElement('div');
   socRow.style.cssText = 'display:flex;align-items:center;gap:10px';
@@ -368,7 +382,7 @@ function buildSubFooter(lang) {
   visImg.onerror = function() { this.style.display = 'none'; };
   visDiv.append(visLbl, visImg);
 
-  botRow.append(crDiv, socRow, visDiv);
+  botRow.append(crDiv, mailDiv, socRow, visDiv);
 
   // copyright
   const copy = document.createElement('p');
