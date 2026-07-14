@@ -252,7 +252,9 @@ function translateDOM(lang) {
 
   // form links
   document.querySelectorAll('a[data-form-link]').forEach(a => {
-    a.href = FORM_LINKS[lang] || FORM_LINKS.ar;
+    const base = FORM_LINKS[lang] || FORM_LINKS.ar;
+    const pkg  = a.getAttribute('data-package');
+    a.href = pkg ? `${base}?package=${encodeURIComponent(pkg)}` : base;
     a.setAttribute('target', '_blank');
     a.setAttribute('rel', 'noopener noreferrer');
   });
