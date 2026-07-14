@@ -196,11 +196,23 @@ canvas{display:block;width:100%;height:100%}
         <div class="party-label">الطرف الثاني — العميل</div>
         <div class="party-name" id="client-name-ar">— يُعبأ من العميل —</div>
         <div class="party-detail">
-          <input id="cname-ar"  placeholder="اسم الشركة / الشخص"
+          <input id="cname-ar" placeholder="الاسم الثلاثي *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
             oninput="document.getElementById('client-name-ar').textContent=this.value||'— يُعبأ من العميل —'"/>
-          <input id="cemail-ar" placeholder="البريد الإلكتروني" type="email"
-            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;background:#fafbff;outline:none"/>
+          <input id="cphone-ar" placeholder="رقم الجوال *" type="tel" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <input id="cemail-ar" placeholder="البريد الإلكتروني *" type="email" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <input id="ccompany-ar" placeholder="اسم المؤسسة / الشركة المستفيدة *" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <select id="crole-ar" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
+            <option value="">صفة العميل *</option>
+            <option>مالك</option>
+            <option>مدير عام</option>
+            <option>مدير مالي</option>
+            <option>مسؤول تقني</option>
+            <option>مفوض بالتوقيع</option>
+          </select>
         </div>
       </div>
     </div>
@@ -254,22 +266,7 @@ canvas{display:block;width:100%;height:100%}
       <h2>التوقيعات</h2>
       <div class="sig-grid">
         <div class="sig-box">
-          <label>توقيع الطرف الأول (Caminotich)</label>
-          <div class="sig-type-tabs">
-            <button class="sig-tab on" onclick="switchSig('draw','ar','first')">رسم</button>
-            <button class="sig-tab"    onclick="switchSig('type','ar','first')">كتابة</button>
-          </div>
-          <div class="canvas-wrap" id="cw-ar-first">
-            <canvas id="cv-ar-first" width="400" height="120"></canvas>
-          </div>
-          <input class="sig-text-input" id="st-ar-first" placeholder="اكتب اسمك هنا"/>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <input type="date" class="sig-date" id="sd-ar-first"/>
-            <button class="clear-btn" onclick="clearSig('ar','first')">مسح</button>
-          </div>
-        </div>
-        <div class="sig-box">
-          <label>توقيع الطرف الثاني (العميل)</label>
+          <label>توقيع الطرف الثاني (العميل) *</label>
           <div class="sig-type-tabs">
             <button class="sig-tab on" onclick="switchSig('draw','ar','second')">رسم</button>
             <button class="sig-tab"    onclick="switchSig('type','ar','second')">كتابة</button>
@@ -333,11 +330,23 @@ canvas{display:block;width:100%;height:100%}
         <div class="party-label">Party B — Client</div>
         <div class="party-name" id="client-name-en">— To be filled by client —</div>
         <div class="party-detail">
-          <input id="cname-en"  placeholder="Company / Full name"
+          <input id="cname-en" placeholder="Full name (three parts) *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
             oninput="document.getElementById('client-name-en').textContent=this.value||'— To be filled by client —'"/>
-          <input id="cemail-en" placeholder="Email address" type="email"
-            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;background:#fafbff;outline:none"/>
+          <input id="cphone-en" placeholder="Mobile number *" type="tel" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <input id="cemail-en" placeholder="Email address *" type="email" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <input id="ccompany-en" placeholder="Beneficiary company / organization *" required
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
+          <select id="crole-en" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
+            <option value="">Client capacity *</option>
+            <option>Owner</option>
+            <option>General Manager</option>
+            <option>CFO / Finance Manager</option>
+            <option>Technical Lead</option>
+            <option>Authorized Signatory</option>
+          </select>
         </div>
       </div>
     </div>
@@ -391,22 +400,7 @@ canvas{display:block;width:100%;height:100%}
       <h2>Signatures</h2>
       <div class="sig-grid">
         <div class="sig-box">
-          <label>Party A Signature (Caminotich)</label>
-          <div class="sig-type-tabs">
-            <button class="sig-tab on" onclick="switchSig('draw','en','first')">Draw</button>
-            <button class="sig-tab"    onclick="switchSig('type','en','first')">Type</button>
-          </div>
-          <div class="canvas-wrap" id="cw-en-first">
-            <canvas id="cv-en-first" width="400" height="120"></canvas>
-          </div>
-          <input class="sig-text-input" id="st-en-first" placeholder="Type your name"/>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <input type="date" class="sig-date" id="sd-en-first"/>
-            <button class="clear-btn" onclick="clearSig('en','first')">Clear</button>
-          </div>
-        </div>
-        <div class="sig-box">
-          <label>Party B Signature (Client)</label>
+          <label>Party B Signature (Client) *</label>
           <div class="sig-type-tabs">
             <button class="sig-tab on" onclick="switchSig('draw','en','second')">Draw</button>
             <button class="sig-tab"    onclick="switchSig('type','en','second')">Type</button>
@@ -512,7 +506,7 @@ function initCanvas(id) {
   drawing[id] = ctx;
 }
 
-['ar-first','ar-second','en-first','en-second'].forEach(initCanvas);
+['ar-second','en-second'].forEach(initCanvas);
 
 function switchSig(mode, lang, party) {
   const id  = `${lang}-${party}`;
@@ -558,8 +552,11 @@ function checkReady(lang) {
 async function submitContract(lang) {
   const name  = document.getElementById(`cname-${lang}`)?.value.trim();
   const email = document.getElementById(`cemail-${lang}`)?.value.trim();
-  if (!name || !email) {
-    alert(lang==='ar' ? 'يرجى تعبئة اسم الشركة والبريد الإلكتروني' : 'Please fill in company name and email');
+  const phone   = document.getElementById(`cphone-${lang}`)?.value.trim();
+  const company = document.getElementById(`ccompany-${lang}`)?.value.trim();
+  const role    = document.getElementById(`crole-${lang}`)?.value.trim();
+  if (!name || !email || !phone || !company || !role) {
+    alert(lang==='ar' ? 'يرجى تعبئة جميع بيانات الطرف الثاني الإلزامية: الاسم الثلاثي، رقم الجوال، البريد، اسم المؤسسة، وصفة العميل' : 'Please fill in all required Party B fields: full name, mobile, email, company, and client capacity');
     return;
   }
   const btn = document.getElementById(`sub-${lang}`);
@@ -574,6 +571,8 @@ async function submitContract(lang) {
   const payParams = new URLSearchParams({
     name:  name,
     email: email,
+    phone: phone,
+    company: company,
     pkg:   p.get('pkg')  || 'pulse',
     ref:   p.get('ref')  || document.getElementById(`contract-num-${lang}`)?.textContent || '',
     lang:  lang
@@ -636,7 +635,7 @@ function exportPDF(lang) {
     document.body.innerHTML = prev.body;
     document.documentElement.dir = prev.dir;
     setLang(curLang);
-    ['ar-first','ar-second','en-first','en-second'].forEach(initCanvas);
+    ['ar-second','en-second'].forEach(initCanvas);
   }, 400);
 }
 
