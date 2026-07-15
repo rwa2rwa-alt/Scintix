@@ -233,7 +233,9 @@
 
   // ── Show which package the visitor came from (?package=Glow) ──
   const params = new URLSearchParams(window.location.search);
-  const pkgParam = params.get('package');
+  const pkgRaw = params.get('package');
+  // تنظيف قيمة الباقة من الرموز والزخارف مهما كان مصدر الرابط
+  const pkgParam = pkgRaw ? pkgRaw.replace(/[^A-Za-z]/g, '').replace(/^(spark|glow|pulse|nova|zenith)$/i, m => m.charAt(0).toUpperCase() + m.slice(1).toLowerCase()) : pkgRaw;
   if (pkgParam) {
     document.getElementById('pkgChip').style.display = 'inline-flex';
     document.getElementById('pkgChipText').textContent = `طلبك على باقة ${pkgParam}`;
