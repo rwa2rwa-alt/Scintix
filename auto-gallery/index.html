@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معرض السيارات | Auto Showroom</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#D91E2E;--dark:#111827;--light:#f9f9f9;--gray:#6b7280;--white:#fff}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(217,30,46,0.4)}50%{box-shadow:0 0 0 12px rgba(217,30,46,0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes revLine{from{width:0}to{width:60px}}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(17,24,39,0.95);backdrop-filter:blur(10px);border-bottom:2px solid var(--red);padding:0 5%}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;height:65px;flex-wrap:wrap}
+.logo{font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:1px}
+.logo span{color:var(--red)}
+.nav-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.nav-links a{color:#ccc;text-decoration:none;font-size:.9rem;transition:color .3s;padding:4px 0;border-bottom:2px solid transparent}
+.nav-links a:hover{color:var(--red);border-bottom-color:var(--red)}
+#hero{min-height:100vh;background:linear-gradient(135deg,#0a0f1a 0%,#1a0408 50%,#0a0f1a 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 5% 40px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D91E2E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-content{animation:fadeUp .9s ease forwards;max-width:700px}
+.hero-badge{display:inline-block;background:var(--red);color:var(--white);font-size:.8rem;padding:5px 16px;border-radius:20px;margin-bottom:1rem;letter-spacing:1px}
+#hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.2;margin-bottom:.5rem}
+#hero h1 span{color:var(--red)}
+#hero p{color:#b0b8c8;font-size:1.05rem;margin:1rem 0 2rem;line-height:1.8}
+.btn-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 30px;border-radius:6px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-red{background:var(--red);color:var(--white);animation:pulse 2.5s infinite}
+.btn-red:hover{background:#b8111f;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid var(--white)}
+.btn-outline:hover{background:var(--white);color:var(--dark)}
+.hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:3rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:2rem;font-weight:900;color:var(--red)}
+.stat-label{font-size:.8rem;color:#8899aa}
+section{padding:80px 5%}
+.sec-header{text-align:center;margin-bottom:3rem}
+.sec-header h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:.5rem}
+.sec-header h2 span{color:var(--red)}
+.line{width:0;height:3px;background:var(--red);margin:10px auto;animation:revLine .8s ease .3s forwards;border-radius:2px}
+.sec-header p{color:#8899aa;font-size:.95rem;margin-top:.5rem}
+#about{background:linear-gradient(180deg,#0d1420 0%,#111827 100%)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1000px;margin:0 auto}
+.about-img{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a2030,#0d1018);padding:40px;text-align:center}
+.car-icon{font-size:6rem;display:block;animation:fadeUp 1s ease}
+.about-tag{position:absolute;top:15px;right:15px;background:var(--red);color:#fff;font-size:.75rem;padding:4px 10px;border-radius:4px}
+.about-text h3{font-size:1.5rem;font-weight:800;margin-bottom:1rem;animation:slideIn .8s ease}
+.about-text p{color:#9aaabb;line-height:1.9;margin-bottom:1rem}
+.about-features{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.about-features li{display:flex;align-items:center;gap:.6rem;color:#ccd;font-size:.9rem}
+.about-features li::before{content:'✓';color:var(--red);font-weight:900;font-size:1rem}
+#services{background:#0a0e18}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
+.card{background:linear-gradient(135deg,#141e30,#0f1622);border:1px solid #1e2d40;border-radius:12px;padding:2rem;transition:all .3s;position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;bottom:0;right:0;width:0;height:3px;background:var(--red);transition:width .4s}
+.card:hover{transform:translateY(-6px);border-color:var(--red)}
+.card:hover::after{width:100%}
+.card-icon{font-size:2.5rem;margin-bottom:1rem;display:block}
+.card h3{font-size:1.15rem;font-weight:800;margin-bottom:.7rem;color:var(--white)}
+.card p{color:#8090a8;font-size:.88rem;line-height:1.8}
+#contact{background:linear-gradient(180deg,#111827 0%,#0a0e18 100%)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:900px;margin:0 auto}
+.contact-info{display:flex;flex-direction:column;gap:1.2rem}
+.contact-item{display:flex;align-items:center;gap:1rem;background:#141e30;border:1px solid #1e2d40;border-radius:10px;padding:1.2rem;transition:border-color .3s}
+.contact-item:hover{border-color:var(--red)}
+.c-icon{width:44px;height:44px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.c-label{font-size:.75rem;color:#6b7280;margin-bottom:2px}
+.c-val{font-size:.95rem;color:var(--white);font-weight:600}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea{background:#141e30;border:1px solid #1e2d40;border-radius:8px;padding:12px 15px;color:var(--white);font-size:.9rem;font-family:inherit;transition:border-color .3s;width:100%}
+.contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--red)}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form button{background:var(--red);color:#fff;border:none;padding:13px;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .3s;font-family:inherit}
+.contact-form button:hover{background:#b8111f}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:.6rem;background:#25D366;color:#fff;padding:13px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem;transition:background .3s}
+.wa-btn:hover{background:#1eb558}
+footer{background:#070c14;text-align:center;padding:2rem 5%;border-top:1px solid #1e2d40;color:#4b5563;font-size:.85rem}
+footer span{color:var(--red)}
+@media(max-width:768px){
+.about-grid,.contact-wrap{grid-template-columns:1fr}
+.nav-links{gap:.8rem}
+.nav-links a{font-size:.8rem}
+.hero-stats{gap:1.2rem}
+}
+@media(max-width:480px){
+.nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">معرض <span>السيارات</span></div>
+    <ul class="nav-links">
+      <li><a href="#hero">الرئيسية | Home</a></li>
+      <li><a href="#about">من نحن | About</a></li>
+      <li><a href="#services">خدماتنا | Services</a></li>
+      <li><a href="#contact">تواصل | Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🚗 معرض سيارات موثوق | Trusted Auto Showroom</div>
+    <h1>اعثر على سيارتك <span>المثالية</span><br>Find Your Perfect Ride</h1>
+    <p>سيارات جديدة ومستعملة بحالة ممتازة — فحص شامل، تمويل ميسر، ونقل ملكية سريع<br>New &amp; used cars in excellent condition with inspection, financing &amp; ownership transfer</p>
+    <div class="btn-group">
+      <a href="#services" class="btn btn-red">🔍 اكتشف خدماتنا</a>
+      <a href="#contact" class="btn btn-outline">📞 تواصل معنا</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">سيارة متاحة</div></div>
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">سنوات خبرة</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">فحص مضمون</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-header">
+    <h2>من <span>نحن</span> | About Us</h2>
+    <div class="line"></div>
+    <p>قصتنا في عالم السيارات</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-img">
+      <div class="about-tag">موثوق | Trusted</div>
+      <span class="car-icon">🏎️</span>
+      <p style="color:#8090a8;font-size:.85rem;margin-top:.5rem">سيارات بجودة استثنائية</p>
+    </div>
+    <div class="about-text">
+      <h3>معرض سيارات حديث ومتكامل</h3>
+      <p>نحن معرض سيارات متخصص يقدم أفضل السيارات الجديدة والمستعملة بحالة ممتازة وبأسعار تنافسية لا مثيل لها في السوق.</p>
+      <p>We offer a full range of new and pre-owned vehicles with complete transparency, professional inspection, and easy financing options.</p>
+      <ul class="about-features">
+        <li>سيارات مفحوصة بالكامل | Fully inspected vehicles</li>
+        <li>أسعار تنافسية وشفافية تامة | Competitive transparent pricing</li>
+        <li>خدمة عملاء متميزة | Outstanding customer service</li>
+        <li>تمويل ميسر وسريع | Fast &amp; easy financing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="sec-header">
+    <h2>خدماتنا | <span>Our Services</span></h2>
+    <div class="line"></div>
+    <p>كل ما تحتاجه في مكان واحد</p>
+  </div>
+  <div class="services-grid">
+    <div class="card">
+      <span class="card-icon">🔎</span>
+      <h3>فحص شامل | Full Inspection</h3>
+      <p>نقدم فحصاً تقنياً شاملاً لكل سيارة قبل البيع لضمان سلامتها وجودتها. Comprehensive technical inspection for every vehicle before sale.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💳</span>
+      <h3>تمويل ميسر | Easy Financing</h3>
+      <p>حلول تمويلية مرنة تناسب جميع الميزانيات بإجراءات سريعة وبسيطة. Flexible financing solutions for all budgets with quick processing.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📋</span>
+      <h3>نقل الملكية | Ownership Transfer</h3>
+      <p>نتولى إجراءات نقل الملكية بالكامل بسرعة واحترافية دون أي تعقيدات. We handle all ownership transfer paperwork quickly and professionally.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-header">
+    <h2>تواصل <span>معنا</span> | Contact Us</h2>
+    <div class="line"></div>
+    <p>نحن هنا للمساعدة — We're here to help</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="c-icon">📞</div>
+        <div>
+          <div class="c-label">اتصال مباشر | Direct Call</div>
+          <div class="c-val"><a href="tel:0549955996" style="color:inherit;text-decoration:none">0549955996</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">✉️</div>
+        <div>
+          <div class="c-label">البريد الإلكتروني | Email</div>
+          <div class="c-val"><a href="mailto:zahranir88@gmail.com" style="color:inherit;text-decoration:none;font-size:.85rem">zahranir88@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">📍</div>
+        <div>
+          <div class="c-label">الموقع | Location</div>
+          <div class="c-val">المملكة العربية السعودية</div>
+        </div>
+      </div>
+      <a href="https://wa.me/966549955996" target="_blank" class="wa-btn">
+        <span>💬</span> تواصل عبر واتساب | WhatsApp
+      </a>
+    </div>
+    <div class="contact-form">
+      <input type="text" placeholder="اسمك الكريم | Your Name" />
+      <input type="tel" placeholder="رقم الجوال | Phone Number" />
+      <input type="text" placeholder="نوع السيارة المطلوبة | Car Type" />
+      <textarea placeholder="رسالتك | Your Message"></textarea>
+      <button type="button">إرسال الرسالة | Send Message 🚀</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>جميع الحقوق محفوظة &copy; 2024 — <span>معرض السيارات</span> | Auto Showroom</p>
+  <p style="margin-top:.4rem">تصميم بـ <span>❤</span> لخدمة عملائنا الكرام</p>
+</footer>
+
+</body>
+</html>
