@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صالون وهج المذهلة | Wahaj Beauty Salon</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--rose:#B76E79;--dark:#1C1C1C;--light:#fff;--soft:#f9f3f4;--gray:#666;--trans:all .35s ease}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#fff;color:var(--dark);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.en{font-family:'Georgia',serif;font-style:italic}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;background:rgba(28,28,28,.97);z-index:999;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:65px;border-bottom:2px solid var(--rose)}
+.logo{display:flex;flex-direction:column;line-height:1.2}
+.logo-ar{color:var(--rose);font-size:1.1rem;font-weight:700}
+.logo-en{color:#aaa;font-size:.7rem;letter-spacing:2px}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#ddd;font-size:.85rem;padding:.3rem 0;border-bottom:2px solid transparent;transition:var(--trans)}
+.nav-links a:hover{color:var(--rose);border-color:var(--rose)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.nav-toggle span{width:25px;height:2px;background:var(--rose)}
+.mobile-menu{display:none;position:fixed;top:65px;right:0;width:100%;background:#1c1c1c;z-index:998;padding:1rem 0}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:.8rem 2rem;color:#ddd;border-bottom:1px solid #333;font-size:.9rem;transition:var(--trans)}
+.mobile-menu a:hover{color:var(--rose);padding-right:2.5rem}
+
+/* SECTIONS COMMON */
+section{padding:80px 2rem}
+.section-title{text-align:center;margin-bottom:3rem}
+.section-title h2{font-size:2rem;color:var(--dark);position:relative;display:inline-block;padding-bottom:.5rem}
+.section-title h2::after{content:'';position:absolute;bottom:0;right:50%;transform:translateX(50%);width:60px;height:3px;background:var(--rose)}
+.section-title p{color:var(--gray);margin-top:.8rem;font-size:.95rem}
+
+/* HOME */
+#home{min-height:100vh;background:linear-gradient(135deg,var(--dark) 60%,#2a1417 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding-top:65px}
+.hero-content{max-width:700px;animation:fadeUp .8s ease}
+.hero-badge{display:inline-block;background:var(--rose);color:#fff;padding:.3rem 1.2rem;border-radius:20px;font-size:.8rem;margin-bottom:1.5rem;letter-spacing:1px}
+.hero-content h1{font-size:3rem;color:#fff;line-height:1.3;margin-bottom:.5rem}
+.hero-content h1 span{color:var(--rose)}
+.hero-content p{color:#bbb;font-size:1rem;margin-bottom:.5rem;line-height:1.8}
+.hero-sub{color:var(--rose);font-size:.9rem;margin-bottom:2rem}
+.btn{display:inline-block;padding:.75rem 2rem;border-radius:30px;font-size:.9rem;transition:var(--trans);cursor:pointer;border:none}
+.btn-primary{background:var(--rose);color:#fff}
+.btn-primary:hover{background:#9e5a63;transform:translateY(-2px);box-shadow:0 6px 20px rgba(183,110,121,.4)}
+.btn-outline{background:transparent;color:var(--rose);border:2px solid var(--rose);margin-right:1rem}
+.btn-outline:hover{background:var(--rose);color:#fff}
+.hero-branches{display:flex;justify-content:center;gap:2rem;margin-top:2.5rem;flex-wrap:wrap}
+.branch-card{background:rgba(255,255,255,.07);border:1px solid rgba(183,110,121,.3);padding:1rem 1.5rem;border-radius:12px;color:#ddd;font-size:.85rem}
+.branch-card strong{color:var(--rose);display:block;margin-bottom:.3rem}
+
+/* ABOUT */
+#about{background:var(--soft)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1000px;margin:0 auto}
+.about-visual{text-align:center}
+.about-circle{width:260px;height:260px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#8a4a54);margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:0 0 0 15px rgba(183,110,121,.15),0 0 0 30px rgba(183,110,121,.07)}
+.about-text h3{font-size:1.6rem;color:var(--dark);margin-bottom:1rem}
+.about-text h3 span{color:var(--rose)}
+.about-text p{color:var(--gray);line-height:1.9;margin-bottom:1rem;font-size:.95rem}
+.about-stats{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:2rem;font-weight:700;color:var(--rose)}
+.stat-label{font-size:.8rem;color:var(--gray)}
+
+/* SERVICES */
+#services{background:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.srv-card{background:var(--soft);border-radius:16px;padding:2rem 1.5rem;text-align:center;border:1px solid transparent;transition:var(--trans);position:relative;overflow:hidden}
+.srv-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:0;background:var(--rose);transition:height .4s ease}
+.srv-card:hover::before{height:100%}
+.srv-card:hover{border-color:rgba(183,110,121,.3);transform:translateY(-5px);box-shadow:0 10px 30px rgba(183,110,121,.15)}
+.srv-icon{font-size:2.5rem;margin-bottom:1rem}
+.srv-card h4{font-size:1.05rem;color:var(--dark);margin-bottom:.5rem}
+.srv-card p{color:var(--gray);font-size:.85rem;line-height:1.7}
+.srv-price{display:inline-block;margin-top:.8rem;background:var(--rose);color:#fff;padding:.2rem .8rem;border-radius:20px;font-size:.8rem}
+
+/* GALLERY */
+#gallery{background:var(--soft)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1000px;margin:0 auto}
+.gallery-item{border-radius:12px;overflow:hidden;aspect-ratio:1;position:relative;cursor:pointer}
+.gallery-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;transition:var(--trans)}
+.gallery-item:hover .gallery-placeholder{transform:scale(1.1)}
+.gallery-item:nth-child(1) .gallery-placeholder{background:linear-gradient(135deg,#f2b8c0,#d4a0a8)}
+.gallery-item:nth-child(2) .gallery-placeholder{background:linear-gradient(135deg,#c99ea5,#b8838c)}
+.gallery-item:nth-child(3) .gallery-placeholder{background:linear-gradient(135deg,#e8c4c9,#d4a8b0)}
+.gallery-item:nth-child(4) .gallery-placeholder{background:linear-gradient(135deg,#d4a0a8,#bf8a93)}
+.gallery-item:nth-child(5) .gallery-placeholder{background:linear-gradient(135deg,#b8838c,#a06870)}
+.gallery-item:nth-child(6) .gallery-placeholder{background:linear-gradient(135deg,#e0b0b8,#c89aa3)}
+.gallery-overlay{position:absolute;inset:0;background:rgba(183,110,121,.8);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;opacity:0;transition:var(--trans)}
+.gallery-item:hover .gallery-overlay{opacity:1}
+
+/* TESTIMONIALS */
+#testimonials{background:#fff}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.testi-card{background:var(--soft);border-radius:16px;padding:1.5rem;border-right:4px solid var(--rose);transition:var(--trans)}
+.testi-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(183,110,121,.15)}
+.testi-stars{color:var(--rose);font-size:1.1rem;margin-bottom:.8rem}
+.testi-text{color:var(--gray);font-size:.9rem;line-height:1.8;margin-bottom:1rem}
+.testi-author{display:flex;align-items:center;gap:.8rem}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem}
+.testi-name{font-weight:700;font-size:.9rem}
+.testi-loc{font-size:.75rem;color:var(--gray)}
+
+/* FAQ */
+#faq{background:var(--soft)}
+.faq-container{max-width:750px;margin:0 auto}
+.faq-item{background:#fff;border-radius:12px;margin-bottom:1rem;overflow:hidden;border:1px solid rgba(183,110,121,.2)}
+.faq-q{padding:1.2rem 1.5rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:var(--trans)}
+.faq-q:hover{color:var(--rose)}
+.faq-q .arrow{color:var(--rose);transition:transform .3s;font-size:.8rem}
+.faq-item.open .arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:200px;padding:0 1.5rem 1.2rem}
+.faq-a p{color:var(--gray);line-height:1.8;font-size:.9rem}
+
+/* CONTACT */
+#contact{background:var(--dark)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:1000px;margin:0 auto}
+.contact-info h3{color:#fff;font-size:1.4rem;margin-bottom:1.5rem}
+.contact-info h3 span{color:var(--rose)}
+.info-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem}
+.info-icon{width:42px;height:42px;background:rgba(183,110,121,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.info-text{color:#bbb;font-size:.88rem;line-height:1.6}
+.info-text strong{color:#fff;display:block}
+.social-row{display:flex;gap:.8rem;margin-top:1.5rem}
+.soc-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--rose);display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:.85rem;transition:var(--trans)}
+.soc-btn:hover{background:var(--rose);color:#fff}
+.contact-form{background:rgba(255,255,255,.05);border-radius:16px;padding:2rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;color:#bbb;font-size:.85rem;margin-bottom:.4rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(183,110,121,.3);border-radius:8px;padding:.7rem 1rem;color:#fff;font-size:.9rem;outline:none;transition:var(--trans);font-family:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--rose)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-group select option{background:var(--dark)}
+
+/* FOOTER */
+footer{background:#111;padding:1.5rem 2rem;text-align:center;border-top:2px solid var(--rose)}
+footer p{color:#666;font-size:.82rem}
+footer p span{color:var(--rose)}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:25px;left:25px;width:55px;height:55px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;z-index:990;box-shadow:0 4px 15px rgba(37,211,102,.4);animation:pulse 2s infinite;text-decoration:none}
+@keyframes pulse{0%,100%{box-shadow:0 4px 15px rgba(37,211,102,.4)}50%{box-shadow:0 4px 25px rgba(37,211,102,.7)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .services-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .hero-content h1{font-size:2rem}
+  .services-grid,.testi-grid,.gallery-grid{grid-template-columns:1fr}
+  section{padding:60px 1.2rem}
+  .hero-branches{flex-direction:column;align-items:center}
+  .about-stats{gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <span class="logo-ar">✨ صالون وهج المذهلة</span>
+    <span class="logo-en en">Wahaj Beauty Salon</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#about">من نحن</a></li>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#gallery">معرض الأعمال</a></li>
+    <li><a href="#testimonials">آراء العملاء</a></li>
+    <li><a href="#faq">الأسئلة الشائعة</a></li>
+    <li><a href="#contact">تواصلي معنا</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">🏠 الرئيسية</a>
+  <a href="#about" onclick="closeMenu()">💄 من نحن</a>
+  <a href="#services" onclick="closeMenu()">✨ خدماتنا</a>
+  <a href="#gallery" onclick="closeMenu()">🖼️ معرض الأعمال</a>
+  <a href="#testimonials" onclick="closeMenu()">💬 آراء العملاء</a>
+  <a href="#faq" onclick="closeMenu()">❓ الأسئلة الشائعة</a>
+  <a href="#contact" onclick="closeMenu()">📞 تواصلي معنا</a>
+</div>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-badge">✦ صالون نسائي راقٍ في الرياض ✦</div>
+    <h1>صالون <span>وهج</span> المذهلة</h1>
+    <p>مركزكِ لإطلالة فاخرة تليق بكِ في كل مناسبة</p>
+    <p class="en hero-sub">Your Premier Beauty Destination in Riyadh</p>
+    <div>
+      <a href="#services" class="btn btn-outline">استكشفي خدماتنا</a>
+      <a href="https://wa.me/966564857111" target="_blank" class="btn btn-primary">احجزي الآن 💄</a>
+    </div>
+    <div class="hero-branches">
+      <div class="branch-card">
+        <strong>📍 الفرع الأول</strong>
+        حي الملقا — الرياض
+      </div>
+      <div class="branch-card">
+        <strong>📍 الفرع الثاني</strong>
+        حي الأحمدية — الرياض
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-title">
+    <h2>من نحن</h2>
+    <p class="en">About Wahaj Beauty Salon</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="about-circle">💄</div>
+    </div>
+    <div class="about-text">
+      <h3>خبرة تصنع <span>الفرق</span></h3>
+      <p>صالون وهج المذهلة هو وجهتكِ الأولى للتجميل والأناقة في الرياض، بقيادة خبيرة ميك اب معتمدة ذات خبرة واسعة في عالم التجميل النسائي.</p>
+      <p>نؤمن بأن كل امرأة تستحق إطلالة استثنائية، لذا نقدم خدماتنا بأعلى معايير الجودة واستخدام أرقى منتجات التجميل العالمية.</p>
+      <p>فرعان في الرياض لخدمتكِ: <strong>حي الملقا</strong> و<strong>حي الأحمدية</strong>.</p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">+500</div>
+          <div class="stat-label">عروس سعيدة</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">فرع في الرياض</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">+5</div>
+          <div class="stat-label">سنوات خبرة</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">رضا العميلات</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-title">
+    <h2>خدماتنا</h2>
+    <p class="en">Our Premium Services</p>
+  </div>
+  <div class="services-grid">
+    <div class="srv-card">
+      <div class="srv-icon">👰</div>
+      <h4>مكياج العرايس</h4>
+      <p>إطلالة عروس أحلامك بأيدي خبيرة، تدوم طوال ليلتك الاستثنائية مع منتجات عالمية فاخرة</p>
+      <span class="srv-price">باقات متعددة</span>
+    </div>
+    <div class="srv-card">
+      <div class="srv-icon">💫</div>
+      <h4>مكياج المناسبات</h4>
+      <p>لكل مناسبة إطلالة مميزة — حفلات، خطوبات، أعياد ميلاد، سهرات فاخرة وأكثر</p>
+      <span class="srv-price">ابتداءً من 150 ريال</span>
+    </div>
+    <div class="srv-card">
+      <div class="srv-icon">💇‍♀️</div>
+      <h4>تسريحات الشعر</h4>
+      <p>تسريحات عصرية وكلاسيكية للمناسبات والأعراس، تناسب كل أنواع الشعر وتعكس شخصيتكِ</p>
+      <span class="srv-price">ابتداءً من 100 ريال</span>
+    </div>
+    <div class="srv-card">
+      <div class="srv-icon">🎨</div>
+      <h4>صباغة الشعر</h4>
+      <p>صبغات عالية الجودة بأحدث الألوان والتقنيات — بليجنج، هايلايت، أومبريه والمزيد</p>
+      <span class="srv-price">حسب الطلب</span>
+    </div>
+    <div class="srv-card">
+      <div class="srv-icon">✨</div>
+      <h4>العناية بالبشرة</h4>
+      <p>جلسات عناية شاملة لبشرة مضيئة وصحية، تشمل تنظيف وترطيب وعلاجات متخصصة</p>
+      <span class="srv-price">ابتداءً من 200 ريال</span>
+    </div>
+    <div class="srv-card">
+      <div class="srv-icon">💍</div>
+      <h4>باقات العرايس المتكاملة</h4>
+      <p>باقة شاملة للعروس تتضمن المكياج والتسريحة والعناية بالبشرة والتجهيز الكامل ليوم زفافك</p>
+      <span class="srv-price">باقات VIP</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-title">
+    <h2>معرض الأعمال</h2>
+    <p class="en">Our Portfolio & Work Gallery</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-placeholder">👰</div>
+      <div class="gallery-overlay">مكياج عروس فاخر</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">💄</div>
+      <div class="gallery-overlay">إطلالة سهرة</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">💇‍♀️</div>
+      <div class="gallery-overlay">تسريحة مناسبة</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">✨</div>
+      <div class="gallery-overlay">مكياج خطوبة</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">💅</div>
+      <div class="gallery-overlay">إطلالة عروس كاملة</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">🌸</div>
+      <div class="gallery-overlay">مكياج يومي فاخر</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="https://www.instagram.com/salon_wahaj" target="_blank" class="btn btn-primary">📸 شاهدي المزيد على انستقرام</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-title">
+    <h2>آراء عميلاتنا</h2>
+    <p class="en">What Our Clients Say</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"صالون وهج المذهلة غيّر نظرتي للتجميل! مكياج عروسي كان خيالياً ودام طوال حفل زفافي. شكراً من القلب!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">س</div>
+        <div>
+          <div class="testi-name">سارة المطيري</div>
+          <div class="testi-loc">📍 حي الملقا</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"أفضل صالون زرته في حياتي! الخبيرة محترفة جداً وتفهم ما أريده بالضبط. إطلالتي لحفل الخطوبة كانت مثالية."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ن</div>
+        <div>
+          <div class="testi-name">نورة العتيبي</div>
+          <div class="testi-loc">📍 حي الأحمدية</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"تجربة راقية بكل المعاني! الجو مريح، الفريق محترف، والنتيجة أبهرت الجميع. صرت عميلة دائمة لصالون وهج."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">م</div>
+        <div>
+          <div class="testi-name">منيرة الشمري</div>
+          <div class="testi-loc">📍 الرياض</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"حجزت باقة العروس المتكاملة وكانت تجربة لا تُنسى. الاهتمام بالتفاصيل رائع واللمسات الإبداعية مبهرة!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ر</div>
+        <div>
+          <div class="testi-name">ريم الحربي</div>
+          <div class="testi-loc">📍 الرياض</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"الصبغة والتسريحة طلعت أحلى من توقعاتي! وفّرن لي وقتاً وجهداً كبيراً والنتيجة احترافية 100%."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ل</div>
+        <div>
+          <div class="testi-name">لمى القحطاني</div>
+          <div class="testi-loc">📍 حي الملقا</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"من أجمل التجارب في الرياض! أسعار معقولة مقارنة بالجودة الاستثنائية. أنصح كل بنت تزور صالون وهج!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">ه</div>
+        <div>
+          <div class="testi-name">هنوف الدوسري</div>
+          <div class="testi-loc">📍 حي الأحمدية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-title">
+    <h2>الأسئلة الشائعة</h2>
+    <p class="en">Frequently Asked Questions</p>
+  </div>
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        كيف يمكنني حجز موعد في صالون وهج؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>الحجز يتم بسهولة عبر واتساب على الرقم 0564857111. يُنصح بالحجز المبكر خاصةً لمواسم الأعراس لضمان توفر الموعد المناسب لكِ.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        ما هي فروع الصالون في الرياض؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>لدينا فرعان في الرياض: الفرع الأول في حي الملقا، والفرع الثاني في حي الأحمدية. يمكنكِ اختيار الفرع الأقرب إليكِ عند الحجز.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        هل يتوفر مكياج خارجي (هوم سيرفيس)؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>نعم، نوفر خدمة المكياج الخارجي للعرائس والمناسبات الكبرى. يُرجى التواصل معنا عبر واتساب للاستفسار عن التفاصيل والتوافر.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        ما هي المنتجات المستخدمة في الصالون؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>نستخدم حصراً منتجات تجميل عالمية فاخرة ومعتمدة، مناسبة لجميع أنواع البشرة وآمنة 100%. نلتزم بأعلى معايير النظافة والجودة.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        ما الذي تشمله باقة العروس المتكاملة؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>تشمل الباقة: مكياج العروس الاحترافي، التسريحة، العناية بالبشرة، جلسة تجميل ما قبل الزفاف، وتجربة مسبقة للإطلالة. تفاصيل إضافية عبر واتساب.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        كم يستغرق وقت تحضير مكياج العروس؟
+        <span class="arrow">▼</span>
+      </div>
+      <div class="faq-a"><p>عادةً يستغرق مكياج العروس الكامل مع التسريحة بين 3 إلى 4 ساعات. ننصح بتحديد الموعد مبكراً قبل بداية حفل الزفاف بفترة كافية.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-title">
+    <h2 style="color:#fff">تواصلي معنا</h2>
+    <p class="en" style="color:#aaa">Get In Touch With Us</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>نحن هنا <span>لخدمتكِ</span></h3>
+      <div class="info-item">
+        <div class="info-icon">📱</div>
+        <div class="info-text">
+          <strong>واتساب والهاتف</strong>
+          <a href="tel:0564857111" style="color:#bbb">0564857111</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <strong>البريد الإلكتروني</strong>
+          <a href="mailto:rwa2rwa@gmail.com" style="color:#bbb">rwa2rwa@gmail.com</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>فرع الملقا</strong>
+          حي الملقا — الرياض
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>فرع الأحمدية</strong>
+          حي الأحمدية — الرياض
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div class="info-text">
+          <strong>أوقات الدوام</strong>
+          يومياً من 10 ص حتى 11 م
+        </div>
+      </div>
+      <div class="social-row">
+        <a href="https://www.instagram.com/salon_wahaj" target="_blank" class="soc-btn" title="Instagram">📷</a>
+        <a href="https://www.tiktok.com/@wmsalon" target="_blank" class="soc-btn" title="TikTok">🎵</a>
+        <a href="https://snapchat.com/add/salon_wahaj" target="_blank" class="soc-btn" title="Snapchat">👻</a>
+        <a href="https://wa.me/966564857111" target="_blank" class="soc-btn" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <form onsubmit="sendWhatsApp(event)">
+        <div class="form-group">
+          <label>الاسم الكريم</label>
+          <input type="text" id="f-name" placeholder="اسمكِ" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" id="f-phone" placeholder="05XXXXXXXX" required>
+        </div>
+        <div class="form-group">
+          <label>الخدمة المطلوبة</label>
+          <select id="f-service">
+            <option value="مكياج عروس">مكياج عروس</option>
+            <option value="مكياج مناسبات">مكياج مناسبات</option>
+            <option value="تسريحة شعر">تسريحة شعر</option>
+            <option value="صباغة شعر">صباغة شعر</option>
+            <option value="عناية بالبشرة">عناية بالبشرة</option>
+            <option value="باقة عروس متكاملة">باقة عروس متكاملة</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>الفرع المفضل</label>
+          <select id="f-branch">
+            <option value="حي الملقا">حي الملقا</option>
+            <option value="حي الأحمدية">حي الأحمدية</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ملاحظات إضافية</label>
+          <textarea id="f-msg" placeholder="أي تفاصيل أو استفسارات..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;font-size:1rem;padding:.9rem">
+          💬 إرسال عبر واتساب
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 <span>صالون وهج المذهلة</span> — جميع الحقوق محفوظة | Wahaj Beauty Salon — Riyadh, KSA</p>
+  <p style="margin-top:.4rem;font-size:.75rem">انستقرام: <span>@salon_wahaj</span> | تيك توك: <span>@wmsalon</span> | سناب: <span>@salon_wahaj</span></p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/966564857111" target="_blank" class="wa-float" title="تواصلي معنا عبر واتساب">💬</a>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+function toggleFaq(el){
+  var item=el.parentElement;
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});
+  if(!isOpen) item.classList.add('open');
+}
+function sendWhatsApp(e){
+  e.preventDefault();
+  var name=document.getElementById('f-name').value;
+  var phone=document.getElementById('f-phone').value;
+  var service=document.getElementById('f-service').value;
+  var branch=document.getElementById('f-branch').value;
+  var msg=document.getElementById('f-msg').value;
+  var text='مرحباً صالون وهج المذهلة 👋\n\n'
+    +'الاسم: '+name+'\n'
+    +'الهاتف: '+phone+'\n'
+    +'الخدمة: '+service+'\n'
+    +'الفرع: '+branch+'\n'
+    +(msg?'ملاحظات: '+msg:'');
+  window.open('https://wa.me/966564857111?text='+encodeURIComponent(text),'_blank');
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=this.getAttribute('href');
+    var el=document.querySelector(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'})}
+  });
+});
+</script>
+</body>
+</html>
