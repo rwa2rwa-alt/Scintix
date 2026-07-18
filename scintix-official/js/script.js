@@ -17,7 +17,7 @@ const FORM_LINKS = {
 // ─── روابط وسائل التواصل ─────────────────────────────────────
 const SOCIAL_LINKS = {
   whatsapp:  'https://wa.me/9665XXXXXXXX',
-  x:         'https://x.com/caminotich',
+  x:         'https://x.com/Camino_tich',
   instagram: 'https://instagram.com/caminotich',
   linkedin:  'https://linkedin.com/company/caminotich',
   tiktok:    'https://tiktok.com/@caminotich'
