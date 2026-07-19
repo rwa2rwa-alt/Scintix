@@ -3,201 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أسواق الواحة | Al-Juaidi Supermarket</title>
+<title>سوبر ماركت الجعيدي | Al-Jaaidi Supermarket</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--g:#2E9E4F;--o:#F4A11A;--dk:#1a1a1a;--lt:#f9f9f9;--gy:#666;--wh:#fff}
+:root{--g:#2E9E4F;--o:#F4A11A;--dk:#1a2e22;--lt:#f9fdf9;--gray:#666;--light-g:#e8f5ec}
 html{scroll-behavior:smooth}
-body{font-family:'Segoe UI',Tahoma,Geneva,sans-serif;color:var(--dk);background:var(--wh);overflow-x:hidden}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#fff;color:#222;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
 /* NAV */
-nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.08)}
-.nav-inner{max-width:1200px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);box-shadow:0 2px 20px rgba(0,0,0,0.08);padding:0 5%}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
 .logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--g),var(--o));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
-.logo-text{font-size:1.1rem;font-weight:800;color:var(--g);line-height:1.2}
-.logo-text span{display:block;font-size:.7rem;color:var(--o);font-weight:600}
-.nav-links{display:flex;gap:6px;list-style:none}
-.nav-links a{padding:7px 13px;border-radius:8px;text-decoration:none;color:var(--dk);font-size:.88rem;font-weight:600;transition:.3s}
-.nav-links a:hover{background:var(--g);color:var(--wh)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
-.hamburger span{width:25px;height:2.5px;background:var(--dk);border-radius:3px;transition:.3s}
-#menu-toggle{display:none}
-@media(max-width:768px){
-.hamburger{display:flex}
-.nav-links{display:none;position:absolute;top:68px;right:0;left:0;background:var(--wh);flex-direction:column;padding:16px 24px;gap:4px;box-shadow:0 8px 20px rgba(0,0,0,.1)}
-#menu-toggle:checked~.nav-links{display:flex}
-}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--g),var(--o));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-text{font-size:1.1rem;font-weight:700;color:var(--dk)}
+.logo-text span{display:block;font-size:0.7rem;color:var(--gray);font-weight:400}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:0.88rem;font-weight:600;color:#444;transition:color .3s;padding:4px 0;border-bottom:2px solid transparent}
+.nav-links a:hover{color:var(--g);border-color:var(--g)}
+.nav-cta{background:var(--g);color:#fff;padding:9px 20px;border-radius:25px;font-size:0.85rem;font-weight:700;transition:all .3s}
+.nav-cta:hover{background:var(--o);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.hamburger span{width:25px;height:2px;background:var(--dk);border-radius:2px;transition:.3s}
+.mobile-menu{display:none;position:fixed;top:70px;right:0;left:0;background:#fff;padding:20px 5%;box-shadow:0 10px 30px rgba(0,0,0,0.1);z-index:998}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;padding:12px 0;font-size:1rem;font-weight:600;color:#444;border-bottom:1px solid #f0f0f0}
+.mobile-menu a:hover{color:var(--g)}
+
 /* HERO */
-#home{min-height:100vh;background:linear-gradient(135deg,#0d5c2b 0%,#1a7a3a 40%,#2E9E4F 70%,#4db870 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:68px}
-.hero-bg{position:absolute;inset:0;opacity:.07}
-.hero-bg svg{width:100%;height:100%}
-.hero-shapes{position:absolute;inset:0;pointer-events:none}
-.shape{position:absolute;border-radius:50%;animation:float 6s ease-in-out infinite}
-.shape1{width:300px;height:300px;background:rgba(244,161,26,.15);top:-50px;left:-80px;animation-delay:0s}
-.shape2{width:200px;height:200px;background:rgba(255,255,255,.08);bottom:100px;right:-60px;animation-delay:2s}
-.shape3{width:150px;height:150px;background:rgba(244,161,26,.1);bottom:50px;left:30%;animation-delay:4s}
-@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(5deg)}}
-.hero-content{max-width:1200px;margin:auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%}
-.hero-text h1{font-size:3rem;font-weight:900;color:var(--wh);line-height:1.2;margin-bottom:12px}
-.hero-text h1 span{color:var(--o)}
-.hero-text .sub{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:10px;font-weight:500}
-.hero-text p{font-size:1rem;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:30px}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn-primary{padding:14px 28px;background:var(--o);color:var(--wh);border:none;border-radius:50px;font-size:.95rem;font-weight:700;cursor:pointer;text-decoration:none;transition:.3s;display:inline-block}
-.btn-primary:hover{background:#d4880e;transform:translateY(-2px);box-shadow:0 8px 25px rgba(244,161,26,.4)}
-.btn-outline{padding:14px 28px;background:transparent;color:var(--wh);border:2px solid rgba(255,255,255,.5);border-radius:50px;font-size:.95rem;font-weight:700;cursor:pointer;text-decoration:none;transition:.3s;display:inline-block}
-.btn-outline:hover{background:rgba(255,255,255,.15);border-color:var(--wh)}
-.hero-visual{display:flex;justify-content:center;align-items:center}
-.hero-card{background:rgba(255,255,255,.12);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2);border-radius:24px;padding:32px;text-align:center;animation:fadeInUp .8s ease}
-.hero-emoji{font-size:5rem;display:block;margin-bottom:16px;animation:bounce 2s ease-in-out infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.stat{background:rgba(255,255,255,.1);border-radius:12px;padding:12px;color:var(--wh)}
-.stat-num{font-size:1.5rem;font-weight:900;color:var(--o)}
-.stat-lbl{font-size:.75rem;opacity:.85}
+#home{min-height:100vh;background:linear-gradient(135deg,#0d2414 0%,#1a4a28 50%,#0d3318 100%);position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.shape{position:absolute;border-radius:50%;opacity:0.07}
+.shape1{width:500px;height:500px;background:var(--g);top:-100px;left:-100px;animation:float1 8s ease-in-out infinite}
+.shape2{width:300px;height:300px;background:var(--o);bottom:-50px;right:10%;animation:float2 6s ease-in-out infinite}
+.shape3{width:200px;height:200px;background:#fff;top:30%;right:5%;animation:float1 10s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.05)}}
+@keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(10deg)}}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:120px 5% 80px;position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,161,26,0.2);border:1px solid rgba(244,161,26,0.4);color:var(--o);padding:7px 16px;border-radius:20px;font-size:0.8rem;font-weight:700;margin-bottom:20px;animation:fadeInDown .8s ease}
+.hero-badge::before{content:'🌟'}
+.hero-h1{font-size:3.2rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;animation:fadeInUp .8s ease .1s both}
+.hero-h1 span{color:var(--o)}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:32px;animation:fadeInUp .8s ease .2s both}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;animation:fadeInUp .8s ease .3s both}
+.btn-primary{background:linear-gradient(135deg,var(--g),#3ab85e);color:#fff;padding:14px 32px;border-radius:30px;font-weight:700;font-size:1rem;transition:all .3s;box-shadow:0 6px 20px rgba(46,158,79,0.4)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(46,158,79,0.5)}
+.btn-secondary{background:transparent;color:#fff;padding:14px 32px;border-radius:30px;font-weight:700;font-size:1rem;border:2px solid rgba(255,255,255,0.4);transition:all .3s}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px)}
+.hero-stats{display:flex;gap:30px;margin-top:40px;animation:fadeInUp .8s ease .4s both}
+.stat{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:900;color:var(--o)}
+.stat-label{font-size:0.75rem;color:rgba(255,255,255,0.6)}
+.hero-visual{position:relative;animation:fadeInLeft .8s ease .3s both}
+.hero-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:30px;text-align:center}
+.hero-emoji-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.emoji-item{background:rgba(255,255,255,0.1);border-radius:16px;padding:16px 8px;transition:transform .3s}
+.emoji-item:hover{transform:scale(1.1)}
+.emoji-item .e{font-size:2rem;display:block}
+.emoji-item .label{font-size:0.7rem;color:rgba(255,255,255,0.7);margin-top:4px}
+.promo-badge{background:linear-gradient(135deg,var(--o),#e8920a);color:#fff;padding:12px 20px;border-radius:16px;font-weight:700;font-size:0.9rem;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-/* SECTIONS COMMON */
-section{padding:90px 24px}
-.container{max-width:1200px;margin:auto}
-.section-tag{display:inline-block;background:rgba(46,158,79,.1);color:var(--g);padding:6px 16px;border-radius:50px;font-size:.8rem;font-weight:700;margin-bottom:12px}
-.section-title{font-size:2.2rem;font-weight:900;margin-bottom:12px;line-height:1.2}
+@keyframes fadeInLeft{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+/* SECTION BASE */
+section{padding:90px 5%}
+.section-header{text-align:center;margin-bottom:60px}
+.section-tag{display:inline-block;background:var(--light-g);color:var(--g);padding:6px 18px;border-radius:20px;font-size:0.8rem;font-weight:700;margin-bottom:12px}
+.section-title{font-size:2.2rem;font-weight:900;color:var(--dk);margin-bottom:12px}
 .section-title span{color:var(--g)}
-.section-desc{color:var(--gy);font-size:1rem;line-height:1.7;max-width:600px}
-.text-center{text-align:center}
-.text-center .section-desc{margin:0 auto}
+.section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:550px;margin:0 auto}
+.divider{width:60px;height:4px;background:linear-gradient(90deg,var(--g),var(--o));border-radius:2px;margin:16px auto 0}
+
 /* ABOUT */
 #about{background:var(--lt)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:50px}
-.about-img{background:linear-gradient(135deg,var(--g),#1a7a3a);border-radius:24px;padding:50px 30px;text-align:center;position:relative;overflow:hidden}
-.about-img::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(244,161,26,.3);border-radius:50%}
-.about-img::after{content:'';position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;background:rgba(255,255,255,.1);border-radius:50%}
-.about-img .big-emoji{font-size:6rem;display:block;margin-bottom:20px}
-.about-img .img-title{color:var(--wh);font-size:1.4rem;font-weight:800}
-.about-img .img-sub{color:rgba(255,255,255,.75);font-size:.9rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1100px;margin:0 auto}
+.about-img-wrap{position:relative}
+.about-img-box{background:linear-gradient(135deg,var(--g),#1d7a3a);border-radius:24px;padding:50px 30px;text-align:center;overflow:hidden;position:relative}
+.about-img-box::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,0.08);border-radius:50%}
+.about-big-emoji{font-size:6rem;display:block;margin-bottom:16px}
+.about-img-tag{background:rgba(255,255,255,0.15);color:#fff;padding:8px 20px;border-radius:20px;font-size:0.9rem;font-weight:600}
+.about-float{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 8px 25px rgba(0,0,0,0.12);font-weight:700;font-size:0.85rem;display:flex;align-items:center;gap:8px}
+.about-float.f1{bottom:-20px;left:-20px;color:var(--g)}
+.about-float.f2{top:-15px;right:-15px;color:var(--o)}
+.about-content h2{font-size:2rem;font-weight:900;color:var(--dk);margin-bottom:16px}
+.about-content h2 span{color:var(--g)}
+.about-content p{color:var(--gray);line-height:1.9;margin-bottom:20px;font-size:0.97rem}
 .about-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.feat-item{display:flex;align-items:center;gap:10px;background:var(--wh);padding:12px 16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
-.feat-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--g),var(--o));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.feat-text{font-size:.85rem;font-weight:600;color:var(--dk)}
+.af-item{display:flex;align-items:center;gap:10px;font-size:0.9rem;font-weight:600;color:var(--dk)}
+.af-icon{width:36px;height:36px;background:var(--light-g);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+
 /* SERVICES */
-#services{background:var(--wh)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
-.service-card{background:var(--wh);border:1.5px solid #eee;border-radius:20px;padding:30px 24px;transition:.3s;position:relative;overflow:hidden}
-.service-card::before{content:'';position:absolute;top:0;right:0;width:0;height:3px;background:linear-gradient(90deg,var(--o),var(--g));transition:.4s}
-.service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:var(--g)}
-.service-card:hover::before{width:100%}
-.svc-icon{width:64px;height:64px;background:linear-gradient(135deg,rgba(46,158,79,.1),rgba(244,161,26,.1));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:18px}
-.service-card h3{font-size:1.05rem;font-weight:800;margin-bottom:8px;color:var(--dk)}
-.service-card .en{font-size:.75rem;color:var(--g);font-weight:600;margin-bottom:10px}
-.service-card p{font-size:.88rem;color:var(--gy);line-height:1.6}
+#services{background:#fff}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1100px;margin:0 auto}
+.service-card{background:#fff;border-radius:20px;padding:32px 24px;text-align:center;border:1px solid #eee;transition:all .35s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--g),var(--o));transform:scaleX(0);transition:transform .35s}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(46,158,79,0.12);border-color:transparent}
+.service-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;transition:transform .3s}
+.service-card:hover .svc-icon{transform:scale(1.1) rotate(5deg)}
+.svc-g{background:linear-gradient(135deg,var(--light-g),#c8ead2)}
+.svc-o{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.service-card h3{font-size:1.1rem;font-weight:800;color:var(--dk);margin-bottom:10px}
+.service-card p{font-size:0.87rem;color:var(--gray);line-height:1.7}
+.svc-tag{display:inline-block;background:var(--light-g);color:var(--g);padding:4px 12px;border-radius:12px;font-size:0.75rem;font-weight:700;margin-top:14px}
+
 /* PORTFOLIO */
 #portfolio{background:var(--lt)}
-.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:50px}
-.portfolio-card{border-radius:20px;overflow:hidden;position:relative;cursor:pointer;group}
-.p-thumb{height:240px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.p-thumb .big-icon{font-size:5rem;z-index:2;position:relative}
-.p-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center;z-index:3}
-.portfolio-card:hover .p-overlay{opacity:1}
-.p-overlay-text{color:var(--wh);font-size:.9rem;font-weight:700;text-align:center}
-.p-body{background:var(--wh);padding:20px 24px}
-.p-body h3{font-size:1rem;font-weight:800;margin-bottom:6px}
-.p-body p{font-size:.85rem;color:var(--gy)}
-.p-badge{display:inline-block;background:rgba(46,158,79,.1);color:var(--g);padding:3px 10px;border-radius:50px;font-size:.75rem;font-weight:700;margin-top:8px}
+.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1000px;margin:0 auto}
+.port-card{border-radius:20px;overflow:hidden;position:relative;background:var(--dk);min-height:220px;display:flex;align-items:flex-end;cursor:pointer;transition:transform .3s;box-shadow:0 8px 30px rgba(0,0,0,0.15)}
+.port-card:hover{transform:translateY(-6px)}
+.port-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.25;transition:all .3s}
+.port-card:hover .port-bg{opacity:0.4;transform:scale(1.1)}
+.port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%)}
+.port-content{position:relative;z-index:2;padding:24px}
+.port-tag{background:var(--o);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.75rem;font-weight:700;display:inline-block;margin-bottom:8px}
+.port-content h3{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:4px}
+.port-content p{font-size:0.82rem;color:rgba(255,255,255,0.75)}
+.port-bg-g{background:linear-gradient(135deg,#0d3318,#1a5c2a)}
+.port-bg-o{background:linear-gradient(135deg,#3d1a00,#7a3800)}
+.port-bg-b{background:linear-gradient(135deg,#001a3d,#003880)}
+.port-bg-p{background:linear-gradient(135deg,#1a0033,#3d0066)}
+
 /* TESTIMONIALS */
-#testimonials{background:linear-gradient(135deg,#0d5c2b,#2E9E4F);padding:90px 24px}
-#testimonials .section-title{color:var(--wh)}
-#testimonials .section-tag{background:rgba(255,255,255,.15);color:var(--wh)}
-#testimonials .section-desc{color:rgba(255,255,255,.75)}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
-.testi-card{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;transition:.3s}
-.testi-card:hover{background:rgba(255,255,255,.18);transform:translateY(-4px)}
-.stars{color:var(--o);font-size:1rem;margin-bottom:14px;letter-spacing:2px}
-.testi-card p{color:rgba(255,255,255,.9);font-size:.9rem;line-height:1.7;margin-bottom:20px}
-.testi-author{display:flex;align-items:center;gap:12px}
-.author-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--o),var(--g));display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-.author-info h4{color:var(--wh);font-size:.9rem;font-weight:700}
-.author-info span{color:rgba(255,255,255,.6);font-size:.78rem}
+#testimonials{background:#fff}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
+.test-card{background:var(--lt);border-radius:20px;padding:28px;border:1px solid #e8f5ec;transition:all .3s;position:relative}
+.test-card::before{content:'"';position:absolute;top:16px;right:20px;font-size:4rem;color:var(--g);opacity:0.15;font-family:Georgia,serif;line-height:1}
+.test-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(46,158,79,0.1)}
+.test-stars{color:var(--o);font-size:1rem;margin-bottom:14px;letter-spacing:2px}
+.test-text{font-size:0.9rem;color:var(--gray);line-height:1.8;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--o));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#fff}
+.test-name{font-weight:700;font-size:0.9rem;color:var(--dk)}
+.test-loc{font-size:0.78rem;color:var(--gray)}
+
 /* FAQ */
 #faq{background:var(--lt)}
-.faq-list{max-width:780px;margin:50px auto 0}
-.faq-item{background:var(--wh);border-radius:14px;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.faq-q{padding:20px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:.95rem;color:var(--dk);user-select:none}
-.faq-q::after{content:'+';font-size:1.4rem;color:var(--g);font-weight:400;transition:.3s;flex-shrink:0}
-.faq-item input[type=checkbox]{display:none}
-.faq-item input:checked~.faq-q::after{content:'−'}
-.faq-a{max-height:0;overflow:hidden;transition:.4s ease}
-.faq-a p{padding:0 24px 20px;color:var(--gy);font-size:.9rem;line-height:1.7}
-.faq-item input:checked~.faq-a{max-height:200px}
+.faq-wrap{max-width:750px;margin:0 auto}
+.faq-item{background:#fff;border-radius:16px;margin-bottom:14px;overflow:hidden;border:1px solid #e8f5ec;transition:all .3s}
+.faq-item.active{border-color:var(--g);box-shadow:0 6px 20px rgba(46,158,79,0.1)}
+.faq-q{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;font-size:0.95rem;color:var(--dk);transition:color .3s}
+.faq-item.active .faq-q{color:var(--g)}
+.faq-arrow{width:28px;height:28px;border-radius:50%;background:var(--light-g);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--g);transition:transform .3s;flex-shrink:0}
+.faq-item.active .faq-arrow{transform:rotate(180deg);background:var(--g);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.active .faq-a{max-height:200px;padding:0 24px 20px}
+.faq-a p{font-size:0.9rem;color:var(--gray);line-height:1.8}
+
 /* CONTACT */
-#contact{background:var(--wh)}
-.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;margin-top:50px;align-items:start}
-.contact-info{display:flex;flex-direction:column;gap:20px}
-.info-card{background:var(--lt);border-radius:16px;padding:22px;display:flex;align-items:center;gap:16px}
-.info-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--g),var(--o));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.info-text h4{font-size:.85rem;color:var(--gy);margin-bottom:4px}
-.info-text p{font-weight:700;color:var(--dk);font-size:.95rem}
-.info-text a{color:var(--g);text-decoration:none;font-weight:700}
-.hours-card{background:linear-gradient(135deg,var(--g),#1a7a3a);border-radius:16px;padding:24px;color:var(--wh)}
-.hours-card h4{font-size:1rem;font-weight:800;margin-bottom:14px}
-.hours-row{display:flex;justify-content:space-between;font-size:.88rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.15)}
-.hours-row:last-child{border:none;color:var(--o);font-weight:700}
-.contact-form{background:var(--lt);border-radius:20px;padding:36px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;color:var(--dk)}
-.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 16px;border:1.5px solid #e0e0e0;border-radius:10px;font-size:.9rem;font-family:inherit;transition:.3s;background:var(--wh);color:var(--dk)}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(46,158,79,.1)}
-.form-group textarea{resize:vertical;min-height:110px}
-.form-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--g),#1a7a3a);color:var(--wh);border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:.3s;font-family:inherit}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(46,158,79,.35)}
+#contact{background:linear-gradient(135deg,#0d2414,#1a4a28);color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start;max-width:1100px;margin:0 auto}
+.contact-info h2{font-size:1.9rem;font-weight:900;margin-bottom:14px}
+.contact-info h2 span{color:var(--o)}
+.contact-info p{color:rgba(255,255,255,0.72);line-height:1.8;margin-bottom:30px;font-size:0.95rem}
+.contact-items{display:flex;flex-direction:column;gap:18px}
+.ci-item{display:flex;align-items:center;gap:14px}
+.ci-icon{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.ci-label{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:2px}
+.ci-val{font-weight:700;font-size:0.95rem}
+.contact-form{background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:36px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.8);margin-bottom:7px}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;color:#fff;font-size:0.9rem;transition:border .3s;font-family:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--g);background:rgba(255,255,255,0.12)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.35)}
+.form-group select option{background:#1a3328;color:#fff}
+.form-group textarea{resize:vertical;min-height:100px}
+.btn-submit{width:100%;background:linear-gradient(135deg,var(--g),#3ab85e);color:#fff;border:none;padding:15px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;font-family:inherit}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(46,158,79,0.4)}
+.success-msg{display:none;background:rgba(46,158,79,0.2);border:1px solid var(--g);border-radius:12px;padding:14px 20px;text-align:center;color:#7deb9a;font-weight:600;margin-top:14px;font-size:0.9rem}
+
 /* FOOTER */
-footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
-.footer-inner{max-width:1200px;margin:auto}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand .logo-text{color:var(--wh)}
-.footer-brand p{font-size:.88rem;margin-top:14px;line-height:1.7;color:rgba(255,255,255,.6)}
-.footer-col h4{color:var(--wh);font-size:.95rem;font-weight:800;margin-bottom:16px}
-.footer-col ul{list-style:none}
-.footer-col ul li{margin-bottom:10px}
-.footer-col ul li a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.88rem;transition:.2s}
-.footer-col ul li a:hover{color:var(--o)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;text-align:center;font-size:.82rem;color:rgba(255,255,255,.4)}
-.footer-bottom span{color:var(--g)}
-/* WHATSAPP FLOAT */
-.wa-float{position:fixed;bottom:24px;left:24px;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;z-index:999;box-shadow:0 4px 20px rgba(37,211,102,.4);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 30px rgba(37,211,102,.7)}}
+footer{background:#0a1f10;padding:36px 5%;text-align:center}
+.footer-logo{font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:10px}
+.footer-logo span{color:var(--o)}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+.footer-links a{color:rgba(255,255,255,0.6);font-size:0.85rem;transition:color .3s}
+.footer-links a:hover{color:var(--g)}
+.footer-copy{color:rgba(255,255,255,0.35);font-size:0.8rem}
+
 /* RESPONSIVE */
 @media(max-width:900px){
-.hero-content{grid-template-columns:1fr;gap:40px;text-align:center}
+.hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+.hero-h1{font-size:2.3rem}
 .hero-btns{justify-content:center}
-.hero-visual{margin-top:10px}
+.hero-stats{justify-content:center}
+.hero-visual{max-width:400px;margin:0 auto}
+.about-grid{grid-template-columns:1fr;gap:40px}
 .services-grid{grid-template-columns:1fr 1fr}
-.testi-grid{grid-template-columns:1fr 1fr}
-.footer-top{grid-template-columns:1fr 1fr}
+.test-grid{grid-template-columns:1fr 1fr}
+.contact-grid{grid-template-columns:1fr}
 }
-@media(max-width:600px){
-.hero-text h1{font-size:2rem}
+@media(max-width:650px){
+.nav-links{display:none}
+.hamburger{display:flex}
+.hero-h1{font-size:1.9rem}
 .section-title{font-size:1.7rem}
-.about-grid,.contact-grid{grid-template-columns:1fr}
-.portfolio-grid{grid-template-columns:1fr}
 .services-grid{grid-template-columns:1fr}
-.testi-grid{grid-template-columns:1fr}
+.portfolio-grid{grid-template-columns:1fr}
+.test-grid{grid-template-columns:1fr}
 .form-row{grid-template-columns:1fr}
-.about-features{grid-template-columns:1fr 1fr}
-.footer-top{grid-template-columns:1fr}
-.hero-stats{grid-template-columns:repeat(4,1fr)}
+.about-features{grid-template-columns:1fr}
+section{padding:70px 5%}
 }
 </style>
 </head>
 <body>
-<!-- NAV -->
+
 <nav>
   <div class="nav-inner">
     <div class="logo">
       <div class="logo-icon">🛒</div>
-      <div class="logo-text">الواحة<span>Al-Juaidi Supermarket</span></div>
+      <div class="logo-text">سوبر ماركت الجعيدي<span>Al-Jaaidi Supermarket</span></div>
     </div>
-    <input type="checkbox" id="menu-toggle">
-    <label class="hamburger" for="menu-toggle"><span></span><span></span><span></span></label>
     <ul class="nav-links">
       <li><a href="#home">الرئيسية</a></li>
       <li><a href="#about">من نحن</a></li>
@@ -205,39 +226,55 @@ footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
       <li><a href="#portfolio">عروضنا</a></li>
       <li><a href="#testimonials">آراء العملاء</a></li>
       <li><a href="#faq">الأسئلة</a></li>
-      <li><a href="#contact">تواصل معنا</a></li>
+      <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
     </ul>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">🏠 الرئيسية</a>
+  <a href="#about" onclick="closeMenu()">📖 من نحن</a>
+  <a href="#services" onclick="closeMenu()">🏪 أقسامنا</a>
+  <a href="#portfolio" onclick="closeMenu()">🎁 عروضنا</a>
+  <a href="#testimonials" onclick="closeMenu()">⭐ آراء العملاء</a>
+  <a href="#faq" onclick="closeMenu()">❓ الأسئلة</a>
+  <a href="#contact" onclick="closeMenu()">📞 تواصل معنا</a>
+</div>
+
 <!-- HERO -->
 <section id="home">
-  <div class="hero-shapes">
+  <div class="hero-bg-shapes">
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
     <div class="shape shape3"></div>
   </div>
-  <div class="hero-content">
+  <div class="hero-inner">
     <div class="hero-text">
-      <p class="sub">🌿 طازج · طبيعي · يومي</p>
-      <h1>سوبر ماركت<br><span>الواحة</span></h1>
-      <p>وجهتك المتكاملة للتسوق العائلي — خضار وفواكه طازجة، فرن مخبز يومي، ملحمة، مثلجات، وكل ما تحتاجه أسرتك في مكان واحد. عروض أسبوعية وتوصيل للمنازل.</p>
+      <div class="hero-badge">وجهتك الأولى للتسوق اليومي</div>
+      <h1 class="hero-h1">سوبر ماركت <span>الجعيدي</span><br>طازج دائماً</h1>
+      <p class="hero-sub">متجرك المتكامل للمواد الغذائية والاستهلاكية. فرن مخبز طازج، ملحمة، خضار وفواكه، مثلجات — كل احتياجاتك تحت سقف واحد مع توصيل لباب البيت.</p>
       <div class="hero-btns">
-        <a href="#services" class="btn-primary">اكتشف أقسامنا</a>
-        <a href="#contact" class="btn-outline">تواصل معنا</a>
+        <a href="#services" class="btn-primary">🛍️ استكشف الأقسام</a>
+        <a href="#contact" class="btn-secondary">📞 اطلب توصيل</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">+500</div><div class="stat-label">منتج متاح</div></div>
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">أيام الأسبوع</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">طازج يومياً</div></div>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card">
-        <span class="hero-emoji">🛒</span>
-        <div style="color:#fff;font-weight:800;font-size:1.1rem">تسوق أفضل، عِش أفضل</div>
-        <div style="color:rgba(255,255,255,.7);font-size:.82rem;margin-top:4px">Shop Better, Live Better</div>
-        <div class="hero-stats">
-          <div class="stat"><div class="stat-num">+500</div><div class="stat-lbl">منتج يومياً</div></div>
-          <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">أيام/أسبوع</div></div>
-          <div class="stat"><div class="stat-num">🚚</div><div class="stat-lbl">توصيل منزلي</div></div>
-          <div class="stat"><div class="stat-num">🔥</div><div class="stat-lbl">عروض أسبوعية</div></div>
+        <div class="hero-emoji-grid">
+          <div class="emoji-item"><span class="e">🥖</span><span class="label">المخبز</span></div>
+          <div class="emoji-item"><span class="e">🥩</span><span class="label">الملحمة</span></div>
+          <div class="emoji-item"><span class="e">🥦</span><span class="label">خضروات</span></div>
+          <div class="emoji-item"><span class="e">🍎</span><span class="label">فواكه</span></div>
+          <div class="emoji-item"><span class="e">🍦</span><span class="label">مثلجات</span></div>
+          <div class="emoji-item"><span class="e">🛒</span><span class="label">تسوق</span></div>
         </div>
+        <div class="promo-badge">🎉 عروض أسبوعية حصرية كل جمعة!</div>
       </div>
     </div>
   </div>
@@ -245,29 +282,27 @@ footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="container">
-    <div style="max-width:600px">
-      <span class="section-tag">🏪 من نحن — About Us</span>
-      <h2 class="section-title">سوبر ماركت <span>متكامل</span> لعائلتك</h2>
-      <p class="section-desc">نقدم تجربة تسوق راقية ومتكاملة للأسر في الحي والمناطق المجاورة، بمنتجات طازجة يومياً وأسعار تنافسية وخدمة متميزة.</p>
-    </div>
-    <div class="about-grid">
-      <div class="about-img">
-        <span class="big-emoji">🥬</span>
-        <div class="img-title">أسواق الواحة</div>
-        <div class="img-sub">Al-Juaidi Supermarket — منذ سنوات</div>
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-img-box">
+        <span class="about-big-emoji">🏪</span>
+        <div class="about-img-tag">منذ سنوات في خدمتكم</div>
       </div>
-      <div>
-        <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:12px">لماذا نختلف عن غيرنا؟</h3>
-        <p style="color:var(--gy);line-height:1.8;margin-bottom:24px;font-size:.93rem">أسواق الواحة ليس مجرد متجر، بل وجهة تسوق متكاملة تجمع تحت سقف واحد كل ما تحتاجه عائلتك — من أطيب خبز الفرن الطازج، إلى أجود قطوعات اللحم، إلى أنضر الخضار والفواكه. نلتزم بالجودة والنظافة وأفضل الأسعار.</p>
-        <div class="about-features">
-          <div class="feat-item"><div class="feat-icon">🥖</div><div class="feat-text">فرن مخبز طازج</div></div>
-          <div class="feat-item"><div class="feat-icon">🥩</div><div class="feat-text">ملحمة متكاملة</div></div>
-          <div class="feat-item"><div class="feat-icon">🥦</div><div class="feat-text">خضار وفواكه</div></div>
-          <div class="feat-item"><div class="feat-icon">🍦</div><div class="feat-text">قسم مثلجات</div></div>
-          <div class="feat-item"><div class="feat-icon">🚚</div><div class="feat-text">توصيل للمنازل</div></div>
-          <div class="feat-item"><div class="feat-icon">🏷️</div><div class="feat-text">عروض أسبوعية</div></div>
-        </div>
+      <div class="about-float f1">✅ جودة مضمونة</div>
+      <div class="about-float f2">🚚 توصيل سريع</div>
+    </div>
+    <div class="about-content">
+      <div class="section-tag">من نحن | About Us</div>
+      <h2>سوبر ماركت متكامل<br><span>لخدمة عائلتك</span></h2>
+      <p>سوبر ماركت الجعيدي هو وجهتك الشاملة للتسوق اليومي في الحي. نوفر لك أفضل المنتجات الغذائية والاستهلاكية بأسعار تنافسية وجودة لا تُضاهى.</p>
+      <p>نحرص على توفير منتجات طازجة يومياً من مخبز الفرن والملحمة وأقسام الخضار والفواكه، مع عروض أسبوعية مميزة تناسب جميع الأسر.</p>
+      <div class="about-features">
+        <div class="af-item"><div class="af-icon">🥖</div>فرن مخبز يومي</div>
+        <div class="af-item"><div class="af-icon">🚚</div>توصيل للمنازل</div>
+        <div class="af-item"><div class="af-icon">🎁</div>عروض أسبوعية</div>
+        <div class="af-item"><div class="af-icon">⏰</div>فتح كل الأسبوع</div>
+        <div class="af-item"><div class="af-icon">✅</div>منتجات طازجة</div>
+        <div class="af-item"><div class="af-icon">💰</div>أسعار تنافسية</div>
       </div>
     </div>
   </div>
@@ -275,105 +310,95 @@ footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
 
 <!-- SERVICES -->
 <section id="services">
-  <div class="container">
-    <div class="text-center">
-      <span class="section-tag">🛍️ أقسامنا — Our Sections</span>
-      <h2 class="section-title">كل شيء تحتاجه في <span>مكان واحد</span></h2>
-      <p class="section-desc">ستة أقسام متخصصة تحت سقف واحد، كل قسم يتميز بالجودة والطزاجة والتنوع</p>
+  <div class="section-header">
+    <div class="section-tag">أقسامنا | Our Sections</div>
+    <h2 class="section-title">كل ما تحتاجه <span>تحت سقف واحد</span></h2>
+    <p class="section-sub">نقدم لك تشكيلة متكاملة من الأقسام لتلبية جميع احتياجاتك اليومية والأسبوعية</p>
+    <div class="divider"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-icon svc-g">🥖</div>
+      <h3>فرن المخبز الطازج</h3>
+      <p>خبز طازج يومياً، معجنات ومخبوزات شهية تُعدّ بأجود المكونات وتخرج من الفرن ساخنة صباح كل يوم.</p>
+      <span class="svc-tag">طازج يومياً</span>
     </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="svc-icon">🥖</div>
-        <h3>فرن المخبز الطازج</h3>
-        <div class="en">Fresh Bakery</div>
-        <p>خبز طازج يومياً من أجود أنواع الدقيق، معجنات ومخبوزات متنوعة تُخبز أمامك بيد أمينة وطعم لا يُنسى.</p>
-      </div>
-      <div class="service-card">
-        <div class="svc-icon">🥩</div>
-        <h3>الملحمة</h3>
-        <div class="en">Butchery</div>
-        <p>أجود قطوعات اللحوم الطازجة والمبردة، مجهزة بأعلى معايير النظافة والجودة — لحم بقري وغنم ودجاج.</p>
-      </div>
-      <div class="service-card">
-        <div class="svc-icon">🥦</div>
-        <h3>الخضار والفواكه</h3>
-        <div class="en">Vegetables & Fruits</div>
-        <p>تشكيلة يومية من أطازج الخضار والفواكه المحلية والمستوردة، بألوانها وعطورها الطبيعية مباشرةً من المزرعة.</p>
-      </div>
-      <div class="service-card">
-        <div class="svc-icon">🍦</div>
-        <h3>المثلجات والألبان</h3>
-        <div class="en">Ice Cream & Dairy</div>
-        <p>قسم متكامل للمثلجات ومنتجات الألبان بمختلف الأصناف والمتعة، مثالي للعائلة في جميع الأوقات.</p>
-      </div>
-      <div class="service-card">
-        <div class="svc-icon">🏷️</div>
-        <h3>العروض الأسبوعية</h3>
-        <div class="en">Weekly Offers</div>
-        <p>عروض وتخفيضات حصرية كل أسبوع على المنتجات الأساسية والمختارة — وفّر أكثر مع كل تسوقة.</p>
-      </div>
-      <div class="service-card">
-        <div class="svc-icon">🚚</div>
-        <h3>التوصيل للمنازل</h3>
-        <div class="en">Home Delivery</div>
-        <p>خدمة توصيل سريعة وموثوقة لمنطقتك ومناطق مجاورة — تسوّق من المنزل واستلم طلبك طازجاً.</p>
-      </div>
+    <div class="service-card">
+      <div class="svc-icon svc-o">🥩</div>
+      <h3>الملحمة</h3>
+      <p>أفضل أنواع اللحوم الطازجة والدواجن المختارة. نضمن لك جودة عالية وأسعار مناسبة مع إمكانية التقطيع حسب الطلب.</p>
+      <span class="svc-tag">لحوم طازجة</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon svc-g">🥦</div>
+      <h3>قسم الخضروات</h3>
+      <p>تشكيلة واسعة من الخضروات الطازجة المتجددة يومياً، مختارة بعناية لتضمن لأسرتك أفضل جودة وأعلى قيمة غذائية.</p>
+      <span class="svc-tag">متجدد يومياً</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon svc-o">🍎</div>
+      <h3>قسم الفواكه</h3>
+      <p>فواكه موسمية وعالمية طازجة بألوانها الزاهية ومذاقها الرائع. نجدد التشكيلة باستمرار لتلبية جميع الأذواق.</p>
+      <span class="svc-tag">موسمي وعالمي</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon svc-g">🍦</div>
+      <h3>قسم المثلجات</h3>
+      <p>تشكيلة من أشهر ماركات المثلجات والأيس كريم لجميع الأعمار. منتجات مبردة على الدوام لتلبية رغباتك في كل وقت.</p>
+      <span class="svc-tag">تشكيلة واسعة</span>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon svc-o">🚚</div>
+      <h3>خدمة التوصيل</h3>
+      <p>نوصّل طلباتك إلى باب منزلك في أقصر وقت. خدمة التوصيل متاحة للأحياء المجاورة بسهولة وبأسعار معقولة.</p>
+      <span class="svc-tag">توصيل سريع</span>
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
-  <div class="container">
-    <div class="text-center">
-      <span class="section-tag">✨ عروضنا — Our Highlights</span>
-      <h2 class="section-title">أبرز <span>ما يميزنا</span></h2>
-      <p class="section-desc">لمحة عن أبرز ما يقدمه أسواق الواحة لعملائه الكرام</p>
+  <div class="section-header">
+    <div class="section-tag">عروضنا | Our Offers</div>
+    <h2 class="section-title">عروض وتخفيضات <span>لا تفوتك</span></h2>
+    <p class="section-sub">نقدم عروضاً أسبوعية حصرية على أفضل المنتجات لتوفير أكبر قدر ممكن لعائلتك</p>
+    <div class="divider"></div>
+  </div>
+  <div class="portfolio-grid">
+    <div class="port-card port-bg-g">
+      <div class="port-bg">🥖🧁</div>
+      <div class="port-overlay"></div>
+      <div class="port-content">
+        <span class="port-tag">عرض الجمعة</span>
+        <h3>عروض المخبز الأسبوعية</h3>
+        <p>خصومات على جميع المخبوزات والمعجنات كل يوم جمعة</p>
+      </div>
     </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-card">
-        <div class="p-thumb" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9)">
-          <div class="big-icon">🥬</div>
-          <div class="p-overlay"><div class="p-overlay-text">طزاجة مضمونة يومياً<br>Daily Fresh Guarantee</div></div>
-        </div>
-        <div class="p-body">
-          <h3>ركن الخضار الطازج</h3>
-          <p>تشكيلة واسعة من الخضار الموسمية والدائمة، تصل إلينا يومياً من أفضل المصادر.</p>
-          <span class="p-badge">خضار وفواكه</span>
-        </div>
+    <div class="port-card port-bg-o">
+      <div class="port-bg">🥩🍗</div>
+      <div class="port-overlay"></div>
+      <div class="port-content">
+        <span class="port-tag">عرض الملحمة</span>
+        <h3>باقات اللحوم والدواجن</h3>
+        <p>باقات مميزة من اللحوم الطازجة بأسعار تنافسية أسبوعياً</p>
       </div>
-      <div class="portfolio-card">
-        <div class="p-thumb" style="background:linear-gradient(135deg,#fff8e1,#ffecb3)">
-          <div class="big-icon">🥖</div>
-          <div class="p-overlay"><div class="p-overlay-text">خبز ساخن كل صباح<br>Hot Bread Every Morning</div></div>
-        </div>
-        <div class="p-body">
-          <h3>فرن المخبز</h3>
-          <p>خبز وطني وعيش فرنساوي ومعجنات شهية تُخبز صباحاً ومساءً بأحدث المعدات.</p>
-          <span class="p-badge">مخبز طازج</span>
-        </div>
+    </div>
+    <div class="port-card port-bg-b">
+      <div class="port-bg">🥦🍅</div>
+      <div class="port-overlay"></div>
+      <div class="port-content">
+        <span class="port-tag">سلة الخضار</span>
+        <h3>سلة الخضار والفواكه</h3>
+        <p>سلة متكاملة من أطازج الخضار والفواكه الموسمية بسعر مخفض</p>
       </div>
-      <div class="portfolio-card">
-        <div class="p-thumb" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9)">
-          <div class="big-icon">🥩</div>
-          <div class="p-overlay"><div class="p-overlay-text">جودة وأمانة في كل قطعة<br>Quality You Can Trust</div></div>
-        </div>
-        <div class="p-body">
-          <h3>الملحمة المتكاملة</h3>
-          <p>لحوم طازجة ومبردة بأعلى معايير الجودة والنظافة، مع قطوعات حسب الطلب.</p>
-          <span class="p-badge">ملحمة</span>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <div class="p-thumb" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">
-          <div class="big-icon">🏷️</div>
-          <div class="p-overlay"><div class="p-overlay-text">عروض لا تفوّتها<br>Deals Not to Miss</div></div>
-        </div>
-        <div class="p-body">
-          <h3>العروض الأسبوعية</h3>
-          <p>كل أسبوع عروض جديدة ومفاجآت على أكثر المنتجات طلباً — تابعنا دائماً.</p>
-          <span class="p-badge">عروض وتخفيضات</span>
-        </div>
+    </div>
+    <div class="port-card port-bg-p">
+      <div class="port-bg">🛒🎁</div>
+      <div class="port-overlay"></div>
+      <div class="port-content">
+        <span class="port-tag">عرض شهري</span>
+        <h3>حزمة التسوق الشهرية</h3>
+        <p>اجمع مشترياتك الشهرية في طلب واحد واحصل على توصيل مجاني</p>
       </div>
     </div>
   </div>
@@ -381,36 +406,35 @@ footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="container">
-    <div class="text-center">
-      <span class="section-tag">💬 آراء العملاء — Testimonials</span>
-      <h2 class="section-title" style="color:#fff">ماذا يقول <span style="color:var(--o)">عملاؤنا؟</span></h2>
-      <p class="section-desc">ثقة عملائنا هي أغلى جائزة نحصل عليها</p>
+  <div class="section-header">
+    <div class="section-tag">آراء عملائنا | Testimonials</div>
+    <h2 class="section-title">ماذا يقول <span>عملاؤنا</span></h2>
+    <p class="section-sub">رأي عملائنا هو أهم ما نحرص عليه — إليك بعض الآراء الحقيقية</p>
+    <div class="divider"></div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"سوبر ماركت الجعيدي من أفضل المحلات في الحي! المنتجات دائماً طازجة والأسعار معقولة جداً. خدمة التوصيل ممتازة وفي الوقت المحدد."</p>
+      <div class="test-author">
+        <div class="test-avatar">أ</div>
+        <div><div class="test-name">أم عبدالله</div><div class="test-loc">📍 حي الروضة</div></div>
+      </div>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>أسواق الواحة هو أفضل خيار للعائلة. الخضار دائماً طازجة والأسعار معقولة جداً. خبز الفرن لذيذ ويصحى صباح كل يوم!</p>
-        <div class="testi-author">
-          <div class="author-av">👩</div>
-          <div class="author-info"><h4>أم محمد</h4><span>عميلة منذ 3 سنوات</span></div>
-        </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"خبز الفرن عندهم لا يُضاهى! كل صباح نحرص على شراء الخبز الطازج منهم. الملحمة أيضاً جودتها عالية والموظفون متعاونون."</p>
+      <div class="test-author">
+        <div class="test-avatar">م</div>
+        <div><div class="test-name">محمد الزهراني</div><div class="test-loc">📍 الحي المجاور</div></div>
       </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>الملحمة ممتازة، اللحم طازج وجودته عالية. وخدمة التوصيل سريعة جداً — طلبي وصل في أقل من ساعة. ننصح به لكل الأسر.</p>
-        <div class="testi-author">
-          <div class="author-av">👨</div>
-          <div class="author-info"><h4>أبو خالد</h4><span>من سكان الحي</span></div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>العروض الأسبوعية مغرية وتوفر كثيراً على ميزانية المنزل. الموظفون محترمون ومتعاونون دائماً. مكان راقي ونظيف.</p>
-        <div class="testi-author">
-          <div class="author-av">👩</div>
-          <div class="author-info"><h4>أم عبدالله</h4><span>عميلة وفية</span></div>
-        </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <p class="test-text">"عروض الجمعة الأسبوعية رائعة وتوفر الكثير على الأسرة. أنصح جميع أهل الحي بالتسوق منهم، ما راح تندمون أبداً!"</p>
+      <div class="test-author">
+        <div class="test-avatar">ف</div>
+        <div><div class="test-name">فاطمة العمري</div><div class="test-loc">📍 الحي الجديد</div></div>
       </div>
     </div>
   </div>
@@ -418,151 +442,133 @@ footer{background:#0d2218;color:rgba(255,255,255,.7);padding:50px 24px 24px}
 
 <!-- FAQ -->
 <section id="faq">
-  <div class="container">
-    <div class="text-center">
-      <span class="section-tag">❓ الأسئلة الشائعة — FAQ</span>
-      <h2 class="section-title">أسئلة <span>يسألها عملاؤنا</span></h2>
-      <p class="section-desc">إجابات على أكثر الأسئلة شيوعاً حول خدماتنا</p>
+  <div class="section-header">
+    <div class="section-tag">الأسئلة الشائعة | FAQ</div>
+    <h2 class="section-title">أسئلة <span>يسألها عملاؤنا</span></h2>
+    <p class="section-sub">إجابات على أكثر الأسئلة شيوعاً حول خدماتنا وأقسامنا</p>
+    <div class="divider"></div>
+  </div>
+  <div class="faq-wrap">
+    <div class="faq-item active">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>ما هي ساعات العمل لديكم؟</span><div class="faq-arrow">▼</div></div>
+      <div class="faq-a"><p>نعمل سبعة أيام في الأسبوع من الساعة السابعة صباحاً حتى منتصف الليل. فرن المخبز يبدأ الإنتاج من الساعة السادسة صباحاً لضمان توفر الخبز الطازج.</p></div>
     </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <input type="checkbox" id="f1">
-        <label class="faq-q" for="f1">ما أوقات العمل في أسواق الواحة؟</label>
-        <div class="faq-a"><p>نفتح أبوابنا طوال أيام الأسبوع من الساعة 7 صباحاً حتى 11 مساءً، بدون إجازات — نحن هنا دائماً لخدمتك وعائلتك.</p></div>
-      </div>
-      <div class="faq-item">
-        <input type="checkbox" id="f2">
-        <label class="faq-q" for="f2">هل تتوفر خدمة التوصيل للمنازل؟</label>
-        <div class="faq-a"><p>نعم! نوفر خدمة توصيل سريعة للمنازل في الحي والمناطق المجاورة. تواصل معنا عبر الهاتف لطلب التوصيل واستفسار عن المنطقة والأوقات المتاحة.</p></div>
-      </div>
-      <div class="faq-item">
-        <input type="checkbox" id="f3">
-        <label class="faq-q" for="f3">متى تتوفر العروض الأسبوعية؟</label>
-        <div class="faq-a"><p>تتجدد عروضنا الأسبوعية كل خميس وتستمر حتى نفاد الكمية، وتشمل مواد غذائية أساسية ومنتجات مختارة بتخفيضات تصل إلى 30%.</p></div>
-      </div>
-      <div class="faq-item">
-        <input type="checkbox" id="f4">
-        <label class="faq-q" for="f4">هل يمكن طلب قطوعات لحم محددة من الملحمة؟</label>
-        <div class="faq-a"><p>بالتأكيد! ملحمتنا تقدم خدمة التقطيع حسب الطلب. يمكنك تحديد القطعة والوزن والشكل المطلوب، ونحن نجهزها لك بأعلى معايير النظافة.</p></div>
-      </div>
-      <div class="faq-item">
-        <input type="checkbox" id="f5">
-        <label class="faq-q" for="f5">هل الخبز يُخبز يومياً؟</label>
-        <div class="faq-a"><p>نعم، فرن المخبز يعمل صباحاً ومساءً لضمان توفر خبز ساخن وطازج طوال اليوم — خبز وطني، فرنساوي، ومعجنات متنوعة.</p></div>
-      </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل تتوفر خدمة التوصيل للمنازل؟</span><div class="faq-arrow">▼</div></div>
+      <div class="faq-a"><p>نعم، نوفر خدمة التوصيل للمنازل في الحي والمناطق المجاورة. للطلب يمكنك الاتصال بنا على الرقم 0549955996 أو إرسال طلبك عبر صفحة التواصل.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>متى تكون عروض الجمعة الأسبوعية؟</span><div class="faq-arrow">▼</div></div>
+      <div class="faq-a"><p>تصدر عروضنا الأسبوعية كل يوم خميس مساءً وتسري طوال يوم الجمعة. تشمل العروض مختلف الأقسام من مخبز وملحمة وخضار وفواكه ومنتجات أخرى.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل اللحوم في الملحمة طازجة يومياً؟</span><div class="faq-arrow">▼</div></div>
+      <div class="faq-a"><p>نعم بالتأكيد، نحرص على استقبال كميات طازجة يومياً وعدم تخزين اللحوم لفترات طويلة. جودة المنتج وسلامة العميل هي أولويتنا القصوى.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>هل يمكن الطلب المسبق لمناسبات؟</span><div class="faq-arrow">▼</div></div>
+      <div class="faq-a"><p>بالطبع! يمكنك التواصل معنا مسبقاً لتجهيز طلبات المناسبات من لحوم ومخبوزات وسلات خضار وفواكه. يُفضل التواصل قبل 24 ساعة على الأقل.</p></div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="container">
-    <div class="text-center">
-      <span class="section-tag">📞 تواصل معنا — Contact Us</span>
-      <h2 class="section-title">نسعد <span>بخدمتك دائماً</span></h2>
-      <p class="section-desc">سواء كان لديك سؤال أو طلب توصيل أو استفسار عن عروضنا، نحن هنا لك</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="info-card">
-          <div class="info-icon">📞</div>
-          <div class="info-text">
-            <h4>رقم الهاتف</h4>
-            <p><a href="tel:0500000000">0500000000</a></p>
-          </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-tag" style="background:rgba(255,255,255,0.1);color:var(--o)">تواصل معنا | Contact</div>
+      <h2>نحن هنا <span>لخدمتكم</span></h2>
+      <p>هل لديك استفسار أو تريد طلب توصيل؟ تواصل معنا الآن وسنرد عليك في أقرب وقت ممكن.</p>
+      <div class="contact-items">
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div><div class="ci-label">هاتف | Phone</div><div class="ci-val" dir="ltr">0549955996</div></div>
         </div>
-        <div class="info-card">
-          <div class="info-icon">📧</div>
-          <div class="info-text">
-            <h4>البريد الإلكتروني</h4>
-            <p><a href="mailto:info@caminotich.sa">info@caminotich.sa</a></p>
-          </div>
+        <div class="ci-item">
+          <div class="ci-icon">📧</div>
+          <div><div class="ci-label">بريد | Email</div><div class="ci-val">zahranir88@gmail.com</div></div>
         </div>
-        <div class="info-card">
-          <div class="info-icon">📍</div>
-          <div class="info-text">
-            <h4>الموقع</h4>
-            <p>الحي والمناطق المجاورة</p>
-          </div>
+        <div class="ci-item">
+          <div class="ci-icon">⏰</div>
+          <div><div class="ci-label">ساعات العمل</div><div class="ci-val">7 أيام | 7 صباحاً – 12 منتصف الليل</div></div>
         </div>
-        <div class="hours-card">
-          <h4>🕐 أوقات العمل</h4>
-          <div class="hours-row"><span>السبت – الخميس</span><span>7 ص – 11 م</span></div>
-          <div class="hours-row"><span>الجمعة</span><span>8 ص – 11 م</span></div>
-          <div class="hours-row"><span>التوصيل المنزلي</span><span>متاح يومياً 🚚</span></div>
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-label">الموقع</div><div class="ci-val">الحي والمناطق المجاورة</div></div>
         </div>
       </div>
-      <div class="contact-form">
-        <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:24px">أرسل لنا رسالة</h3>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm" onsubmit="submitForm(event)">
         <div class="form-row">
-          <div class="form-group">
-            <label>الاسم الكريم</label>
-            <input type="text" placeholder="اسمك الكريم">
-          </div>
-          <div class="form-group">
-            <label>رقم الجوال</label>
-            <input type="tel" placeholder="05xxxxxxxx">
-          </div>
+          <div class="form-group"><label>الاسم الكامل</label><input type="text" placeholder="اسمك الكريم" required></div>
+          <div class="form-group"><label>رقم الهاتف</label><input type="tel" placeholder="05xxxxxxxx" required></div>
         </div>
         <div class="form-group">
-          <label>موضوع الرسالة</label>
-          <select>
+          <label>نوع الطلب</label>
+          <select required>
+            <option value="">اختر...</option>
             <option>طلب توصيل</option>
             <option>استفسار عن عرض</option>
-            <option>استفسار عن منتج</option>
-            <option>اقتراح أو شكوى</option>
+            <option>طلب لمناسبة</option>
+            <option>شكوى أو اقتراح</option>
             <option>أخرى</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>رسالتك</label>
-          <textarea placeholder="اكتب رسالتك هنا..."></textarea>
-        </div>
-        <button class="form-submit">📩 إرسال الرسالة — Send Message</button>
-      </div>
+        <div class="form-group"><label>رسالتك</label><textarea placeholder="اكتب رسالتك أو تفاصيل طلبك هنا..." required></textarea></div>
+        <button type="submit" class="btn-submit">🛒 أرسل الطلب الآن</button>
+        <div class="success-msg" id="successMsg">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</div>
+      </form>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo">
-          <div class="logo-icon">🛒</div>
-          <div class="logo-text">الواحة<span>Al-Juaidi Supermarket</span></div>
-        </div>
-        <p>سوبر ماركت متكامل للمواد الغذائية والاستهلاكية، يضم فرن مخبز طازج وملحمة وأقسام خضار وفواكه ومثلجات. وجهتك الأولى للتسوق العائلي.</p>
-      </div>
-      <div class="footer-col">
-        <h4>روابط سريعة</h4>
-        <ul>
-          <li><a href="#home">الرئيسية</a></li>
-          <li><a href="#about">من نحن</a></li>
-          <li><a href="#services">أقسامنا</a></li>
-          <li><a href="#portfolio">عروضنا</a></li>
-          <li><a href="#faq">الأسئلة الشائعة</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>تواصل معنا</h4>
-        <ul>
-          <li><a href="tel:0500000000">📞 0500000000</a></li>
-          <li><a href="mailto:info@caminotich.sa">📧 info@caminotich.sa</a></li>
-          <li><a href="#contact">📍 موقعنا</a></li>
-          <li><a href="#testimonials">💬 آراء العملاء</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 <span>أسواق الواحة</span> — جميع الحقوق محفوظة | تصميم بـ ❤️ لخدمة عائلتك</p>
-    </div>
+  <div class="footer-logo">سوبر ماركت <span>الجعيدي</span> | Al-Jaaidi Supermarket</div>
+  <div class="footer-links">
+    <a href="#home">الرئيسية</a>
+    <a href="#about">من نحن</a>
+    <a href="#services">أقسامنا</a>
+    <a href="#portfolio">عروضنا</a>
+    <a href="#testimonials">آراء العملاء</a>
+    <a href="#faq">الأسئلة</a>
+    <a href="#contact">تواصل</a>
   </div>
+  <p class="footer-copy">© 2024 سوبر ماركت الجعيدي — جميع الحقوق محفوظة | 📞 0549955996</p>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
-<a href="https://wa.me/966500000000" class="wa-float" target="_blank" title="تواصل عبر واتساب">💬</a>
-
+<script>
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
+function toggleFaq(el){
+  var item=el.parentElement;
+  var allItems=document.querySelectorAll('.faq-item');
+  allItems.forEach(function(i){if(i!==item){i.classList.remove('active')}});
+  item.classList.toggle('active');
+}
+function submitForm(e){
+  e.preventDefault();
+  var btn=document.querySelector('.btn-submit');
+  btn.textContent='⏳ جاري الإرسال...';
+  btn.disabled=true;
+  setTimeout(function(){
+    document.getElementById('successMsg').style.display='block';
+    btn.textContent='✅ تم الإرسال';
+    btn.style.background='linear-gradient(135deg,#27ae60,#2ecc71)';
+  },1500);
+}
+window.addEventListener('scroll',function(){
+  var nav=document.querySelector('nav');
+  if(window.scrollY>50){nav.style.boxShadow='0 4px 30px rgba(0,0,0,0.15)'}
+  else{nav.style.boxShadow='0 2px 20px rgba(0,0,0,0.08)'}
+});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
 </body>
 </html>
