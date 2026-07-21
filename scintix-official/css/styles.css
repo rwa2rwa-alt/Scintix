@@ -301,10 +301,11 @@ body {
   background: transparent;
   border: none;
   box-shadow: none;
-  font-size: 5.8rem;
+  font-size: clamp(1.6rem, 6vw, 3.1rem);
+  max-width: 92%;
   font-weight: 800;
   letter-spacing: 0.04em;
-  text-shadow: none;
+  text-shadow: 0 0 18px rgba(255,255,255,0.35);
   font-family: Georgia, serif;
   text-align: center;
   white-space: nowrap;
