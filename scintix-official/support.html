@@ -120,7 +120,7 @@
       await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
+        body: JSON.stringify({...data, k: "cmt_sec_9f4Kq7Xw2R"})
       });
       statusEl.className = 'ok';
       statusEl.textContent = 'تم استلام تذكرتك ✅ بنتواصل معك قريباً';
