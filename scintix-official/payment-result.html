@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex"/>
+<title>نتيجة الدفع | كامينوتك</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .res-wrap{max-width:520px;margin:0 auto;padding:64px 20px;text-align:center}
+  .res-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:36px 28px}
+  .res-icon{font-size:2.6rem;line-height:1;margin-bottom:14px}
+  .res-title{font-size:1.35rem;font-weight:800;margin:0 0 10px}
+  .res-body{color:var(--text-muted);line-height:1.8;margin:0 0 22px}
+  .res-ref{font-size:.75rem;color:var(--text-muted);
+           font-family:ui-monospace,monospace;direction:ltr;word-break:break-all;margin-top:18px}
+  .ok{color:#4ade80} .bad{color:#f87171} .wait{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="res-wrap">
+  <a class="brand" href="index.html" style="justify-content:center;margin-bottom:26px">
+    <img class="brand-logo" src="assets/logo.png" alt="كامينوتك"/>
+    <span class="brand-name">Caminotich</span>
+  </a>
+
+  <div class="res-card">
+    <div class="res-icon wait" id="res-icon">⏳</div>
+    <h1 class="res-title" id="res-title">جاري التحقق من عملية الدفع…</h1>
+    <p class="res-body" id="res-body">لا تغلقي هذه الصفحة، العملية تستغرق ثوانٍ معدودة.</p>
+    <a class="btn btn-primary" id="res-cta" href="index.html" style="display:none">العودة للرئيسية</a>
+    <div class="res-ref" id="res-ref"></div>
+  </div>
+</div>
+
+<script>
+/* ⚠️ استبدلي هذا برابط ويبهوك سيناريو "Payment Verify" في Make */
+var VERIFY_HOOK = 'https://hook.eu2.make.com/XXXXXXXXXXXXXXXXXXXX';
+var SEC_KEY     = 'cmt_sec_9f4Kq7Xw2R';
+
+var paymentId = new URLSearchParams(location.search).get('id') || '';
+var icon = document.getElementById('res-icon');
+var ttl  = document.getElementById('res-title');
+var body = document.getElementById('res-body');
+var cta  = document.getElementById('res-cta');
+
+if (paymentId) document.getElementById('res-ref').textContent = 'REF: ' + paymentId;
+
+function show(cls, ic, title, text){
+  icon.className = 'res-icon ' + cls;
+  icon.textContent = ic;
+  ttl.textContent  = title;
+  body.textContent = text;
+  cta.style.display = 'inline-flex';
+}
+
+if (!paymentId) {
+  show('bad', '⚠️', 'رقم العملية مفقود',
+       'لم نستلم رقم عملية دفع. إذا خُصم مبلغ من بطاقتك تواصلي معنا على info@caminotich.sa.');
+} else {
+  fetch(VERIFY_HOOK, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ k: SEC_KEY, payment_id: paymentId })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (d && d.status === 'paid') {
+      show('ok', '✅', 'تم استلام دفعتك بنجاح',
+           'وصلتك رسالة تأكيد على بريدك، وبدأ فريقنا العمل على مشروعك. شكراً لثقتك بكامينوتك.');
+    } else if (d && d.status === 'failed') {
+      show('bad', '❌', 'لم تكتمل عملية الدفع',
+           (d.message || 'رُفضت العملية من البنك.') + ' لم يُخصم أي مبلغ. جربي بطاقة أخرى.');
+      cta.textContent = 'إعادة المحاولة';
+      cta.href = 'index.html#plans';
+    } else {
+      show('wait', '⏳', 'العملية قيد المراجعة',
+           'استلمنا طلبك ونتحقق منه يدوياً. سنراسلك خلال وقت قصير.');
+    }
+  })
+  .catch(function(){
+    show('wait', '⏳', 'تعذّر التحقق الآن',
+         'استلمنا رقم عمليتك وسنتحقق منها يدوياً ونراسلك. احتفظي بالرقم أدناه.');
+  });
+}
+</script>
+</body>
+</html>

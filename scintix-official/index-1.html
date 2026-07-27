@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كامينوتك Caminotich | شركة تقنية سعودية — تصميم وبناء المواقع بالذكاء الاصطناعي</title>
+    <meta name="description" content="كامينوتك (Caminotich) شركة تقنية سعودية متخصصة في بناء المواقع وتصميمها بالذكاء الاصطناعي وتقديم حلول تقنية متكاملة للأعمال. خمس باقات واضحة تبدأ من 899 ريال. سجل تجاري موحد 7054770941." />
+    <meta name="keywords" content="كامينوتك, كامينو تك, Caminotich, شركة تقنية, حلول تقنية, بناء مواقع, تصميم مواقع, انشاء موقع الكتروني, شركة تقنية سعودية, تصميم موقع بالذكاء الاصطناعي, برمجة مواقع, هوية بصرية" />
+    <link rel="canonical" href="https://caminotich.sa/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Caminotich" />
+    <meta property="og:title" content="كامينوتك Caminotich | تصميم وبناء المواقع بالذكاء الاصطناعي" />
+    <meta property="og:description" content="موقعك جاهز بسرعة الذكاء الاصطناعي — باقات واضحة تبدأ من 899 ريال. وكالة سعودية مرخصة." />
+    <meta property="og:url" content="https://caminotich.sa/" />
+    <meta property="og:image" content="https://caminotich.sa/assets/logo.png" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Camino_tich" />
+    <meta name="twitter:title" content="كامينوتك Caminotich | تصميم وبناء المواقع بالذكاء الاصطناعي" />
+    <meta name="twitter:description" content="باقات واضحة تبدأ من 899 ريال — تصميم ومحتوى وإطلاق آلي." />
+    <meta name="twitter:image" content="https://caminotich.sa/assets/logo.png" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ProfessionalService","name":"Caminotich","alternateName":["كامينوتك","كامينو تك","Camino Tech","شركة كامينوتك للحلول التقنية"],"url":"https://caminotich.sa","logo":"https://caminotich.sa/assets/logo.png","email":"info@caminotich.sa","identifier":"7054770941","description":"وكالة رقمية سعودية تعمل بالذكاء الاصطناعي لبناء المواقع والهوية الرقمية","areaServed":"SA","priceRange":"899-12000 SAR","telephone": "+966535145002",
+      "sameAs":["https://www.linkedin.com/company/caminotich","https://www.youtube.com/@caminotich","https://www.instagram.com/caminotich","https://www.tiktok.com/@caminotich","https://x.com/Camino_tich","https://www.snapchat.com/add/caminotich"]}
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      /* ── Pulse badge ── */
+      .plan-featured-badge {
+        position: absolute;
+        top: -13px;
+        right: 50%;
+        transform: translateX(50%);
+        background: linear-gradient(135deg,#8d4cff,#5cf0ff);
+        color: #06071a;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: 4px 14px;
+        border-radius: 999px;
+        white-space: nowrap;
+        letter-spacing: .04em;
+      }
+      .plan-card { position: relative; }
+
+      /* ── Plans grid 5 cols ── */
+      @media (min-width: 1080px) {
+        .plans-grid { grid-template-columns: repeat(5, minmax(0,1fr)); gap: 16px; }
+      }
+      @media (max-width: 1079px) and (min-width: 640px) {
+        .plans-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      }
+
+      /* ── AI Analyser section ── */
+      #ai-analyser {
+        margin: 44px 0 0;
+        padding: 36px 32px;
+        border-radius: 28px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      #ai-analyser h2 {
+        font-size: 1.6rem;
+        margin: 0 0 6px;
+      }
+      #ai-analyser .sub {
+        color: var(--text-muted);
+        margin: 0 0 24px;
+        font-size: .95rem;
+      }
+      .ai-form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      @media (max-width: 640px) { .ai-form { grid-template-columns: 1fr; } }
+      .ai-form textarea { grid-column: 1 / -1; resize: vertical; min-height: 90px; }
+      .ai-form button   { grid-column: 1 / -1; }
+      .ai-form input,
+      .ai-form textarea {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 13px 16px;
+        color: var(--text);
+        font-size: .95rem;
+        font-family: inherit;
+        transition: border-color .2s;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .ai-form input::placeholder,
+      .ai-form textarea::placeholder { color: var(--text-muted); }
+      .ai-form input:focus,
+      .ai-form textarea:focus { border-color: var(--accent); }
+      .ai-form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 28px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        font-family: inherit;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #031228;
+        transition: transform .25s, box-shadow .25s, opacity .2s;
+      }
+      .ai-form button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(92,240,255,.25);
+      }
+      .ai-form button:disabled { opacity: .55; cursor: not-allowed; }
+      .ai-form button .spinner {
+        width: 18px; height: 18px;
+        border: 2px solid rgba(3,18,40,.3);
+        border-top-color: #031228;
+        border-radius: 50%;
+        animation: spin .7s linear infinite;
+        display: none;
+      }
+      .ai-form button.loading .spinner { display: block; }
+      .ai-form button.loading .btn-label { display: none; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .ai-result {
+        margin-top: 22px;
+        padding: 22px 20px;
+        border-radius: 18px;
+        background: rgba(92,240,255,0.05);
+        border: 1px solid rgba(92,240,255,0.18);
+        display: none;
+        line-height: 1.9;
+        color: var(--text);
+        white-space: pre-wrap;
+      }
+      .ai-result.visible { display: block; }
+      .ai-result strong { color: var(--accent); }
+
+      .ai-error {
+        margin-top: 16px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        background: rgba(255,60,60,.07);
+        border: 1px solid rgba(255,60,60,.2);
+        color: #ff7070;
+        display: none;
+        font-size: .9rem;
+      }
+      .ai-error.visible { display: block; }
+
+      /* ── FAQ (per package) ── */
+      .faq-panel { margin: 48px 0 24px; }
+      .faq-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+      .faq-item {
+        padding: 4px 26px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        transition: border-color .2s;
+      }
+      .faq-item[open] { border-color: rgba(92,240,255,.28); }
+      .faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1rem;
+        list-style: none;
+      }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-icon {
+        flex-shrink: 0;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(92,240,255,0.1);
+        border: 1px solid rgba(92,240,255,0.2);
+        color: var(--accent);
+        font-size: 1.1rem;
+        transition: transform .25s ease;
+      }
+      .faq-item[open] .faq-icon { transform: rotate(45deg); background: var(--accent); color: #031228; }
+      .faq-item p {
+        margin: 0 0 20px;
+        color: var(--text-muted);
+        line-height: 1.9;
+        font-size: .92rem;
+      }
+    </style>
+      <!-- Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script>
+</head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#">
+          <img class="brand-logo" src="assets/logo.png" alt="Caminotich" />
+          <span class="brand-text">
+            <span class="brand-name">Caminotich</span>
+            <span class="header-tagline" data-i18n="header.tagline" data-i18n-html="true">ودع العمل اليدوي وإبدأ استثمارك في المستقبل مع <span class="brand-accent">Caminotich</span></span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" aria-label="فتح القائمة" data-i18n-aria-label="nav.toggle">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav">
+          <a href="#services"    data-i18n="nav.services">الخدمات</a>
+          <a href="#plans"       data-i18n="nav.plans">الباقات</a>
+          <a href="#portfolio"   data-i18n="nav.portfolio">أعمالنا</a>
+          <a href="#faq"         data-i18n="nav.faq">الأسئلة الشائعة</a>
+          <a href="#ai-analyser" data-i18n="nav.ai">الذكاء الاصطناعي</a>
+          <a href="#contact"     data-i18n="nav.contact">اتصل بنا</a>
+        </nav>
+
+        <label class="language-switcher" aria-label="Language switcher">
+          <select class="language-select" data-lang-select>
+            <option value="ar">عربي</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+
+        <label class="language-switcher" aria-label="Currency switcher">
+          <select class="language-select" data-currency-select>
+            <option value="sar">ريال SAR</option>
+            <option value="usd">دولار USD</option>
+          </select>
+        </label>
+
+        <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer"
+           data-form-link data-i18n="cta.consult">اطلب استشارة</a>
+      </header>
+
+      <main>
+        <!-- ════════════ HERO ════════════ -->
+        <section class="hero-panel">
+          <div class="hero-copy">
+            <span class="eyebrow" data-i18n="hero.eyebrow">حلول تقنية متكاملة</span>
+            <h1 data-i18n-html="hero.title">نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span></h1>
+            <p data-i18n="hero.description">من الفكرة إلى الإطلاق والدعم المستمر، نقدم حلولاً تقنية متكاملة تساعدك على النمو وتقليل التكاليف.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#plans" data-i18n="hero.primary">استكشف الباقات</a>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-i18n="hero.secondary">تواصل معنا</a>
+            </div>
+            <div class="hero-stats">
+              <div><strong>72<small> ساعة</small></strong><span data-i18n="stats.launch">متوسط زمن الإطلاق</span></div>
+              <div><strong>10</strong><span data-i18n="stats.services">خدمات تقنية</span></div>
+              <div><strong>24/7</strong><span data-i18n="stats.support">مراقبة ودعم</span></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="glow-orbit"></div>
+            <div class="hero-logo-wrap">
+              <img class="hero-logo" src="assets/logo.png" alt="شعار Caminotich" />
+            </div>
+            <div class="hero-badge">Caminotich</div>
+          </div>
+        </section>
+
+        <!-- ════════════ SERVICES ════════════ -->
+        <section id="services" class="features-panel">
+          <div class="panel-heading" style="grid-column:1/-1">
+            <span data-i18n="features.heading">خدماتنا</span>
+            <p data-i18n="features.description">عشر خدمات تقنية متكاملة تغطي رحلة مشروعك من التأسيس حتى التشغيل اليومي.</p>
+          </div>
+          <article class="feature-card">
+            <h3 data-i18n="features.web.title">تطوير المواقع</h3>
+            <p data-i18n="features.web.body">مواقع سريعة ومتجاوبة مبنية على أسس تقنية سليمة وجاهزة لمحركات البحث.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.ecom.title">المتاجر الإلكترونية</h3>
+            <p data-i18n="features.ecom.body">متاجر متكاملة مع بوابات دفع سعودية وإدارة مخزون وربط شحن.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.mobile.title">تطبيقات الجوال</h3>
+            <p data-i18n="features.mobile.body">تطبيقات iOS وAndroid بواجهات عربية أصيلة وأداء مستقر.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.erp.title">الأنظمة الإدارية ERP / CRM</h3>
+            <p data-i18n="features.erp.body">أنظمة تدير عملياتك وعملاءك ومخزونك في مكان واحد بدل الجداول المتفرقة.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.ai.title">حلول الذكاء الاصطناعي</h3>
+            <p data-i18n="features.ai.body">مساعدات ذكية وتحليل بيانات وتوليد محتوى مدمج داخل أنظمتك.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.auto.title">الأتمتة</h3>
+            <p data-i18n="features.auto.body">ربط أدواتك عبر Make وZapier وn8n لتشغيل المهام المتكررة بلا تدخل يدوي.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.dash.title">لوحات البيانات</h3>
+            <p data-i18n="features.dash.body">لوحات مؤشرات لحظية تعرض أداء عملك بأرقام واضحة وقابلة للقرار.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.brand.title">الهوية الرقمية</h3>
+            <p data-i18n="features.brand.body">شعار وهوية بصرية متكاملة تظهر باحترافية على كل منصاتك.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.mkt.title">التسويق الرقمي</h3>
+            <p data-i18n="features.mkt.body">حملات مدروسة وتحسين محركات البحث ومحتوى يجذب عملاء فعليين.</p>
+          </article>
+          <article class="feature-card">
+            <h3 data-i18n="features.care.title">الصيانة والاستضافة</h3>
+            <p data-i18n="features.care.body">استضافة آمنة ونسخ احتياطي ومتابعة دورية تضمن استمرار عملك.</p>
+          </article>
+        </section>
+
+        <!-- ════════════ PLANS (5 packages) ════════════ -->
+        <section id="plans" class="plans-panel">
+          <div class="panel-heading">
+            <span data-i18n="plans.heading">باقة مرنة تناسب احتياجاتك</span>
+            <p data-i18n="plans.description">اختر الباقة المناسبة لنمو شركتك — من المشاريع الناشئة حتى المؤسسات الكبرى.</p>
+          </div>
+
+          <div class="plans-grid">
+
+            <!-- Spark -->
+            <article class="plan-card plan-spark" onclick="location.href='plan.html?pkg=spark'" style="cursor:pointer">
+              <div class="plan-name">Spark</div>
+              <div class="plan-price"><span data-price="899">899</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-maint" data-maint="90" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
+              <ul>
+                <li data-i18n="plans.spark.one">نماذج رقمية احترافية</li>
+                <li data-i18n="plans.spark.two">صفحة هبوط ذكية</li>
+                <li data-i18n="plans.spark.three">ربط CRM أساسي</li>
+                <li data-i18n="plans.spark.four">دعم تقني أساسي</li>
+                <li data-i18n="plans.spark.five">تحليلات بسيطة</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-package="Spark" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
+              <a class="plan-video" data-video-for="Spark" target="_blank" rel="noopener"
+                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
+            </article>
+
+            <!-- Glow -->
+            <article class="plan-card plan-glow" onclick="location.href='plan.html?pkg=glow'" style="cursor:pointer">
+              <div class="plan-name">Glow</div>
+              <div class="plan-price"><span data-price="1799">1,799</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-maint" data-maint="180" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
+              <ul>
+                <li data-i18n="plans.glow.one">كل خدمات Spark</li>
+                <li data-i18n="plans.glow.two">مساعد واتساب ذكي</li>
+                <li data-i18n="plans.glow.three">أتمتة المبيعات</li>
+                <li data-i18n="plans.glow.four">ربط CRM متقدم</li>
+                <li data-i18n="plans.glow.five">إشعارات تلقائية</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-package="Glow" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
+              <a class="plan-video" data-video-for="Glow" target="_blank" rel="noopener"
+                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
+            </article>
+
+            <!-- Pulse — FEATURED -->
+            <article class="plan-card plan-pulse" onclick="location.href='plan.html?pkg=pulse'" style="cursor:pointer">
+              <div class="plan-featured-badge" data-i18n="plans.pulse.badge">الأكثر طلباً</div>
+              <div class="plan-name">Pulse</div>
+              <div class="plan-price"><span data-price="3299">3,299</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-maint" data-maint="330" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
+              <ul>
+                <li data-i18n="plans.pulse.one">كل خدمات Glow</li>
+                <li data-i18n="plans.pulse.two">تطبيق ويب متكامل</li>
+                <li data-i18n="plans.pulse.three">لوحة تحكم متقدمة</li>
+                <li data-i18n="plans.pulse.four">تكامل بوابة دفع</li>
+                <li data-i18n="plans.pulse.five">تقارير أداء متقدمة</li>
+              </ul>
+              <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-package="Pulse" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
+              <a class="plan-video" data-video-for="Pulse" target="_blank" rel="noopener"
+                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
+            </article>
+
+            <!-- Nova -->
+            <article class="plan-card plan-nova" onclick="location.href='plan.html?pkg=nova'" style="cursor:pointer">
+              <div class="plan-name">Nova</div>
+              <div class="plan-price"><span data-price="5999">5,999</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-maint" data-maint="600" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
+              <ul>
+                <li data-i18n="plans.nova.one">كل خدمات Pulse</li>
+                <li data-i18n="plans.nova.two">أتمتة متقدمة AI</li>
+                <li data-i18n="plans.nova.three">متعدد المستخدمين</li>
+                <li data-i18n="plans.nova.four">تكامل ERP / CRM</li>
+                <li data-i18n="plans.nova.five">دعم فني مخصص</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-package="Nova" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
+              <a class="plan-video" data-video-for="Nova" target="_blank" rel="noopener"
+                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
+            </article>
+
+            <!-- Zenith -->
+            <article class="plan-card plan-zenith" onclick="location.href='plan.html?pkg=zenith'" style="cursor:pointer">
+              <div class="plan-name">Zenith</div>
+              <div class="plan-price"><span data-price="12000">12,000</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-maint" data-maint="1200" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
+              <ul>
+                <li data-i18n="plans.zenith.one">حلول مؤسسية كاملة</li>
+                <li data-i18n="plans.zenith.two">تكامل كامل مع الأنظمة</li>
+                <li data-i18n="plans.zenith.three">مراقبة 24/7</li>
+                <li data-i18n="plans.zenith.four">SLA مضمون</li>
+                <li data-i18n="plans.zenith.five">دعم غير محدود</li>
+              </ul>
+              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
+                 data-form-link data-package="Zenith" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
+              <a class="plan-video" data-video-for="Zenith" target="_blank" rel="noopener"
+                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ════════════ FAQ (per package) ════════════ -->
+        <section id="portfolio" style="padding:70px 0">
+          <div style="text-align:center;margin-bottom:36px">
+            <h2 data-i18n="portfolio.title" style="color:#fff;font-size:1.8rem;margin:0 0 10px">أعمالنا</h2>
+            <p data-i18n="portfolio.description" style="color:#94a3b8;max-width:560px;margin:0 auto">مواقع حقيقية بُنيت بالكامل عبر منظومتنا الذكية — كل مشروع يمثل باقة مختلفة. اضغط لتصفح أي موقع مباشرة.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+          <a href="https://caminotich-demo-cars.netlify.app" target="_blank" rel="noopener" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(92,240,255,0.15);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .25s, border-color .25s" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(92,240,255,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(92,240,255,0.15)'">
+            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=60" alt="موتورز لاين" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:150px;object-fit:cover;display:block"/>
+            <div style="padding:16px 18px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <strong style="color:#fff;font-size:1rem">موتورز لاين</strong>
+                <span style="background:#fbbf24;color:#05071a;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px">Spark</span>
+              </div>
+              <p style="color:#94a3b8;font-size:.8rem;margin:0">معرض سيارات — موقع تعريفي سريع بصفحة واحدة</p>
+            </div>
+          </a>
+          <a href="https://caminotich-demo-salon.netlify.app" target="_blank" rel="noopener" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(92,240,255,0.15);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .25s, border-color .25s" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(92,240,255,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(92,240,255,0.15)'">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=60" alt="صالون لمسة روز" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:150px;object-fit:cover;display:block"/>
+            <div style="padding:16px 18px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <strong style="color:#fff;font-size:1rem">صالون لمسة روز</strong>
+                <span style="background:#a78bfa;color:#05071a;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px">Glow</span>
+              </div>
+              <p style="color:#94a3b8;font-size:.8rem;margin:0">تجميل نسائي — موقع متعدد الأقسام بهوية ناعمة</p>
+            </div>
+          </a>
+          <a href="https://caminotich-demo-art.netlify.app" target="_blank" rel="noopener" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(92,240,255,0.15);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .25s, border-color .25s" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(92,240,255,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(92,240,255,0.15)'">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&q=60" alt="غاليري ألوان" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:150px;object-fit:cover;display:block"/>
+            <div style="padding:16px 18px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <strong style="color:#fff;font-size:1rem">غاليري ألوان</strong>
+                <span style="background:#5cf0ff;color:#05071a;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px">Nova</span>
+              </div>
+              <p style="color:#94a3b8;font-size:.8rem;margin:0">معرض فنون — تجربة بريميوم بمعرض أعمال وشهادات</p>
+            </div>
+          </a>
+          <a href="https://caminotich-demo-market.netlify.app" target="_blank" rel="noopener" style="display:block;background:rgba(255,255,255,0.03);border:1px solid rgba(92,240,255,0.15);border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .25s, border-color .25s" onmouseover="this.style.transform='translateY(-6px)';this.style.borderColor='rgba(92,240,255,0.5)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(92,240,255,0.15)'">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=60" alt="أسواق الواحة" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:150px;object-fit:cover;display:block"/>
+            <div style="padding:16px 18px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <strong style="color:#fff;font-size:1rem">أسواق الواحة</strong>
+                <span style="background:#34d399;color:#05071a;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:999px">Zenith</span>
+              </div>
+              <p style="color:#94a3b8;font-size:.8rem;margin:0">تجزئة وأغذية — موقع متكامل بأقسام وعروض</p>
+            </div>
+          </a>
+          </div>
+        </section>
+
+        <section id="faq" class="faq-panel">
+          <div class="panel-heading">
+            <span data-i18n="faq.heading">أسئلة شائعة عن باقاتنا</span>
+            <p data-i18n="faq.description">إجابات سريعة تساعدك تختار الباقة الصح</p>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary><span data-i18n="faq.spark.q">هل باقة Spark مناسبة لمشروع ناشئ صغير؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.spark.a">نعم، Spark مصممة خصيصاً للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة وبأقل تكلفة.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.glow.q">وش يميز Glow عن Spark؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.glow.a">Glow تضيف مساعد واتساب ذكي وأتمتة مبيعات وربط CRM متقدم — مناسبة لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.pulse.q">ليش Pulse هي الأكثر طلباً؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.pulse.a">لأنها توازن مثالي بين السعر والمزايا: تطبيق ويب متكامل، لوحة تحكم متقدمة، وتكامل بوابة دفع — تغطي أغلب احتياجات الأعمال المتوسطة.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.nova.q">هل Nova تدعم أكثر من مستخدم؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.nova.a">نعم، Nova مبنية لدعم فرق متعددة المستخدمين مع أتمتة AI متقدمة وتكامل مباشر مع أنظمة ERP/CRM الحالية عندك.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.zenith.q">وش يشمله الدعم غير المحدود في Zenith؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.zenith.a">Zenith مخصصة للمؤسسات: مراقبة على مدار الساعة، اتفاقية مستوى خدمة (SLA) مضمونة، وفريق دعم مخصص يستجيب فوراً لأي طارئ.</p>
+            </details>
+            <details class="faq-item">
+              <summary><span data-i18n="faq.switch.q">أقدر أغيّر باقتي لاحقاً؟</span><span class="faq-icon">+</span></summary>
+              <p data-i18n="faq.switch.a">بالتأكيد، تقدر تترقّى لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- ════════════ AI PROJECT ANALYSER ════════════ -->
+        <section id="ai-analyser">
+          <h2 data-i18n="ai.title">🤖 تحليل مشروعك بالذكاء الاصطناعي</h2>
+          <p class="sub" data-i18n="ai.sub">أخبرنا عن مشروعك وسنرشّدك إلى أنسب باقة وخطة عمل فورية</p>
+
+          <div style="text-align:center;padding:12px 0 4px">
+            <a href="analyse.html"
+               style="display:inline-flex;align-items:center;gap:10px;
+                      padding:15px 36px;border-radius:999px;border:none;cursor:pointer;
+                      font-weight:700;font-size:1rem;font-family:inherit;
+                      background:linear-gradient(135deg,var(--accent),var(--accent-strong));
+                      color:#031228;text-decoration:none;
+                      box-shadow:0 12px 32px rgba(92,240,255,.2);"
+               data-i18n="ai.btn">✦ تحليل المشروع</a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ═══ روابط فيديوهات الباقات — الصقي معرّف كل فيديو (11 خانة) ═══ -->
+      <script>
+      /* الترتيب مؤكَّد من أروى: عربي ثم إنجليزي */
+      var PACKAGE_VIDEOS = {
+        Spark : { ar: 'EB3mJNFc9TY', en: '4_sUAzVMrag' },
+        Glow  : { ar: '_B1n5UTVs2M', en: 'L8D6eWw8F-k' },
+        Pulse : { ar: 'j_lXpbSUQc8', en: 'jDvSdsRaD5g' },
+        Nova  : { ar: '7R2dvhM2WvI', en: 'o3WTgro7Kl0' },
+        Zenith: { ar: 'DMdHhxVA1MU', en: 'zG3vYkhSrO8' }
+      };
+
+      function applyPackageVideos() {
+        var lang = localStorage.getItem('caminotich-lang') === 'en' ? 'en' : 'ar';
+        document.querySelectorAll('[data-video-for]').forEach(function (a) {
+          var v = PACKAGE_VIDEOS[a.getAttribute('data-video-for')];
+          var id = v && v[lang];
+          if (!id) { a.style.display = 'none'; return; }
+          a.href = 'https://www.youtube.com/watch?v=' + id;
+          a.textContent = lang === 'en' ? '▶ Watch package video' : '▶ شاهد فيديو الباقة';
+          a.style.display = 'inline-block';
+        });
+      }
+
+      window.applyPackageMaint = function () {
+        var cur  = localStorage.getItem('caminotich-currency') === 'usd' ? 'usd' : 'sar';
+        var lang = localStorage.getItem('caminotich-lang')     === 'en'  ? 'en'  : 'ar';
+        document.querySelectorAll('[data-maint]').forEach(function (el) {
+          var sar = Number(el.getAttribute('data-maint'));
+          var amt = cur === 'usd' ? '$ ' + (sar / 3.754).toFixed(2) : sar + (lang === 'en' ? ' SAR' : ' ريال');
+          el.textContent = (lang === 'en' ? 'Optional hosting & maintenance: ' : 'صيانة واستضافة اختيارية: ')
+                         + amt + (lang === 'en' ? ' / month' : ' / شهرياً');
+        });
+      };
+      window.applyPackageMaint();
+
+      applyPackageVideos();
+      var _langSel = document.querySelector('[data-lang-select]');
+      if (_langSel) _langSel.addEventListener('change', function () {
+        setTimeout(applyPackageVideos, 0);   /* بعد ما يحدّث applyLanguage الـlocalStorage */
+      });
+      </script>
+
+      <!-- ════════════ FOOTER ════════════ -->
+      <footer id="contact" class="site-footer">
+        <div>
+          <h2 data-i18n="footer.title">هل أنت مستعد للانطلاق مع Caminotich؟</h2>
+          <p data-i18n="footer.description">ابدأ استراتيجية رقمية جديدة مع فريق متخصص في التحول الرقمي والتجربة المتميزة.</p>
+        </div>
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
+           data-form-link data-i18n="footer.cta">ابدأ الآن</a>
+      </footer>
+
+      <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
+    </div>
+
+    <script src="js/script.js"></script>
+
+    <!-- 🤖 Chatbase AI Widget -->
+    <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+
+
+    <!-- WhatsApp floating button -->
+    <a href="https://wa.me/966535145002"
+       target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+       style="position:fixed;bottom:24px;inset-inline-start:24px;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.35)">
+      <svg viewBox="0 0 32 32" width="30" height="30" fill="#fff"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.5c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.9.9.9-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.5 4.5-10 10-10s10 4.5 10 10-4.5 10-10 10zm5.5-7.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+    </a>
+  </body>
+</html>
