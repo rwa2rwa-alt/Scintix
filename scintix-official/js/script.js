@@ -206,8 +206,8 @@ const T = {
 
 // ─── Currency ─────────────────────────────────────────────────
 const CURRENCY_LABELS = {
-  ar: { sar: 'SAR / شهرياً', usd: '$ / month' },
-  en: { sar: 'SAR / month',  usd: '$ / month'  }
+  ar: { sar: 'ريال · دفعة واحدة', usd: 'دولار تقريباً · دفعة واحدة' },
+  en: { sar: 'SAR · one-time',    usd: 'USD approx. · one-time'   }
 };
 
 // ─── State ────────────────────────────────────────────────────
@@ -216,8 +216,9 @@ const state = {
   currency: localStorage.getItem('caminotich-currency') || 'sar'
 };
 
+const RATE_USD = 3.754;   // ريال لكل دولار — العرض فقط، التحصيل دائماً بالريال
 function formatPrice(value, currency) {
-  const v = currency === 'usd' ? value / 3.75 : value;
+  const v = currency === 'usd' ? value / RATE_USD : value;
   const n = new Intl.NumberFormat(state.lang === 'en' ? 'en-US' : 'ar-SA', {
     minimumFractionDigits: currency === 'usd' ? 2 : 0,
     maximumFractionDigits: 2
@@ -409,8 +410,7 @@ function buildSubFooter(lang) {
 function applyLanguage(lang) {
   if (!T[lang]) lang = 'ar';
 
-  state.lang     = lang;
-  state.currency = lang === 'en' ? 'usd' : 'sar';
+  state.lang = lang;
 
   // 1) اتجاه الصفحة ولغتها
   html.setAttribute('lang', lang);
@@ -423,8 +423,7 @@ function applyLanguage(lang) {
   buildSubFooter(lang);
 
   // 4) حفظ التفضيل
-  localStorage.setItem('caminotich-lang',     lang);
-  localStorage.setItem('caminotich-currency', state.currency);
+  localStorage.setItem('caminotich-lang', lang);
 
   // 5) إشعار صفحات السياسات والرؤية
   if (typeof window.onPageLanguageChange === 'function') {
@@ -447,5 +446,21 @@ langSelect?.addEventListener('change', () => {
   applyLanguage(langSelect.value);
 });
 
+// ─── مبدّل العملة (عرض فقط — التحصيل بالريال دائماً) ──────────
+const curSelect = document.querySelector('[data-currency-select]');
+function applyCurrency(cur) {
+  state.currency = cur === 'usd' ? 'usd' : 'sar';
+  localStorage.setItem('caminotich-currency', state.currency);
+  translateDOM(state.lang);
+  const note = document.querySelector('[data-billing-note]');
+  if (note) note.style.display = state.currency === 'usd' ? 'block' : 'none';
+  if (typeof window.applyPackageMaint === 'function') window.applyPackageMaint();
+}
+if (curSelect) {
+  curSelect.value = state.currency;
+  curSelect.addEventListener('change', () => applyCurrency(curSelect.value));
+}
+
 // ─── Boot ─────────────────────────────────────────────────────
 applyLanguage(state.lang);
+applyCurrency(state.currency);
