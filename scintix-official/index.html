@@ -249,7 +249,7 @@
         <section class="hero-panel">
           <div class="hero-copy">
             <span class="eyebrow" data-i18n="hero.eyebrow">حلول تقنية متكاملة</span>
-            <h1 data-i18n-html="hero.title">نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span></h1>
+            <h1 data-i18n="hero.title" data-i18n-html="true">نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span></h1>
             <p data-i18n="hero.description">من الفكرة إلى الإطلاق والدعم المستمر، نقدم حلولاً تقنية متكاملة تساعدك على النمو وتقليل التكاليف.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#plans" data-i18n="hero.primary">استكشف الباقات</a>
@@ -257,7 +257,7 @@
                  data-form-link data-i18n="hero.secondary">تواصل معنا</a>
             </div>
             <div class="hero-stats">
-              <div><strong>72<small> ساعة</small></strong><span data-i18n="stats.launch">متوسط زمن الإطلاق</span></div>
+              <div><strong>72<small data-i18n="stats.hours"> ساعة</small></strong><span data-i18n="stats.launch">متوسط زمن الإطلاق</span></div>
               <div><strong>10</strong><span data-i18n="stats.services">خدمات تقنية</span></div>
               <div><strong>24/7</strong><span data-i18n="stats.support">مراقبة ودعم</span></div>
             </div>
@@ -342,8 +342,6 @@
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
                  data-form-link data-package="Spark" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
-              <a class="plan-video" data-video-for="Spark" target="_blank" rel="noopener"
-                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
             </article>
 
             <!-- Glow -->
@@ -360,8 +358,6 @@
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
                  data-form-link data-package="Glow" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
-              <a class="plan-video" data-video-for="Glow" target="_blank" rel="noopener"
-                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
             </article>
 
             <!-- Pulse — FEATURED -->
@@ -379,8 +375,6 @@
               </ul>
               <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer"
                  data-form-link data-package="Pulse" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
-              <a class="plan-video" data-video-for="Pulse" target="_blank" rel="noopener"
-                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
             </article>
 
             <!-- Nova -->
@@ -397,8 +391,6 @@
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
                  data-form-link data-package="Nova" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
-              <a class="plan-video" data-video-for="Nova" target="_blank" rel="noopener"
-                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
             </article>
 
             <!-- Zenith -->
@@ -415,14 +407,18 @@
               </ul>
               <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
                  data-form-link data-package="Zenith" data-i18n="plans.choose" onclick="event.stopPropagation()">ابدأ الآن</a>
-              <a class="plan-video" data-video-for="Zenith" target="_blank" rel="noopener"
-                 style="display:none;font-size:.8rem;margin-top:10px;color:var(--accent)">▶ شاهد فيديو الباقة</a>
             </article>
 
           </div>
         </section>
 
         <!-- ════════════ FAQ (per package) ════════════ -->
+        <p data-billing-note data-i18n="billing.note" style="display:none;text-align:center;font-size:.82rem;
+             color:var(--text-muted);margin:-10px auto 30px;max-width:620px">
+          الأسعار بالدولار تقريبية للاسترشاد فقط (1 دولار = 3.754 ريال).
+          يتم التحصيل الفعلي بالريال السعودي عبر بوابة ميسر.
+        </p>
+
         <section id="portfolio" style="padding:70px 0">
           <div style="text-align:center;margin-bottom:36px">
             <h2 data-i18n="portfolio.title" style="color:#fff;font-size:1.8rem;margin:0 0 10px">أعمالنا</h2>
@@ -524,45 +520,25 @@
 
       </main>
 
-      <!-- ═══ روابط فيديوهات الباقات — الصقي معرّف كل فيديو (11 خانة) ═══ -->
+      <!-- ═══ أسطر الصيانة الشهرية — تتبع اللغة والعملة ═══ -->
       <script>
-      /* الترتيب مؤكَّد من أروى: عربي ثم إنجليزي */
-      var PACKAGE_VIDEOS = {
-        Spark : { ar: 'EB3mJNFc9TY', en: '4_sUAzVMrag' },
-        Glow  : { ar: '_B1n5UTVs2M', en: 'L8D6eWw8F-k' },
-        Pulse : { ar: 'j_lXpbSUQc8', en: 'jDvSdsRaD5g' },
-        Nova  : { ar: '7R2dvhM2WvI', en: 'o3WTgro7Kl0' },
-        Zenith: { ar: 'DMdHhxVA1MU', en: 'zG3vYkhSrO8' }
-      };
-
-      function applyPackageVideos() {
-        var lang = localStorage.getItem('caminotich-lang') === 'en' ? 'en' : 'ar';
-        document.querySelectorAll('[data-video-for]').forEach(function (a) {
-          var v = PACKAGE_VIDEOS[a.getAttribute('data-video-for')];
-          var id = v && v[lang];
-          if (!id) { a.style.display = 'none'; return; }
-          a.href = 'https://www.youtube.com/watch?v=' + id;
-          a.textContent = lang === 'en' ? '▶ Watch package video' : '▶ شاهد فيديو الباقة';
-          a.style.display = 'inline-block';
-        });
-      }
-
       window.applyPackageMaint = function () {
         var cur  = localStorage.getItem('caminotich-currency') === 'usd' ? 'usd' : 'sar';
         var lang = localStorage.getItem('caminotich-lang')     === 'en'  ? 'en'  : 'ar';
         document.querySelectorAll('[data-maint]').forEach(function (el) {
           var sar = Number(el.getAttribute('data-maint'));
-          var amt = cur === 'usd' ? '$ ' + (sar / 3.754).toFixed(2) : sar + (lang === 'en' ? ' SAR' : ' ريال');
-          el.textContent = (lang === 'en' ? 'Optional hosting & maintenance: ' : 'صيانة واستضافة اختيارية: ')
+          var amt = cur === 'usd' ? '$ ' + (sar / 3.754).toFixed(2)
+                                  : sar + (lang === 'en' ? ' SAR' : ' ريال');
+          el.textContent = (lang === 'en' ? 'Optional hosting & maintenance: '
+                                          : 'صيانة واستضافة اختيارية: ')
                          + amt + (lang === 'en' ? ' / month' : ' / شهرياً');
         });
       };
       window.applyPackageMaint();
 
-      applyPackageVideos();
       var _langSel = document.querySelector('[data-lang-select]');
       if (_langSel) _langSel.addEventListener('change', function () {
-        setTimeout(applyPackageVideos, 0);   /* بعد ما يحدّث applyLanguage الـlocalStorage */
+        setTimeout(window.applyPackageMaint, 0);
       });
       </script>
 
