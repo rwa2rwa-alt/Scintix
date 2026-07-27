@@ -37,8 +37,35 @@ const T = {
     'nav.contact':      'اتصل بنا',
     'cta.consult':      'اطلب استشارة',
     'hero.eyebrow':     'حلول تقنية متكاملة',
-    'hero.title':       'حلول ذكية. آمنة. <span>نمو مستدام.</span>',
-    'hero.description': 'نحو تجربة رقمية متكاملة، نربط بين الاستراتيجية والتقنية والتصميم لمنتجات تلائم السوق والمستخدم وتسرع نمو أعمالك.',
+    'hero.title':       'نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span>',
+    'hero.description': 'من الفكرة إلى الإطلاق والدعم المستمر، نقدم حلولاً تقنية متكاملة تساعدك على النمو وتقليل التكاليف.',
+    'stats.launch':     'متوسط زمن الإطلاق',
+    'stats.hours':      ' ساعة',
+    'billing.note':     'الأسعار بالدولار تقريبية للاسترشاد فقط (1 دولار = 3.754 ريال). يتم التحصيل الفعلي بالريال السعودي عبر بوابة ميسر.',
+    'stats.services':   'خدمات تقنية',
+    'stats.support':    'مراقبة ودعم',
+    'features.heading':     'خدماتنا',
+    'features.description': 'عشر خدمات تقنية متكاملة تغطي رحلة مشروعك من التأسيس حتى التشغيل اليومي.',
+    'features.web.title': 'تطوير المواقع',
+    'features.web.body':  'مواقع سريعة ومتجاوبة مبنية على أسس تقنية سليمة وجاهزة لمحركات البحث.',
+    'features.ecom.title': 'المتاجر الإلكترونية',
+    'features.ecom.body':  'متاجر متكاملة مع بوابات دفع سعودية وإدارة مخزون وربط شحن.',
+    'features.mobile.title': 'تطبيقات الجوال',
+    'features.mobile.body':  'تطبيقات iOS وAndroid بواجهات عربية أصيلة وأداء مستقر.',
+    'features.erp.title': 'الأنظمة الإدارية ERP / CRM',
+    'features.erp.body':  'أنظمة تدير عملياتك وعملاءك ومخزونك في مكان واحد بدل الجداول المتفرقة.',
+    'features.ai.title': 'حلول الذكاء الاصطناعي',
+    'features.ai.body':  'مساعدات ذكية وتحليل بيانات وتوليد محتوى مدمج داخل أنظمتك.',
+    'features.auto.title': 'الأتمتة',
+    'features.auto.body':  'ربط أدواتك عبر Make وZapier وn8n لتشغيل المهام المتكررة بلا تدخل يدوي.',
+    'features.dash.title': 'لوحات البيانات',
+    'features.dash.body':  'لوحات مؤشرات لحظية تعرض أداء عملك بأرقام واضحة وقابلة للقرار.',
+    'features.brand.title': 'الهوية الرقمية',
+    'features.brand.body':  'شعار وهوية بصرية متكاملة تظهر باحترافية على كل منصاتك.',
+    'features.mkt.title': 'التسويق الرقمي',
+    'features.mkt.body':  'حملات مدروسة وتحسين محركات البحث ومحتوى يجذب عملاء فعليين.',
+    'features.care.title': 'الصيانة والاستضافة',
+    'features.care.body':  'استضافة آمنة ونسخ احتياطي ومتابعة دورية تضمن استمرار عملك.',
     'hero.primary':     'استكشف الباقات',
     'hero.secondary':   'تواصل معنا',
     'stats.projects':   'مشروع منشأ',
@@ -125,8 +152,35 @@ const T = {
     'nav.contact':      'Contact',
     'cta.consult':      'Request Consultation',
     'hero.eyebrow':     'Integrated Tech Solutions',
-    'hero.title':       'Smart. Secure. <span>Sustainable Growth.</span>',
-    'hero.description': 'A complete digital experience connecting strategy, technology, and design — products that fit your market and accelerate your business growth.',
+    'hero.title':       'We build smart digital systems <span>that automate your work and accelerate growth.</span>',
+    'hero.description': 'From idea to launch and ongoing support, we deliver integrated technical solutions that help you grow and cut costs.',
+    'stats.launch':     'Average Launch Time',
+    'stats.hours':      ' hours',
+    'billing.note':     'USD prices are approximate, for reference only (1 USD = 3.754 SAR). Actual charges are made in Saudi Riyals via the Moyasar gateway.',
+    'stats.services':   'Tech Services',
+    'stats.support':    'Monitoring & Support',
+    'features.heading':     'Our Services',
+    'features.description': 'Ten integrated tech services covering your project from setup through daily operation.',
+    'features.web.title': 'Web Development',
+    'features.web.body':  'Fast, responsive websites built on solid technical foundations and ready for search engines.',
+    'features.ecom.title': 'E-Commerce',
+    'features.ecom.body':  'Complete stores with Saudi payment gateways, inventory management and shipping integration.',
+    'features.mobile.title': 'Mobile Apps',
+    'features.mobile.body':  'iOS and Android apps with native Arabic interfaces and stable performance.',
+    'features.erp.title': 'ERP / CRM Systems',
+    'features.erp.body':  'Systems that run your operations, customers and inventory in one place instead of scattered sheets.',
+    'features.ai.title': 'AI Solutions',
+    'features.ai.body':  'Smart assistants, data analysis and content generation built into your systems.',
+    'features.auto.title': 'Automation',
+    'features.auto.body':  'Connecting your tools via Make, Zapier and n8n so repetitive tasks run without manual work.',
+    'features.dash.title': 'Dashboards',
+    'features.dash.body':  'Live dashboards showing your business performance in clear, decision-ready numbers.',
+    'features.brand.title': 'Digital Identity',
+    'features.brand.body':  'A logo and full visual identity that looks professional across all your platforms.',
+    'features.mkt.title': 'Digital Marketing',
+    'features.mkt.body':  'Considered campaigns, SEO and content that attracts real customers.',
+    'features.care.title': 'Hosting & Maintenance',
+    'features.care.body':  'Secure hosting, backups and regular monitoring that keep your business running.',
     'hero.primary':     'Explore Plans',
     'hero.secondary':   'Contact Us',
     'stats.projects':   'Projects Delivered',
@@ -206,8 +260,8 @@ const T = {
 
 // ─── Currency ─────────────────────────────────────────────────
 const CURRENCY_LABELS = {
-  ar: { sar: 'ريال · دفعة واحدة', usd: 'دولار تقريباً · دفعة واحدة' },
-  en: { sar: 'SAR · one-time',    usd: 'USD approx. · one-time'   }
+  ar: { sar: '· دفعة واحدة', usd: '· دفعة واحدة (تقريبي)' },
+  en: { sar: '· one-time',    usd: '· one-time (approx.)'   }
 };
 
 // ─── State ────────────────────────────────────────────────────
@@ -219,11 +273,11 @@ const state = {
 const RATE_USD = 3.754;   // ريال لكل دولار — العرض فقط، التحصيل دائماً بالريال
 function formatPrice(value, currency) {
   const v = currency === 'usd' ? value / RATE_USD : value;
-  const n = new Intl.NumberFormat(state.lang === 'en' ? 'en-US' : 'ar-SA', {
+  const n = new Intl.NumberFormat('en-US', {   // أرقام لاتينية في اللغتين — توحيد العرض المالي
     minimumFractionDigits: currency === 'usd' ? 2 : 0,
     maximumFractionDigits: 2
   }).format(v);
-  return currency === 'usd' ? `$ ${n}` : `SAR ${n}`;
+  return currency === 'usd' ? `$ ${n}` : (state.lang === 'en' ? `SAR ${n}` : `${n} ريال`);
 }
 
 // ─── Translate DOM ────────────────────────────────────────────
@@ -393,7 +447,23 @@ function buildSubFooter(lang) {
   visImg.onerror = function() { this.style.display = 'none'; };
   visDiv.append(visLbl, visImg);
 
-  botRow.append(crDiv, mailDiv, socRow, visDiv);
+  /* ═══ شعار المركز السعودي للأعمال ═══
+     ⚠️ لا يُعرض إلا بعد صدور التوثيق الفعلي — عرضه قبل ذلك ادعاء اعتماد غير قائم.
+     للتفعيل: غيّري القيمة أدناه إلى true فقط. */
+  const SBC_VERIFIED = false;
+
+  const sbcDiv = document.createElement('div');
+  sbcDiv.style.cssText = 'display:flex;align-items:center;gap:10px';
+  if (SBC_VERIFIED) {
+    const sbcImg = document.createElement('img');
+    sbcImg.src = 'assets/Saudi%20Business%20Center%20Logo%20-%20PNG%20-%20SVG.png';
+    sbcImg.alt = isAr ? 'المركز السعودي للأعمال' : 'Saudi Business Center';
+    sbcImg.style.cssText = 'height:40px;opacity:0.85;flex-shrink:0;object-fit:contain';
+    sbcImg.onerror = function () { this.style.display = 'none'; };
+    sbcDiv.appendChild(sbcImg);
+  }
+
+  botRow.append(crDiv, mailDiv, socRow, visDiv, sbcDiv);
 
   // copyright
   const copy = document.createElement('p');
