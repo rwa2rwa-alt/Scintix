@@ -3,9 +3,9 @@
   --surface: rgba(10, 16, 35, 0.96);
   --surface-strong: rgba(3, 7, 19, 0.98);
   --text: #eef5ff;
-  --text-muted: #8ba5ca;
-  --accent: #5cf0ff;
-  --accent-strong: #8d4cff;
+  --text-muted: #9db2cc;
+  --accent: #57c6d8;
+  --accent-strong: #7b5fc9;
   --navy: #0f1f56;
   --border: rgba(255, 255, 255, 0.1);
   --shadow: 0 30px 90px rgba(20, 40, 90, 0.35);
@@ -52,18 +52,16 @@ body {
   gap: 4px;
 }
 .brand-name {
-  color: var(--navy);
+  color: var(--text);
   line-height: 1;
 }
 .header-tagline {
   color: #ffffff;
   font-size: 0.94rem;
   line-height: 1.5;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.22);
-  animation: tagline-flicker 4.8s ease-in-out infinite;
 }
 .brand-accent {
-  color: var(--navy);
+  color: var(--accent);
   font-weight: 800;
 }
 .brand-logo {
@@ -157,7 +155,7 @@ body {
 .btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   color: #031228;
-  box-shadow: 0 18px 44px rgba(92, 240, 255, 0.22);
+  box-shadow: 0 18px 44px rgba(87, 198, 216, 0.22);
 }
 .btn-secondary,
 .btn-outline {
@@ -305,7 +303,7 @@ body {
   max-width: 92%;
   font-weight: 800;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 18px rgba(255,255,255,0.35);
+  text-shadow: 0 0 6px rgba(255,255,255,0.35);
   font-family: Georgia, serif;
   text-align: center;
   white-space: nowrap;
@@ -330,15 +328,15 @@ body {
 @keyframes tagline-flicker {
   0%, 100% {
     opacity: 1;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.22);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.22);
   }
   45% {
     opacity: 0.55;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
   }
   70% {
     opacity: 0.82;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.16);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.16);
   }
 }
 .features-panel {
