@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<title>حزمة إثبات — {{contract_no}}</title>
+<style>
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",Tahoma,Arial,sans-serif;color:#111;background:#fff;
+       margin:0;padding:28px 34px;line-height:1.85;font-size:13px}
+  h1{font-size:19px;margin:0 0 4px;letter-spacing:-.2px}
+  h2{font-size:14px;margin:26px 0 8px;padding-bottom:5px;border-bottom:2px solid #111;
+     text-transform:none}
+  .sub{color:#666;font-size:11.5px;margin-bottom:2px}
+  table{width:100%;border-collapse:collapse;margin:6px 0 2px}
+  th,td{border:1px solid #ccc;padding:6px 9px;text-align:right;vertical-align:top;font-size:12px}
+  th{background:#f4f4f6;width:34%;font-weight:600;white-space:nowrap}
+  td.mono{font-family:"Courier New",monospace;font-size:11px;word-break:break-all;direction:ltr;text-align:left}
+  .sig-box{border:1px solid #ccc;padding:10px;text-align:center;background:#fff;margin-top:6px}
+  .sig-box img{max-width:340px;max-height:130px}
+  .note{background:#f7f7f9;border-right:3px solid #111;padding:9px 12px;font-size:11.5px;margin:10px 0}
+  .terms{border:1px solid #ddd;padding:12px;font-size:11px;line-height:1.9;
+         background:#fcfcfd;white-space:pre-wrap;max-height:none}
+  .foot{margin-top:26px;padding-top:10px;border-top:1px solid #ddd;color:#666;font-size:10.5px}
+  .kv{display:flex;gap:22px;flex-wrap:wrap;font-size:11.5px;color:#444}
+  @page{margin:14mm}
+  @media print{body{padding:0}}
+</style>
+</head>
+<body>
+
+<div class="sub">Caminotich · كامينوتك — السجل التجاري ٧٠٥٤٧٧٠٩٤١ — info@caminotich.sa</div>
+<h1>حزمة إثبات المعاملة — {{contract_no}}</h1>
+<div class="kv">
+  <span>تاريخ الإصدار: {{generated_at}}</span>
+  <span>مرجع السجل: {{record_id}}</span>
+  <span>أُعدّت رداً على: {{dispute_ref}}</span>
+</div>
+
+<h2>١ · أطراف العقد</h2>
+<table>
+  <tr><th>المورّد</th><td>مؤسسة كامينوتك — س.ت ٧٠٥٤٧٧٠٩٤١ — caminotich.sa</td></tr>
+  <tr><th>العميل (المؤسسة)</th><td>{{company}}</td></tr>
+  <tr><th>الموقّع</th><td>{{signer_name}} — الصفة: {{signer_role}}</td></tr>
+  <tr><th>البريد الإلكتروني</th><td class="mono">{{client_email}}</td></tr>
+  <tr><th>الجوال</th><td class="mono">{{phone_e164}} ({{phone_country}})</td></tr>
+</table>
+
+<h2>٢ · الخدمة المتعاقد عليها</h2>
+<table>
+  <tr><th>الباقة</th><td>{{package}}</td></tr>
+  <tr><th>المبلغ</th><td>{{amount_sar}} ريال سعودي — دفعة واحدة</td></tr>
+  <tr><th>تاريخ إصدار العقد</th><td>{{created_at}}</td></tr>
+</table>
+
+<h2>٣ · إثبات التوقيع الإلكتروني</h2>
+<table>
+  <tr><th>وقت التوقيع (خادم Make، UTC)</th><td class="mono">{{signed_at}}</td></tr>
+  <tr><th>عنوان IP للموقّع</th><td class="mono">{{sign_ip}}</td></tr>
+  <tr><th>معرّف الطلب</th><td class="mono">{{request_id}}</td></tr>
+  <tr><th>نوع التوقيع</th><td>{{sig_type}} — {{sig_text}}</td></tr>
+  <tr><th>الجهاز والمتصفح</th><td class="mono">{{sign_user_agent}}</td></tr>
+  <tr><th>المنصة · الشاشة</th><td class="mono">{{sign_platform}} · {{sign_screen}}</td></tr>
+  <tr><th>المنطقة الزمنية · اللغة</th><td class="mono">{{sign_tz}} · {{sign_locale}}</td></tr>
+  <tr><th>وقت جهاز العميل</th><td class="mono">{{client_ts}}</td></tr>
+</table>
+<div class="sig-box">
+  <img src="{{sig_data_uri}}" alt="توقيع العميل"/>
+  <div class="sub" style="margin-top:6px">التوقيع كما رُسم أو كُتب في المتصفح لحظة الاعتماد</div>
+</div>
+<div class="note">
+  وقت التوقيع وعنوان IP مُسجّلان من جانب الخادم (طابع تنفيذ Make ورأس <span class="mono">x-forwarded-for</span>)،
+  لا من جهاز العميل. وقت جهاز العميل مُدرج للمقارنة فقط ولا يُعتد به منفرداً.
+</div>
+
+<h2>٤ · إثبات ما تمّت الموافقة عليه</h2>
+<table>
+  <tr><th>نسخة الشروط</th><td class="mono">{{terms_version}}</td></tr>
+  <tr><th>لغة التوقيع</th><td>{{sign_lang}}</td></tr>
+  <tr><th>بصمة النص (SHA-256)</th><td class="mono">{{terms_sha256}}</td></tr>
+  <tr><th>النسخة المنشورة</th><td class="mono">https://caminotich.sa/terms/{{terms_version}}/{{sign_lang}}.txt</td></tr>
+</table>
+<div class="note">
+  النص أدناه هو المحفوظ في أرشيف الشروط لهذه النسخة. حساب SHA-256 عليه ينتج البصمة
+  المسجلة أعلاه لحظة التوقيع، ما يثبت أن بنود العقد لم تُعدّل بعد اعتماد العميل.
+  تاريخ نشر هذه النسخة موثّق مستقلاً في سجل الإيداعات على GitHub.
+</div>
+<div class="terms">{{terms_text}}</div>
+
+<h2>٥ · إثبات السداد</h2>
+<table>
+  <tr><th>معرّف العملية (Moyasar)</th><td class="mono">{{moyasar_payment_id}}</td></tr>
+  <tr><th>الحالة · التاريخ</th><td>{{payment_status}} — {{paid_at}}</td></tr>
+  <tr><th>المبلغ المحصّل</th><td>{{paid_amount}} ريال</td></tr>
+  <tr><th>وسيلة الدفع</th><td class="mono">{{payment_method}} •••• {{card_last4}}</td></tr>
+  <tr><th>رمز التفويض</th><td class="mono">{{auth_code}}</td></tr>
+  <tr><th>نتيجة المصادقة 3-D Secure</th><td class="mono">{{three_ds_result}}</td></tr>
+</table>
+
+<h2>٦ · إثبات التسليم</h2>
+<table>
+  <tr><th>تاريخ التسليم</th><td>{{delivered_at}}</td></tr>
+  <tr><th>رابط المُسلَّم</th><td class="mono">{{delivery_url}}</td></tr>
+  <tr><th>إشعار التسليم</th><td>{{delivery_notice}}</td></tr>
+  <tr><th>إقرار استلام العميل</th><td>{{delivery_ack}}</td></tr>
+</table>
+
+<h2>٧ · سجل التواصل</h2>
+<table>
+  <tr><th>قناة التواصل</th><td>{{comm_channel}}</td></tr>
+  <tr><th>عدد الرسائل الموثّقة</th><td>{{comm_count}}</td></tr>
+  <tr><th>أول وآخر تواصل</th><td>{{comm_first}} — {{comm_last}}</td></tr>
+</table>
+
+<h2>٨ · محاولات التوقيع (سجل التدقيق)</h2>
+<table>
+  <tr><th>عدد المحاولات على هذا العقد</th><td>{{attempts_count}}</td></tr>
+  <tr><th>المحاولات المرفوضة</th><td>{{attempts_rejected}}</td></tr>
+  <tr><th>تفصيل</th><td>{{attempts_detail}}</td></tr>
+</table>
+
+<div class="foot">
+  أُعدّت هذه الوثيقة آلياً من سجل العقد رقم {{record_id}} في قاعدة بيانات كامينوتك بتاريخ {{generated_at}}.
+  جميع الطوابع الزمنية بتوقيت UTC ما لم يُذكر خلاف ذلك.
+  للاستفسار: info@caminotich.sa
+</div>
+
+</body>
+</html>

@@ -69,6 +69,28 @@ body{
 .c-section h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--strong);margin-bottom:14px}
 .c-section p,.c-section li{font-size:.88rem;color:#334;line-height:1.9}
 .c-section ul{padding-inline-start:18px;display:grid;gap:6px}
+/* ── Gate / notices / field errors ── */
+.cmt-notice{
+  margin:0;padding:12px 28px;font-size:.85rem;line-height:1.75;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.cmt-notice.err{background:#fff5f5;color:#9b2226}
+.cmt-notice.warn{background:#fffaf0;color:#8a5a00}
+.cmt-notice.ok{background:#f2fbf5;color:#166534}
+.cmt-notice a{color:inherit;font-weight:700}
+.cmt-notice.load{background:#f6f7fb;color:#5c6b8a}
+.field-err{font-size:.72rem;color:#c1121f;margin:-2px 0 5px;line-height:1.5;display:none}
+.inp-bad{border-color:#c1121f !important;background:#fff7f7 !important}
+.phone-hint{font-size:.7rem;color:#8892a8;margin:-2px 0 5px;line-height:1.5}
+
+/* ── Package warning (باقة غير محددة) ── */
+.pkg-warn{
+  margin-top:12px;padding:10px 14px;border-radius:10px;
+  background:#fff5f5;border:1px solid #f3c4c4;color:#9b2226;
+  font-size:.82rem;line-height:1.7;
+}
+.pkg-warn a{color:#9b2226;font-weight:700}
+
 /* ── Package table ── */
 .pkg-table{width:100%;border-collapse:collapse;font-size:.85rem}
 .pkg-table th{background:#f8f6ff;color:var(--strong);font-weight:600;padding:9px 14px;text-align:right;border-bottom:1px solid var(--border)}
@@ -154,6 +176,26 @@ canvas{display:block;width:100%;height:100%}
 /* ── Hidden content ── */
 [lang-block]{display:none}
 [lang-block].on{display:block}
+
+/* ── Print / PDF ─────────────────────────────────────────────────
+   بديل إعادة بناء document.body التي كانت في exportPDF: القواعد هنا
+   تُخفي عناصر التفاعل فقط ويُطبع المستند كما هو، فلا يُفقد التوقيع
+   المرسوم (محتوى canvas لا يُنسخ عبر cloneNode) ولا حالة الصفحة. */
+@media print {
+  html,body{background:#fff !important;margin:0 !important;padding:0 !important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .lang-switch,.sig-type-tabs,.clear-btn,.submit-row,.agree-row,
+  .success-banner,.cmt-notice,.pkg-warn,.phone-hint,.field-err,
+  #pay-row-ar,#pay-row-en,.pdf-btn,.btn-pay{display:none !important}
+  .c-doc{box-shadow:none !important;border:none !important;margin:0 !important;
+         max-width:none !important;border-radius:0 !important}
+  .c-section,.sig-block{page-break-inside:avoid}
+  .canvas-wrap{border:1px solid #ccc !important;background:#fff !important}
+  input,select{border:none !important;background:transparent !important;
+               color:#111 !important;-webkit-appearance:none;appearance:none}
+  a[href]:after{content:"" !important}
+  @page{margin:14mm}
+}
 </style>
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
@@ -199,16 +241,20 @@ canvas{display:block;width:100%;height:100%}
         <div class="party-label">الطرف الثاني — العميل</div>
         <div class="party-name" id="client-name-ar">— يُعبأ من العميل —</div>
         <div class="party-detail">
-          <input id="cname-ar" placeholder="الاسم الثلاثي *" required
+          <input id="cname-ar" maxlength="80" autocomplete="name" aria-label="الاسم الثلاثي للموقّع" placeholder="الاسم الثلاثي *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
             oninput="document.getElementById('client-name-ar').textContent=this.value||'— يُعبأ من العميل —'"/>
-          <input id="cphone-ar" placeholder="رقم الجوال *" type="tel" required
+          <input id="cphone-ar" maxlength="20" aria-label="رقم الجوال مع مفتاح الدولة" placeholder="رقم الجوال مع مفتاح الدولة *" type="tel" inputmode="tel" required autocomplete="tel"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;direction:ltr;text-align:left"
+            oninput="onPhoneInput('ar')"/>
+          <div class="phone-hint">مثال: 966512345678+ · مفتاح الدولة إلزامي</div>
+          <div class="field-err" id="err-phone-ar"></div>
+          <input id="cemail-ar" maxlength="254" autocomplete="email" aria-label="البريد الإلكتروني" oninput="onEmailInput('ar')" placeholder="البريد الإلكتروني *" type="email" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <input id="cemail-ar" placeholder="البريد الإلكتروني *" type="email" required
+          <div class="field-err" id="err-email-ar"></div>
+          <input id="ccompany-ar" maxlength="120" autocomplete="organization" aria-label="اسم المؤسسة" placeholder="اسم المؤسسة / الشركة المستفيدة *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <input id="ccompany-ar" placeholder="اسم المؤسسة / الشركة المستفيدة *" required
-            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <select id="crole-ar" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
+          <select id="crole-ar" aria-label="صفة العميل" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
             <option value="">صفة العميل *</option>
             <option>مالك</option>
             <option>مدير عام</option>
@@ -231,12 +277,13 @@ canvas{display:block;width:100%;height:100%}
         <thead><tr><th>الخدمة</th><th>التفاصيل</th><th>السعر</th></tr></thead>
         <tbody id="pkg-rows-ar">
           <tr>
-            <td><span class="pkg-badge">Pulse</span></td>
-            <td>تطبيق ويب متكامل، لوحة تحكم، تكامل بوابة دفع، تقارير متقدمة</td>
-            <td style="white-space:nowrap;font-weight:600">3,299 SAR / شهرياً</td>
+            <td><span class="pkg-badge">—</span></td>
+            <td>لم تُحدَّد الباقة في رابط العقد</td>
+            <td style="white-space:nowrap;font-weight:600">—</td>
           </tr>
         </tbody>
       </table>
+      <div id="pkg-warn-ar" class="pkg-warn" style="display:none"></div>
     </div>
 
     <div class="c-section">
@@ -277,9 +324,9 @@ canvas{display:block;width:100%;height:100%}
           <div class="canvas-wrap" id="cw-ar-second">
             <canvas id="cv-ar-second" width="400" height="120"></canvas>
           </div>
-          <input class="sig-text-input" id="st-ar-second" placeholder="اكتب اسمك هنا"/>
+          <input class="sig-text-input" id="st-ar-second" maxlength="60" autocomplete="off" aria-label="التوقيع بالكتابة" placeholder="اكتب اسمك هنا" oninput="checkReady('ar')"/>
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <input type="date" class="sig-date" id="sd-ar-second"/>
+            <input type="date" class="sig-date" id="sd-ar-second" aria-label="تاريخ التوقيع"/>
             <button class="clear-btn" onclick="clearSig('ar','second')">مسح</button>
           </div>
         </div>
@@ -333,16 +380,20 @@ canvas{display:block;width:100%;height:100%}
         <div class="party-label">Party B — Client</div>
         <div class="party-name" id="client-name-en">— To be filled by client —</div>
         <div class="party-detail">
-          <input id="cname-en" placeholder="Full name (three parts) *" required
+          <input id="cname-en" maxlength="80" autocomplete="name" aria-label="Signer full name" placeholder="Full name (three parts) *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"
             oninput="document.getElementById('client-name-en').textContent=this.value||'— To be filled by client —'"/>
-          <input id="cphone-en" placeholder="Mobile number *" type="tel" required
+          <input id="cphone-en" maxlength="20" aria-label="Mobile with country code" placeholder="Mobile with country code *" type="tel" inputmode="tel" required autocomplete="tel"
+            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;direction:ltr;text-align:left"
+            oninput="onPhoneInput('en')"/>
+          <div class="phone-hint">e.g. +966512345678 · country code is required</div>
+          <div class="field-err" id="err-phone-en"></div>
+          <input id="cemail-en" maxlength="254" autocomplete="email" aria-label="Email address" oninput="onEmailInput('en')" placeholder="Email address *" type="email" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <input id="cemail-en" placeholder="Email address *" type="email" required
+          <div class="field-err" id="err-email-en"></div>
+          <input id="ccompany-en" maxlength="120" autocomplete="organization" aria-label="Company name" placeholder="Beneficiary company / organization *" required
             style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <input id="ccompany-en" placeholder="Beneficiary company / organization *" required
-            style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none"/>
-          <select id="crole-en" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
+          <select id="crole-en" aria-label="Client capacity" required style="width:100%;border:1px solid #dde;border-radius:6px;padding:5px 9px;font-size:.83rem;margin-bottom:4px;background:#fafbff;outline:none;color:#334">
             <option value="">Client capacity *</option>
             <option>Owner</option>
             <option>General Manager</option>
@@ -363,14 +414,15 @@ canvas{display:block;width:100%;height:100%}
       <h2>Agreed Package &amp; Services</h2>
       <table class="pkg-table">
         <thead><tr><th style="text-align:left">Service</th><th style="text-align:left">Details</th><th style="text-align:left">Price</th></tr></thead>
-        <tbody>
+        <tbody id="pkg-rows-en">
           <tr>
-            <td><span class="pkg-badge">Pulse</span></td>
-            <td>Full web application, advanced dashboard, payment gateway integration, performance reports</td>
-            <td style="white-space:nowrap;font-weight:600">3,299 SAR / month</td>
+            <td><span class="pkg-badge">—</span></td>
+            <td>No package specified in the contract link</td>
+            <td style="white-space:nowrap;font-weight:600">—</td>
           </tr>
         </tbody>
       </table>
+      <div id="pkg-warn-en" class="pkg-warn" style="display:none"></div>
     </div>
 
     <div class="c-section">
@@ -411,9 +463,9 @@ canvas{display:block;width:100%;height:100%}
           <div class="canvas-wrap" id="cw-en-second">
             <canvas id="cv-en-second" width="400" height="120"></canvas>
           </div>
-          <input class="sig-text-input" id="st-en-second" placeholder="Type your name"/>
+          <input class="sig-text-input" id="st-en-second" maxlength="60" autocomplete="off" aria-label="Typed signature" placeholder="Type your name" oninput="checkReady('en')"/>
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <input type="date" class="sig-date" id="sd-en-second"/>
+            <input type="date" class="sig-date" id="sd-en-second" aria-label="Signature date"/>
             <button class="clear-btn" onclick="clearSig('en','second')">Clear</button>
           </div>
         </div>
@@ -445,6 +497,364 @@ canvas{display:block;width:100%;height:100%}
 </div><!-- /c-wrap -->
 
 <script>
+/* ═══════════════════════════════════════════════════════════════════
+   CAMINOTICH — Contract engine (P0)
+   لا تثق الصفحة بمعاملات الرابط. المصدر الوحيد للحقيقة هو Airtable
+   عبر Make، والرابط يحمل رمزاً واحداً فقط: ?t=<token>
+   ═══════════════════════════════════════════════════════════════════ */
+window.CMT_CFG = {
+  OPEN_HOOK: 'REPLACE_WITH_MAKE_OPEN_HOOK',   // GET  ?t=<token>  → حالة العقد
+  SIGN_HOOK: 'REPLACE_WITH_MAKE_SIGN_HOOK',   // POST payload     → تثبيت التوقيع
+  TERMS_VERSION: '2026-07-30',
+  /* مؤقتاً: يسمح بالتشغيل بمعاملات الرابط القديمة قبل بناء سيناريو الفتح.
+     اجعليها false يوم تصبح OPEN_HOOK جاهزة — هذه هي الثغرة التي أغلقناها. */
+  ALLOW_URL_PARAMS: true
+};
+
+window.CMT_STATE = { token:null, state:'loading', contract_no:null, signed:false,
+                  paid:false, pay_url:null, sent:false };
+
+/* ─── الباقات (مصدر واحد للأسعار والأوصاف) ─── */
+const PKG_CATALOG = {
+  spark:  { label:'Spark',  price:899,
+            ar:'نماذج رقمية احترافية، صفحة هبوط ذكية، ربط CRM أساسي',
+            en:'Professional digital forms, smart landing page, basic CRM integration' },
+  glow:   { label:'Glow',   price:1799,
+            ar:'مساعد واتساب ذكي، أتمتة المبيعات، ربط CRM متقدم',
+            en:'Smart WhatsApp assistant, sales automation, advanced CRM integration' },
+  pulse:  { label:'Pulse',  price:3299,
+            ar:'تطبيق ويب متكامل، لوحة تحكم متقدمة، تكامل بوابة دفع',
+            en:'Full web application, advanced dashboard, payment gateway integration' },
+  nova:   { label:'Nova',   price:5999,
+            ar:'أتمتة AI متقدمة، متعدد المستخدمين، تكامل ERP/CRM',
+            en:'Advanced AI automation, multi-user access, ERP/CRM integration' },
+  zenith: { label:'Zenith', price:12000, invoiceOnly:true,
+            ar:'حلول مؤسسية كاملة، تكامل أنظمة، مراقبة 24/7، SLA مضمون',
+            en:'Full enterprise solutions, system integration, 24/7 monitoring, SLA' }
+};
+const PKG_ALIASES = {
+  'سبارك':'spark','شارك':'spark',
+  'جلو':'glow','غلو':'glow','قلو':'glow',
+  'بلس':'pulse','بالس':'pulse','بولس':'pulse',
+  'نوفا':'nova','نوڤا':'nova',
+  'زينيث':'zenith','زنيث':'zenith','زينث':'zenith'
+};
+const PKG_BY_PRICE = { '899':'spark','1799':'glow','3299':'pulse','5999':'nova','12000':'zenith' };
+
+function resolvePkg(raw) {
+  if (raw === null || raw === undefined) return null;
+  let s = String(raw).trim();
+  if (!s) return null;
+  s = s.toLowerCase();
+  const head = s.split(/[—–|,:]|\s-\s/)[0];
+  const digits = s.replace(/[^0-9]/g,'');
+  const norm = v => v.replace(/[\u0640\u064B-\u0652]/g,'')
+                     .replace(/[^a-z\u0621-\u063A\u0641-\u064A]/g,'')
+                     .replace(/^باقة/,'');
+  for (const c of [norm(head), norm(s)]) {
+    if (!c) continue;
+    if (PKG_CATALOG[c]) return c;
+    if (PKG_ALIASES[c]) return PKG_ALIASES[c];
+  }
+  const tokens = s.split(/[^a-z\u0621-\u063A\u0641-\u064A]+/).map(norm).filter(Boolean);
+  for (const t of tokens) {
+    if (PKG_CATALOG[t]) return t;
+    if (PKG_ALIASES[t]) return PKG_ALIASES[t];
+  }
+  if (PKG_BY_PRICE[digits]) return PKG_BY_PRICE[digits];
+  return null;
+}
+
+function pkgRow(lang, k) {
+  const it = PKG_CATALOG[k];
+  const money = lang==='ar'
+    ? it.price.toLocaleString('en-US') + ' ريال · دفعة واحدة'
+    : it.price.toLocaleString('en-US') + ' SAR · one-time';
+  return '<tr><td><span style="display:inline-block;background:#f0edff;color:#7c3aed;'
+    + 'font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px">' + it.label + '</span></td>'
+    + '<td>' + it[lang] + '</td>'
+    + '<td style="white-space:nowrap;font-weight:600">' + money + '</td></tr>';
+}
+
+function renderPkg(pkgRaw) {
+  const key = resolvePkg(pkgRaw);
+  window.CMT_PKG = key
+    ? { key, label:PKG_CATALOG[key].label, price:PKG_CATALOG[key].price,
+        invoiceOnly:!!PKG_CATALOG[key].invoiceOnly, raw:pkgRaw }
+    : { key:null, raw:pkgRaw };
+  ['ar','en'].forEach(l => {
+    const tb = document.getElementById('pkg-rows-' + l);
+    const wr = document.getElementById('pkg-warn-' + l);
+    if (key) {
+      if (tb) tb.innerHTML = pkgRow(l, key);
+      if (wr) wr.style.display = 'none';
+    } else {
+      if (tb) tb.innerHTML = l==='ar'
+        ? '<tr><td><span class="pkg-badge">—</span></td><td>لم تُحدَّد الباقة</td><td style="white-space:nowrap;font-weight:600">—</td></tr>'
+        : '<tr><td><span class="pkg-badge">—</span></td><td>No package specified</td><td style="white-space:nowrap;font-weight:600">—</td></tr>';
+      if (wr) {
+        wr.style.display = 'block';
+        wr.innerHTML = l==='ar'
+          ? '⚠️ الباقة غير محددة أو غير معروفة' + (pkgRaw ? ' («' + pkgRaw + '»)' : '') + '. التوقيع معطّل. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.'
+          : '⚠️ Package missing or unrecognized' + (pkgRaw ? ' ("' + pkgRaw + '")' : '') + '. Signing is disabled. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.';
+      }
+    }
+  });
+  ['ar','en'].forEach(l => { try { checkReady(l); } catch(e){} });
+  return key;
+}
+
+/* ─── الجوال: مفتاح الدولة إلزامي، أي دولة ───────────────────────────
+   القاعدة: E.164 — يبدأ بـ + (أو 00 فتُحوَّل) ثم 8–15 رقماً.
+   جدول المفاتيح للتسمية فقط، لا للرفض، حتى لا يُحجب عميل من دولة
+   غير مدرجة. الاستثناء الوحيد: 966 يُتحقّق أن الرقم 5XXXXXXXX. */
+const DIAL_CODES = {
+  '966':'السعودية','971':'الإمارات','973':'البحرين','974':'قطر','965':'الكويت',
+  '968':'عُمان','967':'اليمن','962':'الأردن','961':'لبنان','964':'العراق','963':'سوريا',
+  '970':'فلسطين','20':'مصر','212':'المغرب','213':'الجزائر','216':'تونس','218':'ليبيا',
+  '249':'السودان','222':'موريتانيا','252':'الصومال','253':'جيبوتي','269':'جزر القمر',
+  '90':'تركيا','98':'إيران','92':'باكستان','91':'الهند','880':'بنغلاديش','94':'سريلانكا',
+  '977':'نيبال','63':'الفلبين','62':'إندونيسيا','60':'ماليزيا','66':'تايلاند','84':'فيتنام',
+  '86':'الصين','81':'اليابان','82':'كوريا الجنوبية','1':'أمريكا/كندا','44':'المملكة المتحدة',
+  '33':'فرنسا','49':'ألمانيا','39':'إيطاليا','34':'إسبانيا','31':'هولندا','32':'بلجيكا',
+  '41':'سويسرا','43':'النمسا','46':'السويد','47':'النرويج','45':'الدنمارك','358':'فنلندا',
+  '351':'البرتغال','30':'اليونان','48':'بولندا','40':'رومانيا','7':'روسيا/كازاخستان',
+  '380':'أوكرانيا','27':'جنوب أفريقيا','234':'نيجيريا','254':'كينيا','255':'تنزانيا',
+  '256':'أوغندا','251':'إثيوبيا','233':'غانا','225':'ساحل العاج','221':'السنغال',
+  '61':'أستراليا','64':'نيوزيلندا','55':'البرازيل','52':'المكسيك','54':'الأرجنتين',
+  '56':'تشيلي','57':'كولومبيا','51':'بيرو','58':'فنزويلا','593':'الإكوادور'
+};
+
+function normalizePhone(raw) {
+  let s = String(raw || '');
+  // أرقام هندية-عربية وفارسية → لاتينية
+  s = s.replace(/[\u0660-\u0669]/g, d => String(d.charCodeAt(0) - 0x0660))
+       .replace(/[\u06F0-\u06F9]/g, d => String(d.charCodeAt(0) - 0x06F0));
+  s = s.replace(/[\s\-().\u200e\u200f\u202a-\u202e]/g,'');
+  if (/^00\d/.test(s)) s = '+' + s.slice(2);
+  if (!s.startsWith('+')) return { ok:false, reason:'NO_DIAL' };
+  const digits = s.slice(1);
+  if (!/^\d+$/.test(digits))      return { ok:false, reason:'CHARS' };
+  if (!/^[1-9]/.test(digits))     return { ok:false, reason:'BAD_DIAL' };
+  if (digits.length < 8 || digits.length > 15) return { ok:false, reason:'LENGTH' };
+  let dial = null;
+  for (const len of [4,3,2,1]) {
+    const pre = digits.slice(0,len);
+    if (DIAL_CODES[pre]) { dial = pre; break; }
+  }
+  const nsn = dial ? digits.slice(dial.length) : null;
+  if (dial === '966' && !/^5\d{8}$/.test(nsn)) return { ok:false, reason:'SA_FORMAT' };
+  if (nsn !== null && nsn.length < 6)          return { ok:false, reason:'LENGTH' };
+  return { ok:true, e164:'+'+digits, dial: dial ? '+'+dial : null,
+           country: dial ? DIAL_CODES[dial] : null, nsn };
+}
+
+const PHONE_MSG = {
+  NO_DIAL:   { ar:'أدخل مفتاح الدولة في البداية، مثل ‎+966‎ أو ‎00966‎', en:'Start with your country code, e.g. +966 or 00966' },
+  BAD_DIAL:  { ar:'مفتاح الدولة غير صحيح', en:'Invalid country code' },
+  CHARS:     { ar:'الرقم يجب أن يحتوي أرقاماً فقط بعد مفتاح الدولة', en:'Digits only after the country code' },
+  LENGTH:    { ar:'طول الرقم غير صحيح (‎8–15‎ رقماً مع المفتاح)', en:'Invalid length (8–15 digits including the code)' },
+  SA_FORMAT: { ar:'رقم سعودي غير صحيح — الصيغة ‎+9665XXXXXXXX‎', en:'Invalid Saudi number — use +9665XXXXXXXX' }
+};
+
+function onPhoneInput(lang) {
+  const inp = document.getElementById(`cphone-${lang}`);
+  const err = document.getElementById(`err-phone-${lang}`);
+  if (!inp || !err) return;
+  const raw = inp.value.trim();
+  if (!raw) { err.style.display='none'; inp.classList.remove('inp-bad'); checkReady(lang); return; }
+  const r = normalizePhone(raw);
+  if (r.ok) {
+    err.style.display = 'none';
+    inp.classList.remove('inp-bad');
+    if (r.country) { err.style.display='block'; err.style.color='#166534';
+      err.textContent = (lang==='ar' ? '✓ ' : '✓ ') + r.e164 + ' — ' + r.country; }
+  } else {
+    err.style.color = '#c1121f';
+    err.style.display = 'block';
+    err.textContent = (PHONE_MSG[r.reason] || PHONE_MSG.LENGTH)[lang];
+    inp.classList.add('inp-bad');
+  }
+  checkReady(lang);
+}
+
+/* ─── البريد ─── */
+function validEmail(v) {
+  const s = String(v||'').trim();
+  if (s.length < 6 || s.length > 254) return false;
+  if (/\.\./.test(s) || /^[.@]|[.@]$/.test(s)) return false;
+  return /^[^\s@,;:<>"'()\[\]\\]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/i.test(s)
+      && /\.[a-z]{2,}$/i.test(s);
+}
+function onEmailInput(lang) {
+  const inp = document.getElementById(`cemail-${lang}`);
+  const err = document.getElementById(`err-email-${lang}`);
+  if (!inp || !err) return;
+  const v = inp.value.trim();
+  const bad = v && !validEmail(v);
+  err.style.display = bad ? 'block' : 'none';
+  err.style.color = '#c1121f';
+  err.textContent = bad ? (lang==='ar' ? 'صيغة البريد غير صحيحة' : 'Invalid email format') : '';
+  inp.classList.toggle('inp-bad', !!bad);
+  checkReady(lang);
+}
+
+/* ─── بصمة الجهاز والوقت ──────────────────────────────────────────
+   ملاحظة: عنوان IP لا يمكن قراءته من الواجهة، ووقت العميل قابل
+   للتلاعب. الوقت والـ IP المُلزِمان يُسجّلان في Make من رأس
+   x-forwarded-for ومن طابع التنفيذ. ما هنا للاستدلال فقط. */
+function newRequestId() {
+  try {
+    if (crypto && crypto.randomUUID) return 'req_' + crypto.randomUUID().replace(/-/g,'');
+  } catch(e){}
+  return 'req_' + Date.now().toString(36) + Math.random().toString(36).slice(2,10);
+}
+
+function auditSnapshot() {
+  let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+  return {
+    client_ts:  new Date().toISOString(),
+    tz, tz_offset_min: new Date().getTimezoneOffset(),
+    locale:     navigator.language || '',
+    languages:  (navigator.languages || []).join(','),
+    user_agent: navigator.userAgent || '',
+    platform:   navigator.platform || '',
+    screen:     (window.screen ? `${screen.width}x${screen.height}` : '') + '@' + (window.devicePixelRatio || 1),
+    viewport:   `${window.innerWidth}x${window.innerHeight}`,
+    touch:      ('ontouchstart' in window) || (navigator.maxTouchPoints > 0),
+    referrer:   document.referrer || ''
+  };
+}
+
+/* ─── بصمة نص الشروط الموقّع عليه ───────────────────────────────
+   تُستثنى بيانات العميل وجدول الباقة، فتبقى البصمة ثابتة لكل
+   من وقّع على نفس نسخة الشروط — وتتغيّر لحظة تعديل أي بند. */
+async function termsFingerprint(lang) {
+  const doc = document.querySelector(`[data-lang="${lang}"].c-doc`);
+  if (!doc) return { text_len:0, sha256:'' };
+  let txt = '';
+  doc.querySelectorAll('.c-section').forEach(sec => {
+    if (sec.querySelector('.pkg-table')) return;
+    txt += (sec.textContent || '') + '\n';
+  });
+  txt = txt.replace(/\s+/g,' ').trim();
+  let hex = '';
+  try {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
+    hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  } catch(e) { hex = ''; }
+  return { text_len: txt.length, sha256: hex };
+}
+
+/* ─── التوقيع كصورة PNG (مقتطعة ومضغوطة) ──────────────────────────
+   تُقتطع الصورة على حدود الحبر ثم تُصغَّر إلى 420px عرضاً. لا رفع إلى
+   تخزين خارجي: رابط عام لتوقيع العميل مشكلة خصوصية لا تحسين حجم. */
+function trimSignature(src, maxW) {
+  maxW = maxW || 420;
+  const w = src.width, h = src.height;
+  let d;
+  try { d = src.getContext('2d').getImageData(0,0,w,h).data; } catch(e) { return null; }
+  let minX = w, minY = h, maxX = -1, maxY = -1;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (d[(y*w+x)*4+3] > 12) {
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        if (y < minY) minY = y; if (y > maxY) maxY = y;
+      }
+    }
+  }
+  if (maxX < 0) return null;                       // لا حبر = لا توقيع
+  const pad = 8;
+  minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad);
+  maxX = Math.min(w - 1, maxX + pad); maxY = Math.min(h - 1, maxY + pad);
+  const cw = maxX - minX + 1, ch = maxY - minY + 1;
+  const k = Math.min(1, maxW / cw);
+  const out = document.createElement('canvas');
+  out.width  = Math.max(1, Math.round(cw * k));
+  out.height = Math.max(1, Math.round(ch * k));
+  const o = out.getContext('2d');
+  o.fillStyle = '#ffffff';
+  o.fillRect(0, 0, out.width, out.height);
+  o.drawImage(src, minX, minY, cw, ch, 0, 0, out.width, out.height);
+  return out;
+}
+
+function signatureImage(lang) {
+  const id = `${lang}-second`;
+  const cw = document.getElementById(`cw-${id}`);
+  const cv = document.getElementById(`cv-${id}`);
+  const st = document.getElementById(`st-${id}`);
+  const drawMode = cw ? (cw.style.display !== 'none') : !!cv;
+  const pack = (canvas, type, text) => {
+    const trimmed = canvas ? trimSignature(canvas) : null;
+    if (!trimmed) return { sig_type:type, sig_png:'', sig_text:text||'', sig_bytes:0, sig_dims:'' };
+    let png = ''; try { png = trimmed.toDataURL('image/png'); } catch(e) { png = ''; }
+    const b64 = png.split(',')[1] || '';
+    return { sig_type:type, sig_png:png, sig_text:text||'',
+             sig_bytes: Math.round(b64.length * 3 / 4),
+             sig_dims: trimmed.width + 'x' + trimmed.height };
+  };
+  if (drawMode && cv) return pack(cv, 'draw', '');
+
+  const text = (st && st.value.trim()) || '';
+  if (!text) return { sig_type:'type', sig_png:'', sig_text:'', sig_bytes:0, sig_dims:'' };
+  let tmp = null;
+  try {
+    tmp = document.createElement('canvas');
+    tmp.width = 900; tmp.height = 200;
+    const x = tmp.getContext('2d');
+    x.font = '64px Georgia, "Times New Roman", serif';   // خلفية شفافة ليعمل الاقتطاع
+    x.fillStyle = '#1a0a40';
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText(text, tmp.width/2, tmp.height/2);
+  } catch(e) { tmp = null; }
+  return pack(tmp, 'type', text);
+}
+
+/* ─── إشعارات وقفل المستند ─── */
+function notice(kind, htmlAr, htmlEn) {
+  ['ar','en'].forEach(l => {
+    const doc = document.querySelector(`[data-lang="${l}"].c-doc`);
+    if (!doc) return;
+    let n = doc.querySelector('.cmt-notice');
+    if (!n) {
+      n = document.createElement('div');
+      n.className = 'cmt-notice';
+      const hdr = doc.querySelector('.c-doc-header');
+      hdr ? hdr.insertAdjacentElement('afterend', n) : doc.prepend(n);
+    }
+    n.className = 'cmt-notice ' + kind;
+    n.innerHTML = (l==='ar' ? htmlAr : htmlEn);
+  });
+}
+function lockDocument(reason) {
+  CMT_STATE.locked = reason;
+  ['ar','en'].forEach(l => {
+    const doc = document.querySelector(`[data-lang="${l}"].c-doc`);
+    if (!doc) return;
+    doc.querySelectorAll('input,select,textarea,canvas').forEach(el => {
+      if (el.tagName === 'CANVAS') { el.style.pointerEvents = 'none'; el.style.opacity = '.6'; return; }
+      el.disabled = true; el.style.background = '#eef0f6'; el.style.cursor = 'not-allowed';
+    });
+    doc.querySelectorAll('.sig-type-tabs,.clear-btn,.submit-row,.agree-row').forEach(el => el.style.display = 'none');
+  });
+}
+function fieldNotice(lang, msg) { alert(msg); }
+
+/* ─── نداء Make ─── */
+async function cmtPost(url, payload) {
+  /* text/plain يتجنّب طلب preflight، فلا حاجة لإعداد CORS معقّد.
+     تأكدي من إضافة Access-Control-Allow-Origin في Webhook Response. */
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+    body: JSON.stringify(payload)
+  });
+  const raw = await r.text();
+  try { return JSON.parse(raw); }
+  catch(e) { return { ok:false, error:'BAD_RESPONSE', http:r.status, raw:String(raw).slice(0,200) }; }
+}
+
 /* ─── Lang ─── */
 let curLang = localStorage.getItem('caminotich-lang') || 'ar';
 function setLang(lang) {
@@ -460,18 +870,23 @@ function setLang(lang) {
   localStorage.setItem('caminotich-lang', lang);
 }
 
-/* ─── Contract number + date ─── */
-function genContractNum() {
-  const n = Math.floor(Math.random() * 9000) + 1000;
-  return `SCX-${new Date().getFullYear()}-${n}`;
-}
-const cn = genContractNum();
+/* ─── Contract number + date ───────────────────────────────────────
+   رقم العقد يأتي من Airtable حصراً (autonumber) عبر webhook الفتح.
+   سابقاً كان Math.random() — أي أن رقمين مختلفين قد يشيران لعقد واحد
+   ورقماً واحداً قد يتكرر بين عميلين. لا توليد محلي بعد اليوم. */
+let cn = '—';
 const today = new Date().toLocaleDateString('en-GB');
+function setContractNo(no) {
+  cn = no || '—';
+  ['ar','en'].forEach(l => {
+    const el = document.getElementById(`contract-num-${l}`);
+    if (el) el.textContent = cn;
+  });
+}
+setContractNo(null);
 ['ar','en'].forEach(l => {
-  const el = document.getElementById(`contract-num-${l}`);
   const de = document.getElementById(`contract-date-${l}`);
-  if(el) el.textContent = cn;
-  if(de) de.textContent = today;
+  if (de) de.textContent = today;
 });
 
 /* ─── Signature drawing ─── */
@@ -533,9 +948,13 @@ function clearSig(lang, party) {
 
 function hasSig(lang, party) {
   const id = `${lang}-${party}`;
+  const cw = document.getElementById(`cw-${id}`);   // الحاوية هي التي يُبدّلها switchSig
   const cv = document.getElementById(`cv-${id}`);
   const st = document.getElementById(`st-${id}`);
-  if (cv && cv.style.display !== 'none') {
+  /* سابقاً: كان الشرط cv.style.display !== 'none' — لكن switchSig يخفي الحاوية
+     cw لا الـ canvas نفسه، فكان الشرط صحيحاً دائماً ووضع «كتابة» لا يُحتسب أبداً. */
+  const drawMode = cw ? (cw.style.display !== 'none') : !!cv;
+  if (drawMode && cv) {
     const ctx = drawing[id];
     if (!ctx) return false;
     const d = ctx.getImageData(0,0,cv.width,cv.height).data;
@@ -548,203 +967,273 @@ function checkReady(lang) {
   const agree = document.getElementById(`agree-${lang}`);
   const btn   = document.getElementById(`sub-${lang}`);
   if (!agree || !btn) return;
-  btn.disabled = !(agree.checked && hasSig(lang,'second'));
+  // لا يُسمح بالتوقيع إذا لم تُحدَّد الباقة — العقد مستند مالي ملزم
+  const pkgOk = (window.CMT_PKG && window.CMT_PKG.key) ? true : false;
+  btn.disabled = !(agree.checked && hasSig(lang,'second') && pkgOk);
 }
 
-/* ─── Submit ─── */
+/* ─── Submit: تثبيت التوقيع في Airtable عبر Make ─── */
 async function submitContract(lang) {
-  const name  = document.getElementById(`cname-${lang}`)?.value.trim();
-  const email = document.getElementById(`cemail-${lang}`)?.value.trim();
-  const phone   = document.getElementById(`cphone-${lang}`)?.value.trim();
-  const company = document.getElementById(`ccompany-${lang}`)?.value.trim();
-  const role    = document.getElementById(`crole-${lang}`)?.value.trim();
-  if (!name || !email || !phone || !company || !role) {
-    alert(lang==='ar' ? 'يرجى تعبئة جميع بيانات الطرف الثاني الإلزامية: الاسم الثلاثي، رقم الجوال، البريد، اسم المؤسسة، وصفة العميل' : 'Please fill in all required Party B fields: full name, mobile, email, company, and client capacity');
+  if (CMT_STATE.sent) return;                       // منع الإرسال المزدوج
+  if (CMT_STATE.signed) {
+    alert(lang==='ar' ? 'هذا العقد موقّع مسبقاً ولا يمكن توقيعه مرة أخرى.'
+                      : 'This contract is already signed and cannot be signed again.');
     return;
   }
+  const name    = document.getElementById(`cname-${lang}`)?.value.trim();
+  const email   = document.getElementById(`cemail-${lang}`)?.value.trim();
+  const phoneIn = document.getElementById(`cphone-${lang}`)?.value.trim();
+  const company = document.getElementById(`ccompany-${lang}`)?.value.trim();
+  const role    = document.getElementById(`crole-${lang}`)?.value.trim();
+
+  if (!name || !email || !phoneIn || !company || !role) {
+    alert(lang==='ar' ? 'يرجى تعبئة جميع بيانات الطرف الثاني الإلزامية: الاسم الثلاثي، رقم الجوال مع مفتاح الدولة، البريد، اسم المؤسسة، وصفة العميل'
+                      : 'Please fill in all required Party B fields: full name, mobile with country code, email, company, and capacity');
+    return;
+  }
+  if (!validEmail(email)) {
+    onEmailInput(lang);
+    alert(lang==='ar' ? 'صيغة البريد الإلكتروني غير صحيحة.' : 'Invalid email format.');
+    return;
+  }
+  const ph = normalizePhone(phoneIn);
+  if (!ph.ok) {
+    onPhoneInput(lang);
+    alert((PHONE_MSG[ph.reason] || PHONE_MSG.LENGTH)[lang]);
+    return;
+  }
+  const resolved = window.CMT_PKG || {};
+  if (!resolved.key) {
+    alert(lang==='ar' ? 'لا يمكن إتمام التوقيع: الباقة غير محددة. تواصلي معنا على info@caminotich.sa'
+                      : 'Cannot sign: package not specified. Contact info@caminotich.sa');
+    return;
+  }
+  const sig = signatureImage(lang);
+  if (!sig.sig_png) {
+    alert(lang==='ar' ? 'لم يُسجّل التوقيع. أعيدي الرسم أو اكتبي الاسم.' : 'Signature not captured. Please draw or type again.');
+    return;
+  }
+
   const btn = document.getElementById(`sub-${lang}`);
-  btn.textContent = lang==='ar' ? 'جارٍ الإرسال...' : 'Submitting...';
+  const original = btn.textContent;
+  btn.textContent = lang==='ar' ? 'جارٍ التثبيت...' : 'Recording...';
   btn.disabled = true;
-  await new Promise(r => setTimeout(r, 900));
+  CMT_STATE.sent = true;
+
+  const terms = await termsFingerprint(lang);
+  CMT_STATE.request_id = newRequestId();   // معرّف تتبّع لكل محاولة، ناجحة أو فاشلة
+  const payload = Object.assign({
+    request_id:     CMT_STATE.request_id,
+    t:              CMT_STATE.token || '',
+    contract_no:    CMT_STATE.contract_no || '',
+    signer_name:    name,
+    email, company, role,
+    phone_e164:     ph.e164,
+    phone_dial:     ph.dial,
+    phone_country:  ph.country,
+    phone_raw:      phoneIn,
+    package:        resolved.label,
+    amount_sar:     resolved.price,
+    lang,
+    terms_version:  CMT_CFG.TERMS_VERSION,
+    terms_sha256:   terms.sha256,
+    terms_len:      terms.text_len,
+    sig_type:       sig.sig_type,
+    sig_text:       sig.sig_text,
+    sig_png:        sig.sig_png,
+    sig_bytes:      sig.sig_bytes,
+    sig_dims:       sig.sig_dims,
+    sig_date:       document.getElementById(`sd-${lang}-second`)?.value || ''
+  }, auditSnapshot());
+
+  let res;
+  try { res = await cmtPost(CMT_CFG.SIGN_HOOK, payload); }
+  catch (e) { res = { ok:false, error:'NETWORK' }; }
+
+  if (!res || res.ok !== true) {
+    CMT_STATE.sent = false;
+    btn.disabled = false;
+    btn.textContent = original;
+    const code = (res && (res.error || res.reason)) || 'UNKNOWN';
+    if (code === 'ALREADY_SIGNED') {
+      CMT_STATE.signed = true;
+      applyState({ state:'signed', contract_no:res.contract_no, package:resolved.label, pay_url:res.pay_url });
+      return;
+    }
+    notice('err',
+      '⚠️ لم يُثبَّت التوقيع (' + code + '). لم يُحفظ شيء — أعيدي المحاولة، وإن تكرر تواصلي على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> مع رقم الطلب: <code>' + CMT_STATE.request_id + '</code>',
+      '⚠️ Signature was not recorded (' + code + '). Nothing was saved — please retry, or contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> quoting request ID: <code>' + CMT_STATE.request_id + '</code>');
+    return;
+  }
+
+  /* نجاح مؤكَّد من الخادم فقط */
+  CMT_STATE.signed = true;
+  if (res.contract_no) { CMT_STATE.contract_no = res.contract_no; setContractNo(res.contract_no); }
   document.getElementById(`success-${lang}`).classList.add('on');
   btn.textContent = lang==='ar' ? '✓ تم التوقيع' : '✓ Signed';
 
-  // ── بناء رابط السداد مع بيانات العميل ──
-  const p = new URLSearchParams(window.location.search);
-  const payParams = new URLSearchParams({
-    name:  name,
-    email: email,
-    phone: phone,
-    company: company,
-    pkg:   p.get('pkg')  || 'pulse',
-    ref:   p.get('ref')  || document.getElementById(`contract-num-${lang}`)?.textContent || '',
-    lang:  lang
-  });
-  const payLink = document.getElementById(`pay-link-${lang}`);
-  if (payLink) payLink.href = 'payment.html?' + payParams.toString();
+  const payUrl = res.pay_url || null;   // الرابط يُبنى في Make ومربوط بالسجل
+  showPayRow(lang, payUrl, resolved);
+  lockDocument('signed');
+  notice('ok',
+    '✓ تم تثبيت العقد ' + (CMT_STATE.contract_no || '') + ' وحفظ التوقيع. وصلتك نسخة على بريدك.',
+    '✓ Contract ' + (CMT_STATE.contract_no || '') + ' recorded and signature stored. A copy was emailed to you.');
+}
 
-  // ── إظهار زر السداد ──
+function showPayRow(lang, payUrl, resolved) {
+  const payLink = document.getElementById(`pay-link-${lang}`);
+  if (payLink) {
+    payLink.href = payUrl || ('payment.html?package=' + encodeURIComponent((resolved && resolved.label) || '')
+                              + '&record=' + encodeURIComponent(CMT_STATE.record_id || '')
+                              + '&lang=' + lang);
+  }
   const payRow = document.getElementById(`pay-row-${lang}`);
   if (payRow) {
     payRow.style.display = 'block';
-    setTimeout(() => payRow.scrollIntoView({behavior:'smooth',block:'center'}), 300);
+    if (typeof payRow.scrollIntoView === 'function') {
+      setTimeout(() => payRow.scrollIntoView({behavior:'smooth',block:'center'}), 300);
+    }
   }
 }
 
-/* ─── Export PDF ─── */
-function exportPDF(lang) {
-  const doc = document.querySelector(`[data-lang="${lang}"].c-doc`);
-  if (!doc) return;
-  const prev = {
-    title: document.title,
-    body:  document.body.innerHTML,
-    dir:   document.documentElement.dir
-  };
-  document.title = `Caminotich-Contract-${cn}`;
-  const clone = doc.cloneNode(true);
-  clone.querySelectorAll('.submit-row,.agree-row,.success-banner,.sig-type-tabs,.clear-btn').forEach(el=>el.remove());
-  document.body.innerHTML = `
-    <style>
-      body{font-family:Arial,sans-serif;color:#111;background:white;margin:0;padding:24px}
-      .c-doc-header{background:#05071a;color:white;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-radius:8px 8px 0 0}
-      .c-doc-header h1{color:white;font-size:1.3rem}
-      .inv-num{color:#5cf0ff;font-family:monospace}
-      .inv-date{color:rgba(255,255,255,.5);font-size:.8rem}
-      .parties{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #eee}
-      .party{padding:16px 20px}.party+.party{border-right:1px solid #eee}
-      .party-label{font-size:.7rem;text-transform:uppercase;color:#999;margin-bottom:4px}
-      .party-name{font-weight:700;margin-bottom:4px}
-      .party-detail{font-size:.82rem;color:#555;line-height:1.7}
-      .c-section{padding:14px 20px;border-bottom:1px solid #eee}
-      .c-section h2{font-size:.72rem;text-transform:uppercase;color:#7c3aed;letter-spacing:.12em;margin-bottom:10px}
-      .c-section p,.c-section li{font-size:.85rem;color:#334;line-height:1.8}
-      .c-section ul{padding-right:18px}
-      .pkg-table{width:100%;border-collapse:collapse;font-size:.83rem}
-      .pkg-table th{background:#f5f3ff;padding:8px 12px;text-align:right;border-bottom:1px solid #eee;font-weight:600}
-      .pkg-table td{padding:8px 12px;border-bottom:1px solid #f5f5f5}
-      .pkg-badge{background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px}
-      .sig-block{padding:14px 20px}
-      .sig-block h2{font-size:.72rem;text-transform:uppercase;color:#7c3aed;letter-spacing:.12em;margin-bottom:12px}
-      .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-      .sig-box label{font-size:.75rem;color:#999;display:block;margin-bottom:4px}
-      .canvas-wrap{border:1px dashed #ccc;border-radius:8px;height:100px;background:#fafaff}
-      .sig-text-input{font-size:1.2rem;font-family:Georgia,serif;border:1px solid #ccc;border-radius:6px;padding:8px;width:100%}
-      .sig-date{width:100%;border:1px solid #eee;border-radius:6px;padding:6px;font-size:.82rem;margin-top:6px}
-    </style>
-  ` + clone.outerHTML;
-  setTimeout(() => {
-    window.print();
-    document.title      = prev.title;
-    document.body.innerHTML = prev.body;
-    document.documentElement.dir = prev.dir;
-    setLang(curLang);
-    ['ar-second','en-second'].forEach(initCanvas);
-  }, 400);
+/* ─── تطبيق حالة العقد القادمة من Make ─── */
+function applyState(d) {
+  CMT_STATE.state       = d.state || 'unknown';
+  CMT_STATE.contract_no = d.contract_no || CMT_STATE.contract_no;
+  CMT_STATE.record_id   = d.record_id || CMT_STATE.record_id;
+  if (d.contract_no) setContractNo(d.contract_no);
+
+  if (d.company) ['ar','en'].forEach(l => lockField(document.getElementById(`ccompany-${l}`), d.company));
+  if (d.email)   ['ar','en'].forEach(l => lockField(document.getElementById(`cemail-${l}`),   d.email));
+  if (d.package) renderPkg(d.package);
+
+  switch (CMT_STATE.state) {
+    case 'open':
+      notice('warn',
+        'عقد رقم ' + (d.contract_no || '') + ' — جاهز للتوقيع. الرجاء مراجعة البنود قبل التوقيع.',
+        'Contract ' + (d.contract_no || '') + ' — ready for signature. Please review the terms before signing.');
+      break;
+
+    case 'signed':
+      CMT_STATE.signed = true;
+      lockDocument('signed');
+      showPayRow(curLang, d.pay_url, window.CMT_PKG);
+      notice('ok',
+        '✓ هذا العقد موقّع بتاريخ ' + (d.signed_at || '—') + ' ولا يمكن توقيعه مرة أخرى. تبقّى سداد المبلغ.',
+        '✓ This contract was signed on ' + (d.signed_at || '—') + ' and cannot be signed again. Payment is pending.');
+      break;
+
+    case 'paid':
+      CMT_STATE.signed = true; CMT_STATE.paid = true;
+      lockDocument('paid');
+      notice('ok',
+        '✓ العقد موقّع والسداد مكتمل بتاريخ ' + (d.paid_at || '—') + '. لا يلزم أي إجراء إضافي.',
+        '✓ Contract signed and payment completed on ' + (d.paid_at || '—') + '. No further action needed.');
+      break;
+
+    case 'expired':
+      lockDocument('expired');
+      notice('err',
+        '⚠️ انتهت صلاحية رابط هذا العقد. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> لإصدار رابط جديد.',
+        '⚠️ This contract link has expired. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> for a new link.');
+      break;
+
+    case 'cancelled':
+      lockDocument('cancelled');
+      notice('err', '⚠️ هذا العقد ملغى.', '⚠️ This contract has been cancelled.');
+      break;
+
+    default:
+      lockDocument('invalid');
+      renderPkg('');
+      notice('err',
+        '⚠️ رابط غير صالح. لا يمكن فتح عقد بدون رمز صحيح. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.',
+        '⚠️ Invalid link. A contract cannot be opened without a valid token. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.');
+  }
+  ['ar','en'].forEach(l => { try { checkReady(l); } catch(e){} });
 }
 
-/* ─── Auto-fill from URL params (sent by Airtable/Make.com) ─────────────
-   الرابط: contract.html?name=شركة+الأمل&email=info@co.com&pkg=pulse&lang=ar
-─────────────────────────────────────────────────────────────────────── */
-(function() {
+function lockField(inp, val) {
+  if (!inp || !val) return;
+  inp.value = val;
+  inp.readOnly = true;
+  inp.tabIndex = -1;
+  inp.setAttribute('aria-readonly','true');
+  inp.style.background = '#eef0f6';
+  inp.style.color = '#5c6b8a';
+  inp.style.cursor = 'not-allowed';
+  inp.style.borderStyle = 'dashed';
+}
+
+/* ─── التحميل: الرمز هو المصدر الوحيد ─── */
+async function bootContract() {
   const p = new URLSearchParams(window.location.search);
-
-  // اللغة
   if (p.get('lang')) curLang = p.get('lang');
-
-  // قفل الحقول الصادرة من السجل: لا يغيّرها العميل
-  function lockField(inp, val) {
-    if (!inp || !val) return;
-    inp.value    = val;
-    inp.readOnly = true;
-    inp.tabIndex = -1;
-    inp.setAttribute('aria-readonly', 'true');
-    inp.style.background  = '#eef0f6';
-    inp.style.color       = '#5c6b8a';
-    inp.style.cursor      = 'not-allowed';
-    inp.style.borderStyle = 'dashed';
-  }
-
-  /* اسم المؤسسة — يأتي من Airtable ويُقفل.
-     ملاحظة: معامل الرابط اسمه name لكنه يحمل اسم الشركة،
-     لذلك يُحقن في ccompany لا في cname. */
-  const company = p.get('company') || p.get('name') || p.get('client') || '';
-  if (company) {
-    ['ar','en'].forEach(l => lockField(document.getElementById(`ccompany-${l}`), company));
-  }
-
-  // البريد الإلكتروني — يُقفل أيضاً
-  const email = p.get('email') || '';
-  if (email) {
-    ['ar','en'].forEach(l => lockField(document.getElementById(`cemail-${l}`), email));
-  }
-
-  /* الاسم الثلاثي ورقم الجوال يبقيان فارغين — توقيع العميل بيده.
-     نُلزمه بكتابة الاسم بإضافة تنبيه بصري فقط. */
   ['ar','en'].forEach(l => {
     const inp = document.getElementById(`cname-${l}`);
     if (inp) inp.style.borderColor = '#7c3aed';
   });
 
-  // الباقة (تُظهر في جدول العقد)
-  const pkg = p.get('pkg') || p.get('package') || '';
-  const PKG_MAP = {
-    spark:  { ar: 'Spark — 899 ريال · دفعة واحدة',   en: 'Spark — 899 SAR · one-time' },
-    glow:   { ar: 'Glow — 1,799 ريال · دفعة واحدة',  en: 'Glow — 1,799 SAR · one-time' },
-    pulse:  { ar: 'Pulse — 3,299 ريال · دفعة واحدة', en: 'Pulse — 3,299 SAR · one-time' },
-    nova:   { ar: 'Nova — 5,999 ريال · دفعة واحدة',  en: 'Nova — 5,999 SAR · one-time' },
-    zenith: { ar: 'Zenith — 12,000 ريال · دفعة واحدة', en: 'Zenith — 12,000 SAR · one-time' }
-  };
-  if (pkg && PKG_MAP[pkg]) {
-    const PKG_DESC = {
-      spark:  { ar:'نماذج رقمية احترافية، صفحة هبوط ذكية، ربط CRM أساسي',
-                en:'Professional digital forms, smart landing page, basic CRM integration' },
-      glow:   { ar:'مساعد واتساب ذكي، أتمتة المبيعات، ربط CRM متقدم',
-                en:'Smart WhatsApp assistant, sales automation, advanced CRM integration' },
-      pulse:  { ar:'تطبيق ويب متكامل، لوحة تحكم متقدمة، تكامل بوابة دفع',
-                en:'Full web application, advanced dashboard, payment gateway integration' },
-      nova:   { ar:'أتمتة AI متقدمة، متعدد المستخدمين، تكامل ERP/CRM',
-                en:'Advanced AI automation, multi-user access, ERP/CRM integration' },
-      zenith: { ar:'حلول مؤسسية كاملة، تكامل أنظمة، مراقبة 24/7، SLA مضمون',
-                en:'Full enterprise solutions, system integration, 24/7 monitoring, SLA' }
-    };
-    const PKG_PRICE = { spark:899, glow:1799, pulse:3299, nova:5999, zenith:12000 };
-    // Update AR table
-    const arTbody = document.getElementById('pkg-rows-ar');
-    if (arTbody) arTbody.innerHTML = `
-      <tr>
-        <td><span style="display:inline-block;background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px">${pkg.charAt(0).toUpperCase()+pkg.slice(1)}</span></td>
-        <td>${PKG_DESC[pkg].ar}</td>
-        <td style="white-space:nowrap;font-weight:600">${PKG_MAP[pkg].ar.split('—')[1].trim()}</td>
-      </tr>`;
-    // Update EN table
-    const enTbody = document.querySelector('[data-lang="en"] .pkg-table tbody');
-    if (enTbody) enTbody.innerHTML = `
-      <tr>
-        <td><span style="display:inline-block;background:#f0edff;color:#7c3aed;font-size:.7rem;font-weight:700;padding:2px 10px;border-radius:999px">${pkg.charAt(0).toUpperCase()+pkg.slice(1)}</span></td>
-        <td>${PKG_DESC[pkg].en}</td>
-        <td style="white-space:nowrap;font-weight:600">${PKG_MAP[pkg].en.split('—')[1].trim()}</td>
-      </tr>`;
+  const token = (p.get('t') || p.get('token') || '').trim();
+  CMT_STATE.token = token;
+
+  if (!token) {
+    if (CMT_CFG.ALLOW_URL_PARAMS) {
+      /* وضع انتقالي: قبل تجهيز OPEN_HOOK. غير آمن — يثق بالرابط. */
+      applyState({
+        state:'open',
+        contract_no: p.get('contract_no') || null,
+        record_id:   p.get('record') || p.get('ref') || '',
+        company:     p.get('company') || p.get('name') || p.get('client') || '',
+        email:       p.get('email') || '',
+        package:     p.get('package') || p.get('pkg') || ''
+      });
+      notice('warn',
+        '⚙️ وضع اختبار: البيانات مأخوذة من الرابط لا من السجل. لا يُستخدم مع عميل حقيقي.',
+        '⚙️ Test mode: data taken from the URL, not the record. Not for real clients.');
+      return;
+    }
+    applyState({ state:'invalid' });
+    return;
   }
 
-  // رقم الطلب من Airtable
-  const ref = p.get('ref') || p.get('record') || '';
-  if (ref) {
-    ['ar','en'].forEach(l => {
-      const el = document.getElementById(`contract-num-${l}`);
-      if (el) el.textContent = 'SCX-' + ref;
-    });
+  notice('load', 'جارٍ التحقق من رابط العقد...', 'Verifying contract link...');
+  let d;
+  try {
+    const r = await fetch(CMT_CFG.OPEN_HOOK + (CMT_CFG.OPEN_HOOK.indexOf('?') === -1 ? '?' : '&')
+                          + 't=' + encodeURIComponent(token));
+    d = JSON.parse(await r.text());
+  } catch (e) {
+    notice('err',
+      '⚠️ تعذّر التحقق من الرابط. تحققي من الاتصال وأعيدي التحميل.',
+      '⚠️ Could not verify the link. Check your connection and reload.');
+    lockDocument('network');
+    return;
   }
-})();
+  if (!d || d.ok !== true) { applyState({ state: (d && d.state) || 'invalid' }); return; }
+  applyState(d);
+}
+
+/* ─── Export PDF ──────────────────────────────────────────────────
+   سابقاً: كان يستبدل document.body بنسخة مبنية يدوياً ثم يعيد تركيبها.
+   محتوى canvas لا يُنسخ مع cloneNode، فالتوقيع المرسوم كان يُطبع فارغاً.
+   الآن الطباعة تعتمد @media print دون أي مساس بالـ DOM. */
+function exportPDF(lang) {
+  if (lang && lang !== curLang) setLang(lang);
+  const prevTitle = document.title;
+  document.title = 'Caminotich-Contract-' + (CMT_STATE.contract_no || cn || '');
+  window.print();
+  setTimeout(() => { document.title = prevTitle; }, 800);
+}
 
 /* ─── Boot ─── */
 setLang(curLang);
+bootContract();
 </script>
 
-<!-- 🤖 Chatbase AI Widget -->
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
-const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+<!-- ⚠️ أُزيل ودجت Chatbase من صفحة العقد عن قصد.
+     سكربت طرف ثالث على صفحة تحمل توقيعاً وبريداً وجوالاً يستطيع قراءة
+     كل حقل ومحتوى canvas التوقيع. يبقى الودجت في بقية الصفحات. -->
 
 </body>
 </html>

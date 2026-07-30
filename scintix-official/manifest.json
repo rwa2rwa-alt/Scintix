@@ -1,0 +1,18 @@
+{
+  "terms_version": "2026-07-30",
+  "published": "2026-07-30",
+  "source": "contract.html · .c-section (جدول الباقة مستثنى)",
+  "normalization": "replace(/\\s+/g,' ').trim() ثم SHA-256 على UTF-8",
+  "files": {
+    "ar": {
+      "file": "ar.txt",
+      "chars": 1008,
+      "sha256": "58f96545935d0d03f2a214c3e68ff0360203ae21f4e6660c7a164c31d099012e"
+    },
+    "en": {
+      "file": "en.txt",
+      "chars": 1180,
+      "sha256": "c1f32bd7f0165e6202bbd07126000a4a0da5487641b7bfe2bb77efd8a121d989"
+    }
+  }
+}

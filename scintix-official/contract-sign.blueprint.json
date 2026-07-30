@@ -1,0 +1,414 @@
+{
+  "name": "Caminotich — Contract Sign",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": null,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0,
+          "name": "Webhook: contract-sign (Get request headers = ON)"
+        },
+        "restore": {
+          "parameters": {
+            "hook": {
+              "label": "contract-sign"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "json:ParseJSON",
+      "version": 1,
+      "parameters": {
+        "type": null
+      },
+      "mapper": {
+        "json": "{{1.value}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 300,
+          "y": 0,
+          "name": "Parse JSON (body arrives as text/plain)"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "airtable:ActionSearchRecords",
+      "version": 3,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "base": "appkYurrIYGIup8QH",
+        "table": "Contracts",
+        "formula": "{token} = \"{{2.t}}\"",
+        "maxRecords": "1",
+        "useColumnId": false
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0,
+          "name": "Airtable: find by token"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "mapper": null,
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0,
+          "name": "Router: gate"
+        }
+      },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "airtable:ActionUpdateRecords",
+              "version": 3,
+              "parameters": {
+                "__IMTCONN__": null
+              },
+              "mapper": {
+                "id": "{{3.id}}",
+                "base": "appkYurrIYGIup8QH",
+                "table": "Contracts",
+                "useColumnId": false,
+                "record": {
+                  "status": "signed",
+                  "signed_at": "{{now}}",
+                  "signer_name": "{{2.signer_name}}",
+                  "signer_role": "{{2.role}}",
+                  "phone_e164": "{{2.phone_e164}}",
+                  "phone_dial": "{{2.phone_dial}}",
+                  "phone_country": "{{2.phone_country}}",
+                  "sig_type": "{{2.sig_type}}",
+                  "sig_data_uri": "{{2.sig_png}}",
+                  "sig_text": "{{2.sig_text}}",
+                  "sign_ip": "{{first(split(1.headers.`x-forwarded-for`; \",\"))}}",
+                  "sign_user_agent": "{{2.user_agent}}",
+                  "sign_platform": "{{2.platform}}",
+                  "sign_screen": "{{2.screen}}",
+                  "sign_tz": "{{2.tz}}",
+                  "sign_locale": "{{2.locale}}",
+                  "client_ts": "{{2.client_ts}}",
+                  "terms_version": "{{2.terms_version}}",
+                  "terms_sha256": "{{2.terms_sha256}}",
+                  "sign_lang": "{{2.lang}}"
+                }
+              },
+              "filter": {
+                "name": "بوابة الحماية",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{3.id}}",
+                      "o": "exist"
+                    },
+                    {
+                      "a": "{{3.signed_at}}",
+                      "o": "notexist"
+                    },
+                    {
+                      "a": "{{3.status}}",
+                      "o": "text:notequal",
+                      "b": "cancelled"
+                    },
+                    {
+                      "a": "{{3.token_expires}}",
+                      "o": "date:greaterorequal",
+                      "b": "{{now}}"
+                    },
+                    {
+                      "a": "{{3.package}}",
+                      "o": "text:equal",
+                      "b": "{{2.package}}"
+                    },
+                    {
+                      "a": "{{3.amount_sar}}",
+                      "o": "number:equal",
+                      "b": "{{2.amount_sar}}"
+                    },
+                    {
+                      "a": "{{2.sig_png}}",
+                      "o": "exist"
+                    },
+                    {
+                      "a": "{{2.signer_name}}",
+                      "o": "exist"
+                    },
+                    {
+                      "a": "{{2.phone_e164}}",
+                      "o": "exist"
+                    }
+                  ]
+                ]
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1200,
+                  "y": -150,
+                  "name": "Airtable: mark signed"
+                }
+              }
+            },
+            {
+              "id": 6,
+              "module": "google-email:sendAnEmail",
+              "version": 1,
+              "parameters": {
+                "__IMTCONN__": null
+              },
+              "mapper": {
+                "from": "info@caminotich.sa",
+                "to": [
+                  "{{3.client_email}}"
+                ],
+                "subject": "نسخة عقد الخدمة {{3.contract_no}} — كامينوتك",
+                "html": "<div dir=\"rtl\">مرحباً {{2.signer_name}}،<br/>تم تثبيت توقيعك على عقد الخدمة رقم <b>{{3.contract_no}}</b> بتاريخ {{formatDate(now; \"YYYY-MM-DD HH:mm\")}}.<br/>الباقة: {{3.package}} — {{3.amount_sar}} ريال (دفعة واحدة).<br/><br/>لإتمام السداد: https://caminotich.sa/payment.html?package={{3.package}}&record={{3.id}}<br/><br/>كامينوتك</div>",
+                "attachments": []
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": -150,
+                  "name": "Email: client copy"
+                }
+              }
+            },
+            {
+              "id": 7,
+              "module": "google-email:sendAnEmail",
+              "version": 1,
+              "parameters": {
+                "__IMTCONN__": null
+              },
+              "mapper": {
+                "from": "info@caminotich.sa",
+                "to": [
+                  "info@caminotich.sa"
+                ],
+                "subject": "✅ عقد موقّع: {{3.contract_no}} — {{3.package}}",
+                "html": "<div dir=\"rtl\">الشركة: {{3.company}}<br/>الموقّع: {{2.signer_name}} ({{2.role}})<br/>الجوال: {{2.phone_e164}} — {{2.phone_country}}<br/>IP: {{first(split(1.headers.`x-forwarded-for`; \",\"))}}<br/>الجهاز: {{2.user_agent}}<br/>بصمة الشروط: {{2.terms_sha256}}</div>",
+                "attachments": []
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1800,
+                  "y": -150,
+                  "name": "Email: internal copy"
+                }
+              }
+            },
+            {
+              "id": 8,
+              "module": "gateway:WebhookRespond",
+              "version": 1,
+              "mapper": {
+                "status": "200",
+                "body": "{\"ok\":true,\"contract_no\":\"{{3.contract_no}}\",\"pay_url\":\"payment.html?package={{3.package}}&record={{3.id}}&lang={{2.lang}}\"}",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://caminotich.sa"
+                  }
+                ]
+              },
+              "metadata": {
+                "designer": {
+                  "x": 2100,
+                  "y": -150,
+                  "name": "Respond: ok"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 11,
+              "module": "airtable:ActionCreateRecord",
+              "version": 3,
+              "parameters": {
+                "__IMTCONN__": null
+              },
+              "mapper": {
+                "base": "appkYurrIYGIup8QH",
+                "table": "Contract_Attempts",
+                "useColumnId": false,
+                "record": {
+                  "request_id": "{{2.request_id}}",
+                  "token_used": "{{2.t}}",
+                  "contract": "{{3.contract_no}}",
+                  "result": "ALREADY_SIGNED",
+                  "attempted_at": "{{now}}",
+                  "ip": "{{first(split(1.headers.`x-forwarded-for`; \",\"))}}",
+                  "user_agent": "{{2.user_agent}}",
+                  "signer_name": "{{2.signer_name}}",
+                  "phone_e164": "{{2.phone_e164}}",
+                  "package_sent": "{{2.package}}",
+                  "amount_sent": "{{2.amount_sar}}",
+                  "package_expected": "{{3.package}}",
+                  "amount_expected": "{{3.amount_sar}}",
+                  "lang": "{{2.lang}}"
+                }
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1200,
+                  "y": 100,
+                  "name": "Airtable: log attempt (ALREADY_SIGNED)"
+                }
+              },
+              "filter": {
+                "name": "موقّع مسبقاً",
+                "conditions": [
+                  [
+                    {
+                      "a": "{{3.signed_at}}",
+                      "o": "exist"
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "id": 9,
+              "module": "gateway:WebhookRespond",
+              "version": 1,
+              "mapper": {
+                "status": "200",
+                "body": "{\"ok\":false,\"error\":\"ALREADY_SIGNED\",\"contract_no\":\"{{3.contract_no}}\"}",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://caminotich.sa"
+                  }
+                ]
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": 100,
+                  "name": "Respond: ALREADY_SIGNED"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "flow": [
+            {
+              "id": 12,
+              "module": "airtable:ActionCreateRecord",
+              "version": 3,
+              "parameters": {
+                "__IMTCONN__": null
+              },
+              "mapper": {
+                "base": "appkYurrIYGIup8QH",
+                "table": "Contract_Attempts",
+                "useColumnId": false,
+                "record": {
+                  "request_id": "{{2.request_id}}",
+                  "token_used": "{{2.t}}",
+                  "contract": "{{3.contract_no}}",
+                  "result": "REJECTED",
+                  "attempted_at": "{{now}}",
+                  "ip": "{{first(split(1.headers.`x-forwarded-for`; \",\"))}}",
+                  "user_agent": "{{2.user_agent}}",
+                  "signer_name": "{{2.signer_name}}",
+                  "phone_e164": "{{2.phone_e164}}",
+                  "package_sent": "{{2.package}}",
+                  "amount_sent": "{{2.amount_sar}}",
+                  "package_expected": "{{3.package}}",
+                  "amount_expected": "{{3.amount_sar}}",
+                  "lang": "{{2.lang}}"
+                }
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1200,
+                  "y": 250,
+                  "name": "Airtable: log attempt (REJECTED)"
+                }
+              }
+            },
+            {
+              "id": 10,
+              "module": "gateway:WebhookRespond",
+              "version": 1,
+              "mapper": {
+                "status": "200",
+                "body": "{\"ok\":false,\"error\":\"REJECTED\"}",
+                "headers": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://caminotich.sa"
+                  }
+                ]
+              },
+              "metadata": {
+                "designer": {
+                  "x": 1500,
+                  "y": 250,
+                  "name": "Respond: REJECTED (fallback)"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "slots": null,
+      "confidential": false,
+      "dataloss": false,
+      "dlq": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "eu2.make.com"
+  }
+}
