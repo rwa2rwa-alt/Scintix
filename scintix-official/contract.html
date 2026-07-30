@@ -651,30 +651,39 @@ function exportPDF(lang) {
   // اللغة
   if (p.get('lang')) curLang = p.get('lang');
 
-  // اسم العميل
-  const name = p.get('name') || p.get('client') || '';
-  if (name) {
-    ['ar','en'].forEach(l => {
-      const inp = document.getElementById(`cname-${l}`);
-      if (inp) {
-        // تعبئة مبدئية قابلة للتعديل — الحقل للاسم الثلاثي للموقّع،
-        // والرابط قد يمرّر اسم الشركة، فلا يصح إقفاله.
-        inp.value = name;
-        inp.dispatchEvent(new Event('input'));
-      }
-    });
+  // قفل الحقول الصادرة من السجل: لا يغيّرها العميل
+  function lockField(inp, val) {
+    if (!inp || !val) return;
+    inp.value    = val;
+    inp.readOnly = true;
+    inp.tabIndex = -1;
+    inp.setAttribute('aria-readonly', 'true');
+    inp.style.background  = '#eef0f6';
+    inp.style.color       = '#5c6b8a';
+    inp.style.cursor      = 'not-allowed';
+    inp.style.borderStyle = 'dashed';
   }
 
-  // البريد الإلكتروني
+  /* اسم المؤسسة — يأتي من Airtable ويُقفل.
+     ملاحظة: معامل الرابط اسمه name لكنه يحمل اسم الشركة،
+     لذلك يُحقن في ccompany لا في cname. */
+  const company = p.get('company') || p.get('name') || p.get('client') || '';
+  if (company) {
+    ['ar','en'].forEach(l => lockField(document.getElementById(`ccompany-${l}`), company));
+  }
+
+  // البريد الإلكتروني — يُقفل أيضاً
   const email = p.get('email') || '';
   if (email) {
-    ['ar','en'].forEach(l => {
-      const inp = document.getElementById(`cemail-${l}`);
-      if (inp) {
-        inp.value = email;
-      }
-    });
+    ['ar','en'].forEach(l => lockField(document.getElementById(`cemail-${l}`), email));
   }
+
+  /* الاسم الثلاثي ورقم الجوال يبقيان فارغين — توقيع العميل بيده.
+     نُلزمه بكتابة الاسم بإضافة تنبيه بصري فقط. */
+  ['ar','en'].forEach(l => {
+    const inp = document.getElementById(`cname-${l}`);
+    if (inp) inp.style.borderColor = '#7c3aed';
+  });
 
   // الباقة (تُظهر في جدول العقد)
   const pkg = p.get('pkg') || p.get('package') || '';
