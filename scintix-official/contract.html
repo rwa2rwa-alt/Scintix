@@ -657,13 +657,10 @@ function exportPDF(lang) {
     ['ar','en'].forEach(l => {
       const inp = document.getElementById(`cname-${l}`);
       if (inp) {
+        // تعبئة مبدئية قابلة للتعديل — الحقل للاسم الثلاثي للموقّع،
+        // والرابط قد يمرّر اسم الشركة، فلا يصح إقفاله.
         inp.value = name;
         inp.dispatchEvent(new Event('input'));
-        // اجعل الحقل للعرض فقط — العميل لا يغيّره
-        inp.readOnly = true;
-        inp.style.background = '#f0edff';
-        inp.style.color = '#7c3aed';
-        inp.style.fontWeight = '600';
       }
     });
   }
@@ -675,9 +672,6 @@ function exportPDF(lang) {
       const inp = document.getElementById(`cemail-${l}`);
       if (inp) {
         inp.value = email;
-        inp.readOnly = true;
-        inp.style.background = '#f0edff';
-        inp.style.color = '#5c6b8a';
       }
     });
   }
@@ -685,11 +679,11 @@ function exportPDF(lang) {
   // الباقة (تُظهر في جدول العقد)
   const pkg = p.get('pkg') || p.get('package') || '';
   const PKG_MAP = {
-    spark:  { ar: 'Spark — 899 SAR/شهرياً',   en: 'Spark — 899 SAR/month' },
-    glow:   { ar: 'Glow — 1,799 SAR/شهرياً',  en: 'Glow — 1,799 SAR/month' },
-    pulse:  { ar: 'Pulse — 3,299 SAR/شهرياً', en: 'Pulse — 3,299 SAR/month' },
-    nova:   { ar: 'Nova — 5,999 SAR/شهرياً',  en: 'Nova — 5,999 SAR/month' },
-    zenith: { ar: 'Zenith — 12,000 SAR/شهرياً', en: 'Zenith — 12,000 SAR/month' }
+    spark:  { ar: 'Spark — 899 ريال · دفعة واحدة',   en: 'Spark — 899 SAR · one-time' },
+    glow:   { ar: 'Glow — 1,799 ريال · دفعة واحدة',  en: 'Glow — 1,799 SAR · one-time' },
+    pulse:  { ar: 'Pulse — 3,299 ريال · دفعة واحدة', en: 'Pulse — 3,299 SAR · one-time' },
+    nova:   { ar: 'Nova — 5,999 ريال · دفعة واحدة',  en: 'Nova — 5,999 SAR · one-time' },
+    zenith: { ar: 'Zenith — 12,000 ريال · دفعة واحدة', en: 'Zenith — 12,000 SAR · one-time' }
   };
   if (pkg && PKG_MAP[pkg]) {
     const PKG_DESC = {
