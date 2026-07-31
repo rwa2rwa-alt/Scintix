@@ -202,6 +202,13 @@
       <input type="hidden" name="secondary_color">
     </div>
 
+    <!-- أسئلة خاصة بالباقة — تُبنى ديناميكياً حسب ?package= -->
+    <div class="field" id="pkgQuestions" style="display:none">
+      <label id="pkgQuestionsTitle">تفاصيل إضافية عن باقتك</label>
+      <div id="pkgQuestionsBody"></div>
+      <p class="footnote" style="margin-top:6px">اختيارية — تساعدنا نجهّز عرضك بدقة أكبر.</p>
+    </div>
+
     <button type="submit" id="submitBtn">أرسل واستلم موقعك قريباً</button>
     <div id="status"></div>
     <p class="footnote">بمجرد الإرسال، فريقنا التقني (المدعوم بالذكاء الاصطناعي) بيبدأ فوراً بتجهيز موقعك.</p>
@@ -244,6 +251,73 @@
     document.getElementById('pkgChipText').textContent = `طلبك على باقة ${pkgParam}`;
   }
 
+  // ── أسئلة اختيارية خاصة بكل باقة ──────────────────────────────
+  const PKG_QUESTIONS = {
+    Spark: [
+      { id:'pages',    label:'كم صفحة تتوقع تحتاج؟',            type:'select', options:['صفحة واحدة','2-3 صفحات','4-5 صفحات','لست متأكداً'] },
+      { id:'logo',     label:'هل لديك شعار جاهز؟',              type:'select', options:['نعم جاهز','أحتاج تصميم شعار','لست متأكداً'] }
+    ],
+    Glow: [
+      { id:'whatsapp', label:'تحتاج مساعد واتساب ذكي؟',         type:'select', options:['نعم','لا','أريد معرفة المزيد'] },
+      { id:'social',   label:'ما الحسابات التي تريد ربطها؟',    type:'text',   placeholder:'انستقرام، تيك توك، سناب...' }
+    ],
+    Pulse: [
+      { id:'gateway',  label:'تحتاج بوابة دفع إلكتروني؟',       type:'select', options:['نعم','لا','لاحقاً'] },
+      { id:'store',    label:'كم منتجاً تقريباً في متجرك؟',      type:'select', options:['أقل من 20','20-100','أكثر من 100','لا يوجد متجر'] }
+    ],
+    Nova: [
+      { id:'users',    label:'كم عدد المستخدمين المتوقع للنظام؟', type:'select', options:['أقل من 10','10-50','أكثر من 50','لست متأكداً'] },
+      { id:'erp',      label:'تحتاج ربط ERP أو CRM؟',           type:'select', options:['ERP','CRM','الاثنان','لا'] }
+    ],
+    Zenith: [
+      { id:'scope',    label:'صف نطاق المشروع باختصار',         type:'text',   placeholder:'الأنظمة والتكاملات المطلوبة' },
+      { id:'sla',      label:'تحتاج اتفاقية مستوى خدمة (SLA)؟', type:'select', options:['نعم','لا','أريد مناقشتها'] }
+    ]
+  };
+
+  const pkgQs = PKG_QUESTIONS[pkgParam] || null;
+  if (pkgQs) {
+    const wrap = document.getElementById('pkgQuestions');
+    const body = document.getElementById('pkgQuestionsBody');
+    document.getElementById('pkgQuestionsTitle').textContent = `تفاصيل إضافية عن باقة ${pkgParam}`;
+    pkgQs.forEach(q => {
+      const lb = document.createElement('label');
+      lb.textContent = q.label;
+      lb.style.cssText = 'display:block;margin-top:10px;font-size:.9rem';
+      body.appendChild(lb);
+      let el;
+      if (q.type === 'select') {
+        el = document.createElement('select');
+        const blank = document.createElement('option');
+        blank.value = ''; blank.textContent = '— اختياري —';
+        el.appendChild(blank);
+        q.options.forEach(o => {
+          const op = document.createElement('option');
+          op.value = o; op.textContent = o;
+          el.appendChild(op);
+        });
+      } else {
+        el = document.createElement('input');
+        el.type = 'text';
+        if (q.placeholder) el.placeholder = q.placeholder;
+        el.maxLength = 300;
+      }
+      el.dataset.pkgq = q.id;
+      el.dataset.pkgLabel = q.label;
+      body.appendChild(el);
+    });
+    wrap.style.display = 'block';
+  }
+
+  function collectPkgRequirements() {
+    const out = [];
+    document.querySelectorAll('[data-pkgq]').forEach(el => {
+      const v = (el.value || '').trim();
+      if (v) out.push(`${el.dataset.pkgLabel}: ${v}`);
+    });
+    return out.join(' | ');
+  }
+
   const palettes = document.querySelectorAll('.palette');
   palettes.forEach(p => {
     p.addEventListener('click', () => {
@@ -270,14 +344,17 @@
     delete data.phone_country;
     delete data.phone_number;
     data.package = pkgParam || '';
+    data.package_requirements = collectPkgRequirements();
     btn.disabled = true;
     btn.textContent = 'جارٍ الإرسال...';
     try{
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({...data, k: "cmt_sec_9f4Kq7Xw2R"})
       });
+      /* بدون هذا الفحص كانت الصفحة تعرض "تم الاستلام" حتى لو رفض Make الطلب */
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       statusEl.className = 'ok';
       statusEl.textContent = 'تم استلام طلبك ✅ راح نتواصل معك قريباً';
       form.reset();
@@ -292,11 +369,8 @@
   });
 </script>
 
-<!-- 🤖 Chatbase AI Widget -->
-<script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
-const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
+<!-- ودجت Chatbase أُزيل 2026-07-31: هذه الصفحة تجمع اسماً وبريداً وجوالاً،
+     وسكربت طرف ثالث يقرأ الـDOM كاملاً. نفس سبب إزالته من صفحة العقد. -->
 
 </body>
 </html>

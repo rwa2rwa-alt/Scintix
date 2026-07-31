@@ -117,11 +117,12 @@
     btn.disabled = true;
     btn.textContent = 'جارٍ الإرسال...';
     try {
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({...data, k: "cmt_sec_9f4Kq7Xw2R"})
       });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
       statusEl.className = 'ok';
       statusEl.textContent = 'تم استلام تذكرتك ✅ بنتواصل معك قريباً';
       form.reset();
