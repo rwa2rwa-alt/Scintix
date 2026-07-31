@@ -42,12 +42,12 @@
   #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
   #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
   #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
-  .ack-item{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;margin-bottom:9px;
+  .ack-item{display:flex;gap:12px;align-items:flex-start;padding:16px 18px;margin-bottom:11px;
     border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s}
   .ack-item:hover{border-color:rgba(92,240,255,.4)}
   .ack-item.on{border-color:var(--accent);background:rgba(92,240,255,.06)}
   .ack-item input{width:auto;margin-top:3px;accent-color:var(--accent)}
-  .ack-item .txt{font-size:.88rem;color:var(--text);line-height:1.65}
+  .ack-item .txt{font-size:.85rem;color:var(--text);line-height:1.9;text-align:justify}
   .ack-item .txt small{display:block;color:var(--text-muted);font-size:.78rem;margin-top:3px}
   #submitBtn:disabled{opacity:.45;cursor:not-allowed}
   .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
@@ -356,7 +356,7 @@
 
         <div class="disc-step">
           <h2>٧ — الإقرار</h2>
-          <p>بندان يحكمان بقية المشروع. اقرأهما بعناية.</p>
+          <p>ثلاثة بنود تحكم بقية المشروع. اقرأها بعناية — التوقيع عليها جزء من الاتفاق.</p>
         </div>
 
         <div id="ackList"></div>
@@ -459,10 +459,14 @@
 
   /* ── الإقرارات الملزمة ────────────────────────────────────────── */
   var ACKS = [
-    ['accuracy', 'أقرّ بأن المعلومات المذكورة أعلاه صحيحة وكاملة',
-                 'يُبنى مستند النطاق عليها مباشرة، وأي معلومة ناقصة قد تغيّر التقدير.'],
-    ['change',   'أفهم أن أي تغيير في النطاق بعد اعتماده يؤثر على المدة والتكلفة',
-                 'طلبات التعديل تُنفَّذ خلال مرحلة المراجعة قبل الإطلاق. ما يُطلب بعد الإطلاق يُدار باتفاقية مستقلة.']
+    ['accuracy',
+     'أقرّ بأن جميع المعلومات والبيانات المقدمة في هذا النموذج صحيحة وكاملة، وأتفهم أن وثيقة نطاق العمل (Scope of Work) والتقديرات الزمنية والمالية ستُبنى على هذه المعلومات. كما أقر بأن أي معلومات غير مكتملة أو غير صحيحة أو تُقدَّم لاحقاً قد تستلزم مراجعة نطاق المشروع أو الجدول الزمني أو التكلفة.'],
+
+    ['change',
+     'أقرّ باطلاعي على آلية إدارة التغييرات، وأتفهم أن جميع الملاحظات وطلبات التعديل يجب تقديمها خلال مراحل المراجعة وقبل الاعتماد النهائي والإطلاق. وبعد اعتماد المشروع أو إطلاقه، تُعد أي متطلبات أو تعديلات أو إضافات جديدة خارج نطاق العمل المتفق عليه، ويتم تقييمها وتنفيذها بموجب اتفاقية أو عرض سعر مستقل يحدد نطاق العمل والمدة والتكلفة.'],
+
+    ['materials',
+     'أتعهد بتوفير جميع المواد المطلوبة (مثل النصوص، الصور، الشعارات، بيانات المنتجات، وبيانات الدخول للأنظمة عند الحاجة) خلال المواعيد المتفق عليها، وأتفهم أن أي تأخير في توفيرها قد يؤثر على الجدول الزمني للمشروع دون أن يُعد ذلك تأخيراً من جهة Caminotich.']
   ];
 
   var ackBox = document.getElementById('ackList');
@@ -474,9 +478,6 @@
     var txt = document.createElement('div');
     txt.className = 'txt';
     txt.textContent = a[1];
-    var sm = document.createElement('small');
-    sm.textContent = a[2];
-    txt.appendChild(sm);
     cb.addEventListener('change', function(){
       lb.classList.toggle('on', cb.checked);
       refreshAck();
