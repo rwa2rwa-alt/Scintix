@@ -150,7 +150,7 @@ async function run() {
     const res = await fetch('/.netlify/functions/analyse', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ company, email, desc, budget })
+      body: JSON.stringify({ company, email, desc, budget, k: 'cmt_sec_9f4Kq7Xw2R' })
     });
 
     if (!res.ok) {
@@ -160,7 +160,8 @@ async function run() {
 
     const data = await res.json();
     const text = data.result || '';
-    result.innerHTML = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    const esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    result.innerHTML = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     result.classList.add('on');
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 

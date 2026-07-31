@@ -8,13 +8,30 @@
    Value: sk-ant-xxxxxxxxxxxxxxxx
 ════════════════════════════════════════════════════════════ */
 
+/* النطاقات المسموح لها بالاستدعاء. أي أصل خارجها يُرفض قبل لمس Anthropic. */
+const ALLOWED_ORIGINS = [
+  'https://caminotich.sa',
+  'https://www.caminotich.sa',
+  'https://scintix-official.netlify.app'
+];
+
+/* مفتاح مشترك مع نماذج الموقع. ليس مصادقة قوية — يوقف الاستدعاء الآلي العابر
+   فقط. الحاجز الحقيقي هو ALLOWED_ORIGINS + سقف الطول أدناه. */
+const SEC_KEY = 'cmt_sec_9f4Kq7Xw2R';
+
+const MAX_DESC = 2000;
+
 exports.handler = async function(event) {
 
-  // ── CORS Headers (تسمح بالاستدعاء من موقعك فقط) ─────────────────────────
+  // ── CORS: أصل واحد محدد، لا '*' ───────────────────────────────────────────
+  const origin  = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
+  const allowed = ALLOWED_ORIGINS.indexOf(origin) !== -1;
+
   const headers = {
-    'Access-Control-Allow-Origin':  '*',
+    'Access-Control-Allow-Origin':  allowed ? origin : ALLOWED_ORIGINS[0],
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Vary': 'Origin',
     'Content-Type': 'application/json'
   };
 
@@ -27,6 +44,10 @@ exports.handler = async function(event) {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
+  if (origin && !allowed) {
+    return { statusCode: 403, headers, body: JSON.stringify({ error: 'Origin not allowed' }) };
+  }
+
   // ── Parse request ─────────────────────────────────────────────────────────
   let body;
   try {
@@ -35,39 +56,50 @@ exports.handler = async function(event) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
-  const { company = '', email = '', desc = '', budget = '', lang = 'ar' } = body;
+  const { company = '', email = '', desc = '', budget = '', lang = 'ar', k = '' } = body;
+
+  if (k !== SEC_KEY) {
+    return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
+  }
 
   if (!desc || desc.length < 5) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Project description required' }) };
   }
+
+  /* سقف الطول: يمنع استنزاف الرصيد عبر وصف ضخم. القص أفضل من الرفض للمستخدم الحقيقي. */
+  const safe = (v, n) => String(v || '').slice(0, n);
+  const sDesc    = safe(desc,    MAX_DESC);
+  const sCompany = safe(company, 120);
+  const sEmail   = safe(email,   160);
+  const sBudget  = safe(budget,  80);
 
   // ── Build prompt ──────────────────────────────────────────────────────────
   const prompt = lang === 'en'
     ? `You are a digital consultant at Caminotich Digital Solutions (Saudi Arabia).
 Analyse the project below and recommend the best package. Reply in English.
 
-Company: ${company || 'N/A'}
-Email:   ${email   || 'N/A'}
-Project: ${desc}
-Budget:  ${budget  || 'Not specified'}
+Company: ${sCompany || 'N/A'}
+Email:   ${sEmail   || 'N/A'}
+Project: ${sDesc}
+Budget:  ${sBudget  || 'Not specified'}
 
 Reply in this structure:
 1. **Project Analysis** (2 sentences)
-2. **Recommended Package** (Spark 899 / Glow 1,799 / Pulse 3,299 / Nova 5,999 / Zenith 12,000 SAR/month — with reason)
+2. **Recommended Package** (Spark 899 / Glow 1,799 / Pulse 3,299 / Nova 5,999 / Zenith 12,000 SAR — ONE-TIME payment, never monthly — with reason)
 3. **Next Steps** (3 practical steps)
 4. **Note** (one encouraging closing sentence)`
 
     : `أنت مستشار رقمي في وكالة Caminotich Digital Solutions السعودية.
 حلّل المشروع التالي وأعطِ توصية احترافية باللغة العربية.
 
-اسم الشركة: ${company || 'غير محدد'}
-البريد: ${email || 'غير محدد'}
-وصف المشروع: ${desc}
-الميزانية: ${budget || 'غير محددة'}
+اسم الشركة: ${sCompany || 'غير محدد'}
+البريد: ${sEmail || 'غير محدد'}
+وصف المشروع: ${sDesc}
+الميزانية: ${sBudget || 'غير محددة'}
 
 أجب بهذا الترتيب:
 1. **تحليل المشروع** (جملتان)
-2. **الباقة المقترحة** (Spark 899 / Glow 1,799 / Pulse 3,299 / Nova 5,999 / Zenith 12,000 ريال شهرياً — مع السبب)
+2. **الباقة المقترحة** (Spark 899 / Glow 1,799 / Pulse 3,299 / Nova 5,999 / Zenith 12,000 ريال — دفعة واحدة وليست اشتراكاً شهرياً — مع السبب)
 3. **خطوات البدء** (3 خطوات عملية)
 4. **ملاحظة** (جملة تشجيعية وختامية)`;
 

@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"/>
+<meta name="robots" content="noindex, nofollow"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Caminotich | عقد الخدمة</title>
 <link rel="stylesheet" href="css/styles.css"/>
@@ -506,9 +507,9 @@ window.CMT_CFG = {
   OPEN_HOOK: 'REPLACE_WITH_MAKE_OPEN_HOOK',   // GET  ?t=<token>  → حالة العقد
   SIGN_HOOK: 'REPLACE_WITH_MAKE_SIGN_HOOK',   // POST payload     → تثبيت التوقيع
   TERMS_VERSION: '2026-07-30',
-  /* مؤقتاً: يسمح بالتشغيل بمعاملات الرابط القديمة قبل بناء سيناريو الفتح.
-     اجعليها false يوم تصبح OPEN_HOOK جاهزة — هذه هي الثغرة التي أغلقناها. */
-  ALLOW_URL_PARAMS: true
+  /* أُغلق 2026-07-31. الرابط لم يعد مصدر بيانات إطلاقاً — لا تُعيديها true.
+     كان يسمح بحقن contract_no و package من الرابط مباشرة إلى الصفحة. */
+  ALLOW_URL_PARAMS: false
 };
 
 window.CMT_STATE = { token:null, state:'loading', contract_no:null, signed:false,
@@ -595,8 +596,8 @@ function renderPkg(pkgRaw) {
       if (wr) {
         wr.style.display = 'block';
         wr.innerHTML = l==='ar'
-          ? '⚠️ الباقة غير محددة أو غير معروفة' + (pkgRaw ? ' («' + pkgRaw + '»)' : '') + '. التوقيع معطّل. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.'
-          : '⚠️ Package missing or unrecognized' + (pkgRaw ? ' ("' + pkgRaw + '")' : '') + '. Signing is disabled. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.';
+          ? '⚠️ الباقة غير محددة أو غير معروفة' + (pkgRaw ? ' («' + escHtml(pkgRaw) + '»)' : '') + '. التوقيع معطّل. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.'
+          : '⚠️ Package missing or unrecognized' + (pkgRaw ? ' ("' + escHtml(pkgRaw) + '")' : '') + '. Signing is disabled. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.';
       }
     }
   });
@@ -812,6 +813,14 @@ function signatureImage(lang) {
 }
 
 /* ─── إشعارات وقفل المستند ─── */
+/* تهريب أي قيمة ديناميكية قبل إدراجها في notice() — notice تستقبل HTML عمداً
+   (روابط mailto وعناصر code)، فالتهريب مسؤولية موضع الاستدعاء. */
+function escHtml(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
 function notice(kind, htmlAr, htmlEn) {
   ['ar','en'].forEach(l => {
     const doc = document.querySelector(`[data-lang="${l}"].c-doc`);
@@ -1061,8 +1070,8 @@ async function submitContract(lang) {
       return;
     }
     notice('err',
-      '⚠️ لم يُثبَّت التوقيع (' + code + '). لم يُحفظ شيء — أعيدي المحاولة، وإن تكرر تواصلي على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> مع رقم الطلب: <code>' + CMT_STATE.request_id + '</code>',
-      '⚠️ Signature was not recorded (' + code + '). Nothing was saved — please retry, or contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> quoting request ID: <code>' + CMT_STATE.request_id + '</code>');
+      '⚠️ لم يُثبَّت التوقيع (' + escHtml(code) + '). لم يُحفظ شيء — أعيدي المحاولة، وإن تكرر تواصلي على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> مع رقم الطلب: <code>' + escHtml(CMT_STATE.request_id) + '</code>',
+      '⚠️ Signature was not recorded (' + escHtml(code) + '). Nothing was saved — please retry, or contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> quoting request ID: <code>' + escHtml(CMT_STATE.request_id) + '</code>');
     return;
   }
 
@@ -1076,8 +1085,8 @@ async function submitContract(lang) {
   showPayRow(lang, payUrl, resolved);
   lockDocument('signed');
   notice('ok',
-    '✓ تم تثبيت العقد ' + (CMT_STATE.contract_no || '') + ' وحفظ التوقيع. وصلتك نسخة على بريدك.',
-    '✓ Contract ' + (CMT_STATE.contract_no || '') + ' recorded and signature stored. A copy was emailed to you.');
+    '✓ تم تثبيت العقد ' + escHtml(CMT_STATE.contract_no || '') + ' وحفظ التوقيع. وصلتك نسخة على بريدك.',
+    '✓ Contract ' + escHtml(CMT_STATE.contract_no || '') + ' recorded and signature stored. A copy was emailed to you.');
 }
 
 function showPayRow(lang, payUrl, resolved) {
@@ -1110,8 +1119,8 @@ function applyState(d) {
   switch (CMT_STATE.state) {
     case 'open':
       notice('warn',
-        'عقد رقم ' + (d.contract_no || '') + ' — جاهز للتوقيع. الرجاء مراجعة البنود قبل التوقيع.',
-        'Contract ' + (d.contract_no || '') + ' — ready for signature. Please review the terms before signing.');
+        'عقد رقم ' + escHtml(d.contract_no || '') + ' — جاهز للتوقيع. الرجاء مراجعة البنود قبل التوقيع.',
+        'Contract ' + escHtml(d.contract_no || '') + ' — ready for signature. Please review the terms before signing.');
       break;
 
     case 'signed':
@@ -1119,16 +1128,16 @@ function applyState(d) {
       lockDocument('signed');
       showPayRow(curLang, d.pay_url, window.CMT_PKG);
       notice('ok',
-        '✓ هذا العقد موقّع بتاريخ ' + (d.signed_at || '—') + ' ولا يمكن توقيعه مرة أخرى. تبقّى سداد المبلغ.',
-        '✓ This contract was signed on ' + (d.signed_at || '—') + ' and cannot be signed again. Payment is pending.');
+        '✓ هذا العقد موقّع بتاريخ ' + escHtml(d.signed_at || '—') + ' ولا يمكن توقيعه مرة أخرى. تبقّى سداد المبلغ.',
+        '✓ This contract was signed on ' + escHtml(d.signed_at || '—') + ' and cannot be signed again. Payment is pending.');
       break;
 
     case 'paid':
       CMT_STATE.signed = true; CMT_STATE.paid = true;
       lockDocument('paid');
       notice('ok',
-        '✓ العقد موقّع والسداد مكتمل بتاريخ ' + (d.paid_at || '—') + '. لا يلزم أي إجراء إضافي.',
-        '✓ Contract signed and payment completed on ' + (d.paid_at || '—') + '. No further action needed.');
+        '✓ العقد موقّع والسداد مكتمل بتاريخ ' + escHtml(d.paid_at || '—') + '. لا يلزم أي إجراء إضافي.',
+        '✓ Contract signed and payment completed on ' + escHtml(d.paid_at || '—') + '. No further action needed.');
       break;
 
     case 'expired':

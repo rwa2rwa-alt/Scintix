@@ -5,3 +5,43 @@
   from   = "/.netlify/functions/*"
   to     = "/.netlify/functions/:splat"
   status = 200
+
+# ══════════════════════════════════════════════════════════════════
+# ترويسات الأمان — أُضيفت 2026-07-31
+# ملاحظة: CSP مقصورة على frame-ancestors عمداً. الموقع يحمّل من
+# googletagmanager و chatbase و unsplash و fonts.googleapis و
+# cdn.moyasar، فسياسة script-src كاملة تحتاج اختباراً حياً قبل التفعيل.
+# ══════════════════════════════════════════════════════════════════
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options                 = "SAMEORIGIN"
+    X-Content-Type-Options          = "nosniff"
+    Referrer-Policy                 = "strict-origin-when-cross-origin"
+    Permissions-Policy              = "geolocation=(), microphone=(), camera=(), payment=(self)"
+    Strict-Transport-Security       = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy         = "frame-ancestors 'self'"
+    Cross-Origin-Opener-Policy      = "same-origin"
+
+# صفحات تحمل توقيعاً أو بيانات مالية: منع التضمين نهائياً + منع التخزين
+[[headers]]
+  for = "/contract.html"
+  [headers.values]
+    X-Frame-Options         = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Cache-Control           = "no-store, max-age=0"
+    X-Robots-Tag            = "noindex, nofollow"
+
+[[headers]]
+  for = "/invoice.html"
+  [headers.values]
+    X-Frame-Options         = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Cache-Control           = "no-store, max-age=0"
+    X-Robots-Tag            = "noindex, nofollow"
+
+[[headers]]
+  for = "/payment-result.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag  = "noindex, nofollow"
