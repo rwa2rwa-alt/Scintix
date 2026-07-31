@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Caminotich | محضر التسليم والاعتماد النهائي</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .ho-shell{width:min(780px,100% - 32px);margin:0 auto;padding:40px 0 60px}
+  .ho-back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:24px}
+  .ho-card{padding:36px 32px;border-radius:28px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+  .ho-card h1{font-size:clamp(1.7rem,4vw,2.2rem);margin:0 0 8px}
+  .ho-card > p.lead{color:var(--text-muted);margin:0 0 22px;line-height:1.8}
+  .ho-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:26px}
+  .ho-meta div{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+  .ho-meta b{display:block;font-size:.74rem;color:var(--text-muted);font-weight:700;margin-bottom:3px}
+  .ho-meta span{font-size:.9rem;color:var(--text)}
+  .ho-step{margin:32px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+  .ho-step h2{font-size:1.05rem;margin:0 0 4px}
+  .ho-step p{margin:0;font-size:.82rem;color:var(--text-muted);line-height:1.7}
+  .ack-item{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;margin-bottom:9px;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s}
+  .ack-item:hover{border-color:rgba(92,240,255,.4)}
+  .ack-item.on{border-color:var(--accent);background:rgba(92,240,255,.06)}
+  .ack-item input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .ack-item .txt{font-size:.88rem;color:var(--text);line-height:1.65}
+  .ack-item .txt small{display:block;color:var(--text-muted);font-size:.78rem;margin-top:3px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;color:var(--text-muted)}
+  .field input, .field textarea{
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+    border-radius:10px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:.92rem}
+  .field textarea{resize:vertical;min-height:90px}
+  .field input:focus, .field textarea:focus{outline:none;border-color:var(--accent)}
+  .sig-wrap{border:1.5px dashed var(--border);border-radius:14px;background:rgba(255,255,255,.02);padding:10px}
+  #sigPad{width:100%;height:170px;display:block;border-radius:10px;background:#fff;cursor:crosshair;touch-action:none}
+  .sig-tools{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+  .sig-tools button{background:none;border:1px solid var(--border);color:var(--text-muted);
+    border-radius:8px;padding:6px 14px;font-family:inherit;font-size:.8rem;cursor:pointer}
+  .sig-tools span{font-size:.76rem;color:var(--text-muted)}
+  .warn-box{margin-top:24px;padding:15px 17px;border-radius:12px;
+    background:rgba(234,179,8,.07);border:1px solid rgba(234,179,8,.25);
+    font-size:.84rem;color:#fbbf24;line-height:1.75}
+  #submitBtn{width:100%;margin-top:24px;padding:15px;border:0;border-radius:12px;cursor:pointer;
+    font-family:inherit;font-size:1rem;font-weight:700;color:#04121a;
+    background:linear-gradient(135deg,#4ade80,#22d3ee)}
+  #submitBtn:disabled{opacity:.45;cursor:not-allowed}
+  #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
+  #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+  #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#plans">الباقات</a>
+      <a href="support.html">الدعم</a>
+    </nav>
+  </header>
+
+  <div class="ho-shell">
+    <a class="ho-back" href="index.html">→ رجوع للرئيسية</a>
+
+    <div class="ho-card">
+      <h1>📋 محضر التسليم والاعتماد النهائي</h1>
+      <p class="lead">هذا المحضر يوثّق انتهاء المشروع. بتوقيعك تقرّ باستلام كل ما هو أدناه، ويبدأ من تاريخه سريان فترة الضمان.</p>
+
+      <div class="ho-meta">
+        <div><b>المشروع</b><span id="mProject">—</span></div>
+        <div><b>العميل</b><span id="mClient">—</span></div>
+        <div><b>الباقة</b><span id="mPackage">—</span></div>
+        <div><b>تاريخ التحرير</b><span id="mDate">—</span></div>
+      </div>
+
+      <form id="handoverForm">
+
+        <div class="ho-step">
+          <h2>١ — إقرار الاستلام</h2>
+          <p>أكّد كل بند. لا يمكن التوقيع قبل تأكيد جميع البنود.</p>
+        </div>
+
+        <div id="ackList"></div>
+
+        <div class="ho-step">
+          <h2>٢ — ملاحظات الاعتماد</h2>
+          <p>اختياري — أي تحفّظ أو ملاحظة تريد توثيقها في المحضر.</p>
+        </div>
+
+        <div class="field">
+          <label>ملاحظات</label>
+          <textarea name="notes" maxlength="1000"></textarea>
+        </div>
+
+        <div class="ho-step">
+          <h2>٣ — التوقيع</h2>
+          <p>وقّع بإصبعك أو الفأرة داخل المربع.</p>
+        </div>
+
+        <div class="field">
+          <label>اسم الموقّع *</label>
+          <input type="text" name="signer_name" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label>الصفة *</label>
+          <input type="text" name="signer_role" maxlength="120" placeholder="مثال: المالك / المدير التنفيذي" required>
+        </div>
+
+        <div class="field">
+          <label>التوقيع *</label>
+          <div class="sig-wrap">
+            <canvas id="sigPad"></canvas>
+            <div class="sig-tools">
+              <button type="button" id="clearSig">مسح التوقيع</button>
+              <span id="sigState">لم يُوقَّع بعد</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="warn-box">
+          ⚠️ بتوقيع هذا المحضر يُعتبر المشروع منتهياً. أي تطوير أو تحسين أو طلب جديد بعد هذا التاريخ يُدار عبر <strong>اتفاقية صيانة أو تطوير مستقلة</strong> بنطاق ومدة وتكلفة تُحدَّد قبل البدء. تبدأ فترة ضمان (٣٠) يوماً من تاريخ التوقيع تغطي إصلاح الأعطال التقنية دون إضافة وظائف جديدة.
+        </div>
+
+        <button type="submit" id="submitBtn" disabled>اعتمد وأغلق المشروع</button>
+        <div id="status"></div>
+        <p class="footnote">تصلك نسخة من المحضر على بريدك فور الاعتماد.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var SIGNOFF_HOOK = 'REPLACE_WITH_MAKE_SIGNOFF_HOOK';
+  var SEC_KEY      = 'cmt_sec_9f4Kq7Xw2R';
+
+  /* الرابط ليس مصدر بيانات — المعرّف قيمة معتمة تُنظَّف وتُرسَل فقط.
+     بيانات العرض (اسم المشروع/العميل/الباقة) تأتي من Make لا من الرابط. */
+  var rawT = new URLSearchParams(location.search).get('t') || '';
+  var token = /^[A-Za-z0-9_-]{1,64}$/.test(rawT) ? rawT : '';
+
+  document.getElementById('mDate').textContent =
+    new Date().toLocaleDateString('ar-SA-u-nu-latn', { year:'numeric', month:'long', day:'numeric' });
+  if (token) document.getElementById('mProject').textContent = token;
+
+  /* ── بنود الإقرار ─────────────────────────────────────────────── */
+  var ACKS = [
+    ['approve',  'أعتمد المشروع بصيغته النهائية',
+                 'راجعت العمل المسلَّم وهو مطابق للنطاق المعتمد في مستند الاستكشاف.'],
+    ['files',    'استلمت جميع ملفات المشروع',
+                 'الملفات المصدرية والأصول الرقمية المتفق عليها.'],
+    ['training', 'استلمت المواد التدريبية',
+                 'دليل المستخدم، ودليل مسؤول النظام إن وُجد، ومواد التدريب المرافقة.'],
+    ['access',   'استلمت بيانات الوصول وكلمات المرور',
+                 'لوحة التحكم والاستضافة والنطاق والحسابات المرتبطة، إن وُجدت.'],
+    ['scope',    'أقرّ بأن المشروع ينتهي بهذا الاعتماد',
+                 'وأن أي طلب لاحق يكون باتفاقية صيانة أو تطوير مستقلة.']
+  ];
+
+  var list = document.getElementById('ackList');
+  ACKS.forEach(function(a){
+    var lb = document.createElement('label');
+    lb.className = 'ack-item';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.dataset.ack = a[0]; cb.required = true;
+    var txt = document.createElement('div');
+    txt.className = 'txt';
+    txt.textContent = a[1];
+    var sm = document.createElement('small');
+    sm.textContent = a[2];
+    txt.appendChild(sm);
+    cb.addEventListener('change', function(){
+      lb.classList.toggle('on', cb.checked);
+      refresh();
+    });
+    lb.append(cb, txt);
+    list.appendChild(lb);
+  });
+
+  /* ── لوحة التوقيع ─────────────────────────────────────────────── */
+  var pad = document.getElementById('sigPad');
+  var ctx = pad.getContext('2d');
+  var drawing = false, hasSig = false;
+
+  function sizePad(){
+    var r = pad.getBoundingClientRect();
+    var dpr = window.devicePixelRatio || 1;
+    var data = hasSig ? pad.toDataURL() : null;
+    pad.width  = Math.round(r.width  * dpr);
+    pad.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = '#0a0e1a';
+    if (data) { var im = new Image(); im.onload = function(){ ctx.drawImage(im, 0, 0, r.width, r.height); }; im.src = data; }
+  }
+  sizePad();
+  window.addEventListener('resize', sizePad);
+
+  function pos(e){
+    var r = pad.getBoundingClientRect();
+    var p = e.touches ? e.touches[0] : e;
+    return { x: p.clientX - r.left, y: p.clientY - r.top };
+  }
+  function start(e){ e.preventDefault(); drawing = true; var p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }
+  function move(e){
+    if (!drawing) return;
+    e.preventDefault();
+    var p = pos(e); ctx.lineTo(p.x, p.y); ctx.stroke();
+    if (!hasSig) { hasSig = true; document.getElementById('sigState').textContent = 'تم التوقيع ✓'; refresh(); }
+  }
+  function end(){ drawing = false; }
+
+  ['mousedown','touchstart'].forEach(function(ev){ pad.addEventListener(ev, start, {passive:false}); });
+  ['mousemove','touchmove'].forEach(function(ev){ pad.addEventListener(ev, move,  {passive:false}); });
+  ['mouseup','mouseleave','touchend','touchcancel'].forEach(function(ev){ pad.addEventListener(ev, end); });
+
+  document.getElementById('clearSig').addEventListener('click', function(){
+    ctx.clearRect(0, 0, pad.width, pad.height);
+    hasSig = false;
+    document.getElementById('sigState').textContent = 'لم يُوقَّع بعد';
+    refresh();
+  });
+
+  /* ── تفعيل الزر ───────────────────────────────────────────────── */
+  var form = document.getElementById('handoverForm');
+  var btn  = document.getElementById('submitBtn');
+  var statusEl = document.getElementById('status');
+
+  function allAcked(){
+    var ok = true;
+    document.querySelectorAll('[data-ack]').forEach(function(cb){ if (!cb.checked) ok = false; });
+    return ok;
+  }
+  function refresh(){ btn.disabled = !(allAcked() && hasSig); }
+
+  form.addEventListener('input', refresh);
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (!allAcked() || !hasSig) return;
+
+    var data = Object.fromEntries(new FormData(form).entries());
+    var acks = [];
+    document.querySelectorAll('[data-ack]').forEach(function(cb){ if (cb.checked) acks.push(cb.dataset.ack); });
+
+    data.acknowledgements = acks.join(',');
+    data.token        = token;
+    data.form_type    = 'signoff';
+    data.signature    = pad.toDataURL('image/png');
+    data.signed_at    = new Date().toISOString();
+
+    btn.disabled = true;
+    btn.textContent = 'جارٍ الاعتماد...';
+    statusEl.className = '';
+
+    try {
+      var res = await fetch(SIGNOFF_HOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({}, data, { k: SEC_KEY }))
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      statusEl.className = 'ok';
+      statusEl.textContent = 'تم اعتماد التسليم ✅ وصلتك نسخة من المحضر على بريدك.';
+      btn.textContent = 'تم الاعتماد ✓';
+      form.querySelectorAll('input,textarea,button').forEach(function(el){ el.disabled = true; });
+      pad.style.pointerEvents = 'none';
+    } catch (err) {
+      statusEl.className = 'err';
+      statusEl.textContent = 'ما تم حفظ الاعتماد. أعد المحاولة، وإن تكرر راسلنا على info@caminotich.sa';
+      btn.disabled = false;
+      btn.textContent = 'اعتمد وأغلق المشروع';
+    }
+  });
+})();
+</script>
+</body>
+</html>

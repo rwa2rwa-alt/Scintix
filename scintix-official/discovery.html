@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Caminotich | نموذج جلسة الاستكشاف</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .disc-shell{width:min(760px,100% - 32px);margin:0 auto;padding:40px 0 60px}
+  .disc-back{display:inline-flex;align-items:center;gap:8px;color:var(--accent);text-decoration:none;font-size:.9rem;margin-bottom:24px}
+  .disc-card{padding:36px 32px;border-radius:28px;background:rgba(255,255,255,.03);border:1px solid var(--border)}
+  .disc-card h1{font-size:clamp(1.7rem,4vw,2.2rem);margin:0 0 8px}
+  .disc-card > p.lead{color:var(--text-muted);margin:0 0 8px;line-height:1.8}
+  .disc-meta{display:none;margin:0 0 24px;padding:10px 14px;border-radius:10px;
+    background:rgba(92,240,255,.06);border:1px solid var(--border);font-size:.85rem;color:var(--accent)}
+  .disc-step{margin:34px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+  .disc-step h2{font-size:1.05rem;margin:0 0 4px;color:var(--text)}
+  .disc-step p{margin:0;font-size:.82rem;color:var(--text-muted);line-height:1.7}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;font-weight:700;margin-bottom:6px;color:var(--text-muted)}
+  .field .hint{display:block;font-weight:400;font-size:.78rem;margin-top:3px;color:var(--text-muted);opacity:.75}
+  .field input, .field select, .field textarea{
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+    border-radius:10px;padding:12px 14px;color:var(--text);font-family:inherit;font-size:.92rem;
+  }
+  .field textarea{resize:vertical;min-height:100px}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none;border-color:var(--accent)}
+  .check-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+  .check-item{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:10px;
+    border:1.5px solid var(--border);cursor:pointer;font-size:.85rem;color:var(--text-muted);transition:.15s}
+  .check-item:hover{border-color:rgba(92,240,255,.4)}
+  .check-item input{width:auto;margin:0;accent-color:var(--accent)}
+  .check-item.on{border-color:var(--accent);background:rgba(92,240,255,.07);color:var(--accent)}
+  .prio-list{display:flex;flex-direction:column;gap:9px}
+  .prio-row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center}
+  .prio-row span{font-size:.86rem;color:var(--text-muted)}
+  #submitBtn{width:100%;margin-top:28px;padding:15px;border:0;border-radius:12px;cursor:pointer;
+    font-family:inherit;font-size:1rem;font-weight:700;color:#04121a;
+    background:linear-gradient(135deg,#5cf0ff,#6c5ce7)}
+  #submitBtn:disabled{opacity:.6;cursor:not-allowed}
+  #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
+  #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
+  #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#services">الخدمات</a>
+      <a href="index.html#plans">الباقات</a>
+      <a href="support.html">الدعم</a>
+    </nav>
+  </header>
+
+  <div class="disc-shell">
+    <a class="disc-back" href="index.html">→ رجوع للرئيسية</a>
+
+    <div class="disc-card">
+      <h1>🧭 نموذج جلسة الاستكشاف</h1>
+      <p class="lead">قبل ما نبدأ التصميم أو التطوير، نحتاج نفهم عملك بدقة. إجاباتك هنا تصير أساس <strong>مستند متطلبات العمل ونطاق العمل ومعايير النجاح</strong> — وهو المستند الذي نبني عليه ولا نخرج عنه.</p>
+      <p class="lead">خذ وقتك. كل دقيقة هنا توفّر أسبوعاً من التعديلات لاحقاً.</p>
+      <div class="disc-meta" id="projMeta"></div>
+
+      <form id="discoveryForm">
+
+        <div class="disc-step">
+          <h2>١ — من أنت ومن عميلك</h2>
+          <p>نبدأ بالأساس: هويتك التجارية ومن تخاطب.</p>
+        </div>
+
+        <div class="field">
+          <label>اسم النشاط التجاري *</label>
+          <input type="text" name="company_name" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label>اسم مسؤول التواصل *</label>
+          <input type="text" name="contact_name" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني *</label>
+          <input type="email" name="email" maxlength="160" required>
+        </div>
+        <div class="field">
+          <label>صف نشاطك في فقرة قصيرة *
+            <span class="hint">ما الذي تبيعه أو تقدمه، ومنذ متى، وما الذي يميزك.</span>
+          </label>
+          <textarea name="business_summary" maxlength="1200" required></textarea>
+        </div>
+        <div class="field">
+          <label>من هو عميلك المثالي؟ *
+            <span class="hint">العمر، المدينة، مستوى الدخل، ما الذي يبحث عنه.</span>
+          </label>
+          <textarea name="target_audience" maxlength="800" required></textarea>
+        </div>
+        <div class="field">
+          <label>منافسون أو مواقع تعجبك
+            <span class="hint">روابط أو أسماء، مع سبب إعجابك بكل واحد.</span>
+          </label>
+          <textarea name="competitors" maxlength="800"></textarea>
+        </div>
+
+        <div class="disc-step">
+          <h2>٢ — الهدف ومعايير النجاح</h2>
+          <p>هذا أهم قسم. بدون هدف قابل للقياس، لا نعرف متى ننجح.</p>
+        </div>
+
+        <div class="field">
+          <label>ما الهدف الأساسي من المشروع؟ *</label>
+          <select name="primary_goal" required>
+            <option value="">— اختر —</option>
+            <option>استقبال طلبات أو حجوزات</option>
+            <option>بيع منتجات إلكترونياً</option>
+            <option>جمع عملاء محتملين (Leads)</option>
+            <option>عرض أعمالي وبناء المصداقية</option>
+            <option>أتمتة عملية داخلية</option>
+            <option>أخرى — موضحة أدناه</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>كيف نعرف أن المشروع نجح بعد ٣ أشهر؟ *
+            <span class="hint">اكتب رقماً إن أمكن. مثال: "١٠ حجوزات شهرياً عبر الموقع" أو "تقليل وقت الرد من ساعة إلى ٥ دقائق".</span>
+          </label>
+          <textarea name="success_criteria" maxlength="800" required></textarea>
+        </div>
+        <div class="field">
+          <label>ما الذي يحدث اليوم بدون الموقع؟
+            <span class="hint">كيف تستقبل الطلبات حالياً وما المشكلة في ذلك.</span>
+          </label>
+          <textarea name="current_process" maxlength="800"></textarea>
+        </div>
+
+        <div class="disc-step">
+          <h2>٣ — النطاق: ما نبنيه وما لا نبنيه</h2>
+          <p>حدّد الوظائف المطلوبة. ما لا يُذكر هنا لا يدخل في نطاق المشروع.</p>
+        </div>
+
+        <div class="field">
+          <label>الوظائف المطلوبة</label>
+          <div class="check-grid" id="featGrid"></div>
+        </div>
+        <div class="field">
+          <label>رتّب أولوياتك *
+            <span class="hint">لو اضطررنا للاختيار، ما الذي يأتي أولاً؟</span>
+          </label>
+          <div class="prio-list" id="prioList"></div>
+        </div>
+        <div class="field">
+          <label>ما الذي <strong>لا</strong> تريده في المشروع؟
+            <span class="hint">مهم مثل ما سبق — يمنع سوء الفهم.</span>
+          </label>
+          <textarea name="out_of_scope" maxlength="600"></textarea>
+        </div>
+
+        <div class="disc-step">
+          <h2>٤ — الجاهزية والقيود</h2>
+          <p>ما المتوفر لديك الآن، وما القيود التي يجب أن نعرفها.</p>
+        </div>
+
+        <div class="field">
+          <label>المحتوى (نصوص وصور) *</label>
+          <select name="content_ready" required>
+            <option value="">— اختر —</option>
+            <option>جاهز بالكامل</option>
+            <option>جاهز جزئياً</option>
+            <option>لا يوجد — أحتاج مساعدة</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>الهوية البصرية (شعار وألوان) *</label>
+          <select name="brand_ready" required>
+            <option value="">— اختر —</option>
+            <option>شعار ودليل هوية كامل</option>
+            <option>شعار فقط</option>
+            <option>لا يوجد</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>النطاق (الدومين) والاستضافة</label>
+          <select name="domain_status">
+            <option value="">— اختر —</option>
+            <option>أملك النطاق والاستضافة</option>
+            <option>أملك النطاق فقط</option>
+            <option>لا أملك شيئاً</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>أنظمة تحتاج ربطاً
+            <span class="hint">بوابة دفع، نظام محاسبة، CRM، شحن، واتساب...</span>
+          </label>
+          <textarea name="integrations" maxlength="600"></textarea>
+        </div>
+        <div class="field">
+          <label>موعد نهائي أو مناسبة مرتبطة بالإطلاق</label>
+          <input type="text" name="deadline" maxlength="200" placeholder="مثال: افتتاح الفرع في ١٥ سبتمبر">
+        </div>
+        <div class="field">
+          <label>من يعتمد القرارات من جهتك؟ *
+            <span class="hint">شخص واحد يعتمد ويوقّع — تعدد المعتمدين أكبر سبب لتأخر المشاريع.</span>
+          </label>
+          <input type="text" name="decision_maker" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label>أي شيء آخر يجب أن نعرفه</label>
+          <textarea name="notes" maxlength="800"></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn">أرسل النموذج واحجز الجلسة</button>
+        <div id="status"></div>
+        <p class="footnote">بعد الإرسال نراجع إجاباتك ونحدد معك موعد جلسة الاستكشاف. يصلك بعد الجلسة مستند المتطلبات والنطاق للاعتماد — ولا يبدأ التنفيذ قبل اعتمادك له.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var WEBHOOK_URL = 'REPLACE_WITH_MAKE_DISCOVERY_HOOK';
+  var SEC_KEY     = 'cmt_sec_9f4Kq7Xw2R';
+
+  /* معرّف المشروع من الرابط: يُنظَّف بصرامة ولا يُدرَج في DOM كـHTML إطلاقاً.
+     يُستخدم كقيمة معتمة تُرسَل إلى Make فقط. */
+  var rawP = new URLSearchParams(location.search).get('p') || '';
+  var projectId = /^[A-Za-z0-9_-]{1,40}$/.test(rawP) ? rawP : '';
+
+  if (projectId) {
+    var meta = document.getElementById('projMeta');
+    meta.textContent = 'مرتبط بالمشروع: ' + projectId;   // textContent وليس innerHTML
+    meta.style.display = 'block';
+  }
+
+  /* ── الوظائف المطلوبة ─────────────────────────────────────────── */
+  var FEATURES = [
+    'صفحة تعريفية','معرض أعمال','متجر إلكتروني','حجز مواعيد',
+    'نموذج تواصل','مدونة','ربط واتساب','لوحة تحكم إدارية',
+    'حسابات مستخدمين','خرائط وفروع','متعدد اللغات','تقارير وإحصاءات'
+  ];
+  var grid = document.getElementById('featGrid');
+  FEATURES.forEach(function(f, i){
+    var lb = document.createElement('label');
+    lb.className = 'check-item';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.value = f; cb.dataset.feat = '1'; cb.id = 'f' + i;
+    var sp = document.createElement('span');
+    sp.textContent = f;
+    cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
+    lb.append(cb, sp);
+    grid.appendChild(lb);
+  });
+
+  /* ── ترتيب الأولويات ──────────────────────────────────────────── */
+  var PRIORITIES = ['سرعة الإطلاق','جمال التصميم','عدد الوظائف','تقليل التكلفة'];
+  var plist = document.getElementById('prioList');
+  PRIORITIES.forEach(function(p, i){
+    var row = document.createElement('div');
+    row.className = 'prio-row';
+    var sp = document.createElement('span');
+    sp.textContent = p;
+    var sel = document.createElement('select');
+    sel.dataset.prio = p;
+    [['','— الترتيب —'],['1','١ — الأهم'],['2','٢'],['3','٣'],['4','٤ — الأقل']].forEach(function(o){
+      var op = document.createElement('option');
+      op.value = o[0]; op.textContent = o[1];
+      sel.appendChild(op);
+    });
+    row.append(sp, sel);
+    plist.appendChild(row);
+  });
+
+  /* ── الإرسال ──────────────────────────────────────────────────── */
+  var form     = document.getElementById('discoveryForm');
+  var statusEl = document.getElementById('status');
+  var btn      = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    var data = Object.fromEntries(new FormData(form).entries());
+
+    var feats = [];
+    document.querySelectorAll('[data-feat]').forEach(function(cb){
+      if (cb.checked) feats.push(cb.value);
+    });
+    data.features_requested = feats.join(' | ');
+
+    var prios = [];
+    document.querySelectorAll('[data-prio]').forEach(function(sel){
+      if (sel.value) prios.push(sel.value + '. ' + sel.dataset.prio);
+    });
+    data.priorities = prios.sort().join(' | ');
+
+    data.project_id  = projectId;
+    data.form_type   = 'discovery';
+    data.submitted_at = new Date().toISOString();
+
+    btn.disabled = true;
+    btn.textContent = 'جارٍ الإرسال...';
+    statusEl.className = '';
+
+    try {
+      var res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({}, data, { k: SEC_KEY }))
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      statusEl.className = 'ok';
+      statusEl.textContent = 'وصلنا نموذجك ✅ بنراجعه وبنتواصل معك لتحديد موعد الجلسة.';
+      btn.textContent = 'تم الإرسال ✓';
+      form.querySelectorAll('input,select,textarea').forEach(function(el){ el.disabled = true; });
+    } catch (err) {
+      statusEl.className = 'err';
+      statusEl.textContent = 'ما وصل النموذج. أعد المحاولة، وإن تكرر راسلنا على info@caminotich.sa';
+      btn.disabled = false;
+      btn.textContent = 'أرسل النموذج واحجز الجلسة';
+    }
+  });
+})();
+</script>
+</body>
+</html>
