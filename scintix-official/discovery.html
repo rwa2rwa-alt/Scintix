@@ -42,6 +42,14 @@
   #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
   #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
   #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
+  .ack-item{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;margin-bottom:9px;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s}
+  .ack-item:hover{border-color:rgba(92,240,255,.4)}
+  .ack-item.on{border-color:var(--accent);background:rgba(92,240,255,.06)}
+  .ack-item input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .ack-item .txt{font-size:.88rem;color:var(--text);line-height:1.65}
+  .ack-item .txt small{display:block;color:var(--text-muted);font-size:.78rem;margin-top:3px}
+  #submitBtn:disabled{opacity:.45;cursor:not-allowed}
   .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
 </style>
 </head>
@@ -107,8 +115,34 @@
         </div>
 
         <div class="disc-step">
-          <h2>٢ — الهدف ومعايير النجاح</h2>
-          <p>هذا أهم قسم. بدون هدف قابل للقياس، لا نعرف متى ننجح.</p>
+          <h2>٢ — تحليل الوضع الحالي</h2>
+          <p>كيف تعمل اليوم. هذا يكشف أين تُهدر ساعاتك فعلاً.</p>
+        </div>
+
+        <div class="field">
+          <label>صف سير العمل الحالي من أول تواصل العميل حتى إتمام الخدمة *</label>
+          <textarea name="current_workflow" maxlength="1200" required></textarea>
+        </div>
+        <div class="field">
+          <label>ما الأنظمة والأدوات المستخدمة حالياً؟
+            <span class="hint">واتساب، إكسل، دفتر ورقي، نظام محاسبة، إنستقرام...</span>
+          </label>
+          <textarea name="current_systems" maxlength="600"></textarea>
+        </div>
+        <div class="field">
+          <label>أين تحدث نقاط التأخير أو الأخطاء؟</label>
+          <textarea name="bottlenecks" maxlength="600"></textarea>
+        </div>
+        <div class="field">
+          <label>ما الأعمال اليدوية المتكررة، وكم تستغرق أسبوعياً؟
+            <span class="hint">مثال: إدخال الطلبات يدوياً — ٦ ساعات أسبوعياً.</span>
+          </label>
+          <textarea name="manual_work" maxlength="800"></textarea>
+        </div>
+
+        <div class="disc-step">
+          <h2>٣ — الهدف ومؤشرات النجاح</h2>
+          <p>أهم قسم. بدون هدف قابل للقياس لا نعرف متى ننجح.</p>
         </div>
 
         <div class="field">
@@ -125,25 +159,54 @@
         </div>
         <div class="field">
           <label>كيف نعرف أن المشروع نجح بعد ٣ أشهر؟ *
-            <span class="hint">اكتب رقماً إن أمكن. مثال: "١٠ حجوزات شهرياً عبر الموقع" أو "تقليل وقت الرد من ساعة إلى ٥ دقائق".</span>
+            <span class="hint">مثال: "١٠ حجوزات شهرياً عبر الموقع".</span>
           </label>
           <textarea name="success_criteria" maxlength="800" required></textarea>
         </div>
         <div class="field">
-          <label>ما الذي يحدث اليوم بدون الموقع؟
-            <span class="hint">كيف تستقبل الطلبات حالياً وما المشكلة في ذلك.</span>
+          <label>مؤشرات الأداء القابلة للقياس (KPIs)
+            <span class="hint">اختر ما ينطبق — نقيسها بعد الإطلاق.</span>
           </label>
-          <textarea name="current_process" maxlength="800"></textarea>
+          <div class="check-grid" id="kpiGrid"></div>
+        </div>
+        <div class="field">
+          <label>هل سبق تنفيذ مشروع مشابه؟</label>
+          <select name="prior_project">
+            <option value="">— اختر —</option>
+            <option>نعم، مع جهة أخرى</option>
+            <option>نعم، بنفسي</option>
+            <option>لا، هذه أول مرة</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ما الذي أعجبك في التجربة السابقة؟</label>
+          <textarea name="prior_liked" maxlength="600"></textarea>
+        </div>
+        <div class="field">
+          <label>وما الذي لم يعجبك؟
+            <span class="hint">صريحاً من فضلك — يمنعنا من تكرار الخطأ نفسه.</span>
+          </label>
+          <textarea name="prior_disliked" maxlength="600"></textarea>
         </div>
 
         <div class="disc-step">
-          <h2>٣ — النطاق: ما نبنيه وما لا نبنيه</h2>
-          <p>حدّد الوظائف المطلوبة. ما لا يُذكر هنا لا يدخل في نطاق المشروع.</p>
+          <h2>٤ — النطاق: ما نبنيه وما لا نبنيه</h2>
+          <p>ما لا يُذكر هنا لا يدخل في نطاق المشروع.</p>
         </div>
 
         <div class="field">
           <label>الوظائف المطلوبة</label>
           <div class="check-grid" id="featGrid"></div>
+        </div>
+        <div class="field">
+          <label>حلول الذكاء الاصطناعي والأتمتة
+            <span class="hint">اختر ما تحتاجه؛ نناقش جدواه في الجلسة.</span>
+          </label>
+          <div class="check-grid" id="aiGrid"></div>
+        </div>
+        <div class="field">
+          <label>ما العمليات التي تريد أتمتتها تحديداً؟</label>
+          <textarea name="automation_targets" maxlength="800"></textarea>
         </div>
         <div class="field">
           <label>رتّب أولوياتك *
@@ -153,14 +216,14 @@
         </div>
         <div class="field">
           <label>ما الذي <strong>لا</strong> تريده في المشروع؟
-            <span class="hint">مهم مثل ما سبق — يمنع سوء الفهم.</span>
+            <span class="hint">مهم مثل ما سبق — يُوثَّق صراحة كخارج نطاق.</span>
           </label>
           <textarea name="out_of_scope" maxlength="600"></textarea>
         </div>
 
         <div class="disc-step">
-          <h2>٤ — الجاهزية والقيود</h2>
-          <p>ما المتوفر لديك الآن، وما القيود التي يجب أن نعرفها.</p>
+          <h2>٥ — الجاهزية والميزانية والمخاطر</h2>
+          <p>ما المتوفر لديك الآن، ومن يسلّمه، وما الذي يقلقك.</p>
         </div>
 
         <div class="field">
@@ -182,6 +245,12 @@
           </select>
         </div>
         <div class="field">
+          <label>من المسؤول عن تسليم الشعار والمحتوى والصور والبيانات؟ *
+            <span class="hint">اسم ووسيلة تواصل. تأخر التسليم أكبر سبب لتأخر المشاريع.</span>
+          </label>
+          <input type="text" name="assets_owner" maxlength="160" required>
+        </div>
+        <div class="field">
           <label>النطاق (الدومين) والاستضافة</label>
           <select name="domain_status">
             <option value="">— اختر —</option>
@@ -192,26 +261,107 @@
         </div>
         <div class="field">
           <label>أنظمة تحتاج ربطاً
-            <span class="hint">بوابة دفع، نظام محاسبة، CRM، شحن، واتساب...</span>
+            <span class="hint">بوابة دفع، محاسبة، CRM، شحن، واتساب...</span>
           </label>
           <textarea name="integrations" maxlength="600"></textarea>
+        </div>
+        <div class="field">
+          <label>نطاق الميزانية *
+            <span class="hint">يساعدنا نرشّح لك الباقة الصحيحة بدل عرض لا يناسبك.</span>
+          </label>
+          <select name="budget_range" required>
+            <option value="">— اختر —</option>
+            <option>أقل من 1,000 ريال</option>
+            <option>1,000 – 3,000 ريال</option>
+            <option>3,000 – 6,000 ريال</option>
+            <option>6,000 – 12,000 ريال</option>
+            <option>أكثر من 12,000 ريال</option>
+            <option>أحتاج استشارة لتحديدها</option>
+          </select>
         </div>
         <div class="field">
           <label>موعد نهائي أو مناسبة مرتبطة بالإطلاق</label>
           <input type="text" name="deadline" maxlength="200" placeholder="مثال: افتتاح الفرع في ١٥ سبتمبر">
         </div>
         <div class="field">
+          <label>ما أبرز مخاوفك من هذا المشروع؟
+            <span class="hint">التكلفة، التأخير، صعوبة الاستخدام، عدم وصول العملاء...</span>
+          </label>
+          <textarea name="risks" maxlength="800"></textarea>
+        </div>
+
+        <div class="disc-step">
+          <h2>٦ — إدارة المشروع والاعتماد والتسليم</h2>
+          <p>من يقرر، كيف نتواصل، وماذا تريد أن تستلم.</p>
+        </div>
+
+        <div class="field">
           <label>من يعتمد القرارات من جهتك؟ *
-            <span class="hint">شخص واحد يعتمد ويوقّع — تعدد المعتمدين أكبر سبب لتأخر المشاريع.</span>
+            <span class="hint">شخص واحد يعتمد ويوقّع — تعدد المعتمدين أكبر سبب لتعثر المشاريع.</span>
           </label>
           <input type="text" name="decision_maker" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label>هل يوجد طرف ثالث للمراجعة؟
+            <span class="hint">شريك، مستثمر، جهة تنظيمية، وكالة تسويق.</span>
+          </label>
+          <select name="third_party_review">
+            <option value="">— اختر —</option>
+            <option>لا يوجد</option>
+            <option>نعم — شريك أو مستثمر</option>
+            <option>نعم — جهة تنظيمية</option>
+            <option>نعم — جهة أخرى</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>وسيلة التواصل المفضلة</label>
+          <select name="comm_channel">
+            <option value="">— اختر —</option>
+            <option>واتساب</option>
+            <option>البريد الإلكتروني</option>
+            <option>مكالمات هاتفية</option>
+            <option>اجتماعات مرئية</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>عدد الاجتماعات المتوقع خلال المشروع</label>
+          <select name="meetings_count">
+            <option value="">— اختر —</option>
+            <option>جلسة الاستكشاف فقط</option>
+            <option>اجتماعان (استكشاف + مراجعة)</option>
+            <option>اجتماع أسبوعي</option>
+            <option>حسب الحاجة</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>نوع الدعم المطلوب بعد الإطلاق
+            <span class="hint">يُدار باتفاقية مستقلة عن هذا المشروع.</span>
+          </label>
+          <select name="support_type">
+            <option value="">— اختر —</option>
+            <option>ضمان الأعطال فقط (٣٠ يوماً)</option>
+            <option>صيانة شهرية</option>
+            <option>تطوير مستمر</option>
+            <option>أقرر لاحقاً</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ما المواد التدريبية التي تحتاجها؟</label>
+          <div class="check-grid" id="trainGrid"></div>
         </div>
         <div class="field">
           <label>أي شيء آخر يجب أن نعرفه</label>
           <textarea name="notes" maxlength="800"></textarea>
         </div>
 
-        <button type="submit" id="submitBtn">أرسل النموذج واحجز الجلسة</button>
+        <div class="disc-step">
+          <h2>٧ — الإقرار</h2>
+          <p>بندان يحكمان بقية المشروع. اقرأهما بعناية.</p>
+        </div>
+
+        <div id="ackList"></div>
+
+        <button type="submit" id="submitBtn" disabled>أرسل النموذج واحجز الجلسة</button>
         <div id="status"></div>
         <p class="footnote">بعد الإرسال نراجع إجاباتك ونحدد معك موعد جلسة الاستكشاف. يصلك بعد الجلسة مستند المتطلبات والنطاق للاعتماد — ولا يبدأ التنفيذ قبل اعتمادك له.</p>
       </form>
@@ -237,24 +387,56 @@
     meta.style.display = 'block';
   }
 
-  /* ── الوظائف المطلوبة ─────────────────────────────────────────── */
-  var FEATURES = [
+  /* ── مولّد عام لمجموعات الاختيار ────────────────────────────── */
+  function buildGroup(containerId, group, items) {
+    var box = document.getElementById(containerId);
+    if (!box) return;
+    items.forEach(function(txt, i){
+      var lb = document.createElement('label');
+      lb.className = 'check-item';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = txt;
+      cb.dataset.cbGroup = group;
+      cb.id = group + '-' + i;
+      var sp = document.createElement('span');
+      sp.textContent = txt;
+      cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
+      lb.append(cb, sp);
+      box.appendChild(lb);
+    });
+  }
+
+  function collectGroup(group) {
+    var out = [];
+    document.querySelectorAll('[data-cb-group="' + group + '"]').forEach(function(cb){
+      if (cb.checked) out.push(cb.value);
+    });
+    return out.join(' | ');
+  }
+
+  buildGroup('featGrid', 'features', [
     'صفحة تعريفية','معرض أعمال','متجر إلكتروني','حجز مواعيد',
     'نموذج تواصل','مدونة','ربط واتساب','لوحة تحكم إدارية',
     'حسابات مستخدمين','خرائط وفروع','متعدد اللغات','تقارير وإحصاءات'
-  ];
-  var grid = document.getElementById('featGrid');
-  FEATURES.forEach(function(f, i){
-    var lb = document.createElement('label');
-    lb.className = 'check-item';
-    var cb = document.createElement('input');
-    cb.type = 'checkbox'; cb.value = f; cb.dataset.feat = '1'; cb.id = 'f' + i;
-    var sp = document.createElement('span');
-    sp.textContent = f;
-    cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
-    lb.append(cb, sp);
-    grid.appendChild(lb);
-  });
+  ]);
+
+  buildGroup('kpiGrid', 'kpis', [
+    'عدد الزيارات الشهرية','عدد الطلبات أو الحجوزات','عدد رسائل واتساب',
+    'نسبة التحويل','متوسط قيمة الطلب','وقت الرد على العميل',
+    'ساعات عمل يدوي موفّرة','الظهور في نتائج البحث'
+  ]);
+
+  buildGroup('aiGrid', 'ai_needs', [
+    'مساعد محادثة ذكي (Chatbot)','رد آلي على واتساب','توليد محتوى تلقائي',
+    'تصنيف وفرز الطلبات','تقارير وتحليلات ذكية','أتمتة بين الأنظمة',
+    'لا أحتاج ذكاءً اصطناعياً','أحتاج استشارة'
+  ]);
+
+  buildGroup('trainGrid', 'training_needs', [
+    'دليل المستخدم','دليل مسؤول النظام','فيديوهات قصيرة',
+    'جلسة تدريب مباشرة','تمارين عملية','أسئلة شائعة','لا أحتاج تدريباً'
+  ]);
 
   /* ── ترتيب الأولويات ──────────────────────────────────────────── */
   var PRIORITIES = ['سرعة الإطلاق','جمال التصميم','عدد الوظائف','تقليل التكلفة'];
@@ -275,6 +457,40 @@
     plist.appendChild(row);
   });
 
+  /* ── الإقرارات الملزمة ────────────────────────────────────────── */
+  var ACKS = [
+    ['accuracy', 'أقرّ بأن المعلومات المذكورة أعلاه صحيحة وكاملة',
+                 'يُبنى مستند النطاق عليها مباشرة، وأي معلومة ناقصة قد تغيّر التقدير.'],
+    ['change',   'أفهم أن أي تغيير في النطاق بعد اعتماده يؤثر على المدة والتكلفة',
+                 'طلبات التعديل تُنفَّذ خلال مرحلة المراجعة قبل الإطلاق. ما يُطلب بعد الإطلاق يُدار باتفاقية مستقلة.']
+  ];
+
+  var ackBox = document.getElementById('ackList');
+  ACKS.forEach(function(a){
+    var lb = document.createElement('label');
+    lb.className = 'ack-item';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.dataset.ack = a[0]; cb.required = true;
+    var txt = document.createElement('div');
+    txt.className = 'txt';
+    txt.textContent = a[1];
+    var sm = document.createElement('small');
+    sm.textContent = a[2];
+    txt.appendChild(sm);
+    cb.addEventListener('change', function(){
+      lb.classList.toggle('on', cb.checked);
+      refreshAck();
+    });
+    lb.append(cb, txt);
+    ackBox.appendChild(lb);
+  });
+
+  function refreshAck(){
+    var ok = true;
+    document.querySelectorAll('[data-ack]').forEach(function(cb){ if (!cb.checked) ok = false; });
+    document.getElementById('submitBtn').disabled = !ok;
+  }
+
   /* ── الإرسال ──────────────────────────────────────────────────── */
   var form     = document.getElementById('discoveryForm');
   var statusEl = document.getElementById('status');
@@ -283,13 +499,20 @@
   form.addEventListener('submit', async function(e){
     e.preventDefault();
 
+    var allAck = true;
+    document.querySelectorAll('[data-ack]').forEach(function(cb){ if (!cb.checked) allAck = false; });
+    if (!allAck) return;
+
     var data = Object.fromEntries(new FormData(form).entries());
 
-    var feats = [];
-    document.querySelectorAll('[data-feat]').forEach(function(cb){
-      if (cb.checked) feats.push(cb.value);
-    });
-    data.features_requested = feats.join(' | ');
+    data.features_requested = collectGroup('features');
+    data.kpis               = collectGroup('kpis');
+    data.ai_needs           = collectGroup('ai_needs');
+    data.training_needs     = collectGroup('training_needs');
+
+    var acks = [];
+    document.querySelectorAll('[data-ack]').forEach(function(cb){ if (cb.checked) acks.push(cb.dataset.ack); });
+    data.acknowledgements = acks.join(',');
 
     var prios = [];
     document.querySelectorAll('[data-prio]').forEach(function(sel){
@@ -322,6 +545,7 @@
       statusEl.textContent = 'ما وصل النموذج. أعد المحاولة، وإن تكرر راسلنا على info@caminotich.sa';
       btn.disabled = false;
       btn.textContent = 'أرسل النموذج واحجز الجلسة';
+      refreshAck();
     }
   });
 })();
