@@ -191,6 +191,7 @@ body{
     </div>
     <div>
       <label id="lbl-vat">ضريبة القيمة المضافة %</label>
+      <div style="font-size:.72rem;color:#8a93ab;margin-bottom:4px">اتركها صفراً حتى التسجيل في ضريبة القيمة المضافة لدى هيئة الزكاة والضريبة والجمارك.</div>
       <input id="inp-vat" type="number" value="0" min="0" max="100" style="width:70px" oninput="recalc()"/>
     </div>
     <button class="btn-add" onclick="addRow()">+ إضافة بند</button>
@@ -258,8 +259,8 @@ body{
       <div class="totals-grid">
         <span class="t-label" id="lbl-sub">المجموع قبل الضريبة</span>
         <span class="t-val"   id="disp-sub">0 SAR</span>
-        <span class="t-label" id="lbl-vat-line">ضريبة القيمة المضافة (15%)</span>
-        <span class="t-val"   id="disp-vat">0 SAR</span>
+        <span class="t-label" id="lbl-vat-line" style="display:none">ضريبة القيمة المضافة (0%)</span>
+        <span class="t-val"   id="disp-vat" style="display:none">0 SAR</span>
         <span class="t-label total-row" id="lbl-total">الإجمالي المستحق</span>
         <span class="t-val   total-row" id="disp-total">0 SAR</span>
       </div>
@@ -402,7 +403,9 @@ function applyStrings() {
   document.querySelector('.btn-pdf').textContent  = s.btnPdf;
   document.querySelector('.btn-send').textContent = s.btnSend;
   // vat label with %
-  const vat = document.getElementById('inp-vat')?.value || '15';
+  /* القيمة الاحتياطية صفر لا 15 — كامينوتك غير مسجّلة في ضريبة القيمة المضافة،
+     وإظهار نسبة ضريبة بلا رقم تسجيل مخالفة. */
+  const vat = document.getElementById('inp-vat')?.value || '0';
   g('lbl-vat-line').textContent = `${s.lblVatLine} (${vat}%)`;
 }
 

@@ -117,6 +117,7 @@ const T = {
     'footer.cta':         'ابدأ الآن',
     'subfooter.about':    'من نحن ورؤيتنا',
     'subfooter.policy':   'السياسات',
+    'subfooter.privacy':  'الخصوصية',
     'subfooter.contact':  'جهات التواصل',
     'subfooter.support':  'الدعم',
     'subfooter.cr':       'السجل التجاري الموحد',
@@ -232,6 +233,7 @@ const T = {
     'footer.cta':         'Get Started',
     'subfooter.about':    'About & Vision',
     'subfooter.policy':   'Policies',
+    'subfooter.privacy':  'Privacy',
     'subfooter.contact':  'Contact Info',
     'subfooter.support':  'Support',
     'subfooter.cr':       'Unified CR No.',
@@ -357,6 +359,7 @@ function buildSubFooter(lang) {
   const navItems = [
     { key: 'subfooter.about',   href: 'vision.html'   },
     { key: 'subfooter.policy',  href: 'policies.html'  },
+    { key: 'subfooter.privacy', href: 'privacy.html'   },
     { key: 'subfooter.contact', href: '#contact'        },
     { key: 'subfooter.support', href: 'support.html'    }
   ];

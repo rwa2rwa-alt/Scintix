@@ -50,6 +50,14 @@
   .ack-item .txt{font-size:.85rem;color:var(--text);line-height:1.9;text-align:justify}
   .ack-item .txt small{display:block;color:var(--text-muted);font-size:.78rem;margin-top:3px}
   #submitBtn:disabled{opacity:.45;cursor:not-allowed}
+  .consent-box{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;margin:18px 0;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s;
+    background:rgba(255,255,255,.02)}
+  .consent-box:hover{border-color:rgba(92,240,255,.35)}
+  .consent-box.on{border-color:var(--accent);background:rgba(92,240,255,.05)}
+  .consent-box input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .consent-box .txt{font-size:.85rem;color:var(--text);line-height:1.8}
+  .consent-box .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px}
   .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
 </style>
 </head>
@@ -363,6 +371,8 @@
 
         <div id="ackList"></div>
 
+        <div id="marketingConsent"></div>
+
         <button type="submit" id="submitBtn" disabled>أرسل النموذج واحجز الجلسة</button>
         <div id="status"></div>
         <p class="footnote">بعد الإرسال نراجع إجاباتك ونحدد معك موعد جلسة الاستكشاف. يصلك بعد الجلسة مستند المتطلبات والنطاق للاعتماد — ولا يبدأ التنفيذ قبل اعتمادك له.</p>
@@ -495,6 +505,28 @@
   }
 
   /* ── الإرسال ──────────────────────────────────────────────────── */
+
+  /* ── الموافقة التسويقية (PDPL) ─────────────────────────────────
+     منفصلة تماماً عن الإقرارات الإلزامية، غير مؤشرة افتراضياً،
+     وعدم اختيارها لا يمنع الإرسال ولا يؤثر على الخدمة. */
+  (function(){
+    var host = document.getElementById('marketingConsent');
+    if (!host) return;
+    var lb = document.createElement('label');
+    lb.className = 'consent-box';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.id = 'mktConsent';
+    var txt = document.createElement('div');
+    txt.className = 'txt';
+    txt.textContent = 'أوافق على تلقي عروض وتحديثات من Caminotich على بريدي الإلكتروني';
+    var sm = document.createElement('small');
+    sm.textContent = 'اختياري تماماً — لن يؤثر على خدمتك. يمكنك سحب الموافقة في أي وقت، وكل رسالة تحتوي رابط إلغاء الاشتراك. اطّلع على سياسة الخصوصية.';
+    txt.appendChild(sm);
+    cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
+    lb.append(cb, txt);
+    host.appendChild(lb);
+  })();
+
   var form     = document.getElementById('discoveryForm');
   var statusEl = document.getElementById('status');
   var btn      = document.getElementById('submitBtn');
@@ -516,6 +548,9 @@
     var acks = [];
     document.querySelectorAll('[data-ack]').forEach(function(cb){ if (cb.checked) acks.push(cb.dataset.ack); });
     data.acknowledgements = acks.join(',');
+    var mk2 = document.getElementById('mktConsent');
+    data.marketing_consent = (mk2 && mk2.checked) ? 'Granted' : 'Declined';
+    data.consent_date      = new Date().toISOString();
 
     var prios = [];
     document.querySelectorAll('[data-prio]').forEach(function(sel){

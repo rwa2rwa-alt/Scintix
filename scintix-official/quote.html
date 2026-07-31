@@ -108,6 +108,14 @@
   button:hover{opacity:0.92;transform:translateY(-1px);}
   button:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
 
+  .consent-box{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;margin:18px 0;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s;
+    background:rgba(255,255,255,.02)}
+  .consent-box:hover{border-color:rgba(92,240,255,.35)}
+  .consent-box.on{border-color:var(--accent);background:rgba(92,240,255,.05)}
+  .consent-box input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .consent-box .txt{font-size:.85rem;color:var(--text);line-height:1.8}
+  .consent-box .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px}
   .footnote{text-align:center;color:var(--text-dim);font-size:12px;margin-top:18px;line-height:1.7;}
 
   #status{
@@ -208,6 +216,8 @@
       <div id="pkgQuestionsBody"></div>
       <p class="footnote" style="margin-top:6px">اختيارية — تساعدنا نجهّز عرضك بدقة أكبر.</p>
     </div>
+
+    <div id="marketingConsent"></div>
 
     <button type="submit" id="submitBtn">أرسل واستلم موقعك قريباً</button>
     <div id="status"></div>
@@ -328,6 +338,28 @@
     });
   });
 
+
+  /* ── الموافقة التسويقية (PDPL) ─────────────────────────────────
+     منفصلة تماماً عن أي التزام، غير مؤشرة افتراضياً،
+     وعدم اختيارها لا يمنع الإرسال ولا يؤثر على الخدمة. */
+  (function(){
+    var host = document.getElementById('marketingConsent');
+    if (!host) return;
+    var lb = document.createElement('label');
+    lb.className = 'consent-box';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.id = 'mktConsent';
+    var txt = document.createElement('div');
+    txt.className = 'txt';
+    txt.textContent = 'أوافق على تلقي عروض وتحديثات من Caminotich على بريدي الإلكتروني';
+    var sm = document.createElement('small');
+    sm.textContent = 'اختياري تماماً — لن يؤثر على خدمتك. يمكنك سحب الموافقة في أي وقت، وكل رسالة تحتوي رابط إلغاء الاشتراك.';
+    txt.appendChild(sm);
+    cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
+    lb.append(cb, txt);
+    host.appendChild(lb);
+  })();
+
   const form = document.getElementById('intakeForm');
   const statusEl = document.getElementById('status');
   const btn = document.getElementById('submitBtn');
@@ -345,6 +377,9 @@
     delete data.phone_number;
     data.package = pkgParam || '';
     data.package_requirements = collectPkgRequirements();
+    var mk = document.getElementById('mktConsent');
+    data.marketing_consent = (mk && mk.checked) ? 'Granted' : 'Declined';
+    data.consent_date      = new Date().toISOString();
     btn.disabled = true;
     btn.textContent = 'جارٍ الإرسال...';
     try{
