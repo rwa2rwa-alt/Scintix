@@ -116,6 +116,13 @@
   .consent-box input{width:auto;margin-top:3px;accent-color:var(--accent)}
   .consent-box .txt{font-size:.85rem;color:var(--text);line-height:1.8}
   .consent-box .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px}
+  .mkt-consent{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;margin:6px 0 4px;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s}
+  .mkt-consent:hover{border-color:rgba(92,240,255,.35)}
+  .mkt-consent.on{border-color:var(--accent);background:rgba(92,240,255,.05)}
+  .mkt-consent input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .mkt-consent .txt{font-size:.85rem;color:var(--text);line-height:1.75}
+  .mkt-consent .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px;line-height:1.7}
   .footnote{text-align:center;color:var(--text-dim);font-size:12px;margin-top:18px;line-height:1.7;}
 
   #status{
@@ -218,6 +225,8 @@
     </div>
 
     <div id="marketingConsent"></div>
+
+    <div class="field" id="mktConsentHost"></div>
 
     <button type="submit" id="submitBtn">أرسل واستلم موقعك قريباً</button>
     <div id="status"></div>
@@ -377,6 +386,9 @@
     delete data.phone_number;
     data.package = pkgParam || '';
     data.package_requirements = collectPkgRequirements();
+    var mk = document.getElementById('mktConsent');
+    data.marketing_consent = (mk && mk.checked) ? 'yes' : 'no';
+    data.consent_at = (mk && mk.checked) ? new Date().toISOString() : '';
     var mk = document.getElementById('mktConsent');
     data.marketing_consent = (mk && mk.checked) ? 'Granted' : 'Declined';
     data.consent_date      = new Date().toISOString();

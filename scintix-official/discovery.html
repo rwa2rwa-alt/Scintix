@@ -58,6 +58,13 @@
   .consent-box input{width:auto;margin-top:3px;accent-color:var(--accent)}
   .consent-box .txt{font-size:.85rem;color:var(--text);line-height:1.8}
   .consent-box .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px}
+  .mkt-consent{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;margin:6px 0 4px;
+    border-radius:12px;border:1.5px solid var(--border);cursor:pointer;transition:.15s}
+  .mkt-consent:hover{border-color:rgba(92,240,255,.35)}
+  .mkt-consent.on{border-color:var(--accent);background:rgba(92,240,255,.05)}
+  .mkt-consent input{width:auto;margin-top:3px;accent-color:var(--accent)}
+  .mkt-consent .txt{font-size:.85rem;color:var(--text);line-height:1.75}
+  .mkt-consent .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px;line-height:1.7}
   .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
 </style>
 </head>
@@ -373,6 +380,8 @@
 
         <div id="marketingConsent"></div>
 
+        <div class="field" id="mktConsentHost"></div>
+
         <button type="submit" id="submitBtn" disabled>أرسل النموذج واحجز الجلسة</button>
         <div id="status"></div>
         <p class="footnote">بعد الإرسال نراجع إجاباتك ونحدد معك موعد جلسة الاستكشاف. يصلك بعد الجلسة مستند المتطلبات والنطاق للاعتماد — ولا يبدأ التنفيذ قبل اعتمادك له.</p>
@@ -504,6 +513,29 @@
     document.getElementById('submitBtn').disabled = !ok;
   }
 
+
+  /* ── الموافقة التسويقية ────────────────────────────────────────
+     غير مؤشرة افتراضياً ومنفصلة تماماً عن الإقرارات الإلزامية —
+     هذا ما تنص عليه سياسة الخصوصية (القسم ٨) ويشترطه النظام. */
+  (function buildMarketingConsent(){
+    var host = document.getElementById('mktConsentHost');
+    if (!host) return;
+    var lb = document.createElement('label');
+    lb.className = 'mkt-consent';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.id = 'mktConsent';
+    var txt = document.createElement('div');
+    txt.className = 'txt';
+    txt.textContent = 'أوافق على تلقي عروض وتحديثات من Caminotich عبر البريد الإلكتروني';
+    var sm = document.createElement('small');
+    sm.textContent = 'اختياري تماماً — عدم اختيارها لا يؤثر على خدمتك بأي شكل. يمكنك سحب الموافقة في أي وقت من رابط إلغاء الاشتراك في كل رسالة.';
+    txt.appendChild(sm);
+    cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
+    lb.append(cb, txt);
+    host.appendChild(lb);
+  })();
+
   /* ── الإرسال ──────────────────────────────────────────────────── */
 
   /* ── الموافقة التسويقية (PDPL) ─────────────────────────────────
@@ -548,6 +580,10 @@
     var acks = [];
     document.querySelectorAll('[data-ack]').forEach(function(cb){ if (cb.checked) acks.push(cb.dataset.ack); });
     data.acknowledgements = acks.join(',');
+
+    var mk = document.getElementById('mktConsent');
+    data.marketing_consent = (mk && mk.checked) ? 'yes' : 'no';
+    data.consent_at = (mk && mk.checked) ? new Date().toISOString() : '';
     var mk2 = document.getElementById('mktConsent');
     data.marketing_consent = (mk2 && mk2.checked) ? 'Granted' : 'Declined';
     data.consent_date      = new Date().toISOString();
