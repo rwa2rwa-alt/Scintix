@@ -139,10 +139,57 @@
 </script>
 <script src="js/script.js"></script>
 
-<!-- 🤖 Chatbase AI Widget -->
+<!-- ════════════════════════════════════════════════════════════════
+     Chatbase — تحميل عند الطلب فقط (2026-07-31)
+     السكربت لا يُنزَّل إطلاقاً حتى يضغط الزائر الزر. من يعبّي تذكرة
+     الدعم فقط لا يشتغل عنده أي كود طرف ثالث ولا يُقرأ نموذجه.
+     ════════════════════════════════════════════════════════════════ -->
+<button id="chatLauncher" type="button" aria-label="افتح المحادثة الفورية">
+  💬 <span>تحتاج مساعدة فورية؟</span>
+</button>
+<style>
+  #chatLauncher{
+    position:fixed; inset-inline-end:20px; bottom:20px; z-index:9999;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border:0; border-radius:999px; cursor:pointer;
+    font-family:inherit; font-size:.95rem; font-weight:700; color:#fff;
+    background:linear-gradient(135deg,#6c5ce7,#22d3ee);
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  #chatLauncher:hover{ transform:translateY(-2px); }
+  #chatLauncher[hidden]{ display:none; }
+  #chatLauncher.loading{ opacity:.6; cursor:progress; }
+</style>
 <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
-const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+(function(){
+  var btn = document.getElementById('chatLauncher');
+  if (!btn) return;
+
+  function bootChatbase(){
+    if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+    var script=document.createElement("script");
+    script.src="https://www.chatbase.co/embed.min.js";
+    script.id="-itf2CNf19xa0q7z76P41";
+    script.domain="www.chatbase.co";
+    script.onload=function(){
+      btn.hidden = true;
+      try { window.chatbase('open'); } catch(e){}
+    };
+    script.onerror=function(){
+      btn.classList.remove('loading');
+      btn.querySelector('span').textContent = 'تعذّر فتح المحادثة — استخدم النموذج أعلاه';
+    };
+    document.body.appendChild(script);
+  }
+
+  btn.addEventListener('click', function(){
+    if (btn.classList.contains('loading')) return;
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = 'جارٍ الفتح...';
+    bootChatbase();
+  }, { once:false });
+})();
 </script>
 </body>
 </html>
