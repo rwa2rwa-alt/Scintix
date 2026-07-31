@@ -45,3 +45,25 @@
   [headers.values]
     Cache-Control = "no-store, max-age=0"
     X-Robots-Tag  = "noindex, nofollow"
+
+[[headers]]
+  for = "/portal.html"
+  [headers.values]
+    X-Frame-Options         = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Cache-Control           = "no-store, max-age=0"
+    X-Robots-Tag            = "noindex, nofollow"
+
+[[headers]]
+  for = "/discovery.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag  = "noindex, nofollow"
+
+[[headers]]
+  for = "/handover.html"
+  [headers.values]
+    X-Frame-Options         = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Cache-Control           = "no-store, max-age=0"
+    X-Robots-Tag            = "noindex, nofollow"

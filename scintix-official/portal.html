@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Caminotich | بوابة المشروع</title>
+<link rel="stylesheet" href="css/styles.css"/>
+<style>
+  .pt-shell{width:min(880px,100% - 32px);margin:0 auto;padding:34px 0 64px}
+  .pt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+  .pt-head h1{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 4px}
+  .pt-head p{margin:0;color:var(--text-muted);font-size:.88rem}
+  .pt-pkg{padding:7px 16px;border-radius:999px;background:rgba(92,240,255,.08);
+    border:1px solid var(--border);color:var(--accent);font-size:.82rem;font-weight:700;white-space:nowrap}
+
+  .pt-card{padding:24px 26px;border-radius:22px;background:rgba(255,255,255,.03);
+    border:1px solid var(--border);margin-bottom:16px}
+  .pt-card h2{font-size:1rem;margin:0 0 14px;color:var(--text);display:flex;align-items:center;gap:8px}
+  .pt-card p{color:var(--text-muted);line-height:1.85;font-size:.88rem;margin:0}
+
+  .bar-wrap{height:12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:6px 0 10px}
+  .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#5cf0ff,#6c5ce7);
+    width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .bar-meta{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text-muted)}
+  .bar-meta b{color:var(--accent);font-size:1.1rem}
+
+  .steps{display:flex;flex-direction:column;gap:0;margin-top:6px}
+  .step{display:flex;gap:13px;align-items:flex-start;padding:11px 0;position:relative}
+  .step:not(:last-child)::before{content:'';position:absolute;inset-inline-start:9px;top:32px;bottom:-4px;
+    width:2px;background:rgba(255,255,255,.08)}
+  .step.done:not(:last-child)::before{background:rgba(92,240,255,.35)}
+  .dot{flex:0 0 20px;width:20px;height:20px;border-radius:50%;border:2px solid var(--border);
+    display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--text-muted);
+    background:var(--bg,#050b18);z-index:1}
+  .step.done .dot{border-color:var(--accent);background:var(--accent);color:#04121a}
+  .step.now .dot{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 4px rgba(92,240,255,.12)}
+  .step .label{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+  .step.done .label,.step.now .label{color:var(--text)}
+  .step.now .label b{color:var(--accent)}
+
+  .file-row{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding:13px 15px;border-radius:12px;border:1px solid var(--border);margin-bottom:9px}
+  .file-row span{font-size:.87rem;color:var(--text)}
+  .file-row a{padding:7px 16px;border-radius:999px;background:rgba(92,240,255,.1);
+    border:1px solid var(--border);color:var(--accent);text-decoration:none;font-size:.8rem;white-space:nowrap}
+
+  .log-line{padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.02);
+    border-inline-start:3px solid rgba(92,240,255,.4);margin-bottom:8px;
+    font-size:.85rem;color:var(--text-muted);line-height:1.75}
+
+  .cta-mail{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:12px 24px;
+    border-radius:999px;background:linear-gradient(135deg,#5cf0ff,#6c5ce7);color:#04121a;
+    text-decoration:none;font-weight:700;font-size:.88rem}
+  .hint-box{margin-top:12px;padding:13px 15px;border-radius:11px;background:rgba(234,179,8,.06);
+    border:1px solid rgba(234,179,8,.2);font-size:.82rem;color:#fbbf24;line-height:1.8}
+
+  #pt-loading,#pt-error{text-align:center;padding:70px 20px;color:var(--text-muted)}
+  #pt-error{display:none}
+  #pt-body{display:none}
+  .spin{width:34px;height:34px;margin:0 auto 16px;border:3px solid rgba(255,255,255,.1);
+    border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .muted{color:var(--text-muted);font-size:.85rem;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
+    </a>
+  </header>
+
+  <div class="pt-shell">
+
+    <div id="pt-loading">
+      <div class="spin"></div>
+      <p>جارٍ تحميل بيانات مشروعك...</p>
+    </div>
+
+    <div id="pt-error">
+      <h2 style="color:#f87171;margin:0 0 10px">تعذّر فتح البوابة</h2>
+      <p id="pt-error-msg" class="muted">الرابط غير صالح أو انتهت صلاحيته.</p>
+      <p class="muted">تواصل معنا على <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a></p>
+    </div>
+
+    <div id="pt-body">
+      <div class="pt-head">
+        <div>
+          <h1 id="pt-name">—</h1>
+          <p>بوابة متابعة المشروع</p>
+        </div>
+        <div class="pt-pkg" id="pt-pkg">—</div>
+      </div>
+
+      <div class="pt-card">
+        <h2>📊 نسبة الإنجاز</h2>
+        <div class="bar-wrap"><div class="bar-fill" id="pt-bar"></div></div>
+        <div class="bar-meta">
+          <span id="pt-stage">—</span>
+          <b id="pt-pct">0%</b>
+        </div>
+      </div>
+
+      <div class="pt-card">
+        <h2>🧭 مراحل المشروع</h2>
+        <div class="steps" id="pt-steps"></div>
+      </div>
+
+      <div class="pt-card" id="pt-files-card">
+        <h2>📁 الملفات المتاحة</h2>
+        <div id="pt-files"></div>
+      </div>
+
+      <div class="pt-card" id="pt-log-card">
+        <h2>📋 سجل القرارات والاعتمادات</h2>
+        <div id="pt-log"></div>
+      </div>
+
+      <div class="pt-card" id="pt-cr-card">
+        <h2>✏️ طلبات التعديل</h2>
+        <div id="pt-cr"></div>
+        <a class="cta-mail" id="pt-mail" href="mailto:info@caminotich.sa">✉️ أرسل ملاحظة أو طلب تعديل</a>
+        <div class="hint-box">
+          البريد الإلكتروني هو القناة الرسمية المعتمدة لطلبات التعديل والاعتمادات، وهو المرجع الموثّق. هذه الصفحة للعرض والمتابعة فقط.
+        </div>
+      </div>
+
+      <div class="pt-card" id="pt-warranty-card" style="display:none">
+        <h2>🛡️ الضمان</h2>
+        <p id="pt-warranty">—</p>
+      </div>
+
+      <p class="muted" style="text-align:center;margin-top:22px">
+        هذا الرابط خاص بمشروعك — لا تشاركه مع أحد.<br/>
+        Caminotich · <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var rawT = new URLSearchParams(location.search).get('t') || '';
+  var token = /^[A-Za-z0-9_-]{24,64}$/.test(rawT) ? rawT : '';
+
+  var elLoad = document.getElementById('pt-loading');
+  var elErr  = document.getElementById('pt-error');
+  var elBody = document.getElementById('pt-body');
+
+  function fail(msg){
+    elLoad.style.display = 'none';
+    elErr.style.display  = 'block';
+    if (msg) document.getElementById('pt-error-msg').textContent = msg;
+  }
+
+  if (!token) { fail('الرابط غير مكتمل. تأكد من نسخه كاملاً من رسالة البريد.'); return; }
+
+  /* المراحل الخمس بترتيبها التعاقدي — مطابقة لبنود العقد */
+  var STAGES = [
+    ['discovery', 'الاستكشاف',      'تعبئة النموذج ومراجعة الإجابات وإصدار مستند النطاق'],
+    ['scope',     'اعتماد النطاق',  'موافقتك على مستند المتطلبات — شرط بدء التنفيذ'],
+    ['build',     'التنفيذ',        'بناء العمل ضمن النطاق المعتمد'],
+    ['review',    'المراجعة',       'معاينتك وإبداء الملاحظات قبل الإطلاق'],
+    ['training',  'التدريب',        'تسليم دليل المستخدم والمواد التدريبية'],
+    ['signoff',   'الاعتماد النهائي','توقيع محضر التسليم وبدء الضمان']
+  ];
+
+  function stageIndex(p){
+    if (p.SignedOff)               return 5;
+    if (p.TrainingStatus)          return 4;
+    if (p.Status === 'Client Preview' || p.Status === 'Review') return 3;
+    if (p.ScopeApproved)           return 2;
+    if (p.DiscoveryStatus === 'Scope Approved') return 2;
+    if (p.DiscoveryStatus)         return 0;
+    return 0;
+  }
+
+  function renderSteps(idx){
+    var host = document.getElementById('pt-steps');
+    STAGES.forEach(function(s, i){
+      var row = document.createElement('div');
+      row.className = 'step' + (i < idx ? ' done' : (i === idx ? ' now' : ''));
+      var dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.textContent = i < idx ? '✓' : '';
+      var lab = document.createElement('div');
+      lab.className = 'label';
+      var b = document.createElement('b');
+      b.textContent = s[1];
+      lab.appendChild(b);
+      lab.appendChild(document.createTextNode(' — ' + s[2]));
+      row.append(dot, lab);
+      host.appendChild(row);
+    });
+  }
+
+  function addFile(label, url){
+    var row = document.createElement('div');
+    row.className = 'file-row';
+    var sp = document.createElement('span');
+    sp.textContent = label;
+    var a = document.createElement('a');
+    a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.textContent = 'فتح ↗';
+    row.append(sp, a);
+    document.getElementById('pt-files').appendChild(row);
+    return true;
+  }
+
+  function addLines(hostId, text, emptyMsg){
+    var host = document.getElementById(hostId);
+    var lines = String(text || '').split('\n').map(function(l){ return l.trim(); }).filter(Boolean);
+    if (!lines.length) {
+      var p = document.createElement('p');
+      p.className = 'muted';
+      p.textContent = emptyMsg;
+      host.appendChild(p);
+      return;
+    }
+    lines.forEach(function(l){
+      var d = document.createElement('div');
+      d.className = 'log-line';
+      d.textContent = l;
+      host.appendChild(d);
+    });
+  }
+
+  (async function load(){
+    try {
+      var res = await fetch('/.netlify/functions/portal?t=' + encodeURIComponent(token));
+      if (!res.ok) {
+        var e = await res.json().catch(function(){ return {}; });
+        fail(e.error || 'تعذّر تحميل البيانات.');
+        return;
+      }
+      var data = await res.json();
+      var f = (data && data.project) || {};
+
+      var p = {
+        Name:            f['Project Name'] || 'مشروعك',
+        Package:         f['Package'] || '',
+        Status:          f['Status'] || '',
+        Progress:        Number(f['Progress'] || 0),
+        DeliveryURL:     f['Delivery URL'] || '',
+        BRD:             f['BRD Doc URL'] || '',
+        TrainingURL:     f['Training Pack URL'] || '',
+        TrainingStatus:  f['Training Status'] === 'Ready' || f['Training Status'] === 'Delivered',
+        DiscoveryStatus: f['Discovery Status'] || '',
+        ScopeApproved:   !!f['Scope Approved At'],
+        SignedOff:       !!f['Signed Off At'],
+        WarrantyEnds:    f['Warranty Ends At'] || '',
+        Log:             f['Decision Log'] || '',
+        CR:              f['Open Change Requests'] || ''
+      };
+
+      document.getElementById('pt-name').textContent = p.Name;
+      document.getElementById('pt-pkg').textContent  = p.Package || 'باقة';
+      document.title = 'Caminotich | ' + p.Name;
+
+      var idx = stageIndex(p);
+      renderSteps(idx);
+      document.getElementById('pt-stage').textContent = 'المرحلة الحالية: ' + STAGES[idx][1];
+
+      var pct = Math.max(0, Math.min(100, p.Progress));
+      document.getElementById('pt-pct').textContent = pct + '%';
+      setTimeout(function(){ document.getElementById('pt-bar').style.width = pct + '%'; }, 120);
+
+      var any = false;
+      if (p.DeliveryURL) any = addFile('معاينة الموقع', p.DeliveryURL) || any;
+      if (p.BRD)         any = addFile('مستند المتطلبات والنطاق', p.BRD) || any;
+      if (p.TrainingURL) any = addFile('حزمة التدريب', p.TrainingURL) || any;
+      if (!any) {
+        var m = document.createElement('p');
+        m.className = 'muted';
+        m.textContent = 'لا توجد ملفات متاحة بعد — ستظهر هنا فور جاهزيتها.';
+        document.getElementById('pt-files').appendChild(m);
+      }
+
+      addLines('pt-log', p.Log, 'لم تُسجَّل قرارات بعد.');
+      addLines('pt-cr',  p.CR,  'لا توجد طلبات تعديل مفتوحة حالياً.');
+
+      document.getElementById('pt-mail').href =
+        'mailto:info@caminotich.sa?subject=' + encodeURIComponent('ملاحظة على مشروع: ' + p.Name);
+
+      if (p.SignedOff && p.WarrantyEnds) {
+        document.getElementById('pt-warranty-card').style.display = 'block';
+        document.getElementById('pt-warranty').textContent =
+          'المشروع مُعتمد ومُسلَّم. فترة الضمان سارية حتى ' + p.WarrantyEnds +
+          ' وتغطي إصلاح الأعطال التقنية التي تمنع الموقع من أداء وظائفه المعتمدة، ولا تشمل إضافة وظائف جديدة أو تغيير التصميم.';
+      }
+
+      elLoad.style.display = 'none';
+      elBody.style.display = 'block';
+
+    } catch (err) {
+      fail('تعذّر الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.');
+    }
+  })();
+})();
+</script>
+</body>
+</html>
