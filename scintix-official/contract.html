@@ -558,8 +558,12 @@ canvas{display:block;width:100%;height:100%}
    عبر Make، والرابط يحمل رمزاً واحداً فقط: ?t=<token>
    ═══════════════════════════════════════════════════════════════════ */
 window.CMT_CFG = {
-  OPEN_HOOK: 'REPLACE_WITH_MAKE_OPEN_HOOK',   // GET  ?t=<token>  → حالة العقد
-  SIGN_HOOK: 'REPLACE_WITH_MAKE_SIGN_HOOK',   // POST payload     → تثبيت التوقيع
+  /* الفتح: دالة Netlify لا ويبهوك Make — الصفحة قد تُفتح عدة مرات قبل
+     التوقيع، والدالة لا تستهلك عمليات Make. */
+  OPEN_HOOK: '/.netlify/functions/contract-open',   // GET  ?t=<token>  → حالة العقد
+  /* التوقيع: ويبهوك Make — حدث واحد يستحق العملية، ويحتاج راوتر
+     يميّز النجاح من "موقّع مسبقاً" من المرفوض. */
+  SIGN_HOOK: 'https://hook.eu1.make.com/vl81dpaqsuh3jqjut92dblwafv85o9h9',
   TERMS_VERSION: '2026-07-30',
   /* أُغلق 2026-07-31. الرابط لم يعد مصدر بيانات إطلاقاً — لا تُعيديها true.
      كان يسمح بحقن contract_no و package من الرابط مباشرة إلى الصفحة. */
