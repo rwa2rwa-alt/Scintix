@@ -34,8 +34,11 @@
 </div>
 
 <script>
-/* ويبهوك سيناريو "Payment Verify — Moyasar" (6724812) — منطقة eu1 */
-var VERIFY_HOOK = 'https://hook.eu1.make.com/fi02114hj83d2ynslaan147wovsehwn1';
+/* دالة Netlify لا ويبهوك Make: المفتاح السري لميسر يتحكم في تحصيل
+   الأموال واستردادها، فلا يُخزَّن نصاً صريحاً في مخطط Make. يبقى في
+   متغير بيئة على الخادم. الدالة تسأل ميسر مباشرة ولا تثق بأي شيء
+   من المتصفح سوى معرّف العملية. */
+var VERIFY_HOOK = '/.netlify/functions/payment-verify';
 var SEC_KEY     = 'cmt_sec_9f4Kq7Xw2R';
 
 var paymentId = new URLSearchParams(location.search).get('id') || '';
