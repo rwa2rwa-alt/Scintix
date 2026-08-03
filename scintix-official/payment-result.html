@@ -37,11 +37,16 @@
 /* دالة Netlify لا ويبهوك Make: المفتاح السري لميسر يتحكم في تحصيل
    الأموال واستردادها، فلا يُخزَّن نصاً صريحاً في مخطط Make. يبقى في
    متغير بيئة على الخادم. الدالة تسأل ميسر مباشرة ولا تثق بأي شيء
-   من المتصفح سوى معرّف العملية. */
-var VERIFY_HOOK = '/.netlify/functions/payment-verify';
-var SEC_KEY     = 'cmt_sec_9f4Kq7Xw2R';
+   من المتصفح سوى معرّف العملية ورمز العقد.
 
-var paymentId = new URLSearchParams(location.search).get('id') || '';
+   حُذف المفتاح المشترك cmt_sec_… من هنا: كان يُقرأ من مصدر الصفحة،
+   وهو نفسه حارس سيناريوهي Web Intake و Support Ticket. بديله رمز
+   العقد — لا يعرفه إلا حامل الرابط. */
+var VERIFY_HOOK = '/.netlify/functions/payment-verify';
+
+var qs        = new URLSearchParams(location.search);
+var paymentId = qs.get('id') || '';
+var token     = qs.get('t')  || '';
 var icon = document.getElementById('res-icon');
 var ttl  = document.getElementById('res-title');
 var body = document.getElementById('res-body');
@@ -57,14 +62,14 @@ function show(cls, ic, title, text){
   cta.style.display = 'inline-flex';
 }
 
-if (!paymentId) {
+if (!paymentId || !token) {
   show('bad', '⚠️', 'رقم العملية مفقود',
        'لم نستلم رقم عملية دفع. إذا خُصم مبلغ من بطاقتك تواصلي معنا على info@caminotich.sa.');
 } else {
   fetch(VERIFY_HOOK, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ k: SEC_KEY, payment_id: paymentId })
+    body: JSON.stringify({ payment_id: paymentId, t: token })
   })
   .then(function(r){ return r.json(); })
   .then(function(d){
