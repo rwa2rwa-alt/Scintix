@@ -717,7 +717,7 @@ function renderPkg(pkgRaw) {
       if (wr) {
         wr.style.display = 'block';
         wr.innerHTML = l==='ar'
-          ? '⚠️ الباقة غير محددة أو غير معروفة' + (pkgRaw ? ' («' + escHtml(pkgRaw) + '»)' : '') + '. التوقيع معطّل. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.'
+          ? '⚠️ الباقة غير محددة أو غير معروفة' + (pkgRaw ? ' («' + escHtml(pkgRaw) + '»)' : '') + '. التوقيع معطّل. تواصل معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.'
           : '⚠️ Package missing or unrecognized' + (pkgRaw ? ' ("' + escHtml(pkgRaw) + '")' : '') + '. Signing is disabled. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.';
       }
     }
@@ -974,7 +974,7 @@ function fieldNotice(lang, msg) { alert(msg); }
 /* ─── نداء Make ─── */
 async function cmtPost(url, payload) {
   /* text/plain يتجنّب طلب preflight، فلا حاجة لإعداد CORS معقّد.
-     تأكدي من إضافة Access-Control-Allow-Origin في Webhook Response. */
+     تأكد من إضافة Access-Control-Allow-Origin في Webhook Response. */
   const r = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
@@ -1134,13 +1134,13 @@ async function submitContract(lang) {
   }
   const resolved = window.CMT_PKG || {};
   if (!resolved.key) {
-    alert(lang==='ar' ? 'لا يمكن إتمام التوقيع: الباقة غير محددة. تواصلي معنا على info@caminotich.sa'
+    alert(lang==='ar' ? 'لا يمكن إتمام التوقيع: الباقة غير محددة. تواصل معنا على info@caminotich.sa'
                       : 'Cannot sign: package not specified. Contact info@caminotich.sa');
     return;
   }
   const sig = signatureImage(lang);
   if (!sig.sig_png) {
-    alert(lang==='ar' ? 'لم يُسجّل التوقيع. أعيدي الرسم أو اكتبي الاسم.' : 'Signature not captured. Please draw or type again.');
+    alert(lang==='ar' ? 'لم يُسجّل التوقيع. أعد الرسم أو اكتب الاسم.' : 'Signature not captured. Please draw or type again.');
     return;
   }
 
@@ -1191,7 +1191,7 @@ async function submitContract(lang) {
       return;
     }
     notice('err',
-      '⚠️ لم يُثبَّت التوقيع (' + escHtml(code) + '). لم يُحفظ شيء — أعيدي المحاولة، وإن تكرر تواصلي على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> مع رقم الطلب: <code>' + escHtml(CMT_STATE.request_id) + '</code>',
+      '⚠️ لم يُثبَّت التوقيع (' + escHtml(code) + '). لم يُحفظ شيء — أعد المحاولة، وإن تكرر تواصل على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> مع رقم الطلب: <code>' + escHtml(CMT_STATE.request_id) + '</code>',
       '⚠️ Signature was not recorded (' + escHtml(code) + '). Nothing was saved — please retry, or contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> quoting request ID: <code>' + escHtml(CMT_STATE.request_id) + '</code>');
     return;
   }
@@ -1240,6 +1240,7 @@ function applyState(d) {
   if (d.package) renderPkg(d.package);
 
   switch (CMT_STATE.state) {
+    case 'ready':   /* contract-open ترسل ready؛ open للتوافق مع Make القديم */
     case 'open':
       notice('warn',
         'عقد رقم ' + escHtml(d.contract_no || '') + ' — جاهز للتوقيع. الرجاء مراجعة البنود قبل التوقيع.',
@@ -1266,7 +1267,7 @@ function applyState(d) {
     case 'expired':
       lockDocument('expired');
       notice('err',
-        '⚠️ انتهت صلاحية رابط هذا العقد. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> لإصدار رابط جديد.',
+        '⚠️ انتهت صلاحية رابط هذا العقد. تواصل معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> لإصدار رابط جديد.',
         '⚠️ This contract link has expired. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> for a new link.');
       break;
 
@@ -1279,7 +1280,7 @@ function applyState(d) {
       lockDocument('invalid');
       renderPkg('');
       notice('err',
-        '⚠️ رابط غير صالح. لا يمكن فتح عقد بدون رمز صحيح. تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.',
+        '⚠️ رابط غير صالح. لا يمكن فتح عقد بدون رمز صحيح. تواصل معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.',
         '⚠️ Invalid link. A contract cannot be opened without a valid token. Contact <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.');
   }
   ['ar','en'].forEach(l => { try { checkReady(l); } catch(e){} });
@@ -1337,7 +1338,7 @@ async function bootContract() {
     d = JSON.parse(await r.text());
   } catch (e) {
     notice('err',
-      '⚠️ تعذّر التحقق من الرابط. تحققي من الاتصال وأعيدي التحميل.',
+      '⚠️ تعذّر التحقق من الرابط. تحقق من الاتصال وأعد التحميل.',
       '⚠️ Could not verify the link. Check your connection and reload.');
     lockDocument('network');
     return;
