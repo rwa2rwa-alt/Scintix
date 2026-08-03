@@ -50,19 +50,17 @@
 </div>
 
 <script>
-/* أسعار الباقات بالهللات — دفعة واحدة */
-var PACKAGES = {
-  Spark:  { label: 'Spark',  halalas:   89900 },
-  Glow:   { label: 'Glow',   halalas:  179900 },
-  Pulse:  { label: 'Pulse',  halalas:  329900 },
-  Nova:   { label: 'Nova',   halalas:  599900 },
-  Zenith: { label: 'Zenith', halalas: 1200000, invoiceOnly: true }
-};
+/* ════════════════════════════════════════════════════════════════
+   صفحة الدفع — المبلغ يأتي من العقد لا من الرابط.
+   جدول الأسعار حُذف من هنا عمداً: أي سعر في الواجهة يعني أن من
+   يعدّل الرابط يدفع ما يشاء. المبلغ الوحيد المعتمد هو قيمة العقد
+   الموقّع كما يرجعها الخادم.
+   ════════════════════════════════════════════════════════════════ */
+var LOOKUP  = '/.netlify/functions/contract-lookup';
+var PK_KEY  = 'pk_test_34GwBonUQjx8qJJyN6w7Hv9LvihR6rwAkxhixuiW'; /* بدّليه بـ pk_live_ عند الإنتاج */
+var RATE_USD = 3.754;
 
-var qs       = new URLSearchParams(location.search);
-var pkgKey   = (qs.get('package') || '').trim();
-var recordId = (qs.get('record')  || '').trim();
-var pkg      = PACKAGES[pkgKey];
+var token  = (new URLSearchParams(location.search).get('t') || '').trim();
 
 var elName = document.getElementById('pkg-name');
 var elTot  = document.getElementById('pkg-total');
@@ -75,39 +73,72 @@ function block(msg){
   elErr.innerHTML      = msg;
 }
 
-if (!pkg) {
-  elName.textContent = 'غير محددة';
-  block('لم يتم تحديد الباقة. رجاءً ارجعي لصفحة الباقات واختاري باقتك.<br>'
-      + '<a href="index.html#plans">← صفحة الباقات</a>');
-} else {
-  elName.textContent = pkg.label;
-  elTot.textContent  = (pkg.halalas / 100).toLocaleString('en-US') + ' ريال';
-  var approx = document.createElement('div');
-  approx.style.cssText = 'font-size:.78rem;color:var(--text-muted);text-align:left;margin-top:4px';
-  approx.textContent = '≈ $ ' + (pkg.halalas / 100 / 3.754).toFixed(2)
-                     + ' — يُحصّل بالريال السعودي';
-  elTot.parentNode.appendChild(approx);
+var CONTACT = 'تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a>.';
+var REASONS = {
+  BAD_TOKEN:    'رابط الدفع غير صالح. استخدمي الرابط الوارد في بريد العقد.',
+  NOT_FOUND:    'لم نجد عقداً بهذا الرابط. قد يكون أُلغي. ' + CONTACT,
+  UNSIGNED:     'لم يُوقَّع العقد بعد. وقّعيه أولاً ثم يفتح الدفع تلقائياً.',
+  ALREADY_PAID: 'هذا العقد مدفوع بالفعل. لو خُصم منك مبلغ مرتين ' + CONTACT,
+  NO_VALUE:     'قيمة العقد غير مسجّلة. ' + CONTACT,
+  UNAVAILABLE:  'تعذّر فتح صفحة الدفع الآن. حاولي بعد قليل أو ' + CONTACT
+};
 
-  if (pkg.invoiceOnly) {
-    block('باقة Zenith تُسدَّد عبر فاتورة أو تحويل بنكي بدل الدفع بالبطاقة.<br>'
-        + 'تواصلي معنا على <a href="mailto:info@caminotich.sa">info@caminotich.sa</a> ونصدر لك الفاتورة.');
-  } else {
+elName.textContent = '…';
+elTot.textContent  = '…';
+
+if (!token) {
+  elName.textContent = 'غير محدد';
+  block(REASONS.BAD_TOKEN);
+} else {
+  fetch(LOOKUP, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ t: token })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d || !d.ok) {
+      elName.textContent = 'غير متاح';
+      elTot.textContent  = '—';
+      block(REASONS[(d && d.reason) || 'UNAVAILABLE'] || REASONS.UNAVAILABLE);
+      return;
+    }
+
+    elName.textContent = d.package || d.contract_name || 'عقد';
+    elTot.textContent  = Number(d.amount_sar).toLocaleString('en-US') + ' ريال';
+
+    var approx = document.createElement('div');
+    approx.style.cssText = 'font-size:.78rem;color:var(--text-muted);text-align:left;margin-top:4px';
+    approx.textContent = '≈ $ ' + (d.amount_sar / RATE_USD).toFixed(2) + ' — يُحصّل بالريال السعودي';
+    elTot.parentNode.appendChild(approx);
+
+    /* Zenith تُسدَّد بفاتورة أو تحويل بنكي — تُقيَّد يدوياً في سجل الدفعات */
+    if (String(d.package).toLowerCase() === 'zenith') {
+      block('باقة Zenith تُسدَّد عبر فاتورة أو تحويل بنكي بدل الدفع بالبطاقة.<br>' + CONTACT);
+      return;
+    }
+
     Moyasar.init({
       element: '.mysr-form',
-      amount: pkg.halalas,
+      amount: d.halalas,
       currency: 'SAR',
-      description: 'باقة ' + pkg.label + ' — كامينوتك' + (recordId ? ' | ' + recordId : ''),
-      /* مفتاح النشر — آمن في الواجهة. للانتقال للإنتاج بدّليه بـ pk_live_ */
-      publishable_api_key: 'pk_test_34GwBonUQjx8qJJyN6w7Hv9LvihR6rwAkxhixuiW',
-      callback_url: 'https://caminotich.sa/payment-result.html',
+      description: (d.contract_name || 'عقد') + ' — كامينوتك',
+      publishable_api_key: PK_KEY,
+      callback_url: 'https://caminotich.sa/payment-result.html?t=' + encodeURIComponent(token),
       methods: ['creditcard'],
       supported_networks: ['mada', 'visa', 'mastercard'],
       metadata: {
-        package: pkg.label,
-        airtable_record_id: recordId
+        contract_id:   d.contract_id,
+        contract_name: d.contract_name,
+        package:       d.package
       }
     });
-  }
+  })
+  .catch(function(){
+    elName.textContent = 'غير متاح';
+    elTot.textContent  = '—';
+    block(REASONS.UNAVAILABLE);
+  });
 }
 </script>
 </body>
