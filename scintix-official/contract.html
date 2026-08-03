@@ -1213,9 +1213,11 @@ async function submitContract(lang) {
 function showPayRow(lang, payUrl, resolved) {
   const payLink = document.getElementById(`pay-link-${lang}`);
   if (payLink) {
-    payLink.href = payUrl || ('payment.html?package=' + encodeURIComponent((resolved && resolved.label) || '')
-                              + '&record=' + encodeURIComponent(CMT_STATE.record_id || '')
-                              + '&lang=' + lang);
+    /* رمز العقد فقط. لا باقة ولا معرّف سجل في الرابط: صفحة الدفع
+       تقرأ المبلغ من قيمة العقد على الخادم، فتعديل الرابط لا يغيّر
+       ما يُدفع. والرمز نفسه يفتح التحقق بعد الدفع. */
+    const t = encodeURIComponent(CMT_STATE.token || '');
+    payLink.href = payUrl || ('payment.html?t=' + t + '&lang=' + lang);
   }
   const payRow = document.getElementById(`pay-row-${lang}`);
   if (payRow) {
@@ -1367,3 +1369,4 @@ bootContract();
 
 </body>
 </html>
+
