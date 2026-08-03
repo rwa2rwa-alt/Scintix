@@ -1342,7 +1342,12 @@ async function bootContract() {
     lockDocument('network');
     return;
   }
-  if (!d || d.ok !== true) { applyState({ state: (d && d.state) || 'invalid' }); return; }
+  /* الدالة contract-open ترجع {state:'ready',...} بلا حقل ok، بينما كان
+     الشرط هنا يطلب ok===true — فيسقط أي رد صحيح ويعلن «رابط غير صالح».
+     الآن نقبل الشكلين: نرفض فقط عند ok===false أو حالة غائبة/خاطئة. */
+  const bad = !d || d.ok === false || !d.state
+              || d.state === 'invalid' || d.state === 'error';
+  if (bad) { applyState({ state: (d && d.state) || 'invalid' }); return; }
   applyState(d);
 }
 
