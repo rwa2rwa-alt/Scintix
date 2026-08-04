@@ -1,11 +1,6 @@
 [build]
   functions = "netlify/functions"
 
-[[redirects]]
-  from   = "/.netlify/functions/*"
-  to     = "/.netlify/functions/:splat"
-  status = 200
-
 # ══════════════════════════════════════════════════════════════════
 # ترويسات الأمان — أُضيفت 2026-07-31
 # ملاحظة: CSP مقصورة على frame-ancestors عمداً. الموقع يحمّل من
