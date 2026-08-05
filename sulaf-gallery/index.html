@@ -91,7 +91,8 @@ section{padding:100px 2rem}
 .about-img-wrap{position:relative}
 .about-frame{width:100%;aspect-ratio:4/5;background:var(--dark3);border:1px solid rgba(201,162,39,0.2);position:relative;overflow:hidden}
 .about-frame-inner{position:absolute;inset:15px;border:1px solid rgba(201,162,39,0.1)}
-.about-art{position:absolute;inset:0;background:linear-gradient(135deg,#1a1408,#2a2010);display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.5}
+.about-art{position:absolute;inset:0;overflow:hidden}
+.about-art img{width:100%;height:100%;object-fit:cover;display:block}
 .about-corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid}
 .about-corner.tl{top:-1px;right:-1px;border-width:2px 2px 0 0}
 .about-corner.br{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
@@ -219,8 +220,8 @@ footer{background:var(--dark);border-top:1px solid rgba(201,162,39,0.15);padding
 .p2{background:linear-gradient(135deg,#0a1520,#101014)}
 .p3{background:linear-gradient(135deg,#1a0a0a,#101014)}
 .p4{background:linear-gradient(135deg,#0a1a0a,#101014)}
-.p5{background:linear-gradient(135deg,#1a0a1a,#101014)}
-.port-art{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.4}
+.port-art{width:100%;height:100%;overflow:hidden}
+.port-art img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* REVEAL ANIMATION */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -254,6 +255,10 @@ section{padding:70px 1.2rem}
 .about-stats{grid-template-columns:1fr 1fr}
 .footer-bottom{flex-direction:column;text-align:center}
 }
+
+/* صور رمزية بالحروف الأولى — بديل الإيموجي */
+.avatar-init{display:flex;align-items:center;justify-content:center;font-weight:700;
+  letter-spacing:.5px;color:#fff;font-size:1.05rem;line-height:1;width:100%;height:100%}
 </style>
 </head>
 <body>
@@ -319,7 +324,7 @@ section{padding:70px 1.2rem}
     <div class="about-grid">
       <div class="about-img-wrap reveal">
         <div class="about-frame">
-          <div class="about-art">🖼️</div>
+          <div class="about-art"><img src="assets/portfolio/art-1.jpg" alt="من داخل المعرض" loading="lazy" decoding="async"></div>
           <div class="about-frame-inner"></div>
           <div class="about-corner tl"></div>
           <div class="about-corner br"></div>
@@ -437,38 +442,31 @@ section{padding:70px 1.2rem}
     </div>
     <div class="portfolio-grid">
       <div class="portfolio-item reveal">
-        <div class="port-bg p1"><div class="port-art">🌅</div></div>
+        <div class="port-bg p1"><div class="port-art"><img src="assets/portfolio/art-1.jpg" alt="لوحة مناظر" loading="lazy" decoding="async"></div></div>
         <div class="port-overlay">
           <span class="port-cat">لوحات زيتية</span>
           <h3 class="port-title">أمواج الصحراء الذهبية</h3>
         </div>
       </div>
       <div class="portfolio-item reveal reveal-delay-1">
-        <div class="port-bg p2"><div class="port-art">✍️</div></div>
+        <div class="port-bg p2"><div class="port-art"><img src="assets/portfolio/art-2.jpg" alt="خط عربي" loading="lazy" decoding="async"></div></div>
         <div class="port-overlay">
           <span class="port-cat">خط عربي</span>
           <h3 class="port-title">بسم الله — ثلث جميل</h3>
         </div>
       </div>
       <div class="portfolio-item reveal reveal-delay-2">
-        <div class="port-bg p3"><div class="port-art">🏺</div></div>
+        <div class="port-bg p3"><div class="port-art"><img src="assets/portfolio/art-3.jpg" alt="تحف وأعمال يدوية" loading="lazy" decoding="async"></div></div>
         <div class="port-overlay">
           <span class="port-cat">تحف نادرة</span>
           <h3 class="port-title">مزهرية أندلسية تاريخية</h3>
         </div>
       </div>
       <div class="portfolio-item reveal reveal-delay-1">
-        <div class="port-bg p4"><div class="port-art">🌺</div></div>
+        <div class="port-bg p4"><div class="port-art"><img src="assets/portfolio/art-4.jpg" alt="لوحة زهور" loading="lazy" decoding="async"></div></div>
         <div class="port-overlay">
           <span class="port-cat">لوحات معاصرة</span>
           <h3 class="port-title">زهور الشرق الأقصى</h3>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2">
-        <div class="port-bg p5"><div class="port-art">🎨</div></div>
-        <div class="port-overlay">
-          <span class="port-cat">فن تجريدي</span>
-          <h3 class="port-title">أبعاد اللون والضوء</h3>
         </div>
       </div>
     </div>
@@ -486,25 +484,25 @@ section{padding:70px 1.2rem}
     </div>
     <div class="team-grid">
       <div class="team-card reveal">
-        <div class="team-avatar">👩‍🎨</div>
+        <div class="team-avatar" style="background:#c9a227"><span class="avatar-init">س.ع</span></div>
         <h3 class="team-name">ألوان الزهراني</h3>
         <p class="team-role-ar">مديرة المعرض والمؤسسة</p>
         <p class="team-role-en">Gallery Director & Founder</p>
       </div>
       <div class="team-card reveal reveal-delay-1">
-        <div class="team-avatar">🎨</div>
+        <div class="team-avatar" style="background:#a8871c"><span class="avatar-init">ن.خ</span></div>
         <h3 class="team-name">أحمد العتيبي</h3>
         <p class="team-role-ar">مدير الأعمال الفنية</p>
         <p class="team-role-en">Art Director</p>
       </div>
       <div class="team-card reveal reveal-delay-2">
-        <div class="team-avatar">✍️</div>
+        <div class="team-avatar" style="background:#8a6f14"><span class="avatar-init">م.ط</span></div>
         <h3 class="team-name">نورة القحطاني</h3>
         <p class="team-role-ar">خطاطة وفنانة</p>
         <p class="team-role-en">Calligrapher & Artist</p>
       </div>
       <div class="team-card reveal reveal-delay-3">
-        <div class="team-avatar">🖼️</div>
+        <div class="team-avatar" style="background:#6b5410"><span class="avatar-init">ه.ر</span></div>
         <h3 class="team-name">فيصل الحربي</h3>
         <p class="team-role-ar">متخصص التأطير والتوثيق</p>
         <p class="team-role-en">Framing Specialist</p>
@@ -526,7 +524,7 @@ section{padding:70px 1.2rem}
         <div class="test-stars">★★★★★</div>
         <p class="test-text">"تجربة استثنائية من أولها لآخرها. اقتنيت لوحة خط عربي رائعة وكان التأطير احترافياً جداً. سأعود بالتأكيد لاقتناء المزيد."</p>
         <div class="test-author">
-          <div class="test-avatar">👩</div>
+          <div class="test-avatar" style="background:linear-gradient(135deg,#c9a227,#8a6f14)"><span class="avatar-init">ل.ق</span></div>
           <div><div class="test-name">أمل الشمري</div><div class="test-city">الرياض</div></div>
         </div>
       </div>
@@ -534,7 +532,7 @@ section{padding:70px 1.2rem}
         <div class="test-stars">★★★★★</div>
         <p class="test-text">"معرض راقٍ بكل معنى الكلمة. وجدت فيه ما كنت أبحث عنه من تحف نادرة، والتعامل كان محترفاً وودوداً. شكراً لفريق ألوان."</p>
         <div class="test-author">
-          <div class="test-avatar">👨</div>
+          <div class="test-avatar" style="background:linear-gradient(135deg,#8a6f14,#5c4a0d)"><span class="avatar-init">ف.ش</span></div>
           <div><div class="test-name">محمد العسيري</div><div class="test-city">جدة</div></div>
         </div>
       </div>
@@ -542,7 +540,7 @@ section{padding:70px 1.2rem}
         <div class="test-stars">★★★★★</div>
         <p class="test-text">"أهدانا زوجي لوحة من معرض ألوان في مناسبة زواجنا، وكانت هدية لا تُنسى. التغليف الفاخر والتوصيل الآمن أثّرا فينا كثيراً."</p>
         <div class="test-author">
-          <div class="test-avatar">👩</div>
+          <div class="test-avatar" style="background:linear-gradient(135deg,#a8871c,#6b5410)"><span class="avatar-init">م.ب</span></div>
           <div><div class="test-name">ريم الغامدي</div><div class="test-city">الدمام</div></div>
         </div>
       </div>

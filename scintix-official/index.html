@@ -347,7 +347,6 @@
             <article class="plan-card plan-spark" onclick="location.href='plan.html?pkg=spark'" style="cursor:pointer">
               <div class="plan-name">Spark</div>
               <div class="plan-price"><span data-price="899">899</span><small data-currency-label>ريال · دفعة واحدة</small></div>
-              <div class="plan-maint" data-maint="90" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
               <div class="plan-duration">⏱ مدة التنفيذ: 7 – 14 يوم عمل</div>
               <ul>
                 <li data-i18n="plans.spark.one">نماذج رقمية احترافية</li>
@@ -364,7 +363,6 @@
             <article class="plan-card plan-glow" onclick="location.href='plan.html?pkg=glow'" style="cursor:pointer">
               <div class="plan-name">Glow</div>
               <div class="plan-price"><span data-price="1799">1,799</span><small data-currency-label>ريال · دفعة واحدة</small></div>
-              <div class="plan-maint" data-maint="180" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
               <div class="plan-duration">⏱ مدة التنفيذ: 7 – 14 يوم عمل</div>
               <ul>
                 <li data-i18n="plans.glow.one">كل خدمات Spark</li>
@@ -382,7 +380,6 @@
               <div class="plan-featured-badge" data-i18n="plans.pulse.badge">الأكثر طلباً</div>
               <div class="plan-name">Pulse</div>
               <div class="plan-price"><span data-price="3299">3,299</span><small data-currency-label>ريال · دفعة واحدة</small></div>
-              <div class="plan-maint" data-maint="330" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
               <div class="plan-duration">⏱ مدة التنفيذ: 7 – 14 يوم عمل</div>
               <ul>
                 <li data-i18n="plans.pulse.one">كل خدمات Glow</li>
@@ -400,7 +397,6 @@
             <article class="plan-card plan-nova" onclick="location.href='plan.html?pkg=nova'" style="cursor:pointer">
               <div class="plan-name">Nova</div>
               <div class="plan-price"><span data-price="5999">5,999</span><small data-currency-label>ريال · دفعة واحدة</small></div>
-              <div class="plan-maint" data-maint="600" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
               <div class="plan-duration">⏱ التنفيذ على مراحل — حسب الاتفاق (بحد أقصى 60 يوم عمل)</div>
               <ul>
                 <li data-i18n="plans.nova.one">كل خدمات Pulse</li>
@@ -417,7 +413,6 @@
             <article class="plan-card plan-zenith" onclick="location.href='plan.html?pkg=zenith'" style="cursor:pointer">
               <div class="plan-name">Zenith</div>
               <div class="plan-price"><span data-price="12000">12,000</span><small data-currency-label>ريال · دفعة واحدة</small></div>
-              <div class="plan-maint" data-maint="1200" style="font-size:.78rem;color:var(--text-muted);margin-top:-6px"></div>
               <div class="plan-duration">⏱ التنفيذ على مراحل — حسب الاتفاق (بحد أقصى 60 يوم عمل)</div>
               <ul>
                 <li data-i18n="plans.zenith.one">حلول مؤسسية كاملة</li>
@@ -540,28 +535,6 @@
         </section>
 
       </main>
-
-      <!-- ═══ أسطر الصيانة الشهرية — تتبع اللغة والعملة ═══ -->
-      <script>
-      window.applyPackageMaint = function () {
-        var cur  = localStorage.getItem('caminotich-currency') === 'usd' ? 'usd' : 'sar';
-        var lang = localStorage.getItem('caminotich-lang')     === 'en'  ? 'en'  : 'ar';
-        document.querySelectorAll('[data-maint]').forEach(function (el) {
-          var sar = Number(el.getAttribute('data-maint'));
-          var amt = cur === 'usd' ? '$ ' + (sar / 3.754).toFixed(2)
-                                  : sar + (lang === 'en' ? ' SAR' : ' ريال');
-          el.textContent = (lang === 'en' ? 'Optional hosting & maintenance: '
-                                          : 'صيانة واستضافة اختيارية: ')
-                         + amt + (lang === 'en' ? ' / month' : ' / شهرياً');
-        });
-      };
-      window.applyPackageMaint();
-
-      var _langSel = document.querySelector('[data-lang-select]');
-      if (_langSel) _langSel.addEventListener('change', function () {
-        setTimeout(window.applyPackageMaint, 0);
-      });
-      </script>
 
       <!-- ════════════ FOOTER ════════════ -->
       <footer id="contact" class="site-footer">

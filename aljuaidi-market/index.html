@@ -101,7 +101,8 @@ section{padding:90px 5%}
 .about-img-wrap{position:relative}
 .about-img-box{background:linear-gradient(135deg,var(--g),#1d7a3a);border-radius:24px;padding:50px 30px;text-align:center;overflow:hidden;position:relative}
 .about-img-box::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,0.08);border-radius:50%}
-.about-big-emoji{font-size:6rem;display:block;margin-bottom:16px}
+.about-big-emoji{display:block;margin-bottom:16px;border-radius:16px;overflow:hidden;max-height:320px}
+.about-big-emoji img{width:100%;height:100%;object-fit:cover;display:block}
 .about-img-tag{background:rgba(255,255,255,0.15);color:#fff;padding:8px 20px;border-radius:20px;font-size:0.9rem;font-weight:600}
 .about-float{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 8px 25px rgba(0,0,0,0.12);font-weight:700;font-size:0.85rem;display:flex;align-items:center;gap:8px}
 .about-float.f1{bottom:-20px;left:-20px;color:var(--g)}
@@ -133,8 +134,9 @@ section{padding:90px 5%}
 .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1000px;margin:0 auto}
 .port-card{border-radius:20px;overflow:hidden;position:relative;background:var(--dk);min-height:220px;display:flex;align-items:flex-end;cursor:pointer;transition:transform .3s;box-shadow:0 8px 30px rgba(0,0,0,0.15)}
 .port-card:hover{transform:translateY(-6px)}
-.port-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.25;transition:all .3s}
-.port-card:hover .port-bg{opacity:0.4;transform:scale(1.1)}
+.port-bg{position:absolute;inset:0;overflow:hidden;transition:transform .3s}
+.port-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.port-card:hover .port-bg{transform:scale(1.06)}
 .port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%)}
 .port-content{position:relative;z-index:2;padding:24px}
 .port-tag{background:var(--o);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.75rem;font-weight:700;display:inline-block;margin-bottom:8px}
@@ -304,7 +306,7 @@ section{padding:70px 5%}
   <div class="about-grid">
     <div class="about-img-wrap">
       <div class="about-img-box">
-        <span class="about-big-emoji">🏪</span>
+        <span class="about-big-emoji"><img src="assets/portfolio/market-1.jpg" alt="من داخل السوق" loading="lazy" decoding="async"></span>
         <div class="about-img-tag">منذ سنوات في خدمتكم</div>
       </div>
       <div class="about-float f1">✅ جودة مضمونة</div>
@@ -385,7 +387,7 @@ section{padding:70px 5%}
   </div>
   <div class="portfolio-grid">
     <div class="port-card port-bg-g">
-      <div class="port-bg">🥖🧁</div>
+      <div class="port-bg"><img src="assets/portfolio/market-1.jpg" alt="قسم المخبوزات" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">عرض الجمعة</span>
@@ -394,7 +396,7 @@ section{padding:70px 5%}
       </div>
     </div>
     <div class="port-card port-bg-o">
-      <div class="port-bg">🥩🍗</div>
+      <div class="port-bg"><img src="assets/portfolio/market-2.jpg" alt="قسم اللحوم" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">عرض الملحمة</span>
@@ -403,7 +405,7 @@ section{padding:70px 5%}
       </div>
     </div>
     <div class="port-card port-bg-b">
-      <div class="port-bg">🥦🍅</div>
+      <div class="port-bg"><img src="assets/portfolio/market-3.jpg" alt="خضروات وفواكه طازجة" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">سلة الخضار</span>
@@ -412,7 +414,7 @@ section{padding:70px 5%}
       </div>
     </div>
     <div class="port-card port-bg-p">
-      <div class="port-bg">🛒🎁</div>
+      <div class="port-bg"><img src="assets/portfolio/market-4.jpg" alt="عروض السوق" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">عرض شهري</span>
@@ -551,59 +553,7 @@ section{padding:70px 5%}
     <img decoding="async" src="assets/portfolio/market-1.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
     <img decoding="async" src="assets/portfolio/market-2.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
     <img decoding="async" src="assets/portfolio/market-3.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">سوبر ماركت <span>الواحة</span> | Al-Waha Market</div>
-  <div class="footer-links">
-    <a href="#home">الرئيسية</a>
-    <a href="#about">من نحن</a>
-    <a href="#services">أقسامنا</a>
-    <a href="#portfolio">عروضنا</a>
-    <a href="#testimonials">آراء العملاء</a>
-    <a href="#faq">الأسئلة</a>
-    <a href="#contact">تواصل</a>
-  </div>
-  <p class="footer-copy">© 2024 أسواق الواحة — جميع الحقوق محفوظة | 📞 0549955996</p>
-</footer>
-
-<script>
-function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
-function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
-function toggleFaq(el){
-  var item=el.parentElement;
-  var allItems=document.querySelectorAll('.faq-item');
-  allItems.forEach(function(i){if(i!==item){i.classList.remove('active')}});
-  item.classList.toggle('active');
-}
-function submitForm(e){
-  e.preventDefault();
-  var btn=document.querySelector('.btn-submit');
-  btn.textContent='⏳ جاري الإرسال...';
-  btn.disabled=true;
-  setTimeout(function(){
-    document.getElementById('successMsg').style.display='block';
-    btn.textContent='✅ تم الإرسال';
-    btn.style.background='linear-gradient(135deg,#27ae60,#2ecc71)';
-  },1500);
-}
-window.addEventListener('scroll',function(){
-  var nav=document.querySelector('nav');
-  if(window.scrollY>50){nav.style.boxShadow='0 4px 30px rgba(0,0,0,0.15)'}
-  else{nav.style.boxShadow='0 2px 20px rgba(0,0,0,0.08)'}
-});
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    var target=document.querySelector(this.getAttribute('href'));
-    if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}
-  });
-});
-</script>
-</body>
-</html>
-          <img decoding="async" src="assets/portfolio/market-4.jpg" alt="سوق تقليدي — أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
+    <img decoding="async" src="assets/portfolio/market-4.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
   </div>
 </section>
 
