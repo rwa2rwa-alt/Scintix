@@ -60,7 +60,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,0.97
 @keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(10deg)}}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:120px 5% 80px;position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,161,26,0.2);border:1px solid rgba(244,161,26,0.4);color:var(--o);padding:7px 16px;border-radius:20px;font-size:0.8rem;font-weight:700;margin-bottom:20px;animation:fadeInDown .8s ease}
-.hero-badge::before{content:'🌟'}
+.hero-badge::before{content:''}
 .hero-h1{font-size:3.2rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;animation:fadeInUp .8s ease .1s both}
 .hero-h1 span{color:var(--o)}
 .hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:32px;animation:fadeInUp .8s ease .2s both}
@@ -229,17 +229,14 @@ footer{background:#0a1f10;padding:36px 5%;text-align:center}
 .form-row{grid-template-columns:1fr}
 .about-features{grid-template-columns:1fr}
 section{padding:70px 5%}
-}
-</style>
-</head>
+}</style></head>
 <body>
 
 <nav>
   <div class="nav-inner">
     <div class="logo">
-      <div class="logo-icon">🛒</div>
-      <div class="logo-text">أسواق الواحة<span>Al-Waha Market</span></div>
-    </div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h3l2.6 12.3a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.2L21 7H6"/></svg></div>
+      <div class="logo-text">أسواق الواحة<span>Al-Waha Market</span></div></div>
     <ul class="nav-links">
       <li><a href="#home">الرئيسية</a></li>
       <li><a href="#about">من نحن</a></li>
@@ -247,59 +244,46 @@ section{padding:70px 5%}
       <li><a href="#portfolio">عروضنا</a></li>
       <li><a href="#testimonials">آراء العملاء</a></li>
       <li><a href="#faq">الأسئلة</a></li>
-      <li><a href="#contact" class="nav-cta">تواصل معنا</a></li>
-    </ul>
-    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-  </div>
-</nav>
+      <li><a href="#contact" class="nav-cta">تواصل معنا</a></li></ul>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></div></nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home" onclick="closeMenu()">🏠 الرئيسية</a>
-  <a href="#about" onclick="closeMenu()">📖 من نحن</a>
-  <a href="#services" onclick="closeMenu()">🏪 أقسامنا</a>
-  <a href="#portfolio" onclick="closeMenu()">🎁 عروضنا</a>
-  <a href="#testimonials" onclick="closeMenu()">⭐ آراء العملاء</a>
-  <a href="#faq" onclick="closeMenu()">❓ الأسئلة</a>
-  <a href="#contact" onclick="closeMenu()">📞 تواصل معنا</a>
-</div>
+  <a href="#home" onclick="closeMenu()">الرئيسية</a>
+  <a href="#about" onclick="closeMenu()">من نحن</a>
+  <a href="#services" onclick="closeMenu()">أقسامنا</a>
+  <a href="#portfolio" onclick="closeMenu()">عروضنا</a>
+  <a href="#testimonials" onclick="closeMenu()">آراء العملاء</a>
+  <a href="#faq" onclick="closeMenu()">الأسئلة</a>
+  <a href="#contact" onclick="closeMenu()">تواصل معنا</a></div>
 
 <!-- HERO -->
 <section id="home">
   <div class="hero-bg-shapes">
     <div class="shape shape1"></div>
     <div class="shape shape2"></div>
-    <div class="shape shape3"></div>
-  </div>
+    <div class="shape shape3"></div></div>
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-badge">وجهتك الأولى للتسوق اليومي</div>
       <h1 class="hero-h1">سوبر ماركت <span>الواحة</span><br>طازج دائماً</h1>
       <p class="hero-sub">متجرك المتكامل للمواد الغذائية والاستهلاكية. فرن مخبز طازج، ملحمة، خضار وفواكه، مثلجات — كل احتياجاتك تحت سقف واحد مع توصيل لباب البيت.</p>
       <div class="hero-btns">
-        <a href="#services" class="btn-primary">🛍️ استكشف الأقسام</a>
-        <a href="#contact" class="btn-secondary">📞 اطلب توصيل</a>
-      </div>
+        <a href="#services" class="btn-primary">استكشف الأقسام</a>
+        <a href="#contact" class="btn-secondary">اطلب توصيل</a></div>
       <div class="hero-stats">
         <div class="stat"><div class="stat-num">+500</div><div class="stat-label">منتج متاح</div></div>
         <div class="stat"><div class="stat-num">7</div><div class="stat-label">أيام الأسبوع</div></div>
-        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">طازج يومياً</div></div>
-      </div>
-    </div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">طازج يومياً</div></div></div></div>
     <div class="hero-visual">
       <div class="hero-card">
         <div class="hero-emoji-grid">
-          <div class="emoji-item"><span class="e">🥖</span><span class="label">المخبز</span></div>
-          <div class="emoji-item"><span class="e">🥩</span><span class="label">الملحمة</span></div>
-          <div class="emoji-item"><span class="e">🥦</span><span class="label">خضروات</span></div>
-          <div class="emoji-item"><span class="e">🍎</span><span class="label">فواكه</span></div>
-          <div class="emoji-item"><span class="e">🍦</span><span class="label">مثلجات</span></div>
-          <div class="emoji-item"><span class="e">🛒</span><span class="label">تسوق</span></div>
-        </div>
-        <div class="promo-badge">🎉 عروض أسبوعية حصرية كل جمعة!</div>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M4 10.2C4 7.4 7.6 6 12 6s8 1.4 8 4.2c0 1.4-1 2-2.1 2V19H6.1v-6.8C5 12.2 4 11.6 4 10.2z"/><path d="M9 13.5v4M12 13.5v4M15 13.5v4"/></svg></span><span class="label">المخبز</span></div>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8.6 15.9a5.6 5.6 0 1 1 7.6-8.1c1.6 1.6 1.6 4.2 0 5.8s-4.2 1.6-5.8 0"/><path d="m9 16-4.4 4.4"/></svg></span><span class="label">الملحمة</span></div>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8 10a3 3 0 1 1 1.3-5.7 3 3 0 0 1 5.4 0A3 3 0 1 1 16 10z"/><path d="M9.2 10v4a2.8 2.8 0 0 0 5.6 0v-4"/></svg></span><span class="label">خضروات</span></div>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M12 8.4C9 6 4.2 7.4 4.2 12.6 4.2 17 7.1 21 9.5 21c1 0 1.6-.6 2.5-.6s1.5.6 2.5.6c2.4 0 5.3-4 5.3-8.4 0-5.2-4.8-6.6-7.8-4.2z"/><path d="M12 8.4V5.2m0 0c2 0 3.1-1.4 3.1-2.4-1.6 0-3.1 1-3.1 2.4z"/></svg></span><span class="label">فواكه</span></div>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8 10.5a4 4 0 1 1 8 0"/><path d="M7.4 11.4h9.2L12 21z"/></svg></span><span class="label">مثلجات</span></div>
+          <div class="emoji-item"><span class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2 3h3l2.6 12.3a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.2L21 7H6"/></svg></span><span class="label">تسوق</span></div></div>
+        <div class="promo-badge">عروض أسبوعية حصرية كل جمعة!</div></div></div></div></section>
 
 <!-- ABOUT -->
 <section id="about">
@@ -307,27 +291,21 @@ section{padding:70px 5%}
     <div class="about-img-wrap">
       <div class="about-img-box">
         <span class="about-big-emoji"><img src="/assets/portfolio/market-1.jpg" alt="من داخل السوق" loading="lazy" decoding="async"></span>
-        <div class="about-img-tag">منذ سنوات في خدمتكم</div>
-      </div>
-      <div class="about-float f1">✅ جودة مضمونة</div>
-      <div class="about-float f2">🚚 توصيل سريع</div>
-    </div>
+        <div class="about-img-tag">منذ سنوات في خدمتكم</div></div>
+      <div class="about-float f1">جودة مضمونة</div>
+      <div class="about-float f2">توصيل سريع</div></div>
     <div class="about-content">
       <div class="section-tag">من نحن | About Us</div>
       <h2>سوبر ماركت متكامل<br><span>لخدمة عائلتك</span></h2>
       <p>أسواق الواحة هو وجهتك الشاملة للتسوق اليومي في الحي. نوفر لك أفضل المنتجات الغذائية والاستهلاكية بأسعار تنافسية وجودة لا تُضاهى.</p>
       <p>نحرص على توفير منتجات طازجة يومياً من مخبز الفرن والملحمة وأقسام الخضار والفواكه، مع عروض أسبوعية مميزة تناسب جميع الأسر.</p>
       <div class="about-features">
-        <div class="af-item"><div class="af-icon">🥖</div>فرن مخبز يومي</div>
-        <div class="af-item"><div class="af-icon">🚚</div>توصيل للمنازل</div>
-        <div class="af-item"><div class="af-icon">🎁</div>عروض أسبوعية</div>
-        <div class="af-item"><div class="af-icon">⏰</div>فتح كل الأسبوع</div>
-        <div class="af-item"><div class="af-icon">✅</div>منتجات طازجة</div>
-        <div class="af-item"><div class="af-icon">💰</div>أسعار تنافسية</div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="af-item"><div class="af-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M4 10.2C4 7.4 7.6 6 12 6s8 1.4 8 4.2c0 1.4-1 2-2.1 2V19H6.1v-6.8C5 12.2 4 11.6 4 10.2z"/><path d="M9 13.5v4M12 13.5v4M15 13.5v4"/></svg></div>فرن مخبز يومي</div>
+        <div class="af-item"><div class="af-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M2 6h11v10H2z"/><path d="M13 9.5h4l4 3.3V16h-8z"/><circle cx="7" cy="18.2" r="1.7"/><circle cx="17.4" cy="18.2" r="1.7"/></svg></div>توصيل للمنازل</div>
+        <div class="af-item"><div class="af-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M3.5 11.5h17V20h-17z"/><path d="M2.5 7.5h19v4h-19z"/><path d="M12 7.5V20"/><path d="M12 7.5C10.2 3.8 6.4 4.6 7.3 7.5M12 7.5c1.8-3.7 5.6-2.9 4.7 0"/></svg></div>عروض أسبوعية</div>
+        <div class="af-item"><div class="af-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg></div>فتح كل الأسبوع</div>
+        <div class="af-item"><div class="af-icon"></div>منتجات طازجة</div>
+        <div class="af-item"><div class="af-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10"/><path d="M14.7 9.7c0-1.1-1.2-1.8-2.7-1.8s-2.7.7-2.7 1.8 1.1 1.5 2.7 1.8 2.8.7 2.8 1.9-1.3 1.9-2.8 1.9-2.8-.8-2.8-1.9"/></svg></div>أسعار تنافسية</div></div></div></div></section>
 
 <!-- SERVICES -->
 <section id="services">
@@ -335,47 +313,38 @@ section{padding:70px 5%}
     <div class="section-tag">أقسامنا | Our Sections</div>
     <h2 class="section-title">كل ما تحتاجه <span>تحت سقف واحد</span></h2>
     <p class="section-sub">نقدم لك تشكيلة متكاملة من الأقسام لتلبية جميع احتياجاتك اليومية والأسبوعية</p>
-    <div class="divider"></div>
-  </div>
+    <div class="divider"></div></div>
   <div class="services-grid">
     <div class="service-card">
-      <div class="svc-icon svc-g">🥖</div>
+      <div class="svc-icon svc-g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M4 10.2C4 7.4 7.6 6 12 6s8 1.4 8 4.2c0 1.4-1 2-2.1 2V19H6.1v-6.8C5 12.2 4 11.6 4 10.2z"/><path d="M9 13.5v4M12 13.5v4M15 13.5v4"/></svg></div>
       <h3>فرن المخبز الطازج</h3>
       <p>خبز طازج يومياً، معجنات ومخبوزات شهية تُعدّ بأجود المكونات وتخرج من الفرن ساخنة صباح كل يوم.</p>
-      <span class="svc-tag">طازج يومياً</span>
-    </div>
+      <span class="svc-tag">طازج يومياً</span></div>
     <div class="service-card">
-      <div class="svc-icon svc-o">🥩</div>
+      <div class="svc-icon svc-o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8.6 15.9a5.6 5.6 0 1 1 7.6-8.1c1.6 1.6 1.6 4.2 0 5.8s-4.2 1.6-5.8 0"/><path d="m9 16-4.4 4.4"/></svg></div>
       <h3>الملحمة</h3>
       <p>أفضل أنواع اللحوم الطازجة والدواجن المختارة. نضمن لك جودة عالية وأسعار مناسبة مع إمكانية التقطيع حسب الطلب.</p>
-      <span class="svc-tag">لحوم طازجة</span>
-    </div>
+      <span class="svc-tag">لحوم طازجة</span></div>
     <div class="service-card">
-      <div class="svc-icon svc-g">🥦</div>
+      <div class="svc-icon svc-g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8 10a3 3 0 1 1 1.3-5.7 3 3 0 0 1 5.4 0A3 3 0 1 1 16 10z"/><path d="M9.2 10v4a2.8 2.8 0 0 0 5.6 0v-4"/></svg></div>
       <h3>قسم الخضروات</h3>
       <p>تشكيلة واسعة من الخضروات الطازجة المتجددة يومياً، مختارة بعناية لتضمن لأسرتك أفضل جودة وأعلى قيمة غذائية.</p>
-      <span class="svc-tag">متجدد يومياً</span>
-    </div>
+      <span class="svc-tag">متجدد يومياً</span></div>
     <div class="service-card">
-      <div class="svc-icon svc-o">🍎</div>
+      <div class="svc-icon svc-o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M12 8.4C9 6 4.2 7.4 4.2 12.6 4.2 17 7.1 21 9.5 21c1 0 1.6-.6 2.5-.6s1.5.6 2.5.6c2.4 0 5.3-4 5.3-8.4 0-5.2-4.8-6.6-7.8-4.2z"/><path d="M12 8.4V5.2m0 0c2 0 3.1-1.4 3.1-2.4-1.6 0-3.1 1-3.1 2.4z"/></svg></div>
       <h3>قسم الفواكه</h3>
       <p>فواكه موسمية وعالمية طازجة بألوانها الزاهية ومذاقها الرائع. نجدد التشكيلة باستمرار لتلبية جميع الأذواق.</p>
-      <span class="svc-tag">موسمي وعالمي</span>
-    </div>
+      <span class="svc-tag">موسمي وعالمي</span></div>
     <div class="service-card">
-      <div class="svc-icon svc-g">🍦</div>
+      <div class="svc-icon svc-g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M8 10.5a4 4 0 1 1 8 0"/><path d="M7.4 11.4h9.2L12 21z"/></svg></div>
       <h3>قسم المثلجات</h3>
       <p>تشكيلة من أشهر ماركات المثلجات والأيس كريم لجميع الأعمار. منتجات مبردة على الدوام لتلبية رغباتك في كل وقت.</p>
-      <span class="svc-tag">تشكيلة واسعة</span>
-    </div>
+      <span class="svc-tag">تشكيلة واسعة</span></div>
     <div class="service-card">
-      <div class="svc-icon svc-o">🚚</div>
+      <div class="svc-icon svc-o"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M2 6h11v10H2z"/><path d="M13 9.5h4l4 3.3V16h-8z"/><circle cx="7" cy="18.2" r="1.7"/><circle cx="17.4" cy="18.2" r="1.7"/></svg></div>
       <h3>خدمة التوصيل</h3>
       <p>نوصّل طلباتك إلى باب منزلك في أقصر وقت. خدمة التوصيل متاحة للأحياء المجاورة بسهولة وبأسعار معقولة.</p>
-      <span class="svc-tag">توصيل سريع</span>
-    </div>
-  </div>
-</section>
+      <span class="svc-tag">توصيل سريع</span></div></div></section>
 
 <!-- PORTFOLIO -->
 <section id="portfolio">
@@ -383,8 +352,7 @@ section{padding:70px 5%}
     <div class="section-tag">عروضنا | Our Offers</div>
     <h2 class="section-title">عروض وتخفيضات <span>لا تفوتك</span></h2>
     <p class="section-sub">نقدم عروضاً أسبوعية حصرية على أفضل المنتجات لتوفير أكبر قدر ممكن لعائلتك</p>
-    <div class="divider"></div>
-  </div>
+    <div class="divider"></div></div>
   <div class="portfolio-grid">
     <div class="port-card port-bg-g">
       <div class="port-bg"><img src="/assets/portfolio/market-2.jpg" alt="قسم المخبوزات" loading="lazy" decoding="async"></div>
@@ -392,38 +360,28 @@ section{padding:70px 5%}
       <div class="port-content">
         <span class="port-tag">عرض الجمعة</span>
         <h3>عروض المخبز الأسبوعية</h3>
-        <p>خصومات على جميع المخبوزات والمعجنات كل يوم جمعة</p>
-      </div>
-    </div>
+        <p>خصومات على جميع المخبوزات والمعجنات كل يوم جمعة</p></div></div>
     <div class="port-card port-bg-o">
       <div class="port-bg"><img src="/assets/portfolio/market-4.jpg" alt="قسم اللحوم والدواجن" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">عرض الملحمة</span>
         <h3>باقات اللحوم والدواجن</h3>
-        <p>باقات مميزة من اللحوم الطازجة بأسعار تنافسية أسبوعياً</p>
-      </div>
-    </div>
+        <p>باقات مميزة من اللحوم الطازجة بأسعار تنافسية أسبوعياً</p></div></div>
     <div class="port-card port-bg-b">
       <div class="port-bg"><img src="/assets/portfolio/market-1.jpg" alt="خضروات وفواكه طازجة" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">سلة الخضار</span>
         <h3>سلة الخضار والفواكه</h3>
-        <p>سلة متكاملة من أطازج الخضار والفواكه الموسمية بسعر مخفض</p>
-      </div>
-    </div>
+        <p>سلة متكاملة من أطازج الخضار والفواكه الموسمية بسعر مخفض</p></div></div>
     <div class="port-card port-bg-p">
       <div class="port-bg"><img src="/assets/portfolio/market-3.jpg" alt="ممرات السوق — التسوق الشهري" loading="lazy" decoding="async"></div>
       <div class="port-overlay"></div>
       <div class="port-content">
         <span class="port-tag">عرض شهري</span>
         <h3>حزمة التسوق الشهرية</h3>
-        <p>اجمع مشترياتك الشهرية في طلب واحد واحصل على توصيل مجاني</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <p>اجمع مشترياتك الشهرية في طلب واحد واحصل على توصيل مجاني</p></div></div></div></section>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
@@ -431,35 +389,26 @@ section{padding:70px 5%}
     <div class="section-tag">آراء عملائنا | Testimonials</div>
     <h2 class="section-title">ماذا يقول <span>عملاؤنا</span></h2>
     <p class="section-sub">رأي عملائنا هو أهم ما نحرص عليه — إليك بعض الآراء الحقيقية</p>
-    <div class="divider"></div>
-  </div>
+    <div class="divider"></div></div>
   <div class="test-grid">
     <div class="test-card">
       <div class="test-stars">★★★★★</div>
       <p class="test-text">"أسواق الواحة من أفضل المحلات في الحي! المنتجات دائماً طازجة والأسعار معقولة جداً. خدمة التوصيل ممتازة وفي الوقت المحدد."</p>
       <div class="test-author">
         <div class="test-avatar">أ</div>
-        <div><div class="test-name">أم عبدالله</div><div class="test-loc">📍 حي الروضة</div></div>
-      </div>
-    </div>
+        <div><div class="test-name">أم عبدالله</div><div class="test-loc">حي الروضة</div></div></div></div>
     <div class="test-card">
       <div class="test-stars">★★★★★</div>
       <p class="test-text">"خبز الفرن عندهم لا يُضاهى! كل صباح نحرص على شراء الخبز الطازج منهم. الملحمة أيضاً جودتها عالية والموظفون متعاونون."</p>
       <div class="test-author">
         <div class="test-avatar">م</div>
-        <div><div class="test-name">محمد الزهراني</div><div class="test-loc">📍 الحي المجاور</div></div>
-      </div>
-    </div>
+        <div><div class="test-name">محمد الزهراني</div><div class="test-loc">الحي المجاور</div></div></div></div>
     <div class="test-card">
       <div class="test-stars">★★★★★</div>
       <p class="test-text">"عروض الجمعة الأسبوعية رائعة وتوفر الكثير على الأسرة. أنصح جميع أهل الحي بالتسوق منهم، ما راح تندمون أبداً!"</p>
       <div class="test-author">
         <div class="test-avatar">ف</div>
-        <div><div class="test-name">فاطمة العمري</div><div class="test-loc">📍 الحي الجديد</div></div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div><div class="test-name">فاطمة العمري</div><div class="test-loc">الحي الجديد</div></div></div></div></div></section>
 
 <!-- FAQ -->
 <section id="faq">
@@ -467,31 +416,23 @@ section{padding:70px 5%}
     <div class="section-tag">الأسئلة الشائعة | FAQ</div>
     <h2 class="section-title">أسئلة <span>يسألها عملاؤنا</span></h2>
     <p class="section-sub">إجابات على أكثر الأسئلة شيوعاً حول خدماتنا وأقسامنا</p>
-    <div class="divider"></div>
-  </div>
+    <div class="divider"></div></div>
   <div class="faq-wrap">
     <div class="faq-item active">
       <div class="faq-q" onclick="toggleFaq(this)"><span>ما هي ساعات العمل لديكم؟</span><div class="faq-arrow">▼</div></div>
-      <div class="faq-a"><p>نعمل سبعة أيام في الأسبوع من الساعة السابعة صباحاً حتى منتصف الليل. فرن المخبز يبدأ الإنتاج من الساعة السادسة صباحاً لضمان توفر الخبز الطازج.</p></div>
-    </div>
+      <div class="faq-a"><p>نعمل سبعة أيام في الأسبوع من الساعة السابعة صباحاً حتى منتصف الليل. فرن المخبز يبدأ الإنتاج من الساعة السادسة صباحاً لضمان توفر الخبز الطازج.</p></div></div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>هل تتوفر خدمة التوصيل للمنازل؟</span><div class="faq-arrow">▼</div></div>
-      <div class="faq-a"><p>نعم، نوفر خدمة التوصيل للمنازل في الحي والمناطق المجاورة. للطلب يمكنك الاتصال بنا على الرقم 0549955996 أو إرسال طلبك عبر صفحة التواصل.</p></div>
-    </div>
+      <div class="faq-a"><p>نعم، نوفر خدمة التوصيل للمنازل في الحي والمناطق المجاورة. للطلب يمكنك الاتصال بنا على الرقم 0549955996 أو إرسال طلبك عبر صفحة التواصل.</p></div></div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>متى تكون عروض الجمعة الأسبوعية؟</span><div class="faq-arrow">▼</div></div>
-      <div class="faq-a"><p>تصدر عروضنا الأسبوعية كل يوم خميس مساءً وتسري طوال يوم الجمعة. تشمل العروض مختلف الأقسام من مخبز وملحمة وخضار وفواكه ومنتجات أخرى.</p></div>
-    </div>
+      <div class="faq-a"><p>تصدر عروضنا الأسبوعية كل يوم خميس مساءً وتسري طوال يوم الجمعة. تشمل العروض مختلف الأقسام من مخبز وملحمة وخضار وفواكه ومنتجات أخرى.</p></div></div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>هل اللحوم في الملحمة طازجة يومياً؟</span><div class="faq-arrow">▼</div></div>
-      <div class="faq-a"><p>نعم بالتأكيد، نحرص على استقبال كميات طازجة يومياً وعدم تخزين اللحوم لفترات طويلة. جودة المنتج وسلامة العميل هي أولويتنا القصوى.</p></div>
-    </div>
+      <div class="faq-a"><p>نعم بالتأكيد، نحرص على استقبال كميات طازجة يومياً وعدم تخزين اللحوم لفترات طويلة. جودة المنتج وسلامة العميل هي أولويتنا القصوى.</p></div></div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>هل يمكن الطلب المسبق لمناسبات؟</span><div class="faq-arrow">▼</div></div>
-      <div class="faq-a"><p>بالطبع! يمكنك التواصل معنا مسبقاً لتجهيز طلبات المناسبات من لحوم ومخبوزات وسلات خضار وفواكه. يُفضل التواصل قبل 24 ساعة على الأقل.</p></div>
-    </div>
-  </div>
-</section>
+      <div class="faq-a"><p>بالطبع! يمكنك التواصل معنا مسبقاً لتجهيز طلبات المناسبات من لحوم ومخبوزات وسلات خضار وفواكه. يُفضل التواصل قبل 24 ساعة على الأقل.</p></div></div></div></section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -502,29 +443,22 @@ section{padding:70px 5%}
       <p>هل لديك استفسار أو تريد طلب توصيل؟ تواصل معنا الآن وسنرد عليك في أقرب وقت ممكن.</p>
       <div class="contact-items">
         <div class="ci-item">
-          <div class="ci-icon">📞</div>
-          <div><div class="ci-label">هاتف | Phone</div><div class="ci-val" dir="ltr">0549955996</div></div>
-        </div>
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M6 3h3.8l2 5-2.4 1.5a12.2 12.2 0 0 0 5.1 5.1L16 12.2l5 2V18a2 2 0 0 1-2.2 2C10.6 19.3 4.7 13.4 4 5.2A2 2 0 0 1 6 3z"/></svg></div>
+          <div><div class="ci-label">هاتف | Phone</div><div class="ci-val" dir="ltr">0549955996</div></div></div>
         <div class="ci-item">
-          <div class="ci-icon">📧</div>
-          <div><div class="ci-label">بريد | Email</div><div class="ci-val">zahranir88@gmail.com</div></div>
-        </div>
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></div>
+          <div><div class="ci-label">بريد | Email</div><div class="ci-val">zahranir88@gmail.com</div></div></div>
         <div class="ci-item">
-          <div class="ci-icon">⏰</div>
-          <div><div class="ci-label">ساعات العمل</div><div class="ci-val">7 أيام | 7 صباحاً – 12 منتصف الليل</div></div>
-        </div>
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg></div>
+          <div><div class="ci-label">ساعات العمل</div><div class="ci-val">7 أيام | 7 صباحاً – 12 منتصف الليل</div></div></div>
         <div class="ci-item">
-          <div class="ci-icon">📍</div>
-          <div><div class="ci-label">الموقع</div><div class="ci-val">الحي والمناطق المجاورة</div></div>
-        </div>
-      </div>
-    </div>
+          <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;display:inline-block;vertical-align:middle"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+          <div><div class="ci-label">الموقع</div><div class="ci-val">الحي والمناطق المجاورة</div></div></div></div></div>
     <div class="contact-form">
       <form id="contactForm" onsubmit="submitForm(event)">
         <div class="form-row">
           <div class="form-group"><label>الاسم الكامل</label><input type="text" placeholder="اسمك الكريم" required></div>
-          <div class="form-group"><label>رقم الهاتف</label><input type="tel" placeholder="05xxxxxxxx" required></div>
-        </div>
+          <div class="form-group"><label>رقم الهاتف</label><input type="tel" placeholder="05xxxxxxxx" required></div></div>
         <div class="form-group">
           <label>نوع الطلب</label>
           <select required>
@@ -533,16 +467,10 @@ section{padding:70px 5%}
             <option>استفسار عن عرض</option>
             <option>طلب لمناسبة</option>
             <option>شكوى أو اقتراح</option>
-            <option>أخرى</option>
-          </select>
-        </div>
+            <option>أخرى</option></select></div>
         <div class="form-group"><label>رسالتك</label><textarea placeholder="اكتب رسالتك أو تفاصيل طلبك هنا..." required></textarea></div>
-        <button type="submit" class="btn-submit">🛒 أرسل الطلب الآن</button>
-        <div class="success-msg" id="successMsg">✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</div>
-      </form>
-    </div>
-  </div>
-</section>
+        <button type="submit" class="btn-submit">أرسل الطلب الآن</button>
+        <div class="success-msg" id="successMsg">تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</div></form></div></div></section>
 
 
 
@@ -553,9 +481,7 @@ section{padding:70px 5%}
     <img decoding="async" src="/assets/portfolio/market-1.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
     <img decoding="async" src="/assets/portfolio/market-2.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
     <img decoding="async" src="/assets/portfolio/market-3.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
-    <img decoding="async" src="/assets/portfolio/market-4.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)">
-  </div>
-</section>
+    <img decoding="async" src="/assets/portfolio/market-4.jpg" alt="أسواق الواحة" loading="lazy" style="width:100%;height:230px;object-fit:cover;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)"></div></section>
 
 <footer>
   <div class="footer-logo">سوبر ماركت <span>الواحة</span> | Al-Waha Market</div>
@@ -566,10 +492,8 @@ section{padding:70px 5%}
     <a href="#portfolio">عروضنا</a>
     <a href="#testimonials">آراء العملاء</a>
     <a href="#faq">الأسئلة</a>
-    <a href="#contact">تواصل</a>
-  </div>
-  <p class="footer-copy">© 2024 أسواق الواحة — جميع الحقوق محفوظة | 📞 0549955996</p>
-</footer>
+    <a href="#contact">تواصل</a></div>
+  <p class="footer-copy">© 2024 أسواق الواحة — جميع الحقوق محفوظة | 0549955996</p></footer>
 
 <script>
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
@@ -587,7 +511,7 @@ function submitForm(e){
   btn.disabled=true;
   setTimeout(function(){
     document.getElementById('successMsg').style.display='block';
-    btn.textContent='✅ تم الإرسال';
+    btn.textContent='تم الإرسال';
     btn.style.background='linear-gradient(135deg,#27ae60,#2ecc71)';
   },1500);
 }
@@ -602,7 +526,4 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     var target=document.querySelector(this.getAttribute('href'));
     if(target){target.scrollIntoView({behavior:'smooth',block:'start'})}
   });
-});
-</script>
-</body>
-</html>
+});</script></body></html>
