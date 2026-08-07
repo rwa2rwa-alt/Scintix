@@ -228,8 +228,27 @@
             <span class="hint">بوابة دفع، محاسبة، CRM، شحن، واتساب...</span></label>
           <textarea name="integrations" maxlength="600"></textarea></div>
         <div class="field">
+          <label>هل حددت باقتك؟ *
+            <span class="hint">إن لم تكن متأكداً فلا مشكلة — نرشّح لك الأنسب بناءً على إجاباتك أعلاه.</span></label>
+          <select name="package_known" id="pkgKnown" required>
+            <option value="">— اختر —</option>
+            <option value="نعم">نعم، اخترت باقتي</option>
+            <option value="لا">لست متأكداً — رشّحوا لي</option></select></div>
+
+        <div class="field" id="pkgChoiceWrap" style="display:none">
+          <label>أي باقة اخترت؟ *
+            <span class="hint">إن تبيّن أن نطاقك يحتاج أكثر أو أقل، نوضّح لك الفارق قبل أي عقد.</span></label>
+          <select name="package_choice" id="pkgChoice">
+            <option value="">— اختر —</option>
+            <option value="Spark">Spark — 899 ريال</option>
+            <option value="Glow">Glow — 1,799 ريال</option>
+            <option value="Pulse">Pulse — 3,299 ريال</option>
+            <option value="Nova">Nova — 5,999 ريال</option>
+            <option value="Zenith">Zenith — 12,000 ريال فأكثر</option></select></div>
+
+        <div class="field">
           <label>نطاق الميزانية *
-            <span class="hint">يساعدنا نرشّح لك الباقة الصحيحة بدل عرض لا يناسبك.</span></label>
+            <span class="hint">يساعدنا نرشّح الباقة الصحيحة، أو نتأكد أن اختيارك يناسب نطاق عملك.</span></label>
           <select name="budget_range" required>
             <option value="">— اختر —</option>
             <option>أقل من 1,000 ريال</option>
@@ -477,6 +496,29 @@
     cb.addEventListener('change', function(){ lb.classList.toggle('on', cb.checked); });
     lb.append(cb, txt);
     host.appendChild(lb);
+  })();
+
+  /* ── اختيار الباقة: إظهار شرطي + تعبئة مسبقة من ?pkg= ──────────────
+     العميل القادم من صفحة الباقات يصل ومعه اختياره في الرابط، فلا نسأله
+     مرتين. ومن لا يعرف يترك الترشيح لقاعدة النطاق في سيناريو الاستكشاف. */
+  (function(){
+    var known = document.getElementById('pkgKnown');
+    var wrap  = document.getElementById('pkgChoiceWrap');
+    var pick  = document.getElementById('pkgChoice');
+    if (!known || !wrap || !pick) return;
+
+    function sync(){
+      var show = known.value === 'نعم';
+      wrap.style.display = show ? '' : 'none';
+      pick.required = show;
+      if (!show) pick.value = '';
+    }
+    known.addEventListener('change', sync);
+
+    var VALID = { spark:'Spark', glow:'Glow', pulse:'Pulse', nova:'Nova', zenith:'Zenith' };
+    var raw   = (new URLSearchParams(location.search).get('pkg') || '').trim().toLowerCase();
+    if (VALID[raw]) { known.value = 'نعم'; pick.value = VALID[raw]; }
+    sync();
   })();
 
   var form     = document.getElementById('discoveryForm');
