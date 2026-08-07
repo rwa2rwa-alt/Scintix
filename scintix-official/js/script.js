@@ -130,17 +130,17 @@ const T = {
     'faq.heading':      'أسئلة شائعة عن باقاتنا',
     'faq.description':  'إجابات سريعة تساعدك تختار الباقة الصح',
     'faq.spark.q':  'هل باقة Spark مناسبة لمشروع ناشئ صغير؟',
-    'faq.spark.a':  'نعم، Spark مصممة خصيصاً للمشاريع الناشئة والأفراد اللي يحتاجون حضور رقمي احترافي بسرعة وبأقل تكلفة.',
+    'faq.spark.a':  'نعم، Spark مصممة للمشاريع الناشئة والأفراد: موقع تعريفي احترافي بصفحة واحدة، متجاوب وثنائي اللغة، مع نموذج تواصل يوصلك كل استفسار فوراً.',
     'faq.glow.q':   'وش يميز Glow عن Spark؟',
-    'faq.glow.a':   'Glow تضيف مساعد واتساب ذكي وأتمتة مبيعات وربط CRM متقدم — مناسبة لما يبدأ نشاطك يكبر ويحتاج أتمتة فعلية.',
+    'faq.glow.a':   'Glow توسّع موقعك إلى عدة أقسام (حتى 5 صفحات)، وتضيف هوية بصرية كاملة وتحليلات زوار ونظاماً بسيطاً لتجميع بيانات عملائك.',
     'faq.pulse.q':  'ليش Pulse هي الأكثر طلباً؟',
-    'faq.pulse.a':  'لأنها توازن مثالي بين السعر والمزايا: تطبيق ويب متكامل، لوحة تحكم متقدمة، وتكامل بوابة دفع — تغطي أغلب احتياجات الأعمال المتوسطة.',
-    'faq.nova.q':   'هل Nova تدعم أكثر من مستخدم؟',
-    'faq.nova.a':   'نعم، Nova مبنية لدعم فرق متعددة المستخدمين مع أتمتة AI متقدمة وتكامل مباشر مع أنظمة ERP/CRM الحالية عندك.',
-    'faq.zenith.q': 'وش يشمله الدعم غير المحدود في Zenith؟',
-    'faq.zenith.a': 'Zenith مخصصة للمؤسسات: مراقبة على مدار الساعة، اتفاقية مستوى خدمة (SLA) مضمونة، وفريق دعم مخصص يستجيب فوراً لأي طارئ.',
+    'faq.pulse.a':  'لأنها تنقلك من موقع إلى نظام عمل: نظام CRM احترافي لإدارة عملائك، وبوت ترحيب تلقائي على واتساب، وأتمتة متابعة العملاء المحتملين، وتقارير أداء دورية.',
+    'faq.nova.q':   'متى أحتاج Nova؟',
+    'faq.nova.a':   'حين تبيع مباشرة من موقعك: Nova تضيف متجراً إلكترونياً كاملاً بسلة وشراء، وبوابة دفع Moyasar باسم متجرك، وتطبيق PWA، وإدارة للمنتجات والطلبات.',
+    'faq.zenith.q': 'وش يميز Zenith عن باقي الباقات؟',
+    'faq.zenith.a': 'Zenith ليست باقة جاهزة: حل مخصص بالكامل حسب مشروعك، بتنفيذ وإشراف مباشر خطوة بخطوة، وتكاملات وأنظمة متقدمة، وأولوية قصوى في الدعم، واتفاقية مستوى خدمة (SLA) مكتوبة.',
     'faq.switch.q': 'أقدر أغيّر باقتي لاحقاً؟',
-    'faq.switch.a': 'بالتأكيد، تقدر تترقّى لباقة أعلى في أي وقت، ونحسب الفرق بشكل عادل حسب المدة المتبقية من اشتراكك الحالي.'
+    'faq.switch.a': 'نعم، تقدر تترقّى لباقة أعلى قبل بدء التنفيذ وتدفع فرق السعر فقط. وبعد التسليم تُعامل الترقية كمشروع جديد. الباقات دفعة واحدة وليست اشتراكاً شهرياً.'
   },
   en: {
     'page.title':       'Caminotich | Smart Digital Growth Solutions',
@@ -246,17 +246,17 @@ const T = {
     'faq.heading':      'Frequently Asked Questions',
     'faq.description':  'Quick answers to help you pick the right plan',
     'faq.spark.q':  'Is Spark suitable for a small startup project?',
-    'faq.spark.a':  'Yes, Spark is designed specifically for startups and individuals who need a professional digital presence quickly and affordably.',
+    'faq.spark.a':  'Yes. Spark is built for startups and individuals: a professional one-page website, responsive and bilingual, with a contact form that delivers every enquiry to you instantly.',
     'faq.glow.q':   'What makes Glow different from Spark?',
-    'faq.glow.a':   'Glow adds a smart WhatsApp assistant, sales automation, and advanced CRM integration — ideal once your business starts growing and needs real automation.',
+    'faq.glow.a':   'Glow expands your site into multiple sections (up to 5 pages) and adds a full brand identity, visitor analytics, and a simple system to collect your customer data.',
     'faq.pulse.q':  'Why is Pulse the most popular plan?',
-    'faq.pulse.a':  'It strikes the perfect balance between price and features: a full web application, advanced dashboard, and payment gateway integration — covering most mid-sized business needs.',
-    'faq.nova.q':   'Does Nova support multiple users?',
-    'faq.nova.a':   'Yes, Nova is built for multi-user teams with advanced AI automation and direct integration with your existing ERP/CRM systems.',
-    'faq.zenith.q': 'What does unlimited support in Zenith include?',
-    'faq.zenith.a': 'Zenith is built for enterprises: 24/7 monitoring, a guaranteed Service Level Agreement (SLA), and a dedicated support team that responds instantly to any issue.',
+    'faq.pulse.a':  'Because it turns a website into a working system: a professional CRM to manage your customers, an automated WhatsApp welcome bot, lead follow-up automation, and periodic performance reports.',
+    'faq.nova.q':   'When do I need Nova?',
+    'faq.nova.a':   'When you sell directly from your site: Nova adds a full online store with cart and checkout, a Moyasar payment gateway in your store name, a PWA app, and product and order management.',
+    'faq.zenith.q': 'What makes Zenith different from the other plans?',
+    'faq.zenith.a': 'Zenith is not an off-the-shelf plan: a fully custom solution built around your project, with direct step-by-step execution and oversight, advanced integrations, top priority support, and a written service level agreement (SLA).',
     'faq.switch.q': 'Can I change my plan later?',
-    'faq.switch.a': 'Absolutely, you can upgrade to a higher plan anytime, and we calculate the difference fairly based on the remaining time on your current subscription.'
+    'faq.switch.a': 'Yes. You can upgrade before work begins and pay only the price difference. After delivery, an upgrade is treated as a new project. Plans are one-time payments, not monthly subscriptions.'
   }
 };
 
