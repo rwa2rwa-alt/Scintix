@@ -232,8 +232,8 @@
             <span class="hint">إن لم تكن متأكداً فلا مشكلة — نرشّح لك الأنسب بناءً على إجاباتك أعلاه.</span></label>
           <select name="package_known" id="pkgKnown" required>
             <option value="">— اختر —</option>
-            <option value="نعم">نعم، اخترت باقتي</option>
-            <option value="لا">لست متأكداً — رشّحوا لي</option></select></div>
+            <option value="yes">نعم، اخترت باقتي</option>
+            <option value="no">لست متأكداً — رشّحوا لي</option></select></div>
 
         <div class="field" id="pkgChoiceWrap" style="display:none">
           <label>أي باقة اخترت؟ *
@@ -508,7 +508,7 @@
     if (!known || !wrap || !pick) return;
 
     function sync(){
-      var show = known.value === 'نعم';
+      var show = known.value === 'yes';
       wrap.style.display = show ? '' : 'none';
       pick.required = show;
       if (!show) pick.value = '';
@@ -517,7 +517,7 @@
 
     var VALID = { spark:'Spark', glow:'Glow', pulse:'Pulse', nova:'Nova', zenith:'Zenith' };
     var raw   = (new URLSearchParams(location.search).get('pkg') || '').trim().toLowerCase();
-    if (VALID[raw]) { known.value = 'نعم'; pick.value = VALID[raw]; }
+    if (VALID[raw]) { known.value = 'yes'; pick.value = VALID[raw]; }
     sync();
   })();
 
