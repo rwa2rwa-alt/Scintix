@@ -143,25 +143,20 @@ body{
   body{background:white!important}
   .i-doc{border:none!important;box-shadow:none!important}
   .i-notes .printed-note{display:block}
-}
-</style>
+}</style>
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script>
-</head>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script></head>
 <body>
 
 <!-- ── Page header ── -->
 <div class="i-header">
   <a class="i-brand" href="index.html">
     <img src="assets/logo.png" alt="Caminotich"/>
-    <span>Caminotich</span>
-  </a>
+    <span>Caminotich</span></a>
   <div class="lang-btns">
     <button class="lang-btn on" onclick="setLang('ar')">عربي</button>
-    <button class="lang-btn"   onclick="setLang('en')">English</button>
-  </div>
-</div>
+    <button class="lang-btn"   onclick="setLang('en')">English</button></div></div>
 
 <div class="i-wrap">
 
@@ -169,12 +164,10 @@ body{
   <div class="toolbar" id="toolbar">
     <div>
       <label id="lbl-client">اسم العميل</label>
-      <input id="inp-client" placeholder="شركة / شخص" oninput="updateClient()"/>
-    </div>
+      <input id="inp-client" placeholder="شركة / شخص" oninput="updateClient()"/></div>
     <div>
       <label id="lbl-email">البريد</label>
-      <input id="inp-email" placeholder="email@example.com" type="email"/>
-    </div>
+      <input id="inp-email" placeholder="email@example.com" type="email"/></div>
     <div>
       <label id="lbl-pkg">الباقة</label>
       <select id="inp-pkg" onchange="selectPackage()">
@@ -183,20 +176,15 @@ body{
         <option value="pulse" selected>Pulse — 3,299 SAR</option>
         <option value="nova">Nova — 5,999 SAR</option>
         <option value="zenith">Zenith — 12,000 SAR</option>
-        <option value="custom">مخصص / Custom</option>
-      </select>
-    </div>
+        <option value="custom">مخصص / Custom</option></select></div>
     <div>
       <label id="lbl-due">تاريخ الاستحقاق</label>
-      <input id="inp-due" type="date"/>
-    </div>
+      <input id="inp-due" type="date"/></div>
     <div>
       <label id="lbl-vat">ضريبة القيمة المضافة %</label>
       <div style="font-size:.72rem;color:#8a93ab;margin-bottom:4px">اتركها صفراً حتى التسجيل في ضريبة القيمة المضافة لدى هيئة الزكاة والضريبة والجمارك.</div>
-      <input id="inp-vat" type="number" value="0" min="0" max="100" style="width:70px" oninput="recalc()"/>
-    </div>
-    <button class="btn-add" onclick="addRow()">+ إضافة بند</button>
-  </div>
+      <input id="inp-vat" type="number" value="0" min="0" max="100" style="width:70px" oninput="recalc()"/></div>
+    <button class="btn-add" onclick="addRow()">+ إضافة بند</button></div>
 
   <!-- ════ INVOICE DOC ════ -->
   <div class="i-doc" id="i-doc">
@@ -208,18 +196,13 @@ body{
         <img src="assets/logo.png" alt="Caminotich"/>
         <div>
           <div class="i-company-name">Caminotich Digital Solutions</div>
-          <div class="i-company-sub">info@caminotich.sa · caminotich.sa</div>
-        </div>
-      </div>
+          <div class="i-company-sub">info@caminotich.sa · caminotich.sa</div></div></div>
       <div class="i-doc-meta">
         <div class="i-doc-title" id="doc-title">فاتورة</div>
         <div class="i-doc-num"   id="inv-num">INV-2026-0001</div>
         <div class="i-doc-dates">
           <span id="lbl-issued">تاريخ الإصدار:</span> <span id="inv-issued"></span><br/>
-          <span id="lbl-due-lbl">تاريخ الاستحقاق:</span> <span id="inv-due"></span>
-        </div>
-      </div>
-    </div>
+          <span id="lbl-due-lbl">تاريخ الاستحقاق:</span> <span id="inv-due"></span></div></div></div>
 
     <!-- Parties -->
     <div class="i-parties">
@@ -229,15 +212,11 @@ body{
         <div class="party-info">
           المملكة العربية السعودية<br/>
           info@caminotich.sa<br/>
-          <span id="cr-lbl">السجل التجاري الموحد:</span> 7054770941
-        </div>
-      </div>
+          <span id="cr-lbl">السجل التجاري الموحد:</span> 7054770941</div></div>
       <div class="i-party">
         <div class="party-lbl" id="lbl-to">إلى</div>
         <div class="party-nm"  id="disp-client">—</div>
-        <div class="party-info" id="disp-email">—</div>
-      </div>
-    </div>
+        <div class="party-info" id="disp-email">—</div></div></div>
 
     <!-- Items -->
     <div class="i-items">
@@ -248,12 +227,8 @@ body{
             <th id="th-qty"  style="width:70px">الكمية</th>
             <th id="th-unit" style="width:110px">سعر الوحدة</th>
             <th id="th-total" style="width:110px">الإجمالي</th>
-            <th style="width:40px"></th>
-          </tr>
-        </thead>
-        <tbody id="items-body"></tbody>
-      </table>
-    </div>
+            <th style="width:40px"></th></tr></thead>
+        <tbody id="items-body"></tbody></table></div>
 
     <!-- Totals -->
     <div class="i-totals">
@@ -263,16 +238,13 @@ body{
         <span class="t-label" id="lbl-vat-line" style="display:none">ضريبة القيمة المضافة (0%)</span>
         <span class="t-val"   id="disp-vat" style="display:none">0 SAR</span>
         <span class="t-label total-row" id="lbl-total">الإجمالي المستحق</span>
-        <span class="t-val   total-row" id="disp-total">0 SAR</span>
-      </div>
-    </div>
+        <span class="t-val   total-row" id="disp-total">0 SAR</span></div></div>
 
     <!-- Notes -->
     <div class="i-notes">
       <label id="lbl-notes">ملاحظات</label>
       <textarea id="inp-notes" placeholder="شكراً لثقتكم بـ Caminotich Digital Solutions. يُرجى السداد خلال 14 يوماً من تاريخ الإصدار."></textarea>
-      <div class="printed-note" id="printed-note" style="font-size:.82rem;color:#555;line-height:1.7;display:none"></div>
-    </div>
+      <div class="printed-note" id="printed-note" style="font-size:.82rem;color:#555;line-height:1.7;display:none"></div></div>
 
     <!-- Status -->
     <div class="i-status">
@@ -281,16 +253,13 @@ body{
         <option value="draft"  id="opt-draft">مسودة</option>
         <option value="sent"   id="opt-sent">مُرسلة</option>
         <option value="paid"   id="opt-paid">مدفوعة</option>
-        <option value="overdue" id="opt-overdue">متأخرة</option>
-      </select>
-      <span class="status-badge s-draft" id="status-badge">مسودة</span>
-    </div>
+        <option value="overdue" id="opt-overdue">متأخرة</option></select>
+      <span class="status-badge s-draft" id="status-badge">مسودة</span></div>
 
     <!-- Actions -->
     <div class="i-actions">
       <button class="btn-pdf"  onclick="printInv()">↓ PDF</button>
-      <button class="btn-send" onclick="sendInv()">إرسال الفاتورة ←</button>
-    </div>
+      <button class="btn-send" onclick="sendInv()">إرسال الفاتورة ←</button></div>
     <div style="padding:0 28px 24px;text-align:center;border-top:1px solid var(--border)">
       <a id="pay-btn" href="payment.html" style="
         display:inline-flex;align-items:center;gap:10px;
@@ -300,13 +269,8 @@ body{
         text-decoration:none;transition:transform .25s,box-shadow .25s;
         margin-bottom:8px;
       ">
-        <span id="pay-btn-lbl">🔒 انتقل إلى صفحة السداد</span>
-      </a>
-      <p id="pay-sub" style="font-size:.78rem;color:#5c6b8a;margin:0">سيتم بدء العمل فور تأكيد الدفع</p>
-    </div>
-  </div>
-
-</div><!-- /i-wrap -->
+        <span id="pay-btn-lbl">انتقل إلى صفحة السداد</span></a>
+      <p id="pay-sub" style="font-size:.78rem;color:#5c6b8a;margin:0">سيتم بدء العمل فور تأكيد الدفع</p></div></div></div><!-- /i-wrap -->
 
 <script>
 /* ─── State ─── */
@@ -364,7 +328,7 @@ function setLang(l) {
   // تحديث نص زر السداد
   const lbl = document.getElementById('pay-btn-lbl');
   const sub = document.getElementById('pay-sub');
-  if (lbl) lbl.textContent = l==='ar' ? '🔒 انتقل إلى صفحة السداد' : '🔒 Proceed to Payment';
+  if (lbl) lbl.textContent = l==='ar' ? 'انتقل إلى صفحة السداد' : 'Proceed to Payment';
   if (sub) sub.textContent = l==='ar' ? 'سيتم بدء العمل فور تأكيد الدفع' : 'Work begins immediately after payment confirmation';
   buildPayUrl();
   renderItems();
@@ -620,11 +584,7 @@ function buildPayUrl() {
 
 /* ─── Boot ─── */
 setLang(lang);
-selectPackage();
-</script>
+selectPackage();</script>
 
 <!-- ودجت Chatbase أُزيل 2026-07-31: الصفحة تعرض بيانات مالية لعملاء
-     (مبالغ، ضريبة، أسماء). لا سكربتات طرف ثالث هنا. -->
-
-</body>
-</html>
+     (مبالغ، ضريبة، أسماء). لا سكربتات طرف ثالث هنا. --></body></html>

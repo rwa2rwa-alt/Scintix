@@ -29,42 +29,35 @@
   .priority-chip.urgent.active{border-color:#e11d48;background:rgba(225,29,72,.08);color:#e11d48}
   #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
   #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
-  #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
-</style>
+  #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}</style>
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script>
-</head>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script></head>
 <body>
 <div class="page-shell">
   <header class="site-header">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
-      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
-    </a>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span></a>
     <nav class="main-nav">
       <a href="index.html#services">الخدمات</a>
       <a href="index.html#plans">الباقات</a>
-      <a href="index.html#faq">الأسئلة الشائعة</a>
-    </nav>
-  </header>
+      <a href="index.html#faq">الأسئلة الشائعة</a></nav></header>
 
   <div class="support-shell">
     <a class="support-back" href="index.html">→ رجوع للرئيسية</a>
 
     <div class="support-card">
-      <h1>🎫 عندك مشكلة؟ خبّرنا</h1>
-      <p>عبّي البيانات وفريقنا بيتواصل معك أسرع ما يمكن. للأسئلة السريعة، جرّب أول المساعد الذكي 🤖 أسفل الصفحة.</p>
+      <h1>عندك مشكلة؟ خبّرنا</h1>
+      <p>عبّي البيانات وفريقنا بيتواصل معك أسرع ما يمكن. للأسئلة السريعة، جرّب أول المساعد الذكي أسفل الصفحة.</p>
 
       <form id="ticketForm">
         <div class="field">
           <label>الاسم *</label>
-          <input type="text" name="client_name" required>
-        </div>
+          <input type="text" name="client_name" required></div>
         <div class="field">
           <label>البريد الإلكتروني *</label>
-          <input type="email" name="email" required>
-        </div>
+          <input type="email" name="email" required></div>
         <div class="field">
           <label>باقتك (إن وجدت)</label>
           <select name="package">
@@ -73,32 +66,24 @@
             <option>Glow</option>
             <option>Pulse</option>
             <option>Nova</option>
-            <option>Zenith</option>
-          </select>
-        </div>
+            <option>Zenith</option></select></div>
         <div class="field">
           <label>وش المشكلة؟ *</label>
-          <textarea name="issue" placeholder="اشرح المشكلة بالتفصيل قدر الإمكان..." required></textarea>
-        </div>
+          <textarea name="issue" placeholder="اشرح المشكلة بالتفصيل قدر الإمكان..." required></textarea></div>
         <div class="field">
           <label>مدى إلحاح المشكلة</label>
           <div class="priority-row">
             <div class="priority-chip active" data-val="Normal">عادية</div>
-            <div class="priority-chip urgent" data-val="Urgent">عاجلة 🚨</div>
-          </div>
-          <input type="hidden" name="priority" value="Normal">
-        </div>
+            <div class="priority-chip urgent" data-val="Urgent">عاجلة</div></div>
+          <input type="hidden" name="priority" value="Normal"></div>
         <button class="btn btn-primary" type="submit" id="submitBtn" style="width:100%;justify-content:center;border:none;cursor:pointer">إرسال التذكرة</button>
         <div id="status"></div>
-      </form>
-    </div>
-  </div>
+    <p class="footnote" style="margin-top:10px"><a href="/privacy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">بإرسال هذا النموذج تُعالَج بياناتك وفق سياسة الخصوصية</a></p></form></div></div>
 
-  <!-- ✅ الفوتر الفرعي يُبنى تلقائياً عبر script.js -->
-</div>
+  <!-- الفوتر الفرعي يُبنى تلقائياً عبر script.js --></div>
 
 <script>
-  const WEBHOOK_URL = "https://hook.eu1.make.com/t329y7jjtzruw0oald5n9bbp9sk1l5t2";
+  const WEBHOOK_URL = "/.netlify/functions/submit";
 
   document.querySelectorAll('.priority-chip').forEach(chip => {
     chip.addEventListener('click', () => {
@@ -121,11 +106,11 @@
       const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...data, k: "cmt_sec_9f4Kq7Xw2R"})
+        body: JSON.stringify({ form: 'support', payload: data })
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       statusEl.className = 'ok';
-      statusEl.textContent = 'تم استلام تذكرتك ✅ بنتواصل معك قريباً';
+      statusEl.textContent = 'تم استلام تذكرتك بنتواصل معك قريباً';
       form.reset();
       document.querySelectorAll('.priority-chip').forEach(c => c.classList.remove('active'));
       document.querySelector('.priority-chip[data-val="Normal"]').classList.add('active');
@@ -136,8 +121,7 @@
       btn.disabled = false;
       btn.textContent = 'إرسال التذكرة';
     }
-  });
-</script>
+  });</script>
 <script src="js/script.js"></script>
 
 <!-- ════════════════════════════════════════════════════════════════
@@ -146,8 +130,7 @@
      الدعم فقط لا يشتغل عنده أي كود طرف ثالث ولا يُقرأ نموذجه.
      ════════════════════════════════════════════════════════════════ -->
 <button id="chatLauncher" type="button" aria-label="افتح المحادثة الفورية">
-  💬 <span>تحتاج مساعدة فورية؟</span>
-</button>
+  <span>تحتاج مساعدة فورية؟</span></button>
 <style>
   #chatLauncher{
     position:fixed; inset-inline-end:20px; bottom:20px; z-index:9999;
@@ -160,8 +143,7 @@
   }
   #chatLauncher:hover{ transform:translateY(-2px); }
   #chatLauncher[hidden]{ display:none; }
-  #chatLauncher.loading{ opacity:.6; cursor:progress; }
-</style>
+  #chatLauncher.loading{ opacity:.6; cursor:progress; }</style>
 <script>
 (function(){
   var btn = document.getElementById('chatLauncher');
@@ -190,7 +172,4 @@
     btn.querySelector('span').textContent = 'جارٍ الفتح...';
     bootChatbase();
   }, { once:false });
-})();
-</script>
-</body>
-</html>
+})();</script></body></html>

@@ -28,7 +28,7 @@ const SOCIAL_LINKS = {
 const T = {
   ar: {
     'page.title':       'Caminotich | حلول ذكية للنمو الرقمي',
-    'header.tagline':   'ودع العمل اليدوي وإبدأ استثمارك في المستقبل مع <span class="brand-accent">Caminotich</span>',
+    'header.tagline':   'ودع العمل اليدوي وابدأ استثمارك في المستقبل مع <span class="brand-accent">Caminotich</span>',
     'nav.toggle':       'فتح القائمة',
     'nav.services':     'الخدمات',
     'nav.plans':        'الباقات',
@@ -108,7 +108,7 @@ const T = {
     'plans.zenith.three':'تكاملات وأنظمة متقدمة',
     'plans.zenith.four': 'أولوية قصوى في الدعم',
     'plans.zenith.five': 'اتفاقية مستوى خدمة (SLA)',
-    'ai.title':   '🤖 تحليل مشروعك بالذكاء الاصطناعي',
+    'ai.title':   'تحليل مشروعك بالذكاء الاصطناعي',
     'ai.sub':     'أخبرنا عن مشروعك وسنرشّدك إلى أنسب باقة وخطة عمل فورية',
     'ai.btn':     '✦ تحليل المشروع',
     'clients.label':      'شركاؤنا',
@@ -224,7 +224,7 @@ const T = {
     'plans.zenith.three':'Advanced integrations and systems',
     'plans.zenith.four': 'Top priority support',
     'plans.zenith.five': 'Service level agreement (SLA)',
-    'ai.title':   '🤖 Analyse Your Project with AI',
+    'ai.title':   'Analyse Your Project with AI',
     'ai.sub':     'Tell us about your project and we\'ll instantly recommend the best package and action plan',
     'ai.btn':     '✦ Analyse Project',
     'clients.label':      'Our Clients',

@@ -62,85 +62,65 @@
   .spin{width:34px;height:34px;margin:0 auto 16px;border:3px solid rgba(255,255,255,.1);
     border-top-color:var(--accent);border-radius:50%;animation:sp .8s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
-  .muted{color:var(--text-muted);font-size:.85rem;line-height:1.8}
-</style>
-</head>
+  .muted{color:var(--text-muted);font-size:.85rem;line-height:1.8}</style></head>
 <body>
 <div class="page-shell">
   <header class="site-header">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
-      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
-    </a>
-  </header>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span></a></header>
 
   <div class="pt-shell">
 
     <div id="pt-loading">
       <div class="spin"></div>
-      <p>جارٍ تحميل بيانات مشروعك...</p>
-    </div>
+      <p>جارٍ تحميل بيانات مشروعك...</p></div>
 
     <div id="pt-error">
       <h2 style="color:#f87171;margin:0 0 10px">تعذّر فتح البوابة</h2>
       <p id="pt-error-msg" class="muted">الرابط غير صالح أو انتهت صلاحيته.</p>
-      <p class="muted">تواصل معنا على <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a></p>
-    </div>
+      <p class="muted">تواصل معنا على <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a></p></div>
 
     <div id="pt-body">
       <div class="pt-head">
         <div>
           <h1 id="pt-name">—</h1>
-          <p>بوابة متابعة المشروع</p>
-        </div>
-        <div class="pt-pkg" id="pt-pkg">—</div>
-      </div>
+          <p>بوابة متابعة المشروع</p></div>
+        <div class="pt-pkg" id="pt-pkg">—</div></div>
 
       <div class="pt-card">
-        <h2>📊 نسبة الإنجاز</h2>
+        <h2>نسبة الإنجاز</h2>
         <div class="bar-wrap"><div class="bar-fill" id="pt-bar"></div></div>
         <div class="bar-meta">
           <span id="pt-stage">—</span>
-          <b id="pt-pct">0%</b>
-        </div>
-      </div>
+          <b id="pt-pct">0%</b></div></div>
 
       <div class="pt-card">
-        <h2>🧭 مراحل المشروع</h2>
-        <div class="steps" id="pt-steps"></div>
-      </div>
+        <h2>مراحل المشروع</h2>
+        <div class="steps" id="pt-steps"></div></div>
 
       <div class="pt-card" id="pt-files-card">
-        <h2>📁 الملفات المتاحة</h2>
-        <div id="pt-files"></div>
-      </div>
+        <h2>الملفات المتاحة</h2>
+        <div id="pt-files"></div></div>
 
       <div class="pt-card" id="pt-log-card">
-        <h2>📋 سجل القرارات والاعتمادات</h2>
-        <div id="pt-log"></div>
-      </div>
+        <h2>سجل القرارات والاعتمادات</h2>
+        <div id="pt-log"></div></div>
 
       <div class="pt-card" id="pt-cr-card">
         <h2>✏️ طلبات التعديل</h2>
         <div id="pt-cr"></div>
         <a class="cta-mail" id="pt-mail" href="mailto:info@caminotich.sa">✉️ أرسل ملاحظة أو طلب تعديل</a>
         <div class="hint-box">
-          البريد الإلكتروني هو القناة الرسمية المعتمدة لطلبات التعديل والاعتمادات، وهو المرجع الموثّق. هذه الصفحة للعرض والمتابعة فقط.
-        </div>
-      </div>
+          البريد الإلكتروني هو القناة الرسمية المعتمدة لطلبات التعديل والاعتمادات، وهو المرجع الموثّق. هذه الصفحة للعرض والمتابعة فقط.</div></div>
 
       <div class="pt-card" id="pt-warranty-card" style="display:none">
-        <h2>🛡️ الضمان</h2>
-        <p id="pt-warranty">—</p>
-      </div>
+        <h2>الضمان</h2>
+        <p id="pt-warranty">—</p></div>
 
       <p class="muted" style="text-align:center;margin-top:22px">
         هذا الرابط خاص بمشروعك — لا تشاركه مع أحد.<br/>
-        Caminotich · <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a>
-      </p>
-    </div>
-  </div>
-</div>
+        Caminotich · <a href="mailto:info@caminotich.sa" style="color:var(--accent)">info@caminotich.sa</a></p></div></div></div>
 
 <script>
 (function(){
@@ -302,7 +282,4 @@
       fail('تعذّر الاتصال. تحقق من اتصالك بالإنترنت وأعد المحاولة.');
     }
   })();
-})();
-</script>
-</body>
-</html>
+})();</script></body></html>

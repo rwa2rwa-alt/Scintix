@@ -50,59 +50,49 @@
   #status{display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:.88rem;text-align:center}
   #status.ok{display:block;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
   #status.err{display:block;background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25)}
-  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}
-</style>
-</head>
+  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}</style></head>
 <body>
 <div class="page-shell">
   <header class="site-header">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="assets/logo.png" alt="Caminotich"/>
-      <span class="brand-text"><span class="brand-name">Caminotich</span></span>
-    </a>
+      <span class="brand-text"><span class="brand-name">Caminotich</span></span></a>
     <nav class="main-nav">
       <a href="index.html#plans">الباقات</a>
-      <a href="support.html">الدعم</a>
-    </nav>
-  </header>
+      <a href="support.html">الدعم</a></nav></header>
 
   <div class="ho-shell">
     <a class="ho-back" href="index.html">→ رجوع للرئيسية</a>
 
     <div class="ho-card">
-      <h1>📋 محضر التسليم والاعتماد النهائي</h1>
+      <h1>محضر التسليم والاعتماد النهائي</h1>
       <p class="lead">هذا المحضر يوثّق انتهاء المشروع. بتوقيعك تقرّ باستلام كل ما هو أدناه، ويبدأ من تاريخه سريان فترة الضمان.</p>
 
       <div class="ho-meta">
         <div><b>المشروع</b><span id="mProject">—</span></div>
         <div><b>العميل</b><span id="mClient">—</span></div>
         <div><b>الباقة</b><span id="mPackage">—</span></div>
-        <div><b>تاريخ التحرير</b><span id="mDate">—</span></div>
-      </div>
+        <div><b>تاريخ التحرير</b><span id="mDate">—</span></div></div>
 
       <form id="handoverForm">
 
         <div class="ho-step">
           <h2>١ — إقرار الاستلام</h2>
-          <p>أكّد كل بند. لا يمكن التوقيع قبل تأكيد جميع البنود.</p>
-        </div>
+          <p>أكّد كل بند. لا يمكن التوقيع قبل تأكيد جميع البنود.</p></div>
 
         <div id="ackList"></div>
 
         <div class="ho-step">
           <h2>٢ — ملاحظات الاعتماد</h2>
-          <p>اختياري — أي تحفّظ أو ملاحظة تريد توثيقها في المحضر.</p>
-        </div>
+          <p>اختياري — أي تحفّظ أو ملاحظة تريد توثيقها في المحضر.</p></div>
 
         <div class="field">
           <label>ملاحظات</label>
-          <textarea name="notes" maxlength="1000"></textarea>
-        </div>
+          <textarea name="notes" maxlength="1000"></textarea></div>
 
         <div class="ho-step">
           <h2>٣ — ترتيب الاستضافة</h2>
-          <p>حدّد ما اتُفق عليه — يُثبَّت في المحضر ويحكم مسؤولية كل طرف بعد اليوم.</p>
-        </div>
+          <p>حدّد ما اتُفق عليه — يُثبَّت في المحضر ويحكم مسؤولية كل طرف بعد اليوم.</p></div>
 
         <div class="field">
           <label>أين يُستضاف الموقع بعد التسليم؟ *</label>
@@ -110,31 +100,24 @@
             <option value="">— اختر —</option>
             <option>نُقل الموقع إلى حساب استضافة أملكه — وانتهت مسؤولية Caminotich عن استمراريته</option>
             <option>يبقى على حساب Caminotich ضمن اتفاقية صيانة سارية</option>
-            <option>استلمت الملفات المصدرية وسأستضيفه بنفسي لاحقاً</option>
-          </select>
-        </div>
+            <option>استلمت الملفات المصدرية وسأستضيفه بنفسي لاحقاً</option></select></div>
         <div class="field">
           <label>النطاق (الدومين)</label>
           <select name="domain_ownership">
             <option value="">— اختر —</option>
             <option>مسجَّل باسمي وأتحمل رسوم تجديده</option>
-            <option>لم يُربط نطاق بعد</option>
-          </select>
-        </div>
+            <option>لم يُربط نطاق بعد</option></select></div>
 
         <div class="ho-step">
           <h2>٤ — التوقيع</h2>
-          <p>وقّع بإصبعك أو الفأرة داخل المربع.</p>
-        </div>
+          <p>وقّع بإصبعك أو الفأرة داخل المربع.</p></div>
 
         <div class="field">
           <label>اسم الموقّع *</label>
-          <input type="text" name="signer_name" maxlength="120" required>
-        </div>
+          <input type="text" name="signer_name" maxlength="120" required></div>
         <div class="field">
           <label>الصفة *</label>
-          <input type="text" name="signer_role" maxlength="120" placeholder="مثال: المالك / المدير التنفيذي" required>
-        </div>
+          <input type="text" name="signer_role" maxlength="120" placeholder="مثال: المالك / المدير التنفيذي" required></div>
 
         <div class="field">
           <label>التوقيع *</label>
@@ -142,29 +125,22 @@
             <canvas id="sigPad"></canvas>
             <div class="sig-tools">
               <button type="button" id="clearSig">مسح التوقيع</button>
-              <span id="sigState">لم يُوقَّع بعد</span>
-            </div>
-          </div>
-        </div>
+              <span id="sigState">لم يُوقَّع بعد</span></div></div></div>
 
         <div class="warn-box">
-          ⚠️ بتوقيع هذا المحضر يُعتبر المشروع منتهياً. أي تطوير أو تحسين أو طلب جديد بعد هذا التاريخ يُدار عبر <strong>اتفاقية صيانة أو تطوير مستقلة</strong> بنطاق ومدة وتكلفة تُحدَّد قبل البدء. تبدأ فترة ضمان (٣٠) يوماً من تاريخ التوقيع تغطي إصلاح الأعطال التقنية دون إضافة وظائف جديدة.
-        </div>
+          ⚠️ بتوقيع هذا المحضر يُعتبر المشروع منتهياً. أي تطوير أو تحسين أو طلب جديد بعد هذا التاريخ يُدار عبر <strong>اتفاقية صيانة أو تطوير مستقلة</strong> بنطاق ومدة وتكلفة تُحدَّد قبل البدء. تبدأ فترة ضمان (٣٠) يوماً من تاريخ التوقيع تغطي إصلاح الأعطال التقنية دون إضافة وظائف جديدة.</div>
 
         <button type="submit" id="submitBtn" disabled>اعتمد وأغلق المشروع</button>
         <div id="status"></div>
-        <p class="footnote">تصلك نسخة من المحضر على بريدك فور الاعتماد.</p>
-      </form>
-    </div>
-  </div>
-</div>
+    <p class="footnote" style="margin-top:10px"><a href="/privacy.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">بإرسال هذا النموذج تُعالَج بياناتك وفق سياسة الخصوصية</a></p>
+        <p class="footnote">تصلك نسخة من المحضر على بريدك فور الاعتماد.</p></form></div></div></div>
 
 <script>
 (function(){
   'use strict';
 
-  var SIGNOFF_HOOK = 'https://hook.eu1.make.com/h6c6k1y7w8mvkdvc3c64fd9bbk9edrmx';
-  var SEC_KEY      = 'cmt_sec_9f4Kq7Xw2R';
+  var SIGNOFF_HOOK = '/.netlify/functions/submit';
+  var FORM_ID      = 'handover';
 
   /* الرابط ليس مصدر بيانات — المعرّف قيمة معتمة تُنظَّف وتُرسَل فقط.
      بيانات العرض (اسم المشروع/العميل/الباقة) تأتي من Make لا من الرابط. */
@@ -291,12 +267,12 @@
       var res = await fetch(SIGNOFF_HOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.assign({}, data, { k: SEC_KEY }))
+        body: JSON.stringify({ form: FORM_ID, payload: data })
       });
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
       statusEl.className = 'ok';
-      statusEl.textContent = 'تم اعتماد التسليم ✅ وصلتك نسخة من المحضر على بريدك.';
+      statusEl.textContent = 'تم اعتماد التسليم وصلتك نسخة من المحضر على بريدك.';
       btn.textContent = 'تم الاعتماد ✓';
       form.querySelectorAll('input,textarea,button').forEach(function(el){ el.disabled = true; });
       pad.style.pointerEvents = 'none';
@@ -307,7 +283,4 @@
       btn.textContent = 'اعتمد وأغلق المشروع';
     }
   });
-})();
-</script>
-</body>
-</html>
+})();</script></body></html>

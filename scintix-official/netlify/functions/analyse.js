@@ -17,7 +17,7 @@ const ALLOWED_ORIGINS = [
 
 /* مفتاح مشترك مع نماذج الموقع. ليس مصادقة قوية — يوقف الاستدعاء الآلي العابر
    فقط. الحاجز الحقيقي هو ALLOWED_ORIGINS + سقف الطول أدناه. */
-const SEC_KEY = 'cmt_sec_9f4Kq7Xw2R';
+const SEC_KEY = process.env.CMT_WEBHOOK_KEY || '';
 
 const MAX_DESC = 2000;
 
@@ -58,7 +58,10 @@ exports.handler = async function(event) {
 
   const { company = '', email = '', desc = '', budget = '', lang = 'ar', k = '' } = body;
 
-  if (k !== SEC_KEY) {
+  /* المفتاح لم يعد يُرسل من المتصفح — كان مكشوفاً في View Source فلا يضيف أماناً.
+     الحاجز الفعلي هو ALLOWED_ORIGINS + سقف الطول. يبقى الفحص فعّالاً فقط إذا
+     ضُبط CMT_WEBHOOK_KEY في بيئة Netlify واستُدعيت الدالة من الخادم. */
+  if (SEC_KEY && k && k !== SEC_KEY) {
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
   }
 

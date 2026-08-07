@@ -5,6 +5,14 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Caminotich | تحليل المشروع</title>
+  <meta name="description" content="حلّل مشروعك بالذكاء الاصطناعي واحصل على توصية بالباقة المناسبة ونطاق العمل خلال ثوانٍ — مجاناً من كامينوتك.">
+  <link rel="canonical" href="https://caminotich.sa/analyse.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Caminotich | تحليل مشروعك بالذكاء الاصطناعي">
+  <meta property="og:description" content="حلّل مشروعك بالذكاء الاصطناعي واحصل على توصية بالباقة المناسبة ونطاق العمل خلال ثوانٍ — مجاناً من كامينوتك.">
+  <meta property="og:url" content="https://caminotich.sa/analyse.html">
+  <meta property="og:image" content="https://caminotich.sa/assets/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
     :root{
       --bg:#020514;--surface:rgba(10,16,35,0.96);
@@ -87,16 +95,14 @@
       background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
       color:var(--muted);font-size:.8rem;line-height:1.7;
     }
-    .note a{color:var(--accent);text-decoration:none}
-  </style>
+    .note a{color:var(--accent);text-decoration:none}</style>
     <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script>
-</head>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script></head>
 <body>
 <div class="card">
   <a class="back" href="index.html">← الرئيسية</a>
-  <h1>🤖 تحليل مشروعك <span>بالذكاء الاصطناعي</span></h1>
+  <h1>تحليل مشروعك <span>بالذكاء الاصطناعي</span></h1>
   <p class="sub">أخبرنا عن مشروعك وسنرشّدك فوراً إلى أنسب باقة وخطة عمل</p>
 
   <div class="grid">
@@ -106,9 +112,7 @@
     <input  id="budget"   placeholder="الميزانية التقريبية"/>
     <button id="btn" onclick="run()">
       <span class="spinner"></span>
-      <span class="lbl">✦ تحليل المشروع</span>
-    </button>
-  </div>
+      <span class="lbl">✦ تحليل المشروع</span></button></div>
 
   <div class="result" id="result"></div>
   <div class="err"    id="err"></div>
@@ -117,9 +121,7 @@
     <strong>⚙️ للمطورين:</strong>
     هذا النموذج يحتاج <strong>Netlify Function</strong> (أو Cloudflare Worker) كـ proxy للـ API.
     راجع ملف <code>netlify/functions/analyse.js</code> المرفق.
-    <a href="https://docs.netlify.com/functions/get-started/" target="_blank">دليل Netlify Functions ←</a>
-  </div>
-</div>
+    <a href="https://docs.netlify.com/functions/get-started/" target="_blank">دليل Netlify Functions ←</a></div></div>
 
 <script>
 /* ══════════════════════════════════════════
@@ -151,7 +153,7 @@ async function run() {
     const res = await fetch('/.netlify/functions/analyse', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ company, email, desc, budget, k: 'cmt_sec_9f4Kq7Xw2R' })
+      body: JSON.stringify({ company, email, desc, budget })
     });
 
     if (!res.ok) {
@@ -173,14 +175,9 @@ async function run() {
     btn.disabled = false;
     btn.classList.remove('loading');
   }
-}
-</script>
+}</script>
 
-<!-- 🤖 Chatbase AI Widget -->
+<!-- Chatbase AI Widget -->
 <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
-const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
-
-</body>
-</html>
+const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-itf2CNf19xa0q7z76P41";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();</script></body></html>
