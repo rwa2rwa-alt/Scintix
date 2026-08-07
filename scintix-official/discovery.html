@@ -216,6 +216,11 @@
           <label>من المسؤول عن تسليم الشعار والمحتوى والصور والبيانات؟ *
             <span class="hint">اسم ووسيلة تواصل. تأخر التسليم أكبر سبب لتأخر المشاريع.</span></label>
           <input type="text" name="assets_owner" maxlength="160" required></div>
+
+        <div class="field">
+          <label>آخر موعد لتسليم الأصول *
+            <span class="hint">تُرسل الشعار والنصوص والصور والبيانات على <strong>info@caminotich.sa</strong> مع ذكر اسم النشاط. التأخير عن هذا الموعد يزيح موعد التسليم بمقدار مدة التأخير.</span></label>
+          <input type="date" name="assets_deadline" id="assetsDeadline" required></div>
         <div class="field">
           <label>النطاق (الدومين) والاستضافة</label>
           <select name="domain_status">
@@ -519,6 +524,18 @@
     var raw   = (new URLSearchParams(location.search).get('pkg') || '').trim().toLowerCase();
     if (VALID[raw]) { known.value = 'yes'; pick.value = VALID[raw]; }
     sync();
+  })();
+
+  /* موعد تسليم الأصول: افتراضياً بعد أسبوع، ولا يقبل تاريخاً ماضياً.
+     تركه مفتوحاً بلا افتراضي يجعل العميل يتخطاه أو يضع تاريخاً بعيداً. */
+  (function(){
+    var d = document.getElementById('assetsDeadline');
+    if (!d) return;
+    var today = new Date();
+    var iso = function(x){ return x.toISOString().slice(0,10); };
+    d.min = iso(today);
+    var plus7 = new Date(today.getTime() + 7*24*60*60*1000);
+    if (!d.value) d.value = iso(plus7);
   })();
 
   var form     = document.getElementById('discoveryForm');
