@@ -180,10 +180,13 @@ body{
     <div>
       <label id="lbl-due">تاريخ الاستحقاق</label>
       <input id="inp-due" type="date"/></div>
-    <div>
+    <!-- حقل ضريبة القيمة المضافة مخفي: كامينوتك غير مسجّلة لدى هيئة الزكاة والضريبة
+         والجمارك، وتحصيل الضريبة بلا رقم تسجيل مخالفة. الحقل باقٍ في الصفحة بقيمة
+         صفر ثابتة كي تستمر recalc() في العمل دون تعديل؛ لإعادة تفعيله بعد التسجيل
+         احذفي display:none وأعيدي type="number". -->
+    <div style="display:none" id="vat-wrap" aria-hidden="true">
       <label id="lbl-vat">ضريبة القيمة المضافة %</label>
-      <div style="font-size:.72rem;color:#8a93ab;margin-bottom:4px">اتركها صفراً حتى التسجيل في ضريبة القيمة المضافة لدى هيئة الزكاة والضريبة والجمارك.</div>
-      <input id="inp-vat" type="number" value="0" min="0" max="100" style="width:70px" oninput="recalc()"/></div>
+      <input id="inp-vat" type="hidden" value="0"/></div>
     <button class="btn-add" onclick="addRow()">+ إضافة بند</button></div>
 
   <!-- ════ INVOICE DOC ════ -->
