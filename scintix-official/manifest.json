@@ -1,18 +1,36 @@
 {
-  "terms_version": "2026-07-30",
-  "published": "2026-07-30",
+  "terms_version": "2026-08-06",
+  "published": "2026-08-06",
   "source": "contract.html · .c-section (جدول الباقة مستثنى)",
   "normalization": "replace(/\\s+/g,' ').trim() ثم SHA-256 على UTF-8",
   "files": {
     "ar": {
       "file": "ar.txt",
-      "chars": 1008,
-      "sha256": "58f96545935d0d03f2a214c3e68ff0360203ae21f4e6660c7a164c31d099012e"
+      "chars": 11019,
+      "sha256": "d9ef119d029b3100a8ce8e6410d40c5808e67743a89089dc415cd83e36af41c6"
     },
     "en": {
       "file": "en.txt",
-      "chars": 1180,
-      "sha256": "c1f32bd7f0165e6202bbd07126000a4a0da5487641b7bfe2bb77efd8a121d989"
+      "chars": 13295,
+      "sha256": "af7d459276125152427e81356c3ae14f4593c60179bb76597e8edd552f00f3eb"
     }
-  }
+  },
+  "archive": [
+    {
+      "terms_version": "2026-07-30",
+      "files": {
+        "ar": {
+          "file": "terms-archive/ar-2026-07-30.txt",
+          "chars": 1008,
+          "sha256": "58f96545935d0d03f2a214c3e68ff0360203ae21f4e6660c7a164c31d099012e"
+        },
+        "en": {
+          "file": "terms-archive/en-2026-07-30.txt",
+          "chars": 1180,
+          "sha256": "c1f32bd7f0165e6202bbd07126000a4a0da5487641b7bfe2bb77efd8a121d989",
+          "note": "الملف مفقود من المستودع — لم يُؤرشف وقت النشر"
+        }
+      }
+    }
+  ]
 }
