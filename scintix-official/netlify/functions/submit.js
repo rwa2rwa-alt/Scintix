@@ -33,8 +33,17 @@ const HOOKS = {
   quote:     process.env.HOOK_QUOTE     || 'https://hook.eu1.make.com/q9in1wja70ipcqt15dbgkg3gll171dwg',
   discovery: process.env.HOOK_DISCOVERY || 'https://hook.eu1.make.com/6v0u2j08v9v5jl6yxtf9ipx4xrnffd5s',
   handover:  process.env.HOOK_HANDOVER  || 'https://hook.eu1.make.com/h6c6k1y7w8mvkdvc3c64fd9bbk9edrmx',
-  support:   process.env.HOOK_SUPPORT   || 'https://hook.eu1.make.com/t329y7jjtzruw0oald5n9bbp9sk1l5t2'
+  support:   process.env.HOOK_SUPPORT   || 'https://hook.eu1.make.com/t329y7jjtzruw0oald5n9bbp9sk1l5t2',
+  /* توقيع العقد. مهيّأ ولا يُستخدم بعد: contract.html ما زال ينادي Make
+     مباشرة. للتحويل لاحقاً بدّلي SIGN_HOOK هناك إلى هذا المسار مع
+     { form:'sign', payload:{...} } — ولا شيء آخر يتغيّر، لأن هذا المسار
+     يمرّر رد Make كما هو بحالته ونصّه (راجعي PASSTHROUGH أدناه). */
+  sign:      process.env.HOOK_SIGN      || 'https://hook.eu1.make.com/vl81dpaqsuh3jqjut92dblwafv85o9h9'
 };
+
+/* نماذج تحتاج رد Make حرفياً لا ملخّصاً. مسار التوقيع يفرّق بين
+   «نجح» و«موقّع مسبقاً» و«مرفوض» عبر راوتر، وأي تلخيص يكسر ذلك. */
+const PASSTHROUGH = ['sign'];
 
 /* سقف حجم الطلب — يمنع إغراق Airtable بحمولة ضخمة */
 const MAX_BODY = 60 * 1024;
@@ -112,6 +121,10 @@ exports.handler = async function (event) {
       body: JSON.stringify(signed)
     });
     const text = await res.text();
+    if (PASSTHROUGH.indexOf(form) !== -1) {
+      const ct = res.headers.get('content-type') || 'application/json';
+      return { statusCode: res.status, headers: Object.assign({}, headers, { 'Content-Type': ct }), body: text };
+    }
     if (!res.ok) {
       return { statusCode: 502, headers, body: JSON.stringify({ error: 'Upstream rejected', status: res.status }) };
     }

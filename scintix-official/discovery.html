@@ -533,7 +533,8 @@
     if (!d) return;
     var today = new Date();
     var iso = function(x){ return x.toISOString().slice(0,10); };
-    d.min = iso(today);
+    var tomorrow = new Date(today.getTime() + 24*60*60*1000);
+    d.min = iso(tomorrow);   /* مهلة صفر ساعة تُفرغ الشرط من معناه */
     var plus7 = new Date(today.getTime() + 7*24*60*60*1000);
     if (!d.value) d.value = iso(plus7);
   })();
