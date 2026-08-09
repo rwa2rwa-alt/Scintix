@@ -69,6 +69,7 @@
       <p class="lead">هذا المحضر يوثّق انتهاء المشروع. بتوقيعك تقرّ باستلام كل ما هو أدناه، ويبدأ من تاريخه سريان فترة الضمان.</p>
 
       <div class="ho-meta">
+        <div><b>رقم العقد</b><span id="mContract">—</span></div>
         <div><b>المشروع</b><span id="mProject">—</span></div>
         <div><b>العميل</b><span id="mClient">—</span></div>
         <div><b>الباقة</b><span id="mPackage">—</span></div>
@@ -149,7 +150,39 @@
 
   document.getElementById('mDate').textContent =
     new Date().toLocaleDateString('ar-SA-u-nu-latn', { year:'numeric', month:'long', day:'numeric' });
-  if (token) document.getElementById('mProject').textContent = token;
+
+  /* ── بيانات المحضر تأتي من الخادم لا من الرابط ── */
+  var META = {};
+  function setTxt(id, v){ var e = document.getElementById(id); if (e) e.textContent = v || '—'; }
+
+  if (token) {
+    fetch('/.netlify/functions/signoff-lookup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t: token })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (!d || !d.ok) {
+        if (d && d.code === 'ALREADY_SIGNED') {
+          setTxt('status', 'هذا المحضر موقَّع مسبقاً.');
+          var fm = document.getElementById('handoverForm');
+          if (fm) fm.style.display = 'none';
+        }
+        return;
+      }
+      META = d;
+      setTxt('mContract', d.contract_no);
+      setTxt('mProject',  d.project);
+      setTxt('mClient',   d.client);
+      setTxt('mPackage',  d.package);
+      var nm = document.querySelector('[name="signer_name"]');
+      var rl = document.querySelector('[name="signer_role"]');
+      if (nm && !nm.value) nm.value = d.signer_name || d.client_name || '';
+      if (rl && !rl.value) rl.value = d.client_role || '';
+    })
+    .catch(function(){ /* تبقى الحقول بشرطات */ });
+  }
 
   /* ── بنود الإقرار ─────────────────────────────────────────────── */
   var ACKS = [
