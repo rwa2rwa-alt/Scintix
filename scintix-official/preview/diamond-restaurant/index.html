@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دايموند — DIAMOND · ASIAN FUSION</title>
+<meta name="description" content="نكهات آسيا في قلب الرياض — مطبخ آسيوي فيوجن معاصر — وضيافة كاملة لمناسباتك.">
+<meta property="og:title" content="دايموند — DIAMOND · ASIAN FUSION">
+<meta property="og:description" content="نكهات آسيا في قلب الرياض">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;800&family=Cairo:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0A0A0A; --ink:#F2EDE4; --muted:#8F887D;
+    --brand:#D62828; --accent:#B8934A; --veil:#151515;
+    --display:'Almarai', sans-serif; --body:'Cairo', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--body);
+    min-height:100svh; display:grid; place-items:center;
+    padding:3rem 1.5rem; line-height:1.75; overflow-x:hidden;
+  }
+  .halo{position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(58rem 38rem at 50% 14%, var(--veil), transparent 68%);
+    opacity:0.55}
+  main{position:relative;z-index:1;width:100%;max-width:33rem;text-align:center}
+
+  .mark{width:8rem;height:8rem;margin:0 auto 2rem;border-radius:50%;
+    display:grid;place-items:center;background:var(--veil);
+    border:1px solid color-mix(in srgb, var(--brand) 26%, transparent);
+    overflow:hidden;position:relative}
+  .mark img{width:100%;height:100%;object-fit:cover;display:block}
+  .lockup{width:min(21rem,88vw);height:auto;aspect-ratio:1/1;border:0;border-radius:22px;
+    background:transparent;margin:0 auto 1.4rem}
+  .lockup img{object-fit:contain}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+    clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .mono{font-family:var(--display);font-size:2.9rem;font-weight:700;
+    color:var(--brand);letter-spacing:.02em;line-height:1}
+
+  h1{font-family:var(--display);font-size:clamp(2.1rem,8.5vw,3.1rem);
+    font-weight:700;line-height:1.2;letter-spacing:-.01em}
+  .sub{margin-top:.6rem;font-size:.72rem;letter-spacing:.32em;
+    color:var(--muted);font-weight:400;direction:ltr}
+  .rule{width:3rem;height:1px;background:var(--brand);margin:1.7rem auto;opacity:.5}
+
+  .headline{font-family:var(--display);font-size:clamp(1.3rem,5.4vw,1.7rem);
+    font-weight:400;line-height:1.5;color:var(--ink);max-width:26rem;margin:0 auto}
+  .tagline{margin-top:.9rem;font-size:.98rem;font-weight:300;max-width:26rem;
+    margin-inline:auto;color:color-mix(in srgb, var(--ink) 72%, transparent)}
+
+  .gallery{margin-top:2.2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+  .gallery figure{margin:0;aspect-ratio:1/1;border-radius:12px;overflow:hidden;
+    background:color-mix(in srgb, var(--veil) 70%, transparent)}
+  .gallery img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .4s ease}
+  .gallery figure:hover img{transform:scale(1.05)}
+  @media (prefers-reduced-motion: reduce){.gallery img{transition:none}}
+
+  .contact{margin-top:2.2rem;padding:1.25rem 1.35rem;border-radius:16px;
+    background:color-mix(in srgb, var(--veil) 55%, transparent);
+    border:1px solid color-mix(in srgb, var(--brand) 15%, transparent);
+    display:flex;flex-direction:column;gap:.72rem;text-align:right}
+  .row{display:flex;align-items:center;gap:.7rem;font-size:.9rem;
+    font-weight:300;color:color-mix(in srgb, var(--ink) 84%, transparent)}
+  .row a{color:inherit;text-decoration:none;border-bottom:1px solid
+    color-mix(in srgb, var(--brand) 40%, transparent);padding-bottom:1px}
+  .row a:hover{color:var(--brand)}
+  .row svg{width:1.05rem;height:1.05rem;flex:0 0 auto;fill:var(--brand);opacity:.85}
+  .ltr{direction:ltr;unicode-bidi:isolate}
+
+  .cta{display:inline-block;margin-top:2rem;padding:.95rem 2.4rem;
+    background:var(--brand);color:#FFFFFF;text-decoration:none;border-radius:999px;
+    font-family:var(--body);font-size:1rem;font-weight:600;
+    transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+    box-shadow:0 .5rem 1.6rem color-mix(in srgb, var(--brand) 26%, transparent)}
+  .cta:hover{transform:translateY(-2px);filter:brightness(1.06);
+    box-shadow:0 .8rem 2.1rem color-mix(in srgb, var(--brand) 34%, transparent)}
+  .cta:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+  footer{margin-top:3rem;font-size:.74rem;font-weight:300;letter-spacing:.02em;
+    color:color-mix(in srgb, var(--muted) 80%, transparent)}
+  footer a{color:inherit;text-decoration:none;direction:ltr;display:inline-block;
+    border-bottom:1px solid color-mix(in srgb, var(--muted) 40%, transparent);padding-bottom:1px}
+  footer a:hover{color:var(--brand)}
+
+  .r{opacity:0;transform:translateY(14px);animation:rise .85s cubic-bezier(.22,.68,.36,1) forwards}
+  .r1{animation-delay:.05s} .r2{animation-delay:.20s} .r3{animation-delay:.30s}
+  .r4{animation-delay:.40s} .r5{animation-delay:.50s} .r6{animation-delay:.62s}
+  .r7{animation-delay:.76s} .r8{animation-delay:.90s}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){
+    .r{animation:none;opacity:1;transform:none} .cta{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="halo"></div>
+<main>
+  <div class="mark  r r1">
+    <img src="logo.png" alt="شعار دايموند"
+         onerror="this.remove();document.getElementById('mono').hidden=false">
+    <span class="mono" id="mono" hidden>د</span>
+  </div>
+  <h1 class="r r2">دايموند</h1><p class="sub r r3">DIAMOND · ASIAN FUSION</p><div class="rule r r4"></div>
+  <p class="headline r r5">نكهات آسيا في قلب الرياض</p>
+  <p class="tagline r r5">مطبخ آسيوي فيوجن معاصر — وضيافة كاملة لمناسباتك.</p>
+  <div class="gallery r r6" id="gal"><figure><img src="1.jpg" alt="من أعمال دايموند" loading="lazy"></figure><figure><img src="2.jpg" alt="من أعمال دايموند" loading="lazy"></figure><figure><img src="3.jpg" alt="من أعمال دايموند" loading="lazy"></figure><figure><img src="4.jpg" alt="من أعمال دايموند" loading="lazy"></figure><figure><img src="5.jpg" alt="من أعمال دايموند" loading="lazy"></figure><figure><img src="6.jpg" alt="من أعمال دايموند" loading="lazy"></figure></div>
+  <div class="contact r r6"><div class="row"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.2 2.2Z"/></svg><a href="tel:920006454" rel="noopener">للحجز · 9200 06454</a></div><div class="row"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg><span>الرياض، المملكة العربية السعودية</span></div><div class="row"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9a3.7 3.7 0 0 1-.9-1.4c-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1Zm0 3.4a6.4 6.4 0 1 0 0 12.8 6.4 6.4 0 0 0 0-12.8Zm0 10.5a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2Zm6.6-10.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg><a class="ltr" href="https://instagram.com/diamondriyadh" rel="noopener">@diamondriyadh</a></div></div>
+  <a class="cta r r7" href="tel:920006454" rel="noopener">احجز طاولتك</a>
+  <footer class="r r8">
+    معاينة أولية · صُمِّمت بواسطة <a href="https://caminotich.sa" rel="noopener">Caminotich</a>
+  </footer>
+</main>
+<script>
+  // تُخفى أي صورة غير موجودة، وتُخفى الشبكة كاملة إذا لم تُرفع أي صورة
+  document.querySelectorAll('#gal img').forEach(function (im) {
+    im.addEventListener('error', function () {
+      im.closest('figure').remove();
+      var g = document.getElementById('gal');
+      if (g && !g.querySelector('img')) g.remove();
+    });
+  });
+</script>
+</body>
+</html>
