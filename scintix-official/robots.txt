@@ -3,4 +3,7 @@ Allow: /
 Disallow: /invoice.html
 Disallow: /contract.html
 Disallow: /payment.html
+Disallow: /preview/
+Disallow: /internal/
+
 Sitemap: https://caminotich.sa/sitemap.xml

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الصفحة غير موجودة — Caminotich</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#071A2F; --ink:#E8EEF5; --muted:#8CA3BC; --line:#16375A; --cyan:#3FD0E0 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:'Cairo',sans-serif;
+    min-height:100svh;display:grid;place-items:center;padding:2rem 1.25rem;line-height:1.8}
+  .halo{position:fixed;inset:0;pointer-events:none;
+    background:radial-gradient(46rem 30rem at 50% 12%,rgba(63,208,224,.10),transparent 70%)}
+  main{position:relative;width:100%;max-width:26rem;text-align:center}
+  .code{font-size:.72rem;letter-spacing:.34em;color:var(--muted);
+    font-weight:400;direction:ltr;margin-bottom:1.1rem}
+  h1{font-size:clamp(1.35rem,5.6vw,1.7rem);font-weight:700;line-height:1.5}
+  p{margin-top:.7rem;color:var(--muted);font-weight:300;font-size:.96rem}
+  .rule{width:3rem;height:1px;background:var(--cyan);opacity:.55;margin:1.8rem auto}
+  a.home{display:inline-block;margin-top:.2rem;padding:.7rem 1.6rem;border-radius:999px;
+    border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.92rem;
+    transition:border-color .2s,background .2s}
+  a.home:hover,a.home:focus-visible{border-color:var(--cyan);background:rgba(63,208,224,.07)}
+  a.home:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="halo"></div>
+<main>
+  <div class="code">ERROR 404</div>
+  <h1>هذي الصفحة ما هي موجودة</h1>
+  <p>يمكن الرابط ناقص أو انتهت صلاحيته.</p>
+  <div class="rule"></div>
+  <a class="home" href="/">الرجوع للرئيسية</a>
+</main>
+</body>
+</html>
