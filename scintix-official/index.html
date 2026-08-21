@@ -215,21 +215,76 @@
       <!-- Google Analytics GA4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script><style id="cmt-hero-style">
-  .hero-panel{position:relative;overflow:hidden}
-  .hero-panel>.hero-copy,.hero-panel>.hero-visual{position:relative;z-index:2}
-  .cmt-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-    opacity:0;animation:cmtBgIn 1.6s .2s ease forwards}
-  @keyframes cmtBgIn{to{opacity:.92}}
-  .cmt-hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:radial-gradient(120% 100% at 70% 40%,transparent 30%,rgba(4,6,16,.45) 75%),
-      linear-gradient(180deg,rgba(4,6,16,.5),rgba(4,6,16,.28) 42%,rgba(4,6,16,.72))}
-  .cmt-sphere{animation:cmtSphereIn 1.9s .4s cubic-bezier(.16,1,.3,1) both;
-    filter:drop-shadow(0 0 46px rgba(90,120,255,.45))}
-  .cmt-sphere-wrap{animation:cmtFloat 9s 2.3s ease-in-out infinite both}
-  @keyframes cmtSphereIn{0%{opacity:0;transform:scale(.55);filter:blur(10px) drop-shadow(0 0 0 rgba(90,120,255,0))}
-    60%{opacity:1}100%{opacity:1;transform:scale(1);filter:blur(0) drop-shadow(0 0 46px rgba(90,120,255,.45))}}
-  @keyframes cmtFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
-  @media (prefers-reduced-motion:reduce){.cmt-hero-bg,.cmt-sphere,.cmt-sphere-wrap{animation:none;opacity:1}}
+  .cmt-hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;
+    overflow:hidden;background:#04050c;padding:96px 20px 74px;isolation:isolate;text-align:center}
+  .cmt-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;opacity:0;
+    animation:cmtBg 2s .1s ease forwards}
+  @keyframes cmtBg{to{opacity:.9}}
+  .cmt-veil{position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(85% 65% at 50% 42%,rgba(4,5,14,.32),rgba(4,5,14,.82) 92%),
+      linear-gradient(180deg,rgba(4,5,14,.72),rgba(4,5,14,.3) 30%,rgba(4,5,14,.94))}
+  .cmt-hero-inner{position:relative;z-index:1;max-width:760px;display:flex;flex-direction:column;
+    align-items:center;gap:22px}
+
+  .cmt-eyebrow{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:#a7b6df;
+    display:inline-flex;align-items:center;gap:12px;opacity:0;animation:cmtUp .9s .3s ease forwards}
+  .cmt-eyebrow::before,.cmt-eyebrow::after{content:"";width:28px;height:1px;
+    background:linear-gradient(90deg,transparent,#5cf0ff)}
+  .cmt-eyebrow::after{background:linear-gradient(90deg,#8d4cff,transparent)}
+
+  .cmt-orb-wrap{position:relative;width:min(300px,62vw);aspect-ratio:1;display:grid;place-items:center;
+    opacity:0;animation:cmtOrbIn 2.1s .5s cubic-bezier(.16,1,.3,1) forwards}
+  .cmt-orb-glow{position:absolute;inset:-16%;border-radius:50%;
+    background:radial-gradient(circle,rgba(120,90,255,.5),rgba(92,240,255,.18) 46%,transparent 68%);
+    filter:blur(8px);animation:cmtPulse 6s 2.6s ease-in-out infinite}
+  .cmt-orb{position:relative;width:100%;height:auto;display:block;
+    filter:drop-shadow(0 22px 54px rgba(90,120,255,.42));animation:cmtFloat 8s 2.6s ease-in-out infinite}
+  @keyframes cmtOrbIn{0%{opacity:0;transform:translateY(28px) scale(.6);filter:blur(12px)}
+    60%{opacity:1}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+  @keyframes cmtFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes cmtPulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.07)}}
+
+  .cmt-title{font-size:clamp(28px,5.4vw,52px);line-height:1.28;font-weight:800;margin:0;
+    background:linear-gradient(100deg,#ffffff,#e2e9ff 42%,#93d9ff 72%,#b79cff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    opacity:0;animation:cmtUp 1s .8s ease forwards}
+  .cmt-title span{display:block;margin-top:8px;background:none;
+    color:#8fd9ff;-webkit-text-fill-color:#8fd9ff}
+  .cmt-sub{max-width:560px;color:#aeb8d6;font-size:clamp(14px,2.3vw,17px);line-height:1.95;margin:0;
+    opacity:0;animation:cmtUp 1s 1s ease forwards}
+
+  .cmt-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+    opacity:0;animation:cmtUp 1s 1.2s ease forwards}
+  .cmt-btn{padding:14px 32px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;
+    font-family:inherit;display:inline-block;transition:transform .25s ease,box-shadow .25s ease,
+    background .25s ease,border-color .25s ease}
+  .cmt-btn-primary{color:#05131f;background:linear-gradient(135deg,#5cf0ff,#8d4cff);
+    box-shadow:0 14px 40px rgba(92,140,255,.42)}
+  .cmt-btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 56px rgba(92,140,255,.62)}
+  .cmt-btn-ghost{color:#eaf0ff;border:1px solid rgba(180,200,255,.28);background:rgba(180,200,255,.06);
+    backdrop-filter:blur(8px)}
+  .cmt-btn-ghost:hover{transform:translateY(-3px);border-color:#5cf0ff;background:rgba(92,240,255,.1)}
+
+  .cmt-stats{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:4px;
+    opacity:0;animation:cmtUp 1s 1.4s ease forwards}
+  .cmt-stat{padding:16px 24px;border-radius:16px;min-width:118px;
+    background:rgba(180,200,255,.05);border:1px solid rgba(180,200,255,.12);backdrop-filter:blur(10px);
+    transition:transform .25s ease,border-color .25s ease}
+  .cmt-stat:hover{transform:translateY(-4px);border-color:rgba(92,240,255,.45)}
+  .cmt-stat strong{display:block;font-size:26px;font-weight:800;color:#fff;line-height:1}
+  .cmt-stat small{font-size:13px;font-weight:600;color:#5cf0ff}
+  .cmt-stat span{display:block;margin-top:6px;font-size:12.5px;color:#98a4c6}
+
+  .cmt-scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:24px;height:40px;
+    border:2px solid rgba(180,200,255,.28);border-radius:14px;z-index:1;opacity:0;
+    animation:cmtUp 1s 1.8s ease forwards}
+  .cmt-scroll::before{content:"";position:absolute;top:8px;left:50%;margin-left:-2px;width:4px;height:8px;
+    border-radius:2px;background:#5cf0ff;animation:cmtScroll 1.8s ease-in-out infinite}
+  @keyframes cmtScroll{0%{opacity:0;top:8px}30%{opacity:1}100%{opacity:0;top:22px}}
+
+  @keyframes cmtUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){.cmt-hero *{animation:none!important;opacity:1!important}}
 </style>
 </head>
   <body>
@@ -267,29 +322,32 @@
 
       <main>
         <!-- ════════════ HERO ════════════ -->
-        <section class="hero-panel">
+        <section class="cmt-hero">
           <video class="cmt-hero-bg" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
             <source src="assets/hero-city.webm" type="video/webm">
             <source src="assets/hero-city.mp4" type="video/mp4">
           </video>
-          <div class="cmt-hero-scrim"></div>
-          <div class="hero-copy">
-            <span class="eyebrow" data-i18n="hero.eyebrow">حلول تقنية متكاملة</span>
-            <h1 data-i18n="hero.title" data-i18n-html="true">نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span></h1>
-            <p data-i18n="hero.description">من الفكرة إلى الإطلاق والدعم المستمر، نقدم حلولاً تقنية متكاملة تساعدك على النمو وتقليل التكاليف.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#plans" data-i18n="hero.primary">استكشف الباقات</a>
-              <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer"
-                 data-form-link data-i18n="hero.secondary">تواصل معنا</a></div>
-            <div class="hero-stats">
-              <div><strong>72<small data-i18n="stats.hours"> ساعة</small></strong><span data-i18n="stats.launch">متوسط زمن الإطلاق</span></div>
-              <div><strong>10</strong><span data-i18n="stats.services">خدمات تقنية</span></div>
-              <div><strong>24/7</strong><span data-i18n="stats.support">مراقبة ودعم</span></div></div></div>
-          <div class="hero-visual">
-            <div class="glow-orbit"></div>
-            <div class="hero-logo-wrap cmt-sphere-wrap">
-              <img class="hero-logo cmt-sphere" src="assets/logo-sphere.png" alt="شعار Caminotich" /></div>
-            <div class="hero-badge">Caminotich</div></div></section>
+          <div class="cmt-veil"></div>
+          <div class="cmt-hero-inner">
+            <span class="cmt-eyebrow" data-i18n="hero.eyebrow">حلول تقنية متكاملة</span>
+            <div class="cmt-orb-wrap">
+              <div class="cmt-orb-glow"></div>
+              <img class="cmt-orb" src="assets/logo-sphere.png" alt="Caminotich" />
+            </div>
+            <h1 class="cmt-title" data-i18n="hero.title" data-i18n-html="true">نبني أنظمة رقمية ذكية <span>تؤتمت أعمالك وتسرّع نمو شركتك.</span></h1>
+            <p class="cmt-sub" data-i18n="hero.description">من الفكرة إلى الإطلاق والدعم المستمر، نقدم حلولاً تقنية متكاملة تساعدك على النمو وتقليل التكاليف.</p>
+            <div class="cmt-cta">
+              <a class="cmt-btn cmt-btn-primary" href="#plans" data-i18n="hero.primary">استكشف الباقات</a>
+              <a class="cmt-btn cmt-btn-ghost" href="#" target="_blank" rel="noopener noreferrer" data-form-link data-i18n="hero.secondary">تواصل معنا</a>
+            </div>
+            <div class="cmt-stats">
+              <div class="cmt-stat"><strong>72<small data-i18n="stats.hours"> ساعة</small></strong><span data-i18n="stats.launch">متوسط زمن الإطلاق</span></div>
+              <div class="cmt-stat"><strong>10</strong><span data-i18n="stats.services">خدمات تقنية</span></div>
+              <div class="cmt-stat"><strong>24/7</strong><span data-i18n="stats.support">مراقبة ودعم</span></div>
+            </div>
+          </div>
+          <div class="cmt-scroll"></div>
+        </section>
 
         <!-- ════════════ SERVICES ════════════ -->
         <section id="services" class="features-panel">
