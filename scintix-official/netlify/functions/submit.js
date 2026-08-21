@@ -15,9 +15,9 @@
      HOOK_HANDOVER        رابط webhook محضر التسليم
      HOOK_SUPPORT         رابط webhook تذاكر الدعم
 
-   بدون ضبطها تعمل الدالة بالقيم الحالية تماماً كما كان الوضع
-   قبل التغيير — لا انقطاع. وبعد ضبطها + تعديل الفلاتر في Make
-   يصبح المفتاح القديم بلا قيمة.
+   هذه المتغيرات مضبوطة الآن في Netlify، والقيم النصية أُزيلت
+   من الكود بالكامل. لا مفتاح ولا رابط داخل المصدر. عند تدوير
+   المفتاح: بدّلي CMT_WEBHOOK_KEY في Netlify + فلتر Make فقط.
 ════════════════════════════════════════════════════════════ */
 
 const ALLOWED_ORIGINS = [
@@ -27,18 +27,18 @@ const ALLOWED_ORIGINS = [
   'https://main--scintix-scintix-official.netlify.app'
 ];
 
-const SEC_KEY = process.env.CMT_WEBHOOK_KEY || 'cmt_sec_9f4Kq7Xw2R';
+const SEC_KEY = process.env.CMT_WEBHOOK_KEY;
 
 const HOOKS = {
-  quote:     process.env.HOOK_QUOTE     || 'https://hook.eu1.make.com/q9in1wja70ipcqt15dbgkg3gll171dwg',
-  discovery: process.env.HOOK_DISCOVERY || 'https://hook.eu1.make.com/6v0u2j08v9v5jl6yxtf9ipx4xrnffd5s',
-  handover:  process.env.HOOK_HANDOVER  || 'https://hook.eu1.make.com/h6c6k1y7w8mvkdvc3c64fd9bbk9edrmx',
-  support:   process.env.HOOK_SUPPORT   || 'https://hook.eu1.make.com/t329y7jjtzruw0oald5n9bbp9sk1l5t2',
+  quote:     process.env.HOOK_QUOTE,
+  discovery: process.env.HOOK_DISCOVERY,
+  handover:  process.env.HOOK_HANDOVER,
+  support:   process.env.HOOK_SUPPORT,
   /* توقيع العقد. مهيّأ ولا يُستخدم بعد: contract.html ما زال ينادي Make
      مباشرة. للتحويل لاحقاً بدّلي SIGN_HOOK هناك إلى هذا المسار مع
      { form:'sign', payload:{...} } — ولا شيء آخر يتغيّر، لأن هذا المسار
      يمرّر رد Make كما هو بحالته ونصّه (راجعي PASSTHROUGH أدناه). */
-  sign:      process.env.HOOK_SIGN      || 'https://hook.eu1.make.com/vl81dpaqsuh3jqjut92dblwafv85o9h9'
+  sign:      process.env.HOOK_SIGN
 };
 
 /* نماذج تحتاج رد Make حرفياً لا ملخّصاً. مسار التوقيع يفرّق بين
@@ -108,6 +108,10 @@ exports.handler = async function (event) {
   const url  = HOOKS[form];
   if (!url) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown form' }) };
+  }
+
+  if (!SEC_KEY || !url) {
+    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server not configured' }) };
   }
 
   const payload = (body.payload && typeof body.payload === 'object') ? body.payload : {};
