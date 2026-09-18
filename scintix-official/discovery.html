@@ -249,7 +249,9 @@
             <option value="Glow">Glow — 1,799 ريال</option>
             <option value="Pulse">Pulse — 3,299 ريال</option>
             <option value="Nova">Nova — 5,999 ريال</option>
-            <option value="Zenith">Zenith — 12,000 ريال فأكثر</option></select></div>
+            <option value="Zenith">Zenith — 12,000 ريال فأكثر</option>
+            <option value="Wasalt">وصلت — نظام الروضات والمدارس</option>
+            <option value="Custom">خدمة مخصصة خارج الباقات</option></select></div>
 
         <div class="field">
           <label>نطاق الميزانية *
@@ -520,7 +522,7 @@
     }
     known.addEventListener('change', sync);
 
-    var VALID = { spark:'Spark', glow:'Glow', pulse:'Pulse', nova:'Nova', zenith:'Zenith' };
+    var VALID = { spark:'Spark', glow:'Glow', pulse:'Pulse', nova:'Nova', zenith:'Zenith', wasalt:'Wasalt', custom:'Custom' };
     var raw   = (new URLSearchParams(location.search).get('pkg') || '').trim().toLowerCase();
     if (VALID[raw]) { known.value = 'yes'; pick.value = VALID[raw]; }
     sync();
