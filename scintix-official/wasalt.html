@@ -21,15 +21,16 @@
     .flow{background:#080c21;border-block:1px solid var(--line)}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}.step{position:relative;padding:26px 22px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}.step:before{counter-increment:step;content:counter(step,decimal-leading-zero);display:block;color:var(--purple);font-weight:900;font-size:1.25rem}.step h3{margin:12px 0 5px}.step p{color:var(--muted);font-size:.9rem;margin:0}
     .options{display:grid;grid-template-columns:1fr 1fr;gap:22px}.option{padding:36px;border-radius:26px;border:1px solid var(--line);background:rgba(255,255,255,.035)}.option.highlight{border-color:rgba(92,240,255,.38);box-shadow:inset 0 0 50px rgba(92,240,255,.045)}.option h3{font-size:1.55rem;margin:0 0 8px}.option p{color:var(--muted)}.option ul{padding:0;list-style:none}.option li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)}.option li:before{content:"✓";color:var(--green);font-weight:900;margin-inline-end:9px}
     .cta{padding:70px 40px;text-align:center;border:1px solid rgba(92,240,255,.22);border-radius:30px;background:radial-gradient(circle at 50% 0,rgba(92,240,255,.12),transparent 50%),linear-gradient(145deg,#0c1230,#080a1c)}.cta h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.2;margin:0 0 12px}.cta p{color:var(--muted);max-width:670px;margin:0 auto 28px}.footer{padding:38px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}.contact{display:flex;gap:18px;flex-wrap:wrap}.contact a{text-decoration:none}.contact a:hover{color:var(--cyan)}
-    @media(max-width:900px){.nav-links{display:none}.hero{padding-top:70px}.hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{text-align:center}.lead{margin-inline:auto}.actions,.trust{justify-content:center}.phone{transform:none}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}}
-    @media(max-width:620px){.wrap{width:min(100% - 24px,1140px)}.nav .btn{padding:9px 15px;font-size:.86rem}.brand strong{display:none}.hero{min-height:auto;padding:64px 0}.hero h1{font-size:2.75rem}.cards,.steps,.options{grid-template-columns:1fr}.cta{padding:48px 20px}.footer-row{flex-direction:column;text-align:center}.contact{justify-content:center}}
+    .request{background:#080c21;border-block:1px solid var(--line)}.request-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:28px;align-items:start}.request-copy{position:sticky;top:110px}.request-copy h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.2;margin:10px 0}.request-copy p{color:var(--muted)}.scope{display:grid;gap:10px;margin-top:24px}.scope span{padding:12px 15px;border:1px solid var(--line);border-radius:12px;color:var(--muted)}.scope b{color:var(--green);margin-inline-end:7px}.school-form{padding:30px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.035)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-weight:700;font-size:.95rem}.field small{color:var(--muted);font-weight:400}.field input,.field select,.field textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#080d24;color:var(--text);font:500 1rem Tajawal;outline:none}.field textarea{min-height:115px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(92,240,255,.08)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check{display:flex;align-items:center;gap:9px;padding:11px;border:1px solid var(--line);border-radius:11px;color:var(--muted);cursor:pointer}.check input{width:auto;accent-color:var(--cyan)}.form-actions{grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap}.form-status{color:var(--muted);font-size:.9rem}.form-status.ok{color:var(--green)}.form-status.err{color:#ff8b9c}
+    @media(max-width:900px){.nav-links{display:none}.hero{padding-top:70px}.hero-grid{grid-template-columns:1fr;gap:46px}.hero-copy{text-align:center}.lead{margin-inline:auto}.actions,.trust{justify-content:center}.phone{transform:none}.cards{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.request-grid{grid-template-columns:1fr}.request-copy{position:static}}
+    @media(max-width:620px){.wrap{width:min(100% - 24px,1140px)}.nav .btn{padding:9px 15px;font-size:.86rem}.brand strong{display:none}.hero{min-height:auto;padding:64px 0}.hero h1{font-size:2.75rem}.cards,.steps,.options,.form-grid,.checks{grid-template-columns:1fr}.field.full,.form-actions{grid-column:auto}.school-form{padding:20px}.cta{padding:48px 20px}.footer-row{flex-direction:column;text-align:center}.contact{justify-content:center}}
   </style>
 </head>
 <body>
   <header class="topbar"><div class="wrap nav">
     <a class="brand" href="index.html"><img src="assets/logo.png" alt="Caminotich"><strong>Caminotich</strong></a>
     <nav class="nav-links" aria-label="التنقل"><a href="#benefits">المزايا</a><a href="#how">كيف يعمل؟</a><a href="#activation">خيارات التفعيل</a></nav>
-    <a class="btn btn-primary" href="discovery.html?pkg=wasalt">اطلب عرضًا للمدرسة</a>
+    <a class="btn btn-primary" href="#school-request">اطلب عرضًا للمدرسة</a>
   </div></header>
 
   <main>
@@ -38,7 +39,7 @@
         <span class="eyebrow">نظام ذكي للروضات والمدارس</span>
         <h1>كل طفل في مدرستك… <span>هو طفل أحدهم.</span></h1>
         <p class="lead">«وصلت» ينظم طلبات دخول وخروج الأطفال عبر واتساب، ليمنح المدرسة آلية أوضح ويمنح الوالدين طمأنينة أكبر—من دون تطبيق جديد أو إجراءات معقدة.</p>
-        <div class="actions"><a class="btn btn-primary" href="discovery.html?pkg=wasalt">اطلب تجربة للمدرسة</a><a class="btn btn-ghost" href="#how">شاهد آلية العمل</a></div>
+        <div class="actions"><a class="btn btn-primary" href="#school-request">اطلب تجربة للمدرسة</a><a class="btn btn-ghost" href="#how">شاهد آلية العمل</a></div>
         <div class="trust"><span><b>✓</b> دخول وخروج اختياري</span><span><b>✓</b> حساب مستقل لكل ولي أمر</span><span><b>✓</b> لوحة متابعة للمدرسة</span></div>
       </div>
       <div class="phone" aria-label="مثال مبسط لمحادثة وصلت على واتساب"><div class="phone-screen">
@@ -70,9 +71,43 @@
       <article class="option"><h3>تفعيل الدخول والخروج</h3><p>تغطية أوسع لحركة الطفل في بداية اليوم ونهايته ضمن نظام واحد.</p><ul><li>جميع مزايا وقت الخروج</li><li>تسجيل وصول الطفل</li><li>متابعة أكثر شمولًا</li><li>إعداد مخصص وفق إجراءات المدرسة</li></ul></article>
     </div></div></section>
 
-    <section><div class="wrap"><div class="cta"><h2>لأن أمان أطفالنا مسؤولية نشارك فيها جميعًا.</h2><p>نجهز لكم عرضًا مناسبًا حسب عدد الطلاب، الفروع، وخيار التفعيل المطلوب. تبدأ الرحلة بجلسة قصيرة لفهم إجراءات المدرسة.</p><a class="btn btn-primary" href="discovery.html?pkg=wasalt">اطلب عرض نظام وصلت</a></div></div></section>
+    <section id="school-request" class="request"><div class="wrap request-grid">
+      <div class="request-copy"><span class="eyebrow">نموذج مخصص لوصلت</span><h2>عرّفونا على آلية مدرستكم الحالية</h2><p>هذه المعلومات تكفينا لإعداد تصور مناسب للمدرسة، من دون أسئلة عن باقات أو خدمات أخرى.</p><div class="scope"><span><b>✓</b> يستغرق نحو 3 دقائق</span><span><b>✓</b> يحدد آلية الدخول والخروج</span><span><b>✓</b> يحدد الثيم البصري المطلوب</span></div></div>
+      <form class="school-form" id="wasaltForm"><div class="form-grid">
+        <div class="field"><label>اسم المدرسة أو الروضة *</label><input name="school_name" maxlength="120" required></div>
+        <div class="field"><label>نوع الجهة *</label><select name="school_type" required><option value="">— اختر —</option><option>روضة أطفال</option><option>مدرسة ابتدائية</option><option>روضة ومدرسة</option></select></div>
+        <div class="field"><label>عدد الطلاب التقريبي *</label><select name="student_count" required><option value="">— اختر —</option><option>أقل من 100</option><option>100–300</option><option>301–600</option><option>أكثر من 600</option></select></div>
+        <div class="field"><label>عدد الفروع *</label><input name="branch_count" type="number" min="1" max="100" value="1" required></div>
+        <div class="field full"><label>كيف تتم عملية خروج الطفل حاليًا؟ * <small>من وصول ولي الأمر حتى تسليم الطفل</small></label><textarea name="current_dismissal_workflow" maxlength="1200" placeholder="مثال: يتصل ولي الأمر، ثم يتم إبلاغ المشرفة بالاسم، وبعدها يُنادى الطفل..." required></textarea></div>
+        <div class="field full"><label>ما أبرز المشكلات الحالية؟</label><div class="checks"><label class="check"><input type="checkbox" name="challenges" value="التأخير">التأخير</label><label class="check"><input type="checkbox" name="challenges" value="ازدحام السيارات">ازدحام السيارات</label><label class="check"><input type="checkbox" name="challenges" value="المناداة المتكررة">المناداة المتكررة</label><label class="check"><input type="checkbox" name="challenges" value="صعوبة التحقق من المستلم">صعوبة التحقق من المستلم</label></div></div>
+        <div class="field"><label>التفعيل المطلوب *</label><select name="activation_scope" required><option value="">— اختر —</option><option>وقت الخروج فقط</option><option>وقت الدخول والخروج</option><option>أحتاج توصية</option></select></div>
+        <div class="field"><label>الثيم المطلوب *</label><select name="theme_preference" required><option value="">— اختر —</option><option>هوية المدرسة الحالية</option><option>دافئ وطفولي</option><option>تقني وعصري</option><option>هادئ ورسمي</option><option>أحتاج اقتراحًا</option></select></div>
+        <div class="field"><label>اسم مسؤول التواصل *</label><input name="contact_name" maxlength="120" required></div>
+        <div class="field"><label>رقم الجوال أو واتساب *</label><input name="phone" type="tel" inputmode="tel" maxlength="25" placeholder="05xxxxxxxx" required></div>
+        <div class="field full"><label>ملاحظات إضافية <small>أي اشتراطات أو خطوات خاصة بالمدرسة</small></label><textarea name="notes" maxlength="800"></textarea></div>
+        <div class="form-actions"><button class="btn btn-primary" id="wasaltSubmit" type="submit">أرسل طلب نظام وصلت</button><span class="form-status" id="wasaltStatus" aria-live="polite"></span></div>
+      </div></form>
+    </div></section>
+
+    <section><div class="wrap"><div class="cta"><h2>لأن أمان أطفالنا مسؤولية نشارك فيها جميعًا.</h2><p>بعد استلام النموذج نراجع آلية المدرسة الحالية ونجهز تصورًا أوليًا لنظام وصلت بما يناسب حجمها وهويتها.</p><a class="btn btn-primary" href="#school-request">ابدأ نموذج المدرسة</a></div></div></section>
   </main>
 
   <footer class="footer"><div class="wrap footer-row"><span>© 2026 Caminotich — تقنية بدون تعقيد</span><div class="contact"><a href="https://wa.me/966535145002">واتساب: +966 53 514 5002</a><a href="mailto:info@caminotich.sa">info@caminotich.sa</a><a href="https://caminotich.sa">caminotich.sa</a></div></div></footer>
+  <script>
+    document.getElementById('wasaltForm').addEventListener('submit',async function(event){
+      event.preventDefault();
+      var form=event.currentTarget,button=document.getElementById('wasaltSubmit'),status=document.getElementById('wasaltStatus');
+      var data=Object.fromEntries(new FormData(form).entries());
+      data.challenges=Array.from(form.querySelectorAll('input[name="challenges"]:checked')).map(function(x){return x.value}).join('، ');
+      data.form_type='wasalt_school_request';data.submitted_at=new Date().toISOString();
+      button.disabled=true;button.textContent='جارٍ الإرسال...';status.className='form-status';status.textContent='';
+      try{
+        var response=await fetch('/.netlify/functions/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:'discovery',payload:data})});
+        if(!response.ok)throw new Error('submit failed');
+        status.className='form-status ok';status.textContent='تم استلام طلب المدرسة، سنتواصل معكم قريبًا ✓';button.textContent='تم الإرسال';
+        form.querySelectorAll('input,select,textarea').forEach(function(field){field.disabled=true});
+      }catch(error){status.className='form-status err';status.textContent='تعذر الإرسال. يمكنكم التواصل عبر واتساب.';button.disabled=false;button.textContent='أرسل طلب نظام وصلت'}
+    });
+  </script>
 </body>
 </html>
