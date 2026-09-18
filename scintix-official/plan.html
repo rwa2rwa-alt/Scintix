@@ -26,6 +26,8 @@
   .detail-price{display:flex;align-items:flex-end;gap:8px;margin:18px 0}
   .detail-price span{font-size:2.6rem;font-weight:800}
   .detail-price small{color:var(--text-muted)}
+  .detail-price .old-price{font-size:1.15rem;text-decoration:line-through;opacity:.55}.detail-price .offer-price{color:var(--accent)}
+  .detail-offer{margin:0 0 18px;padding:12px 14px;border:1px solid rgba(92,240,255,.3);border-radius:13px;background:rgba(92,240,255,.06);color:var(--text-muted)}.detail-offer strong{color:var(--accent)}
   .video-frame{
     aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;
     background:radial-gradient(circle at center,rgba(92,240,255,.08),rgba(2,5,20,.6));
@@ -85,8 +87,9 @@
       <div class="detail-badge" id="pkgBadge">SPARK</div>
       <h1 id="pkgName">—</h1>
       <p id="pkgTagline" style="color:var(--text-muted);line-height:1.8"></p>
+      <div class="detail-offer"><strong id="offerTitle">عرض اليوم الوطني 96</strong> — <span id="offerUntil">حتى 1 أكتوبر 2026 للعقود الجديدة</span></div>
       <div class="detail-price">
-        <span id="pkgPrice">—</span>
+        <span class="old-price" id="pkgOldPrice">—</span><span class="offer-price" id="pkgPrice">—</span>
         <small id="pkgPriceUnit">ريال · دفعة واحدة</small>
         <div id="pkgMaint" style="font-size:.8rem;color:var(--text-muted);margin-top:6px"></div>
         <div id="pkgDuration" style="font-size:.85rem;color:var(--accent);margin-top:10px;font-weight:600"></div>
@@ -149,7 +152,7 @@ const PKGS = {
           {q:'What does "basic SEO" include?', a:'We set your site title, description and sitemap, and connect it to Google Search Console so your pages appear in search results and you can track their performance.'},
           {q:'Can I update the site myself?', a:'Yes, we hand over a self-update guide showing how to edit text and images with no technical background. Whenever you need to grow, you can upgrade to Glow.'}
         ]}
-    ,price:899, maint:0, video:{ar:'H9ubdqdpAPI',en:'9pKEpGMTxew'}
+    ,price:899, offerPrice:803, maint:0, video:{ar:'H9ubdqdpAPI',en:'9pKEpGMTxew'}
   },
   glow: {
     ar:{name:'Glow',tagline:'لما تحتاج حضوراً أوسع: عدة أقسام، هوية بصرية كاملة، وبيانات تعرف منها زوارك وعملاءك.',
@@ -168,7 +171,7 @@ const PKGS = {
           {q:'What do visitor analytics give me?', a:'We connect your site to Google Analytics, so you know how many visitors you get, where they come from, and which pages attract them most.'},
           {q:'What does "simple system to collect customer data" mean?', a:'Everyone who fills in a form on your site is saved into an organised table you can return to anytime, instead of losing track across messages.'}
         ]}
-    ,price:1799, maint:0, video:{ar:'_B1n5UTVs2M',en:'L8D6eWw8F-k'}
+    ,price:1799, offerPrice:1603, maint:0, video:{ar:'_B1n5UTVs2M',en:'L8D6eWw8F-k'}
   },
   pulse: {
     ar:{name:'Pulse',tagline:'التوازن المثالي بين السعر والمزايا — الأكثر طلباً بين عملائنا.',
@@ -187,7 +190,7 @@ const PKGS = {
           {q:'How does the WhatsApp welcome bot work?', a:'It replies to your customer automatically the moment they message you, at any hour, captures their basic request, and hands the conversation to you when human input is needed.'},
           {q:'What does "lead follow-up automation" mean?', a:'The system follows up with every lead through automatic reminders based on their stage, without you chasing each one manually.'}
         ]}
-    ,price:3299, maint:0, video:{ar:'j_lXpbSUQc8',en:'jDvSdsRaD5g'}
+    ,price:3299, offerPrice:3003, maint:0, video:{ar:'j_lXpbSUQc8',en:'jDvSdsRaD5g'}
   },
   nova: {
     ar:{name:'Nova',tagline:'لما تبدأ البيع مباشرة من موقعك: متجر إلكتروني كامل وبوابة دفع باسم متجرك وتطبيق على جوال عميلك.',
@@ -206,7 +209,7 @@ const PKGS = {
           {q:'What does a PWA app mean?', a:'A version of your store that installs on the customer phone straight from the browser and behaves like an app, with no app-store fees or approval waits.'},
           {q:'What does product and order management include?', a:'A dashboard where you add your products, prices, images and stock, and track every order from payment through to delivery.'}
         ]}
-    ,price:5999, maint:0, video:{ar:'7R2dvhM2WvI',en:'o3WTgro7Kl0'}
+    ,price:5999, offerPrice:5403, maint:0, video:{ar:'7R2dvhM2WvI',en:'o3WTgro7Kl0'}
   },
   zenith: {
     ar:{name:'Zenith',tagline:'حلول مؤسسية مخصصة بالكامل لمنشآتك، بأعلى مستويات الدعم والمراقبة.',
@@ -225,18 +228,20 @@ const PKGS = {
           {q:'What does a guaranteed SLA mean in simple terms?', a:'A written agreement committing to a specific response time for any technical issue, not just a verbal promise, alongside top priority support.'},
           {q:'Why does the price start with "+" and no fixed number?', a:'Because scope differs from one project to the next, so the final price is set after a free consultation that pins down exactly what you need.'}
         ]}
-    ,price:12000, maint:0, video:{ar:'DMdHhxVA1MU',en:'zG3vYkhSrO8'}
+    ,price:12000, offerPrice:11040, maint:0, video:{ar:'DMdHhxVA1MU',en:'zG3vYkhSrO8'}
   }
 };
 
 
 const STR = {
   ar:{ back:'→ رجوع لكل الباقات', featuresTitle:'وش تحصل عليه؟', cta:'ابدأ الآن', faq:'الأسئلة الشائعة',
+       offerTitle:'عرض اليوم الوطني 96', offerUntil:'حتى 1 أكتوبر 2026 للعقود الجديدة',
        unitSar:'ريال · دفعة واحدة', unitUsd:'· دفعة واحدة (تقريبي)',
        maintSar:'صيانة واستضافة اختيارية: {n} ريال / شهرياً',
        maintUsd:'صيانة واستضافة اختيارية: $ {n} / شهرياً',
        billingNote:'الأسعار بالدولار تقريبية للاسترشاد فقط (1 دولار = 3.754 ريال). يتم التحصيل الفعلي بالريال السعودي عبر بوابة ميسر.', videoSoon:'الفيديو التعريفي لهذه الباقة قريباً' },
   en:{ back:'← Back to all plans', featuresTitle:"What's included?", cta:'Get Started', faq:'FAQ',
+       offerTitle:'Saudi National Day 96 Offer', offerUntil:'through October 1, 2026 for new contracts',
        unitSar:'SAR · one-time', unitUsd:'· one-time (approx.)',
        maintSar:'Optional hosting & maintenance: {n} SAR / month',
        maintUsd:'Optional hosting & maintenance: $ {n} / month',
@@ -257,16 +262,20 @@ function renderPkg(lang){
   document.getElementById('pkgBadge').textContent = data.name.toUpperCase();
   document.getElementById('pkgName').textContent = data.name;
   document.getElementById('pkgTagline').textContent = data.tagline;
+  document.getElementById('offerTitle').textContent = s.offerTitle;
+  document.getElementById('offerUntil').textContent = s.offerUntil;
   /* العملة — عرض فقط، التحصيل دائماً بالريال. نفس سعر الصرف في الرئيسية. */
   const RATE_USD_PLAN = 3.754;
   const cur = localStorage.getItem('caminotich-currency') === 'usd' ? 'usd' : 'sar';
   const curSel = document.querySelector('[data-currency-select]');
   if (curSel) curSel.value = cur;
 
-  document.getElementById('pkgPrice').textContent = cur === 'usd'
-    ? '$ ' + (pkg.price / RATE_USD_PLAN).toLocaleString('en-US',
+  const displayPrice = (amount) => cur === 'usd'
+    ? '$ ' + (amount / RATE_USD_PLAN).toLocaleString('en-US',
               { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : pkg.price.toLocaleString('en-US');
+    : amount.toLocaleString('en-US');
+  document.getElementById('pkgOldPrice').textContent = displayPrice(pkg.price);
+  document.getElementById('pkgPrice').textContent = displayPrice(pkg.offerPrice);
   document.getElementById('pkgPriceUnit').textContent = cur === 'usd' ? s.unitUsd : s.unitSar;
 
   const noteEl = document.getElementById('pkgBillingNote');

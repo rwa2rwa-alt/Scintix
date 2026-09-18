@@ -38,6 +38,8 @@
    }
 
    /* ── Pulse badge ── */
+   .offer-banner{margin:0 0 22px;padding:15px 18px;border:1px solid rgba(92,240,255,.34);border-radius:16px;background:linear-gradient(135deg,rgba(0,108,53,.2),rgba(92,240,255,.08),rgba(151,104,255,.08));text-align:center;color:var(--text-muted)}
+   .offer-banner strong{color:var(--accent);margin-inline-end:6px}.national-mark{display:inline-flex;align-items:center;gap:7px;margin-inline-end:10px;font-size:1.35rem;font-weight:900;color:#fff}.sa-flag{display:inline-block;transform-origin:left center;animation:flagWave 2.4s ease-in-out infinite;filter:drop-shadow(0 4px 8px rgba(0,108,53,.35))}.n96{color:#fff;text-shadow:0 0 18px rgba(92,240,255,.65)}@keyframes flagWave{0%,100%{transform:perspective(80px) rotateY(0deg) rotate(-2deg)}50%{transform:perspective(80px) rotateY(18deg) rotate(3deg)}}@media(prefers-reduced-motion:reduce){.sa-flag{animation:none}}.plan-price .old-price{font-size:.46em!important;text-decoration:line-through;opacity:.55;margin-inline-end:7px}.plan-price .offer-price{color:var(--accent)}
       .plan-featured-badge {
         position: absolute;
         top: -13px;
@@ -310,7 +312,7 @@
           <span></span><span></span><span></span></button>
 
         <nav class="main-nav">
-          <a href="wasalt.html">وصلت</a>
+          <a href="wasalt.html" data-i18n="nav.wasalt">وصلت</a>
           <a href="themes.html" data-i18n="nav.themes">الثيمات الجاهزة</a>
           <a href="#services"    data-i18n="nav.services">الخدمات</a>
           <a href="#plans"       data-i18n="nav.plans">الباقات</a>
@@ -410,22 +412,23 @@
             <h3 data-i18n="features.care.title">الصيانة والاستضافة</h3>
             <p data-i18n="features.care.body">استضافة آمنة ونسخ احتياطي ومتابعة دورية تضمن استمرار عملك.</p></article>
           <article class="feature-card" onclick="location.href='wasalt.html'" style="cursor:pointer;border-color:rgba(92,240,255,.32)">
-            <h3>وصلت — أمان خروج الأطفال</h3>
-            <p>نظام ذكي للروضات والمدارس ينظم طلبات دخول وخروج الأطفال عبر واتساب.</p>
-            <a href="wasalt.html" style="color:var(--accent);font-weight:700;text-decoration:none">اكتشف النظام ←</a></article></section>
+            <h3 data-i18n="features.wasalt.title">وصلت — أمان خروج الأطفال</h3>
+            <p data-i18n="features.wasalt.body">نظام ذكي للروضات والمدارس ينظم طلبات دخول وخروج الأطفال عبر واتساب.</p>
+            <a href="wasalt.html" data-i18n="features.wasalt.cta" style="color:var(--accent);font-weight:700;text-decoration:none">اكتشف النظام ←</a></article></section>
 
         <!-- ════════════ PLANS (5 packages) ════════════ -->
         <section id="plans" class="plans-panel">
           <div class="panel-heading">
             <span data-i18n="plans.heading">باقة مرنة تناسب احتياجاتك</span>
             <p data-i18n="plans.description">اختر الباقة المناسبة لنمو شركتك — من المشاريع الناشئة حتى المؤسسات الكبرى.</p></div>
+          <div class="offer-banner"><span class="national-mark" aria-hidden="true"><span class="sa-flag">🇸🇦</span><span class="n96">96</span></span><strong data-i18n="offer.title">عرض اليوم الوطني 96</strong><span data-i18n="offer.until">أسعار خاصة للعقود الجديدة حتى 1 أكتوبر 2026</span></div>
 
           <div class="plans-grid">
 
             <!-- Spark -->
             <article class="plan-card plan-spark" onclick="location.href='plan.html?pkg=spark'" style="cursor:pointer">
               <div class="plan-name">Spark</div>
-              <div class="plan-price"><span data-price="899">899</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-price"><span class="old-price" data-price="899">899</span><span class="offer-price" data-price="803">803</span><small data-currency-label>ريال · دفعة واحدة</small></div>
               <ul>
               <li data-i18n="plans.spark.one">موقع تعريفي احترافي بصفحة واحدة</li>
               <li data-i18n="plans.spark.two">تصميم متجاوب ثنائي اللغة (RTL)</li>
@@ -439,7 +442,7 @@
             <!-- Glow -->
             <article class="plan-card plan-glow" onclick="location.href='plan.html?pkg=glow'" style="cursor:pointer">
               <div class="plan-name">Glow</div>
-              <div class="plan-price"><span data-price="1799">1,799</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-price"><span class="old-price" data-price="1799">1,799</span><span class="offer-price" data-price="1603">1,603</span><small data-currency-label>ريال · دفعة واحدة</small></div>
               <ul>
               <li data-i18n="plans.glow.one">كل خدمات Spark</li>
               <li data-i18n="plans.glow.two">موقع متعدد الأقسام (حتى 5 صفحات)</li>
@@ -453,7 +456,7 @@
             <article class="plan-card plan-pulse" onclick="location.href='plan.html?pkg=pulse'" style="cursor:pointer">
               <div class="plan-featured-badge" data-i18n="plans.pulse.badge">الأكثر طلباً</div>
               <div class="plan-name">Pulse</div>
-              <div class="plan-price"><span data-price="3299">3,299</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-price"><span class="old-price" data-price="3299">3,299</span><span class="offer-price" data-price="3003">3,003</span><small data-currency-label>ريال · دفعة واحدة</small></div>
               <ul>
               <li data-i18n="plans.pulse.one">كل مميزات Glow</li>
               <li data-i18n="plans.pulse.two">نظام CRM احترافي لإدارة العملاء</li>
@@ -466,7 +469,7 @@
             <!-- Nova -->
             <article class="plan-card plan-nova" onclick="location.href='plan.html?pkg=nova'" style="cursor:pointer">
               <div class="plan-name">Nova</div>
-              <div class="plan-price"><span data-price="5999">5,999</span><small data-currency-label>ريال · دفعة واحدة</small></div>
+              <div class="plan-price"><span class="old-price" data-price="5999">5,999</span><span class="offer-price" data-price="5403">5,403</span><small data-currency-label>ريال · دفعة واحدة</small></div>
               <ul>
               <li data-i18n="plans.nova.one">كل مميزات Pulse</li>
               <li data-i18n="plans.nova.two">متجر إلكتروني كامل بسلة وشراء</li>
@@ -479,7 +482,7 @@
             <!-- Zenith -->
             <article class="plan-card plan-zenith" onclick="location.href='plan.html?pkg=zenith'" style="cursor:pointer">
               <div class="plan-name">Zenith</div>
-              <div class="plan-price"><span style="font-size:.55em;opacity:.75;font-weight:600;margin-inline-end:4px">يبدأ من</span><span data-price="12000">12,000</span><small data-currency-label>ريال</small></div>
+              <div class="plan-price"><span style="font-size:.55em;opacity:.75;font-weight:600;margin-inline-end:4px" data-i18n="plans.from">يبدأ من</span><span class="old-price" data-price="12000">12,000</span><span class="offer-price" data-price="11040">11,040</span><small data-currency-label>ريال</small></div>
               <ul>
               <li data-i18n="plans.zenith.one">حل مخصص بالكامل حسب مشروعك</li>
               <li data-i18n="plans.zenith.two">تنفيذ وإشراف مباشر خطوة بخطوة</li>
