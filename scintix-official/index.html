@@ -286,6 +286,16 @@
   @keyframes cmtUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
   @media (prefers-reduced-motion:reduce){.cmt-hero *{animation:none!important;opacity:1!important}}
 </style>
+<style id="wasalt-home-style">
+  .wasalt-home{position:relative;margin:46px 0 72px;padding:2px;border-radius:30px;overflow:hidden;background:linear-gradient(120deg,#5cf0ff,#916bff,#ff75c3)}
+  .wasalt-home-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;padding:46px;border-radius:28px;background:radial-gradient(circle at 85% 15%,rgba(92,240,255,.13),transparent 40%),#080b20;overflow:hidden}
+  .wasalt-home-copy{position:relative;z-index:2}.wasalt-home-badge{display:inline-flex;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#5cf0ff,#a987ff);color:#061023;font-size:.8rem;font-weight:900}
+  .wasalt-home h2{font-size:clamp(2rem,4vw,3.35rem);line-height:1.15;margin:16px 0 12px;color:#fff}.wasalt-home p{color:#aab4cf;font-size:1.05rem;max-width:650px;margin:0}
+  .wasalt-home-points{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.wasalt-home-points span{padding:8px 12px;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#dbe3f9;font-size:.85rem;background:rgba(255,255,255,.035)}
+  .wasalt-home-visual{min-height:290px;display:grid;place-items:center;position:relative}.wasalt-ring{position:absolute;width:280px;height:280px;border-radius:50%;border:1px solid rgba(92,240,255,.28);box-shadow:0 0 70px rgba(92,240,255,.13)}
+  .wasalt-phone{position:relative;width:220px;padding:15px;border-radius:27px;background:#171d3d;border:1px solid rgba(255,255,255,.18);transform:rotate(-3deg);box-shadow:0 25px 60px rgba(0,0,0,.45)}.wasalt-screen{min-height:300px;padding:20px 14px;border-radius:18px;background:#edf5f2;color:#17211f}.wasalt-logo{width:48px;height:48px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#5cf0ff,#916bff);font-weight:900;color:#071022}.wasalt-msg{background:#fff;border-radius:5px 13px 13px 13px;padding:12px;font-size:.8rem;line-height:1.6;box-shadow:0 2px 8px rgba(0,0,0,.08)}.wasalt-choice{margin-top:9px;padding:10px;border:1px solid #cee2db;border-radius:10px;text-align:center;color:#075e54;font-size:.78rem;font-weight:800;background:#fff}
+  @media(max-width:800px){.wasalt-home-inner{grid-template-columns:1fr;padding:32px 24px;text-align:center}.wasalt-home-points{justify-content:center}.wasalt-home p{margin-inline:auto}.wasalt-home-visual{min-height:330px}}
+</style>
 </head>
   <body>
     <div class="page-shell">
@@ -348,6 +358,19 @@
             </div>
           </div>
           <div class="cmt-scroll"></div>
+        </section>
+
+        <section class="wasalt-home" aria-labelledby="wasalt-home-title">
+          <div class="wasalt-home-inner">
+            <div class="wasalt-home-copy">
+              <span class="wasalt-home-badge" data-i18n="wasalt.badge">لأول مرة</span>
+              <h2 id="wasalt-home-title" data-i18n="wasalt.title">«وصلت» — أمان أكثر عند خروج الأطفال</h2>
+              <p data-i18n="wasalt.body">نظام ذكي مخصص للروضات والمدارس ينظم طلبات دخول وخروج الأطفال عبر واتساب، ويخفف التأخير والازدحام ويمنح الوالدين طمأنينة أكبر.</p>
+              <div class="wasalt-home-points"><span data-i18n="wasalt.point1">بدون تطبيق جديد</span><span data-i18n="wasalt.point2">لوحة متابعة للمدرسة</span><span data-i18n="wasalt.point3">تفعيل للخروج أو للدخول والخروج</span></div>
+              <a class="btn btn-primary" href="wasalt.html" data-i18n="wasalt.cta">اكتشف نظام وصلت</a>
+            </div>
+            <div class="wasalt-home-visual" aria-hidden="true"><div class="wasalt-ring"></div><div class="wasalt-phone"><div class="wasalt-screen"><div class="wasalt-logo">و</div><div class="wasalt-msg" data-i18n="wasalt.chat" data-i18n-html="true">👋 مرحبًا بك في وصلت<br>كيف يمكننا مساعدتك؟</div><div class="wasalt-choice" data-i18n="wasalt.request">🚗 طلب خروج طفل</div><div class="wasalt-choice" data-i18n="wasalt.track">📋 متابعة الطلب</div></div></div></div>
+          </div>
         </section>
 
         <!-- ════════════ SERVICES ════════════ -->
