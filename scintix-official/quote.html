@@ -374,6 +374,7 @@ document.querySelectorAll('[data-setlang]').forEach(b=>{
   const PKG_QUESTIONS_ALL = {
     ar:{
       Spark: [
+        { id:'theme',    label:'اختر الثيم المطلوب',                type:'select', options:['TH-01 — معرض السيارات (899 ريال)','TH-02 — الصالون والجمال (899 ريال)','TH-03 — المعرض الإبداعي (899 ريال)','TH-04 — المتجر المحلي (899 ريال)','TH-CUSTOM — ثيم مخصص من الصفر (1,499 ريال)','أحتاج مساعدة في الاختيار'] },
         { id:'pages',    label:'كم صفحة تتوقع تحتاج؟',            type:'select', options:['صفحة واحدة','2-3 صفحات','4-5 صفحات','لست متأكداً'] },
         { id:'logo',     label:'هل لديك شعار جاهز؟',              type:'select', options:['نعم جاهز','أحتاج تصميم شعار','لست متأكداً'] },
       { id:'inspiration', label:'هل يوجد موقع أو هوية بصرية أعجبتك؟', type:'text', placeholder:'ضع الرابط أو اسم العلامة — اختياري' }
@@ -401,6 +402,7 @@ document.querySelectorAll('[data-setlang]').forEach(b=>{
     },
     en:{
       Spark: [
+        { id:'theme',    label:'Choose your preferred theme',           type:'select', options:['TH-01 — Automotive showroom (SAR 899)','TH-02 — Salon and beauty (SAR 899)','TH-03 — Creative portfolio (SAR 899)','TH-04 — Local store (SAR 899)','TH-CUSTOM — Custom theme from scratch (SAR 1,499)','I need help choosing'] },
         { id:'pages',    label:'How many pages do you expect to need?', type:'select', options:['One page','2-3 pages','4-5 pages','Not sure yet'] },
         { id:'logo',     label:'Do you already have a logo?',           type:'select', options:['Yes, ready','I need a logo designed','Not sure yet'] },
       { id:'inspiration', label:'Is there a website or brand identity you liked?', type:'text', placeholder:'Paste a link or brand name — optional' }
@@ -457,6 +459,11 @@ document.querySelectorAll('[data-setlang]').forEach(b=>{
           op.value = o; op.textContent = o;
           el.appendChild(op);
         });
+        if (q.id === 'theme') {
+          const requestedTheme = (params.get('theme') || '').toUpperCase();
+          const match = Array.from(el.options).find(op => op.value.toUpperCase().startsWith(requestedTheme));
+          if (match && requestedTheme) el.value = match.value;
+        }
       } else {
         el = document.createElement('input');
         el.type = 'text';
