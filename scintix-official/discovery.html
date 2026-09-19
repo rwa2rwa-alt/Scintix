@@ -66,7 +66,8 @@
   .mkt-consent input{width:auto;margin-top:3px;accent-color:var(--accent)}
   .mkt-consent .txt{font-size:.85rem;color:var(--text);line-height:1.75}
   .mkt-consent .txt small{display:block;color:var(--text-muted);font-size:.77rem;margin-top:4px;line-height:1.7}
-  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}</style></head>
+  .footnote{font-size:.78rem;color:var(--text-muted);line-height:1.7;margin-top:14px}</style>
+  <script defer src="js/analytics.js"></script></head>
 <body>
 <div class="page-shell">
   <header class="site-header">
@@ -595,6 +596,7 @@
       statusEl.className = 'ok';
       statusEl.textContent = 'وصلنا نموذجك بنراجعه وبنتواصل معك لتحديد موعد الجلسة.';
       btn.textContent = 'تم الإرسال ✓';
+      if (window.CaminotichAnalytics) window.CaminotichAnalytics.track('consultation_submit', { package_name: (new URLSearchParams(location.search).get('pkg') || 'unspecified').slice(0, 40) });
       form.querySelectorAll('input,select,textarea').forEach(function(el){ el.disabled = true; });
     } catch (err) {
       statusEl.className = 'err';

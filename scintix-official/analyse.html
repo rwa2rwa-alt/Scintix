@@ -97,8 +97,7 @@
     }
     .note a{color:var(--accent);text-decoration:none}</style>
     <!-- Google Analytics GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BM3RDE6XC"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-2BM3RDE6XC");</script></head>
+    <script defer src="js/analytics.js"></script></head>
 <body>
 <div class="card">
   <a class="back" href="index.html">← الرئيسية</a>
@@ -167,6 +166,7 @@ async function run() {
     result.innerHTML = esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     result.classList.add('on');
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (window.CaminotichAnalytics) window.CaminotichAnalytics.track('project_analysis_complete', { budget_range: budget || 'not_selected' });
 
   } catch (e) {
     errBox.textContent = '⚠️ ' + (e.message || 'حدث خطأ. حاولي مرة أخرى.');
