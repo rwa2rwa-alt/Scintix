@@ -52,6 +52,7 @@
   }
 
   window.CaminotichAnalytics = { track: track, measurementId: MEASUREMENT_ID };
+  document.documentElement.setAttribute('data-analytics-ready', MEASUREMENT_ID);
 
   function linkLabel(link) {
     return safe(link.dataset.analyticsLabel || link.getAttribute('aria-label') || link.textContent);
