@@ -127,7 +127,10 @@
       var toggle=document.getElementById('langToggle'),current='ar';
       function translateNode(node,map){Array.from(node.childNodes).forEach(function(child){if(child.nodeType===3){var raw=child.nodeValue,trimmed=raw.trim();if(map[trimmed])child.nodeValue=raw.replace(trimmed,map[trimmed])}else if(child.nodeType===1&&child.id!=='langToggle')translateNode(child,map)})}
       function setLanguage(lang){var map=lang==='en'?dictionary:reverse;translateNode(document.body,map);current=lang;document.documentElement.lang=lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';toggle.textContent=lang==='en'?'العربية':'English';document.title=lang==='en'?'Wasalt | Safer school dismissal — Caminotich':'وصلت | نظام خروج آمن للروضات والمدارس — Caminotich';var workflow=document.querySelector('[name="current_dismissal_workflow"]'),phone=document.querySelector('[name="phone"]');workflow.placeholder=lang==='en'?'Example: The parent calls, staff notify the supervisor, then the student is announced…':'مثال: يتصل ولي الأمر، ثم يتم إبلاغ المشرفة بالاسم، وبعدها يُنادى الطفل...';phone.placeholder=lang==='en'?'05xxxxxxxx or international format':'05xxxxxxxx';localStorage.setItem('wasalt_lang',lang)}
-      toggle.addEventListener('click',function(){setLanguage(current==='ar'?'en':'ar')});if(localStorage.getItem('wasalt_lang')==='en')setLanguage('en');
+      toggle.addEventListener('click',function(){setLanguage(current==='ar'?'en':'ar')});
+      var requestedLang=new URLSearchParams(window.location.search).get('lang');
+      if(requestedLang==='ar'||requestedLang==='en')setLanguage(requestedLang);
+      else if(localStorage.getItem('wasalt_lang')==='en')setLanguage('en');
     })();
     document.getElementById('wasaltForm').addEventListener('submit',async function(event){
       event.preventDefault();

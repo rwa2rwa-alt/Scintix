@@ -315,8 +315,11 @@ const CURRENCY_LABELS = {
 };
 
 // ─── State ────────────────────────────────────────────────────
+const requestedLang = new URLSearchParams(window.location.search).get('lang');
 const state = {
-  lang:     localStorage.getItem('caminotich-lang')     || 'ar',
+  lang:     requestedLang === 'ar' || requestedLang === 'en'
+              ? requestedLang
+              : (localStorage.getItem('caminotich-lang') || 'ar'),
   currency: localStorage.getItem('caminotich-currency') || 'sar'
 };
 
