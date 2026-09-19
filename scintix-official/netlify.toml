@@ -84,3 +84,46 @@
   for = "/preview/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Short campaign links — Wasalt
+[[redirects]]
+  from = "/w/ig"
+  to = "/wasalt.html?utm_source=instagram&utm_medium=organic_social&utm_campaign=wasalt_launch"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/tt"
+  to = "/wasalt.html?utm_source=tiktok&utm_medium=organic_social&utm_campaign=wasalt_launch"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/in"
+  to = "/wasalt.html?utm_source=linkedin&utm_medium=organic_social&utm_campaign=wasalt_launch"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/x"
+  to = "/wasalt.html?utm_source=x&utm_medium=organic_social&utm_campaign=wasalt_launch"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/sc"
+  to = "/wasalt.html?utm_source=snapchat&utm_medium=paid_social&utm_campaign=wasalt_schools"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/wa"
+  to = "/wasalt.html?utm_source=whatsapp&utm_medium=direct_message&utm_campaign=wasalt_outreach"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/w/qr"
+  to = "/wasalt.html?utm_source=printed_brochure&utm_medium=qr&utm_campaign=wasalt_schools"
+  status = 302
+  force = true
