@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  var MEASUREMENT_ID = 'G-2BM3RDE6XC';
+  var MEASUREMENT_ID = 'G-PYFKBZMGZV';
   var CAMPAIGN_KEY = 'caminotich_campaign';
   var params = new URLSearchParams(window.location.search);
   var campaign = {};
