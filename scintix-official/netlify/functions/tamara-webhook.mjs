@@ -44,7 +44,7 @@ export default async (req) => {
     const apiToken = Netlify.env.get("TAMARA_API_TOKEN") || "";
     if (!apiBase || !apiToken) return response(503, { ok: false });
 
-    const authorised = await fetch(\`\${apiBase}/orders/\${encodeURIComponent(orderId)}/authorise\`, {
+    const authorised = await fetch(`${apiBase}/orders/${encodeURIComponent(orderId)}/authorise`, {
       method: "POST",
       headers: {
         Authorization: "Bearer " + apiToken,
