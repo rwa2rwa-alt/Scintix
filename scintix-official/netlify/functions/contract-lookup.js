@@ -13,15 +13,21 @@
 const ALLOWED_ORIGINS = [
   'https://caminotich.sa',
   'https://www.caminotich.sa',
-  'https://scintix-official.netlify.app'
+  'https://scintix-official.netlify.app',
+  'https://scintix-scintix-official.netlify.app'
 ];
+
+function isAllowedOrigin(origin) {
+  return ALLOWED_ORIGINS.indexOf(origin) !== -1 ||
+    /^https:\/\/[a-z0-9-]+--scintix-scintix-official\.netlify\.app$/.test(origin);
+}
 
 const BASE_ID   = 'appkYurrIYGIup8QH';
 const CONTRACTS = 'tblf6juZ47NPebied';
 
 exports.handler = async function (event) {
   const origin  = (event.headers && (event.headers.origin || event.headers.Origin)) || '';
-  const allowed = ALLOWED_ORIGINS.indexOf(origin) !== -1;
+  const allowed = isAllowedOrigin(origin);
 
   const headers = {
     'Access-Control-Allow-Origin': allowed ? origin : ALLOWED_ORIGINS[0],
