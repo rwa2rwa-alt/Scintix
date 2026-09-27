@@ -60,9 +60,9 @@ export default async (req) => {
   }
 
   try {
-    const formula = encodeURIComponent(\`{token}="\${token}"\`);
-    const cRes = await fetch(\`\${AT}/\${BASE_ID}/\${CONTRACTS}?filterByFormula=\${formula}&maxRecords=1\`, {
-      headers: { Authorization: \`Bearer \${airtable}\` }
+    const formula = encodeURIComponent(`{token}="${token}"`);
+    const cRes = await fetch(`${AT}/${BASE_ID}/${CONTRACTS}?filterByFormula=${formula}&maxRecords=1`, {
+      headers: { Authorization: `Bearer ${airtable}` }
     });
     if (!cRes.ok) throw new Error("Airtable " + cRes.status);
     const contract = ((await cRes.json()).records || [])[0];
@@ -77,7 +77,7 @@ export default async (req) => {
 
     const contractName = String(fields["Contract Name"] || fields.package || "خدمة كامينوتك").slice(0, 120);
     const baseUrl = origin || "https://caminotich.sa";
-    const resultBase = \`\${baseUrl}/tamara-result.html?t=\${encodeURIComponent(token)}\`;
+    const resultBase = `${baseUrl}/tamara-result.html?t=${encodeURIComponent(token)}`;
     const reference = contract.id;
 
     const payload = {
@@ -125,7 +125,7 @@ export default async (req) => {
         success: resultBase + "&result=success",
         failure: resultBase + "&result=failure",
         cancel: resultBase + "&result=cancel",
-        notification: \`\${baseUrl}/api/tamara/webhook\`
+        notification: `${baseUrl}/api/tamara/webhook`
       },
       platform: "Caminotich"
     };
