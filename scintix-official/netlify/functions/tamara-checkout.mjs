@@ -88,7 +88,6 @@ export default async (req) => {
       total_amount: money(amount),
       shipping_amount: money(0),
       tax_amount: money(0),
-      discount: money(0),
       payment_type: "PAY_BY_INSTALMENTS",
       items: [{
         reference_id: reference,
