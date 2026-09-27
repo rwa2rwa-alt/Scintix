@@ -18,6 +18,36 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
+function decodeBase64Url(value) {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+  return Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
+}
+
+async function verifyTamaraToken(token, secret) {
+  const parts = String(token || "").split(".");
+  if (parts.length !== 3 || !secret) return false;
+  try {
+    const header = JSON.parse(new TextDecoder().decode(decodeBase64Url(parts[0])));
+    if (header.alg !== "HS256") return false;
+    const key = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+    return await crypto.subtle.verify(
+      "HMAC",
+      key,
+      decodeBase64Url(parts[2]),
+      new TextEncoder().encode(parts[0] + "." + parts[1])
+    );
+  } catch {
+    return false;
+  }
+}
+
 function numericAmount(value) {
   const amount = Number(value && typeof value === "object" ? value.amount : value);
   return Number.isFinite(amount) ? amount : 0;
@@ -71,8 +101,13 @@ export default async (req) => {
   const expected = Netlify.env.get("TAMARA_NOTIFICATION_TOKEN") || "";
   const auth = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "").trim();
   const urlToken = new URL(req.url).searchParams.get("tamaraToken") || "";
-  if (!safeEqual(auth, expected) && !safeEqual(urlToken, expected)) {
-    console.warn("Rejected Tamara webhook: invalid notification token");
+  const validToken =
+    safeEqual(auth, expected) ||
+    safeEqual(urlToken, expected) ||
+    await verifyTamaraToken(auth, expected) ||
+    await verifyTamaraToken(urlToken, expected);
+  if (!validToken) {
+    console.warn("Rejected Tamara webhook: invalid notification signature");
     return response(401, { ok: false });
   }
 
