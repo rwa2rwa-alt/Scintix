@@ -144,7 +144,14 @@ export default async (req) => {
 
     if (!tRes.ok) {
       console.error("Tamara checkout", tRes.status, raw.slice(0, 1000));
-      return json(502, { ok: false, message: "تعذر إنشاء طلب تمارا", code: tRes.status }, origin);
+      const validation = String(
+        data.message ||
+        data.error_message ||
+        data.error ||
+        (Array.isArray(data.errors) ? data.errors.map((x) => x.message || JSON.stringify(x)).join(" | ") : "") ||
+        "تعذر إنشاء طلب تمارا"
+      ).slice(0, 500);
+      return json(502, { ok: false, message: validation, code: tRes.status }, origin);
     }
 
     const checkoutUrl = data.checkout_url || data.url;
