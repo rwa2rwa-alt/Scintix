@@ -24,7 +24,7 @@ function json(status, body, origin) {
 }
 
 function money(amount) {
-  return { amount: Number(amount).toFixed(2), currency: "SAR" };
+  return { amount: Number(Number(amount).toFixed(2)), currency: "SAR" };
 }
 
 export default async (req) => {
