@@ -23,11 +23,10 @@ export default async (req) => {
   if (origin && !allowedOrigin(origin)) return json(403, { ok: false }, origin);
 
   const publicKey = Netlify.env.get("TAMARA_PUBLIC_KEY") || "";
-  const environment = Netlify.env.get("TAMARA_ENVIRONMENT") || "sandbox";
   if (!publicKey) return json(503, { ok: false }, origin);
 
   // The widget public key is intentionally browser-readable; API and notification tokens remain server-only.
-  return json(200, { ok: true, public_key: publicKey, environment }, origin);
+  return json(200, { ok: true, public_key: publicKey }, origin);
 };
 
 export const config = {
