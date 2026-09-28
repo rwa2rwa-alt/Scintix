@@ -10,7 +10,7 @@ function json(status, body, origin) {
     status,
     headers: {
       "Content-Type": "application/json",
-      "Cache-Control": "public, max-age=300",
+      "Cache-Control": "no-store, max-age=0",
       "Access-Control-Allow-Origin": allowedOrigin(origin) ? origin : "https://caminotich.sa",
       "Vary": "Origin"
     }
