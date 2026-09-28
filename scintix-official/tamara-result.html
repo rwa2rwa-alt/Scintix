@@ -74,12 +74,23 @@ if (result === "success") {
   body.textContent = "لم تتم الموافقة على العملية. يمكنك العودة وتجربة وسيلة دفع أخرى.";
   action.textContent = "العودة لخيارات الدفع";
   action.href = "payment.html?t=" + encodeURIComponent(token);
+  reconcileFailureState();
 } else if (result === "cancel") {
   icon.className = "res-icon wait"; icon.textContent = "↩";
   title.textContent = "تم إلغاء العملية";
   body.textContent = "لم يتم تحصيل أي مبلغ. يمكنك العودة للدفع في أي وقت.";
   action.textContent = "العودة لخيارات الدفع";
   action.href = "payment.html?t=" + encodeURIComponent(token);
+  reconcileFailureState();
+}
+
+function reconcileFailureState() {
+  if (!token) return;
+  fetch("/api/tamara/reconcile", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ t: token })
+  }).catch(function(){});
 }
 </script>
 </body>

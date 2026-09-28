@@ -174,6 +174,25 @@ export default async (req) => {
       return json(200, { ok: true, status: "fully_captured" });
     }
 
+    if (["canceled", "cancelled", "expired", "declined"].includes(status)) {
+      const update = await fetch(
+        `${AT}/${BASE_ID}/${CONTRACTS}/${encodeURIComponent(contract.id)}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${airtable}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fields: { Status: "Payment Failed", payment_id: orderId },
+            typecast: true
+          })
+        }
+      );
+      if (!update.ok) throw new Error("Airtable failed-state update " + update.status);
+      return json(200, { ok: true, status });
+    }
+
     return json(202, { ok: true, status: status || "pending" });
   } catch (error) {
     console.error("tamara-reconcile", error && error.message);
