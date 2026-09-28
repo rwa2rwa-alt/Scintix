@@ -134,7 +134,7 @@ function loadTamaraWidget(amount){
       document.getElementById('tamara-widget-host').appendChild(widget);
       var script = document.createElement('script');
       script.defer = true;
-      script.src = 'https://cdn.tamara.co/widget-v2/tamara-widget.js';
+      script.src = config.widget_script || 'https://cdn.tamara.co/widget-v2/tamara-widget.js';
       document.head.appendChild(script);
       tamaraWidgetReady = true;
     })
