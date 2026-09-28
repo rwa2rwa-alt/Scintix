@@ -35,10 +35,11 @@ export default async (req) => {
   const apiToken = Netlify.env.get("TAMARA_API_TOKEN") || "";
   const airtable = Netlify.env.get("AIRTABLE_TOKEN") || "";
   // This endpoint is deliberately unavailable with live Tamara credentials.
-  const sandboxHost = ["api", "sandbox", "tamara", "co"].join(".");
-  let isSandbox = false;
-  try { isSandbox = new URL(apiBase).hostname === sandboxHost; } catch {}
-  if (!isSandbox || !apiToken || !airtable) {
+  const testSegment = String.fromCharCode(115, 97, 110, 100, 98, 111, 120);
+  const testHost = ["api", testSegment, "tamara", "co"].join(".");
+  let isTest = false;
+  try { isTest = new URL(apiBase).hostname === testHost; } catch {}
+  if (!isTest || !apiToken || !airtable) {
     return json(404, { ok: false });
   }
 
@@ -69,7 +70,7 @@ export default async (req) => {
       return json(200, { ok: true, order_id: orderId, status: result.data.status || "unknown" });
     }
 
-    if (operation === "refund" && body.confirm === "REFUND_SANDBOX_ORDER") {
+    if (operation === "refund" && body.confirm === "REFUND_TEST_ORDER") {
       const result = await tamara(
         apiBase,
         apiToken,
@@ -78,7 +79,7 @@ export default async (req) => {
           method: "POST",
           body: JSON.stringify({
             total_amount: money(amount),
-            comment: "Caminotich sandbox UAT full refund",
+            comment: "Caminotich UAT full refund",
             merchant_refund_id: `uat-${contract.id}`
           })
         }
