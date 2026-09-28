@@ -19,6 +19,17 @@
   .pay-note{font-size:.82rem;color:var(--text-muted);margin-top:18px;line-height:1.7}
   .pay-err{background:rgba(220,80,80,.12);border:1px solid rgba(220,80,80,.4);
            border-radius:12px;padding:16px;color:#ffb4b4}
+  .pay-divider{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--text-muted);font-size:.85rem}
+  .pay-divider:before,.pay-divider:after{content:"";height:1px;background:var(--border);flex:1}
+  .tamara-box{border:1px solid var(--border);border-radius:14px;padding:18px;background:rgba(255,255,255,.025)}
+  .tamara-box h2{font-size:1.05rem;margin:0 0 6px}.tamara-box p{font-size:.82rem;color:var(--text-muted);margin:0 0 14px}
+  .tamara-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tamara-grid input{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+  .tamara-grid .full{grid-column:1/-1}.tamara-btn{width:100%;justify-content:center;margin-top:12px}
+  .tamara-status{font-size:.82rem;color:var(--text-muted);margin-top:10px;min-height:1.3em}
+  .tamara-widget-host{margin:12px 0 4px;min-height:34px}
+  .tamara-trust{font-size:.78rem;color:var(--text-muted);margin-top:12px;line-height:1.7}
+  @media(max-width:520px){.tamara-grid{grid-template-columns:1fr}.tamara-grid .full{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -41,6 +52,22 @@
       <div class="mysr-form"></div>
     </div>
 
+    <div class="pay-divider"><span>أو</span></div>
+    <form id="tamara-form" class="tamara-box">
+      <h2>قسّطي مع تمارا</h2>
+      <p>دفعات شهرية متوافقة مع الشريعة الإسلامية. ستنتقلين إلى صفحة تمارا الآمنة لإكمال الطلب.</p>
+      <div id="tamara-widget-host" class="tamara-widget-host" aria-live="polite"></div>
+      <div class="tamara-grid">
+        <input id="tamara-first" required autocomplete="given-name" placeholder="الاسم الأول"/>
+        <input id="tamara-last" required autocomplete="family-name" placeholder="اسم العائلة"/>
+        <input id="tamara-email" class="full" required type="email" autocomplete="email" placeholder="البريد الإلكتروني"/>
+        <input id="tamara-phone" class="full" required inputmode="tel" autocomplete="tel" placeholder="رقم الجوال 05xxxxxxxx"/>
+      </div>
+      <button id="tamara-submit" class="btn btn-primary tamara-btn" type="submit">المتابعة مع تمارا</button>
+      <div id="tamara-status" class="tamara-status" role="status"></div>
+      <div class="tamara-trust">لن تُحفظ بيانات بطاقتك لدى كامينوتك؛ تتم عملية التقسيط والتحقق داخل تمارا.</div>
+    </form>
+
     <div id="pay-blocked" class="pay-err" style="display:none;margin-top:22px"></div>
 
     <p class="pay-note">
@@ -62,6 +89,8 @@ var PK_KEY  = 'pk_live_ar58ggQxhbB4YgE2hUnHYyWvZHPDLJ85WZ6GJ1BQ';
 var RATE_USD = 3.754;
 
 var token  = (new URLSearchParams(location.search).get('t') || '').trim();
+var currentContract = null;
+var tamaraWidgetReady = false;
 
 var elName = document.getElementById('pkg-name');
 var elTot  = document.getElementById('pkg-total');
@@ -70,6 +99,7 @@ var elErr  = document.getElementById('pay-blocked');
 
 function block(msg){
   elHost.style.display = 'none';
+  document.getElementById('tamara-form').style.display = 'none';
   elErr.style.display  = 'block';
   elErr.innerHTML      = msg;
 }
@@ -83,6 +113,35 @@ var REASONS = {
   NO_VALUE:     'قيمة العقد غير مسجّلة. ' + CONTACT,
   UNAVAILABLE:  'تعذّر فتح صفحة الدفع الآن. حاولي بعد قليل أو ' + CONTACT
 };
+
+function loadTamaraWidget(amount){
+  if (tamaraWidgetReady || !(Number(amount) > 0)) return;
+  fetch('/api/tamara/config')
+    .then(function(r){ return r.json(); })
+    .then(function(config){
+      if (!config || !config.ok || !config.public_key) throw new Error('Tamara widget config unavailable');
+      window.tamaraWidgetConfig = {
+        lang: 'ar',
+        country: 'SA',
+        publicKey: config.public_key,
+        style: { fontSize: '14px', badgeRatio: 1.1 }
+      };
+      var widget = document.createElement('tamara-widget');
+      widget.setAttribute('type', 'tamara-summary');
+      widget.setAttribute('inline-type', '3');
+      widget.setAttribute('inline-variant', 'text');
+      widget.setAttribute('amount', Number(amount).toFixed(2));
+      document.getElementById('tamara-widget-host').appendChild(widget);
+      var script = document.createElement('script');
+      script.defer = true;
+      script.src = config.widget_script || 'https://cdn.tamara.co/widget-v2/tamara-widget.js';
+      document.head.appendChild(script);
+      tamaraWidgetReady = true;
+    })
+    .catch(function(){
+      document.getElementById('tamara-widget-host').textContent = 'تمارا متاحة كخيار دفع لهذا الطلب.';
+    });
+}
 
 elName.textContent = '…';
 elTot.textContent  = '…';
@@ -105,8 +164,10 @@ if (!token) {
       return;
     }
 
+    currentContract = d;
     elName.textContent = d.package || d.contract_name || 'عقد';
     elTot.textContent  = Number(d.amount_sar).toLocaleString('en-US') + ' ريال';
+    loadTamaraWidget(d.amount_sar);
 
     var approx = document.createElement('div');
     approx.style.cssText = 'font-size:.78rem;color:var(--text-muted);text-align:left;margin-top:4px';
@@ -141,6 +202,39 @@ if (!token) {
     block(REASONS.UNAVAILABLE);
   });
 }
+
+document.getElementById('tamara-form').addEventListener('submit', function(event){
+  event.preventDefault();
+  var submit = document.getElementById('tamara-submit');
+  var status = document.getElementById('tamara-status');
+  if (!currentContract || !token) {
+    status.textContent = 'انتظري حتى تظهر بيانات العقد.';
+    return;
+  }
+  submit.disabled = true;
+  status.textContent = 'جاري فتح تمارا…';
+
+  fetch('/api/tamara/checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      t: token,
+      first_name: document.getElementById('tamara-first').value,
+      last_name: document.getElementById('tamara-last').value,
+      email: document.getElementById('tamara-email').value,
+      phone: document.getElementById('tamara-phone').value
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d || !d.ok || !d.checkout_url) throw new Error((d && d.message) || 'تعذر فتح تمارا');
+    location.href = d.checkout_url;
+  })
+  .catch(function(err){
+    status.textContent = err.message || 'تعذر فتح تمارا، حاولي مرة أخرى.';
+    submit.disabled = false;
+  });
+});
 </script>
 </body>
 </html>
