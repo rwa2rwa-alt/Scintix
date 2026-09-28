@@ -33,9 +33,40 @@ var icon = document.getElementById("icon");
 var title = document.getElementById("title");
 var body = document.getElementById("body");
 if (result === "success") {
-  icon.className = "res-icon ok"; icon.textContent = "✓";
-  title.textContent = "تم إرسال طلبك إلى تمارا";
-  body.textContent = "استلمنا موافقة الدفع الأولية، وسيتم تأكيد الطلب بعد التحقق الآمن من تمارا.";
+  var token = new URLSearchParams(location.search).get("t") || "";
+  icon.className = "res-icon wait"; icon.textContent = "⏳";
+  title.textContent = "جاري تأكيد الدفع…";
+  body.textContent = "يرجى الانتظار لحظات حتى تكتمل مطابقة طلب تمارا.";
+
+  function reconcile(attempt) {
+    fetch("/api/tamara/reconcile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ t: token })
+    })
+    .then(function(response){ return response.json(); })
+    .then(function(data){
+      if (data && data.ok && data.status === "fully_captured") {
+        icon.className = "res-icon ok"; icon.textContent = "✓";
+        title.textContent = "تم تأكيد الدفع بنجاح";
+        body.textContent = "اكتملت عملية تمارا وتم تسجيل السداد على عقدك.";
+      } else if (attempt < 3) {
+        setTimeout(function(){ reconcile(attempt + 1); }, 2500);
+      } else {
+        icon.className = "res-icon wait"; icon.textContent = "⏳";
+        title.textContent = "طلبك قيد التأكيد";
+        body.textContent = "استلمنا طلب تمارا وسنؤكد السداد تلقائيًا بعد اكتمال المعالجة.";
+      }
+    })
+    .catch(function(){
+      if (attempt < 3) setTimeout(function(){ reconcile(attempt + 1); }, 2500);
+      else {
+        title.textContent = "طلبك قيد التأكيد";
+        body.textContent = "استلمنا طلب تمارا وسنؤكد السداد تلقائيًا بعد اكتمال المعالجة.";
+      }
+    });
+  }
+  reconcile(1);
 } else if (result === "failure") {
   icon.className = "res-icon bad"; icon.textContent = "❌";
   title.textContent = "لم يكتمل طلب تمارا";
