@@ -159,7 +159,29 @@ export default async (req) => {
       return json(502, { ok: false, message: "لم يصل رابط الدفع من تمارا" }, origin);
     }
 
-    return json(200, { ok: true, checkout_url: checkoutUrl, order_id: data.order_id || "" }, origin);
+    const orderId = String(data.order_id || "").trim();
+    if (!orderId) {
+      console.error("Tamara response missing order_id");
+      return json(502, { ok: false, message: "لم يصل رقم الطلب من تمارا" }, origin);
+    }
+
+    const saveOrder = await fetch(`${AT}/${BASE_ID}/${CONTRACTS}/${encodeURIComponent(reference)}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${airtable}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fields: { payment_id: orderId, Status: "Payment Review" },
+        typecast: true
+      })
+    });
+    if (!saveOrder.ok) {
+      console.error("Could not persist Tamara order_id", saveOrder.status);
+      return json(502, { ok: false, message: "تعذر حفظ مرجع طلب تمارا" }, origin);
+    }
+
+    return json(200, { ok: true, checkout_url: checkoutUrl }, origin);
   } catch (error) {
     console.error("tamara-checkout", error && error.message);
     return json(503, { ok: false, message: "تعذر فتح تمارا الآن، حاولي بعد قليل" }, origin);
