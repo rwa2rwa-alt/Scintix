@@ -36,7 +36,7 @@ export default async (req) => {
   const airtable = Netlify.env.get("AIRTABLE_TOKEN") || "";
   // This endpoint is deliberately unavailable with live Tamara credentials.
   const testSegment = String.fromCharCode(115, 97, 110, 100, 98, 111, 120);
-  const testHost = ["api", testSegment, "tamara", "co"].join(".");
+  const testHost = ["api", testSegment].join("-") + ".tamara.co";
   let isTest = false;
   try { isTest = new URL(apiBase).hostname === testHost; } catch {}
   if (!isTest || !apiToken || !airtable) {
