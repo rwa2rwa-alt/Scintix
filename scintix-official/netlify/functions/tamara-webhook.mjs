@@ -58,7 +58,11 @@ function money(amount) {
 }
 
 function normalizedStatus(value) {
-  return String(value || "").trim().toLowerCase().replace(/[ -]+/g, "_");
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[ -]+/g, "_")
+    .replace(/^order_/, "");
 }
 
 function isCaptured(status) {

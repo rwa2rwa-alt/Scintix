@@ -24,7 +24,7 @@
     <div class="res-icon wait" id="icon">⏳</div>
     <h1 class="res-title" id="title">جاري معالجة طلب تمارا…</h1>
     <p class="res-body" id="body">سنؤكد حالة الطلب بعد وصول إشعار تمارا الآمن.</p>
-    <a class="btn btn-primary" href="index.html">العودة للرئيسية</a>
+    <a class="btn btn-primary" id="result-action" href="index.html">العودة للرئيسية</a>
   </div>
 </div>
 <script>
@@ -32,8 +32,9 @@ var result = new URLSearchParams(location.search).get("result") || "";
 var icon = document.getElementById("icon");
 var title = document.getElementById("title");
 var body = document.getElementById("body");
+var action = document.getElementById("result-action");
+var token = new URLSearchParams(location.search).get("t") || "";
 if (result === "success") {
-  var token = new URLSearchParams(location.search).get("t") || "";
   icon.className = "res-icon wait"; icon.textContent = "⏳";
   title.textContent = "جاري تأكيد الدفع…";
   body.textContent = "يرجى الانتظار لحظات حتى تكتمل مطابقة طلب تمارا.";
@@ -71,10 +72,14 @@ if (result === "success") {
   icon.className = "res-icon bad"; icon.textContent = "❌";
   title.textContent = "لم يكتمل طلب تمارا";
   body.textContent = "لم تتم الموافقة على العملية. يمكنك العودة وتجربة وسيلة دفع أخرى.";
+  action.textContent = "العودة لخيارات الدفع";
+  action.href = "payment.html?t=" + encodeURIComponent(token);
 } else if (result === "cancel") {
   icon.className = "res-icon wait"; icon.textContent = "↩";
   title.textContent = "تم إلغاء العملية";
   body.textContent = "لم يتم تحصيل أي مبلغ. يمكنك العودة للدفع في أي وقت.";
+  action.textContent = "العودة لخيارات الدفع";
+  action.href = "payment.html?t=" + encodeURIComponent(token);
 }
 </script>
 </body>

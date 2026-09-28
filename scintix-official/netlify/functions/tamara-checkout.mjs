@@ -27,6 +27,36 @@ function money(amount) {
   return { amount: Number(Number(amount).toFixed(2)), currency: "SAR" };
 }
 
+async function checkEligibility(apiBase, apiToken, amount, phone, email) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 200);
+  try {
+    const result = await fetch(apiBase + "/pre-checkout/v1/eligibility", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + apiToken,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        order: money(amount),
+        customer: {
+          phone_number: phone.replace(/^\+/, ""),
+          email
+        }
+      }),
+      signal: controller.signal
+    });
+    if (!result.ok) return true;
+    const data = await result.json();
+    return data.is_eligible !== false;
+  } catch {
+    // Tamara requires a fail-open after 200 ms so eligibility latency never blocks checkout.
+    return true;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 export default async (req) => {
   const origin = req.headers.get("origin") || "";
   if (req.method === "OPTIONS") return json(200, {}, origin);
@@ -75,6 +105,15 @@ export default async (req) => {
     const amount = Number(fields["Contract Value"] || 0);
     if (!(amount > 0)) return json(409, { ok: false, message: "قيمة العقد غير متاحة" }, origin);
 
+    const eligible = await checkEligibility(apiBase, apiToken, amount, phone, email);
+    if (!eligible) {
+      return json(409, {
+        ok: false,
+        reason: "NOT_ELIGIBLE",
+        message: "تمارا غير متاحة لهذا الطلب حاليًا. يمكنك إكمال الدفع بالبطاقة."
+      }, origin);
+    }
+
     const contractName = String(fields["Contract Name"] || fields.package || "خدمة كامينوتك").slice(0, 120);
     const baseUrl = origin || "https://caminotich.sa";
     const resultBase = `${baseUrl}/tamara-result.html?t=${encodeURIComponent(token)}`;
@@ -103,7 +142,7 @@ export default async (req) => {
       consumer: {
         first_name: firstName,
         last_name: lastName,
-        phone_number: phone,
+        phone_number: phone.replace(/^\+966/, ""),
         email
       },
       billing_address: {
@@ -111,14 +150,18 @@ export default async (req) => {
         last_name: lastName,
         line1: "Digital service",
         city: "Riyadh",
-        country_code: "SA"
+        country_code: "SA",
+        phone_number: phone.replace(/^\+966/, ""),
+        region: "Riyadh"
       },
       shipping_address: {
         first_name: firstName,
         last_name: lastName,
         line1: "Digital service",
         city: "Riyadh",
-        country_code: "SA"
+        country_code: "SA",
+        phone_number: phone,
+        region: "Riyadh"
       },
       merchant_url: {
         success: resultBase + "&result=success",
@@ -126,7 +169,9 @@ export default async (req) => {
         cancel: resultBase + "&result=cancel",
         notification: `${baseUrl}/api/tamara/webhook`
       },
-      platform: "Caminotich"
+      platform: "Caminotich Web",
+      is_mobile: /Android|iPhone|iPad|Mobile/i.test(req.headers.get("user-agent") || ""),
+      locale: "ar_SA"
     };
 
     const tRes = await fetch(apiBase + "/checkout", {
