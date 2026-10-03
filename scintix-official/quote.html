@@ -539,11 +539,11 @@ document.querySelectorAll('[data-setlang]').forEach(b=>{
     data.package = pkgParam || '';
     data.package_requirements = collectPkgRequirements();
     var mk = document.getElementById('mktConsent');
-    data.marketing_consent = (mk && mk.checked) ? 'yes' : 'no';
-    data.consent_at = (mk && mk.checked) ? new Date().toISOString() : '';
-    var mk = document.getElementById('mktConsent');
-    data.marketing_consent = (mk && mk.checked) ? 'Granted' : 'Declined';
-    data.consent_date      = new Date().toISOString();
+    var consented = !!(mk && mk.checked);
+    var consentTs = consented ? new Date().toISOString() : '';
+    data.marketing_consent = consented ? 'Granted' : 'Declined';
+    data.consent_at   = consentTs;
+    data.consent_date = consentTs;
     btn.disabled = true;
     btn.textContent = T().sending;
     try{
