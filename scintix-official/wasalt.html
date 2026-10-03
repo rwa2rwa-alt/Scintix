@@ -135,7 +135,7 @@
       data.form_type='wasalt_school_request';data.submitted_at=new Date().toISOString();
       var english=document.documentElement.lang==='en';button.disabled=true;button.textContent=english?'Sending…':'جارٍ الإرسال...';status.className='form-status';status.textContent='';
       try{
-        var response=await fetch('/.netlify/functions/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:'discovery',payload:data})});
+        var response=await fetch('/.netlify/functions/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:'wasalt',payload:data})});
         if(!response.ok)throw new Error('submit failed');
         status.className='form-status ok';status.textContent=english?'Your school request has been received. We will contact you soon ✓':'تم استلام طلب المدرسة، سنتواصل معكم قريبًا ✓';button.textContent=english?'Submitted':'تم الإرسال';
         if(window.CaminotichAnalytics)window.CaminotichAnalytics.track('wasalt_lead',{school_type:data.school_type||'',student_range:data.student_count||'',activation_scope:data.activation_scope||''});

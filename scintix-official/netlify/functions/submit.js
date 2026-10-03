@@ -31,7 +31,8 @@ const SEC_KEY = process.env.CMT_WEBHOOK_KEY;
 
 const HOOKS = {
   quote:     process.env.HOOK_QUOTE,
-  discovery: process.env.HOOK_DISCOVERY,
+  discovery: process.env.HOOK_QUOTE,
+  wasalt:    process.env.HOOK_QUOTE,
   handover:  process.env.HOOK_HANDOVER,
   support:   process.env.HOOK_SUPPORT,
   /* توقيع العقد. مهيّأ ولا يُستخدم بعد: contract.html ما زال ينادي Make
@@ -116,7 +117,7 @@ exports.handler = async function (event) {
 
   const payload = (body.payload && typeof body.payload === 'object') ? body.payload : {};
   /* المفتاح يُحقن هنا فقط — لا يغادر الخادم أبداً */
-  const signed = Object.assign({}, payload, { k: SEC_KEY });
+  const signed = Object.assign({}, payload, { k: SEC_KEY, _form: form });
 
   try {
     const res = await fetch(url, {
