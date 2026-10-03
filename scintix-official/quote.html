@@ -554,6 +554,13 @@ document.querySelectorAll('[data-setlang]').forEach(b=>{
       });
       /* بدون هذا الفحص كانت الصفحة تعرض "تم الاستلام" حتى لو رفض Make الطلب */
       if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          form_name: 'quote',
+          package: data.package || 'unspecified',
+          language: document.documentElement.lang || 'ar'
+        });
+      }
       statusEl.className = 'ok';
       statusEl.textContent = T().okMsg;
       form.reset();
